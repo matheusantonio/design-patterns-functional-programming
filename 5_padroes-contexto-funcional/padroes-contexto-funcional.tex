@@ -1,0 +1,47 @@
+
+% ---
+% Capitulo de revisão de literatura
+% ---
+\chapter{Padrões de Projeto no Contexto Funcional}
+% ---
+
+O conceito de objeto não existe no paradigma funcional. Para ater-se a não reaproveitar recursos e conceitos oriundos da Orientação a Objetos nos exemplos que utilizam os recursos e conceitos oriundos da programação funcional, será usada uma estrutura equivalente quando for necessário o uso de alguma estrutura semelhante a um objeto.
+Um objeto pode ser definido como uma representação do mundo real que possui características (atributos) e comportamentos (métodos). Para representar as características, será utilizado o recurso case class de scala. Já os comportamentos serão definidos por funções que recebem como entrada um valor do case class criado e retorna uma nova variável do mesmo tipo case class ou o valor de alguma de suas características. Por exemplo, a classe a seguir, construída a partir do paradigma orientado a objetos:
+
+
+
+\begin{lstlisting}[caption={Classe comum em Orientação a Objetos},label=ooclass]
+    
+    class Person(var name : String, var age : Int){
+
+        def getName() : String = this.name
+
+        def setName(name : String) : Unit = this.name = name
+
+        def getAge() : Int = this.age
+
+        def setAge(age : Int) : Unit = this.age = age
+
+    }   
+
+\end{lstlisting}
+
+
+
+Pode ser representada da seguinte forma no paradigma funcional:
+
+\begin{lstlisting}[caption={Representação de uma classe no contexto funcional},label=pfclass]
+    
+    case class Person(name: String, age: Int)
+
+    def getName(person : Person) : String = person.name
+
+    def setName(person : Person, name : String) : Person = 
+        person.copy(name = name)
+
+    def getAge(person : Person) : Int = person.age
+
+    def setAge(person : Person, age : Int) : Person =
+        person.copy(age = age)
+
+\end{lstlisting}
