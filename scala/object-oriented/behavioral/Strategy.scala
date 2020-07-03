@@ -3,29 +3,36 @@ package object-oriented.behavioral
 object Strategy{
 
     trait Strategy {
-        def algorithmInterface() : Unit
+        def execute(a : Int, b : Int) : Int
     }
 
-    class ConcreteStrategyA() extends Strategy {
-        def algorithmInterface() : Unit = {
-            // Implementation
-            println("Strategy A")
+    class ConcreteStrategyAdd() extends Strategy {
+        def execute(a : Int, b : Int) : Int = {
+            a + b
         }
     }
 
-    class ConcreteStrategyB() extends Strategy {
-        def algorithmInterface() : Unit = {
-            // Implementation
-            println("Strategy B")
+    class ConcreteStrategySubtract() extends Strategy {
+        def execute(a : Int, b : Int) : Int = {
+            a - b
         }
     }
 
-    class Context(var strategy : Strategy) {
+    class ConcreteStrategyMultiply() extends Strategy {
+        def execute(a : Int, b : Int) : Int = {
+            a * b
+        }
+    }
+
+    class Context() {
+        
+        private var strategy : Strategy
+
         def setStrategy(strategy : Strategy) =
             this.strategy = strategy
 
-        def contextInterface() : Unit = {
-            this.strategy.algorithmInterface()
-        }
+        def executeStrategy(a : Int, b : Int) : Int =
+            this.strategy.execute(a, b)
+
     }
 }

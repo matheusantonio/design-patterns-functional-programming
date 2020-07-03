@@ -1,16 +1,24 @@
 package functional.behavioral
 
 object Strategy{
-    def algorithmInterfaceA() : Unit = {
-        //Implementation
-        println("Strategy A")
+    def executeAdd(a : Int, b: Int) : Int = {
+        a + b
     }
 
-    def algorithmInterfaceB() : Unit = {
-        //Implementation
-        println("Strategy B")
+    def executeSubtract(a : Int, b: Int) : Int = {
+        a - b
     }
 
-    def ContextInterface(algorithmInterface : () => Unit) : Unit =
-        algorithmInterface()
+    def executeMultiply(a : Int, b: Int) : Int = {
+        a * b
+    }
+
+    def executeStrategy(execute : (a : Int, b : Int) => Int) : Int =
+        execute(a, b)
+
+
+    def executeOutOfScope(a : Int, b : Int) : Int = {
+        a ** 2 + b ** 2
+    }
+
 }
