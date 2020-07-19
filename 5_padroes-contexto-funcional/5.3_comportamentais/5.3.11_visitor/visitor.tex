@@ -1,5 +1,23 @@
 \subsection{Visitor}
 
+O padrão Visitor define uma estrutura que permite implementar 
+operações em um objeto ou em uma coleção de objetos sem 
+alterar sua implementação. Para isso, é definida uma classe 
+abstrata que define as operações que o Visitor deve implementar 
+para cada tipo de elemento da coleção. Dessa forma, cada 
+objeto da coleção implementa apenas uma operação, que recebe 
+um Visitor genérico e realiza a operação desejada sem 
+conhecê-la.
+
+Esse padrão permite estender objetos para novas operações 
+sem comprometer sua implementação ou poluir as classes com 
+diversas operações que não são de sua responsabilidade. Ele 
+também permite que operações diferentes sejam executadas 
+dependentes da implementação do objeto. Por exemplo, em uma 
+coleção de objetos do tipo da interface A que é implementada 
+por objetos do tipo B e C, um Visitor pode realizar uma 
+operação diferente se o objeto for do tipo B ou do tipo C.
+
 \begin{figure}[htb]
 	\caption{\label{fig_grafico}Estrutura do Visitor}
 	\begin{center}
@@ -17,6 +35,18 @@ Exemplo Orientado a Objetos:
 
 Contexto Funcional:
 
+O Visitor é mais um caso em que funções de alta ordem ajudam a 
+economizar novas classes e interfaces. Basta definir uma função 
+que receba como parâmetro um valor do tipo encapsulado pela 
+coleção e retornar um valor do mesmo tipo com a operação 
+realizada. Funções do tipo map, que podem ser usadas para 
+realizar uma operação em uma coleção, contribuem para essa 
+implementação.
+
+Porém, a funcionalidade do Visitor que permite realizar 
+operações diferentes dependendo da implementação do objeto 
+também é interessante e pode ser alcançada utilizando 
+pattern matching. [terminar esse texto]
 
 \begin{lstlisting}[caption={Visitor Funcional},label=fpvisitor]
     
