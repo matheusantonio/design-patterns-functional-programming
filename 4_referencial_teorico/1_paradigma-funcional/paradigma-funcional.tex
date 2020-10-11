@@ -1,0 +1,122 @@
+% ---
+% Capitulo de revisão de literatura
+% ---
+\chapter{O Paradigma Funcional}
+% ---
+
+Para que uma linguagem seja considerada funcional, existem 
+algumas funcionalidades que ela deve implementar, assim 
+como características que ela não deve possuir. Algumas dessas 
+características serão exploradas a seguir. É importante 
+lembrar que o fato de uma linguagem não prevenir contra 
+algumas dessas características desencorajadas não significa 
+que elas não podem ser evitadas. Por mais que uma linguagem 
+não seja implementada baseada em um determinado paradigma, 
+nada impede que as características e convenções dele sejam 
+seguidos como boas práticas. Também é comum linguagens que 
+não são exatamente funcionais implementarem parte desses 
+recursos. É comum esse tipo de linguagem ser referida como 
+multiparadigma, mesmo que um determinado paradigma se 
+sobressaia sobre os demais.
+Também é importante ressaltar, apesar de isso ser 
+evidente tanto pelo que foi descrito no parágrafo anterior 
+quanto pela linguagem utilizada no decorrer deste trabalho, 
+que o fato de alguns paradigmas apresentarem características 
+muito diferentes ou até mutuamente exclusivas, nada impede 
+que mais de um paradigma seja usado de forma complementar 
+durante a construção de um programa. O ideal é que a melhor 
+solução seja usada para o problema proposto, independente 
+do paradigma utilizado.
+
+
+\section{Funções Puras e Efeitos Colaterais}
+
+É comum entre os paradigmas imperativo ou orientado a objetos 
+o uso de operações que consultam tabelas de um banco de dados 
+ou escrevem um valor em um arquivo. Existe algo em comum 
+entre todas essas operações: os efeitos colaterais. 
+
+Quando uma função acessa dados externos à aplicação ou 
+mesmo ao seu escopo, é difícil prever o que pode acontecer. 
+Normalmente, medidas como tratamento de exceções são tomadas 
+para interromper uma tentativa de acesso mau sucedida cuja 
+causa não pode ser reparada pelo programa (por exemplo, 
+o usuário fornecer um nome para um arquivo que não existe e 
+o programa tenta acessá-lo). Esse comportamento, por mais 
+que inevitável, faz com que uma função acabe nem sempre se 
+comportando da forma que ela deveria: Esse tipo de função é 
+conhecida como impura.
+
+Partindo da definição de uma função impura, uma função pura 
+pode ser definida como uma que opera apenas sobre os valores 
+passados a ela como parâmetro. Ou seja, ela não realiza 
+nenhuma operação que possa causar um efeito colateral 
+inesperado que quebre o propósito para o qual a função foi 
+construída.
+
+Uma propriedade importante de funções puras é que, 
+independente de quantas vezes uma função for executada, 
+para os mesmos parâmetros de entrada, a saída será sempre 
+a mesma. Essa é uma propriedade muito útil para a realização 
+de testes e para isolar erros em um programa, tornando muito 
+mais simples o processo de debug. Isso seria impossível para 
+funções que lidam com efeitos colaterais, onde uma função 
+pode retornar um valor incorreto independente de estar se 
+comportando da forma correta ou não.
+
+É importante notar que um programa que possui apenas funções 
+puras é praticamente inviável, já que é constantemente 
+necessário realizar operações que dependem de acessos 
+externos ao programa. O paradigma funcional orienta, porém, 
+que esses efeitos colaterais sejam isolados na aplicação. 
+Dessa forma, as funções que realizam efeitos colaterais como 
+recuperar dados de uma API ou atualizar uma base de dados 
+devem ser executadas no início e no fim de uma execução, 
+preservando o máximo de pureza possível.
+
+\section{Imutabilidade}
+
+Em orientação a objetos, dados costumam ser encapsulados em 
+objetos, onde métodos de acesso podem recuperá-los ou 
+modificá-los. A ideia de modificar um valor é desencorajada 
+no paradigma funcional, ou seja, não existem variáveis.
+
+Em um programa funcional, se um nome x em um determinado 
+escopo recebe um valor, é impossível assosciar a x um 
+valor diferente: esse é o conceito de imutabilidade. O 
+problema é que é comum que um determinado valor seja 
+modificado no decorrer de um programa. Por exemplo, uma 
+estrutura que armazene um 
+
+\section{Funções de Alta Ordem}
+
+Apesar de ser um recurso não tão incomum, funções de alta 
+ordem são importantes para definir uma linguagem funcional. 
+Em linguagens que implementam o paradigma funcional, funções 
+costumam ser tratadas como tipos, da mesma forma que inteiros, 
+caracteres e booleanos. Dessa forma, uma função pode também 
+ser considerada um valor que possui um tipo que depende de 
+outros tipos, da mesma forma que uma lista é um tipo que 
+depende do tipo de dado armazenado.
+
+Essa propriedade é importante pois permite que funções 
+sejam também passadas como parâmetros por outras funções e 
+serem retornadas por outras funções. E essa é exatamente a 
+definição de uma função de alta ordem: É uma função que 
+pode receber funções como parâmetro e retornar funções (ou 
+ambos).
+
+\section{Monads}
+
+Monad é considerado um conceito difícil da programação 
+funcional por ser definido através de leis matemáticas 
+que podem ser complexas. Iniciando pelo básico, um Monad 
+é uma forma de estruturar e combinar sequências de 
+operações em um programa funcional. Algo que é alcançado 
+de forma simples em um paradigma imperativo ou orientado 
+a objetos acaba sendo teoricamente mais difícil em um 
+paradigma funcional graças aos outros conceitos de 
+programação funcional que impedem ou desencorajam que 
+operações sejam simplesmente executadas sequencialmente.
+
+Normalmente, um Monad encapsula um valor.
