@@ -6,25 +6,33 @@
 
 Durante o processo de desenvolvimento de software, 
 problemas de design são comuns durante a 
-fase de projeto. Alguns desses problemas em específico 
-são tão comuns que foi feito um esforço catalogá-los em 
-um livro junto a soluções simples e reutilizáveis para 
-os mesmos. Essas soluções tornaram-se conhecidas como 
-os Padrões de Projeto Gang of Four (GoF).
+fase de projeto. Alguns desses problemas 
+eram tão comuns que foi feito um esforço catalogá-los em 
+um livro que oferece possíveis soluções. 
+Essas soluções tornaram-se conhecidas como 
+os Padrões de Projeto Gang of Four, abreviados 
+para GoF.
 
-Com foco no design orientado a objetos, hoje estão 
-entre os padrões de 
-projeto mais conhecidos. Os responsáveis por compilá-los  
-foram Erich Gamma, Richard Helm, 
-Ralph Johson e John Vlissides. Ao todo, vinte e três 
-padrões foram catalogados, os mesmos serão o alvo desse 
+Por definição, um padrão de projeto é uma solução 
+reutilizável para um problema comum de design. Apesar 
+de neste trabalho ser utilizada no contexto de engenharia 
+de software, o conceito foi introduzido pelo arquiteto 
+Christopher Alexander no livro A Pattern Language.
+
+Com foco no design orientado a objetos, hoje os 
+padrões GoF estão entre os padrões de 
+projeto de software mais conhecidos. Os responsáveis 
+por compilá-los foram Erich Gamma, Richard Helm, 
+Ralph Johson e John Vlissides, o que deu origem ao 
+nome Gang of Four. Ao todo, vinte e três 
+padrões foram catalogados, os mesmos serão o alvo deste 
 trabalho.
 
 De acordo com (o livro), um padrão possui quatro elementos 
 essenciais: Um nome, um problema, uma solução e suas 
 consequências. O nome é uma característica importante 
-por tornar mais fácil referenciar um padrão. O problema 
-descreve a situação em que o padrão é aplicado enquanto 
+por tornar mais fácil referenciar um padrão, o problema 
+descreve a situação em que o padrão é aplicado e 
 a solução descreve como um conjunto de elementos pode 
 resolver o problema proposto. Já as consequências 
 mostram as vantagens e desvantagens do uso do padrão 
@@ -44,20 +52,20 @@ subclasses através de herança, enquanto o segundo lida
 com formas de relacionamento mais dinâmicas entre os 
 objetos, como delegação. Os padrões nesse trabalho 
 serão separados apenas por finalidade, porém 
-características relacionadas à separação por escopo 
-podem ser mencionadas durante a análise de certos 
+características que remetem ao escopo 
+podem ser consideradas durante a análise de alguns 
 padrões.
 
 A descrição de cada padrão (no livro) segue uma estrutura 
 muito similar, utilizada principalmente para apresentar 
 os quatro elementos essenciais mencionados anteriormente. 
-Entre elas, o nome, cujo propósito já foi mencionado, e 
-a classificação, descrita no parágrafo anterior, além de 
+Entre elas, o nome dado pelo livro e a classificação, 
+descrita no parágrafo anterior, além de 
 outros nomes pelos quais o padrão pode ser referenciado. 
-Também são descritas a intenção do padrão e seu objetivo, 
-como o que o padrão realiza e qual problema busca 
-solucionar. Em seguida, é descrito um cenário que 
-ilustra o problema solucionado pelo padrão, e as 
+Também são descritos a intenção do padrão e seu objetivo, 
+como o que é realizado pelo padrão e qual problema é 
+solucionado. Em sequência, é descrito um cenário que 
+ilustra o problema solucionado seguido das 
 situações nas quais ele pode ser aplicado. Sua estrutura, 
 representada através de um diagrama de classes, é 
 acompanhada de uma descrição de cada classe ou objeto 
@@ -65,11 +73,15 @@ que participa do padrão, incluindo como cada um
 colabora para a solução do padrão. As consequências do 
 uso do padrão também são apresentadas, com vantagens e 
 desvantagens decorrentes de seu uso, além de sugestões de 
-técnicas de implementação e se existem considerações 
-específicas para uma determinada linguagem. É 
-demonstrado um exemplo 
-em código ilustrando como utilizar o padrão e exemplos 
-de usos em sistemas reais. Por fim, são enumerados 
-outros padrões que podem estar relacionados e como se dá 
-esse relacionamento.
+técnicas de implementação e a existência de considerações 
+específicas para determinadas linguagens de programação. 
+É demonstrado um exemplo 
+em código ilustrando como utilizar o padrão seguido de 
+referências de uso em sistemas reais. Por fim, são 
+enumerados outros padrões que podem estar relacionados 
+e como ocorre esse relacionamento.
 
+Neste trabalho, uma descrição mais sucinta de cada 
+padrão será apresentada durante o desenvolvimento, onde 
+serão apresentados apenas os elementos essenciais para 
+a análise do padrão a partir do paradigma funcional.
