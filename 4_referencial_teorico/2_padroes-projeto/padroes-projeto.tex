@@ -29,7 +29,7 @@ nome Gang of Four. Ao todo, vinte e três
 padrões foram catalogados, os mesmos que serão o alvo 
 deste trabalho.
 
-De acordo com (o livro), um padrão possui quatro elementos 
+De acordo com o livro, um padrão possui quatro elementos 
 essenciais: Um nome, um problema, uma solução e suas 
 consequências. O nome é uma característica importante 
 por tornar mais fácil referenciar um padrão. O problema 
@@ -81,40 +81,203 @@ podem ser consideradas durante a análise.
 % enumerados outros padrões que podem estar relacionados 
 % e como ocorre esse relacionamento.
 
-\section{Exemplo de padrão: Singleton}
+\section{Exemplo de padrão de projeto: Singleton}
 
 A descrição de cada padrão no livro segue uma estrutura 
 muito similar, utilizada principalmente para apresentar 
 os quatro elementos essenciais mencionados anteriormente. 
 Como exemplo para demonstrar a forma como o livro 
-apresenta cada padrão, o padrão Singleton será 
-demonstrado com uma breve explicação de cada tópico.
+apresenta cada padrão, o padrão criacional Singleton será 
+demonstrado com uma breve explicação de cada tópico. 
+Uma descrição mais sucinta dos outros padrões será 
+apresentada durante o desenvolvimento deste 
+trabalho, onde serão considerados apenas os elementos 
+essenciais dos padrões e sua análise 
+a partir do paradigma funcional.
 
-\subsection{Intenção}
+\subsection*{Intenção}
 
-\subsection{Motivação}
+A intenção é uma forma curta de descrever o que o padrão 
+faz, qual é sua intenção e que problema ele busca resolver. 
+O Singleton busca garantir que uma classe tenha apenas uma
+instância, acessível globalmente.
 
-\subsection{Aplicabilidade}
+\subsection*{Motivação}
 
-\subsection{Estrutura}
+Este tópico ilustra um problema e demonstra como a estrutura 
+do padrão o soluciona, tornando mais simples a compreensão 
+das descrições mais abstratas que vêm a seguir. Para o 
+Singleton, é utilizado como exemplo o spooler de uma 
+impressora, um sistema de arquivos ou um gerenciador de 
+janelas. Para todos esses casos, apenas um precisa existir, 
+ou seja, uma classe que representa algum desses elementos 
+só precisa possuir uma instância de fácil acesso. É proposto 
+tornar a própria classe responsável por gerenciar essa 
+instância, garantindo que nenhum outra instância dela 
+mesma seja criada e garantindo um meio de acesso a essa 
+única instância.
 
-\subsection{Participantes}
+\subsection*{Aplicabilidade}
 
-\subsection{Colaborações}
+A aplicabilidade descreve situações nas quais o padrão 
+pode ser aplicado, exemplos de maus projetos que ele pode 
+ajudar a tratar e ainda como reconhecer essas situações. 
+No caso do Singleton, ele é utilizável quando for necessário 
+possuir apenas uma instância de uma classe através de um 
+ponto de acesso conhecido e quando essa única instância 
+precisa ser extensível através de subclasses. 
 
-\subsection{Consequências}
+\subsection*{Estrutura}
 
-\subsection{Implementação}
+A estrutura apresenta o padrão graficamente, através de uma 
+notação baseada na Object Modeling Technique (OMT) e às vezes 
+em diagramas de interação. No caso do Singleton, apenas o 
+seguinte diagrama é utilizado:
 
-\subsection{Exemplo de Código}
+\begin{figure}[htb]
+	\caption{\label{fig_grafico}Estrutura do Singleton utilizada como exemplo \cite{gamma:1995}}
+	\begin{center}
+	    \includegraphics[scale=0.5]{4_referencial_teorico/2_padroes-projeto/singleton_structure.png}
+	\end{center}
+\end{figure}
 
-\subsection{Usos Conhecidos}
+\subsection*{Participantes}
 
-\subsection{Padrões Relacionados}
+Descreve as responsabilidades de cada classe que 
+participa do padrão. Neste caso, existe 
+apenas uma: o próprio Singleton, que define 
+a operação de classe Instance, permitindo aos clientes 
+acessarem sua única instância. Também pode ser o 
+responsável por criar sua própria instância única.
+
+\subsection*{Colaborações}
+
+Este tópico explica como as classes participantes 
+colaboram para executar as responsabilidades 
+especificadas. Para o Singleton, os clientes (ou seja, 
+os objetos que o acessam) acessam a instância única 
+pela operação Instance.
+
+\subsection*{Consequências}
+
+As consequências descrevem os custos e benefícios para 
+que o padrão possa realizar seu objetivo, além dos 
+aspectos da estrtura de um sistema que ele permite variar 
+independentemente. O Singleton enumera cinco benefícios:
+
+Primeiro, acesso controlado à instância única, já que 
+a única instância é encapsulada dentro da classe 
+Singleton, ela possui controle total de como e quando 
+ela pode ser acessada pelos clientes.
+
+Segundo, espaço de nomes reduzido. Uma alternativa 
+para o Singleton talvez fosse o uso de variáveis 
+globais, porém o padrão evita que o espaço de nomes 
+seja poluído com variáveis globais que utilizam 
+instâncias únicas.
+
+Terceiro, ele permite um refinamento de operações e da 
+representação, ou seja, permite ao Singleton ter 
+subclasses.
+
+Quarto, permite um número variável de instâncias. Nesse 
+caso, o padrão permite que, após ele ser implementado, 
+seja simples mudar de ideia e a própria classe Singleton, 
+dentro da operação Instance, volte a permitir um número 
+indefinido ou até controlado de instâncias.
+
+Quinto, é mais flexível do que operações de classe. Além 
+das variáveis globais, operações de classe seriam outra 
+alternativa para o Singleton, porém isso tornaria mais 
+difícil voltar a ter mais de uma instância da classe, 
+além de impedir, em certas linguagens, que subclasses 
+redefinam operações estáticas polimorficamente.
+
+\subsection*{Implementação}
+
+Explicita sugestões, técnicas ou riscos que devem 
+ser conhecidos durante a implementação do padrão, 
+além de considerações específicas de algumas 
+linguagens. 
+
+[falta inserir implementação do singleton aqui]
+
+\subsection*{Exemplo de Código}
+
+Como o nome já diz, demonstra o padrão através de 
+um exemplo em código. O exemplo do Singleton é um 
+construtor de labirintos, onde a classe que é 
+responsável pela fabricação dos labirintos necessita 
+de apenas uma instância. São apresentadas duas versões: 
+uma onde não há uso de subclasses e uma onde há o 
+uso.
+
+\begin{lstlisting}[caption={Exemplo de Singleton sem subclasses \cite{gamma:1995}},label=singletonnosub]
+    
+    class MazeFactory {
+    public:
+        static MazeFactory* Instance();
+
+        // interface existente vai aqui
+    protected:
+        MazeFactory();
+    private:
+        static MazeFactory* _instance;
+    };
 
 
+    // implementação:
 
-Neste trabalho, uma descrição mais sucinta de cada 
-padrão será apresentada durante o desenvolvimento, onde 
-serão apresentados apenas os elementos essenciais para 
-a análise do padrão a partir do paradigma funcional.
+    MazeFactory* MazeFactory::_instance = 0;
+
+    MazeFactory* MazeFactory::Instance () {
+        if (_instance == 0) {
+            _instance = new MazeFactory;
+        } 
+        return _instance;
+    } 
+
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption={Exemplo de Singleton com subclasses \cite{gamma:1995}},label=singletonsub]
+    
+    MazeFactory* MazeFactory::Instance () {
+        if (_instance == 0) {
+            const char* mazeStyle = getenv("MAZESTYLE");
+
+            if (strcmp(mazeStyle, "bombed") == 0) {
+                _instance = new BombedMazeFactory;
+
+            } else if (strcmp(mazeStyle, "enchanted") == 0) {
+                _instance = new EnchantedMazeFactory;
+
+            // ... outras subclasses possíveis
+
+            } else { // default
+                _instance = new MazeFactory;
+            }
+        }
+        return _instance;
+    } 
+
+\end{lstlisting}
+
+
+\subsection*{Usos Conhecidos}
+
+Demonstra usos desse padrão em sistemas reais. No caso 
+do Singleton, é mencionado o relacionamento entre 
+classes e suas metaclasses e o toolkit para construção 
+de interfaces de usuário InterViews, que usa o padrão para 
+acessar as únicas instâncias das classes Session e 
+WidketKit, entre outras.
+
+\subsection*{Padrões Relacionados}
+
+Os padrões relacionados apresentam padrões que 
+possuem alguma relação ou que podem ser usados juntos 
+do padrão proposto. São mencionados padrões que 
+podem ser implementados utilizando o Singleton, que 
+são o AbstractFactory, o Builder e o Prototype.
+

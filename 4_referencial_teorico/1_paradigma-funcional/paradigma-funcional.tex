@@ -4,6 +4,327 @@
 \chapter{O Paradigma Funcional}
 % ---
 
+
+%Menionar:
+
+% Cálculo lambda (história)
+
+No mesmo ano (1936) em que Alan Turing publicava sua 
+tese sobre as Máquinas de Turing, Alonzo Church publicava 
+a sua sobre o Cálculo Lambda. Essa abordagem da computação 
+era mais embasada na matemática e foi provada como 
+equivalente à Máquina de Turing pelo próprio Alan Turing 
+no ano seguinte. É nele que o paradigma funcional 
+baseia-se para definir as características que serão 
+melhor exploradas em seguida.
+
+% É necessário definir melhor o que é cálculo lambda 
+% aqui ou essa introdução histórica é suficiente?
+
+% Funções puras
+\section{Funções Puras}
+
+Funções puras operam apenas nos parâmetros fornecidos. 
+Elas não leem ou escrevem em qualquer valor que esteja 
+fora do corpo da função. Por exemplo:
+
+\begin{lstlisting}[caption={Exemplo de Função Pura},label=purefunction]
+
+    def add(x, y) {
+        return x + y;
+    }
+
+\end{lstlisting}
+
+A função acima opera apenas nos valores x e y que 
+são passados como parâmetro da função. A partir 
+dessa restrição, algumas conclusões relevantes podem 
+ser tiradas. Por exemplo, uma função pura sempre 
+retornará o mesmo valor para os mesmos parâmetros. 
+Caso a função add acima recebe os parâmetros 1 para x 
+e 2 para y, não importa quantas vezes ela seja chamada, 
+o resultado da operação sempre será 3.
+
+Em seguida, um exemplo de função não pura:
+
+\begin{lstlisting}[caption={Exemplo de Função Pura},label=purefunction]
+
+    var z = 10;
+
+    def modify(x, y) {
+        z = x + y;
+    }
+
+\end{lstlisting}
+
+Essa função não é pura pois ela depende de um 
+valor externo - o da variável z - para realizar 
+uma operação. Existe ainda um outro problema 
+com esse tipo de função: sua execução implica em 
+um efeito colateral.
+
+Efeitos colaterais ocorrem em consultas ou 
+alterações a bases de dados, modificação de 
+arquivos ou até mesmo envio de dados a um 
+servidor. Também ocorrem quando variáveis fora 
+do escopo da função são modificadas ou lidas. 
+Esse tipo de comportamento é muito comum em 
+paradigmas de programação imperativos ou 
+orientados a objetos e, apesar de limitadores, 
+podem causar dificuldades no processo de 
+debug de um código, afinal, se uma variável 
+pode ser alterada em qualquer lugar, um 
+valor errado que ela está assumindo pode 
+estar vindo de qualquer lugar.
+
+Apesar disso, um programa precisa realizar 
+efeitos colaterais, como os já citados: 
+leitura e escrita em arquivos ou bancos de 
+dados, requisições em servidores, exibição em 
+uma tela. Por isso, a ideia no design de software 
+funcional não é apenas utilizar funções puras, 
+mas concentrar os efeitos colaterais em um local 
+só, limitando a busca por problemas relacionados.
+
+
+% imutabilidade
+\section{Imutabilidade}
+
+Em programação funcional, a ideia de variáveis não 
+existe, ou ao menos, possui uma ideia diferente. 
+Em paradigmas procedurais é comum encontrarmos trechos 
+de código parecidos com:
+
+\begin{lstlisting}[caption={Exemplo de Código Mutável},label=mutablevar]
+
+    var x = 1;
+    x = x + 1;
+
+
+\end{lstlisting}
+
+Porém, esse tipo de operação não é permitida em um 
+paradigma funcional, já que é seguido o princípio 
+da imutabilidade. Uma variável \footnote{Aqui, 
+variável é entendida como um valor armazenado 
+e não um valor variável.} que armazena um valor 
+não pode ter esse valor alterado. Dessa forma, 
+o código apresentado anteriormente não seria 
+possível.
+
+Em um programa funcional, a modificação do valor 
+de uma variável é feita copiando o valor para uma 
+nova variável que passará a representar esse valor. 
+Por exemplo, o código acima poderia ser escrito 
+como:
+
+\begin{lstlisting}[caption={Exemplo de Código Imutável},label=imutablevar]
+
+    var x = 1;
+    z = x + 1;
+
+
+\end{lstlisting}
+
+Isso pode parecer problemático quando é necessário 
+modificar um único valor em uma lista ou uma estrutura 
+maior e mais complexa, porém, por baixo dos panos isso 
+é feito de uma forma mais eficiente, sem que seja 
+necessário copiar de fato toda a estrutura. Dessa forma, 
+a imutabilidade está presente apenas a nível de 
+programação, impedindo que um valor seja alterado 
+acidentalmente pelo programador ou de forma imprevista 
+no caso de um programa multi-thread.
+
+
+% Funções de alta ordem
+\section{Funções de Alta Ordem}
+
+% C# e Java já possuem suporte para HoF, mencionar aqui
+Funções de alta ordem são funções que recebem 
+outras funções como parâmetro e ainda podem 
+retornar funções. Esse é um recurso 
+não tão presente em linguagens orientadas a 
+objeto ou procedurais, mas não é exclusivo das 
+linguagens funcionais. Javascript é um bom 
+exemplo de linguagem que pode receber funções 
+como parâmetro em outras funções [citação aqui].
+
+Um bom exemplo de simplicidade do uso de 
+funções de alta ordem é a função map. Seu objetivo 
+é aplicar uma função a todos os elementos de uma 
+coleção e retornar a nova coleção resultante. 
+Para que isso seja possível, a função map precisa 
+receber como parâmetro a função que será aplicada. 
+Por exemplo:
+
+\begin{lstlisting}[caption={Exemplo de Função de Alta Ordem},label=hof]
+
+    def add1(x){
+        return x + 1;
+    }
+
+    let result = map(add1, [1, 2, 3, 4, 5]);
+    // O resultado dessa operação é a lista [2, 3, 4, 5, 6]
+        
+
+\end{lstlisting}
+
+Em uma linguagem que não aceita funções sendo 
+passadas por parâmetro, uma operação simples como 
+essa poderia tornar-se um pouco menos legível:
+
+\begin{lstlisting}[caption={Exemplo sem Funções de Alta Ordem},label=nohof]
+
+    def add1(x){
+        return x + 1;
+    }
+
+    let mylist = [1, 2, 3, 4, 5]
+    let result = []
+
+    foreach(n : mylist) {
+        result.push(add1(n))
+    }
+
+\end{lstlisting}
+
+Talvez a implementação da função map seja parecida 
+com a função acima, porém, um programador que não 
+conhece o programa levaria muito menos tempo para 
+entender a primeira implementação do que a segunda. 
+Além disso, para cada função diferente que poderia 
+ser aplicada a essa mesma coleção, a mesma 
+implementação teria que ser repetida.
+
+
+\section{Closures}
+
+Considerando a seguinte função:
+
+\begin{lstlisting}[caption={Exemplo de Closure},label=closureex]
+
+    def adder(x){
+        return (y) => x + y;
+    }
+
+    let add10 = adder(10)
+
+    res = add10(5)
+    // O resultado acima é 15
+
+
+\end{lstlisting}
+
+Nele, definimos uma função de alta ordem, adder, que 
+recebe como parâmetro um valor x e retorna uma função 
+que recebe como parâmetro y outro valor e retorna a 
+soma dos dois valores. A variável add10 receberá 
+o retorno da chamada da função adder para o valor 10. 
+Com isso, add10 será uma função que receberá como 
+parâmetro um número e adicionará 10 a ele. Quando 
+add10 é chamada com o valor 5 sendo passado como 
+parâmetro, o retorno da função é 15.
+
+Para que isso seja possível, a função retornada por 
+adder precisou ter acesso ao valor da variável x mesmo 
+após o fim da execução de adder. Isso foi possível 
+por a variável x estar dentro do escopo da função 
+quando ela foi criada. Esse comportamento, que torna 
+o retorno de funções muito mais interessante, é chamado 
+de closure.
+
+
+% Composição de funções
+\section{Composição de funções}
+
+Reuso de código é um objetivo desejável para qualquer 
+paradigma de programação, e o paradigma funcional 
+proporciona uma facilidade para isso através de 
+composição de funções.
+
+O código abaixo exemplifica esse recurso:
+
+\begin{lstlisting}[caption={Exemplo de Composição de Funções},label=fogex]
+
+    def add1(x) {
+        return x + 1
+    }
+
+    def mul2(x) {
+        return x * 2
+    }
+
+    def sub4(x) {
+        return x - 4
+    }
+
+    def add1ThenMul2ThenSub4(x) {
+        return sub4(mul2(add1(x)))
+    }
+
+    let res = add1ThenMul2ThenSub4(1);
+    // O resultado da função é 0
+
+\end{lstlisting}
+
+Nada do que foi feito acima é muito novidade em 
+qualquer linguagem de programação comum. Entretanto, 
+utilizar funções menores e mais simples para compor 
+funções maiores e mais complicadas é uma forma de 
+design comum em linguagens funcionais. A diferença é 
+que em linguagens funcionais as composições podem 
+tornar-se mais legíveis:
+
+\begin{lstlisting}[caption={Exemplo de Composição de Funções},label=fogex]
+
+
+    let res = (add1 compose mul2 compose sub4)(1);
+    // O resultado da função é 0
+
+\end{lstlisting}
+
+
+\section{Currying}
+
+Currying é uma técnica de programação funcional que 
+permite que uma função com mais de um parâmetro seja 
+chamada como se possuísse apenas um. Por exemplo, a 
+função:
+
+\begin{lstlisting}[caption={Exemplo sem Currying},label=nocurrex]
+
+    def add(x, y){
+        return x + y;
+    }
+
+\end{lstlisting}
+
+Poderia ser escrita da seguinte forma:
+
+\begin{lstlisting}[caption={Exemplo de Currying},label=currex]
+
+    def add(x){
+        return y => {x + y};
+    }
+
+\end{lstlisting}
+
+Essa técnica simplifica a composição de funções 
+que possuem quantidades diferentes de parâmetros. 
+Normalmente, em linguagens funcionais não é 
+necessário refatorar o código como foi feito 
+acima, já que as funções implementam essa técnica 
+nativamente.
+
+
+
+% mônads
+\section{Mônadas}
+
+
+% ------------------------------------------------------
+
 Para que uma linguagem seja considerada funcional, existem 
 algumas funcionalidades que ela deve implementar, assim 
 como características que ela não deve possuir. Algumas dessas 
@@ -29,7 +350,6 @@ solução seja usada para o problema proposto, independente
 do paradigma utilizado.
 
 
-\section{Funções Puras e Efeitos Colaterais}
 
 É comum entre os paradigmas imperativo ou orientado a objetos 
 o uso de operações que consultam tabelas de um banco de dados 
@@ -74,7 +394,6 @@ recuperar dados de uma API ou atualizar uma base de dados
 devem ser executadas no início e no fim de uma execução, 
 preservando o máximo de pureza possível.
 
-\section{Imutabilidade}
 
 Em orientação a objetos, dados costumam ser encapsulados em 
 objetos, onde métodos de acesso podem recuperá-los ou 
@@ -88,7 +407,6 @@ problema é que é comum que um determinado valor seja
 modificado no decorrer de um programa. Por exemplo, uma 
 estrutura que armazene um 
 
-\section{Funções de Alta Ordem}
 
 Apesar de ser um recurso não tão incomum, funções de alta 
 ordem são importantes para definir uma linguagem funcional. 
@@ -106,7 +424,6 @@ definição de uma função de alta ordem: É uma função que
 pode receber funções como parâmetro e retornar funções (ou 
 ambos).
 
-\section{Mônadas}
 
 Mônada é considerado um conceito difícil da programação 
 funcional por ser definido através de leis matemáticas 
