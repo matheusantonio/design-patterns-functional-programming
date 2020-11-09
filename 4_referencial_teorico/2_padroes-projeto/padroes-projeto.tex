@@ -56,30 +56,6 @@ serão separados apenas por finalidade, porém
 características que remetem ao escopo 
 podem ser consideradas durante a análise.
 
-% A descrição de cada padrão no livro segue uma estrutura 
-% muito similar, utilizada principalmente para apresentar 
-% os quatro elementos essenciais mencionados anteriormente. 
-% Entre elas, o nome dado pelo livro e a classificação, 
-% descrita no parágrafo anterior, além de 
-% outros nomes pelos quais o padrão pode ser referenciado. 
-% Também são descritos a intenção do padrão e seu objetivo, 
-% como o que é realizado pelo padrão e qual problema é 
-% solucionado. Em sequência, é descrito um cenário que 
-% ilustra o problema solucionado seguido das 
-% situações nas quais ele pode ser aplicado. Sua estrutura, 
-% representada através de um diagrama de classes, é 
-% acompanhada de uma descrição de cada classe ou objeto 
-% que participa do padrão, incluindo como cada um 
-% colabora para a solução do padrão. As consequências do 
-% uso do padrão também são apresentadas, com vantagens e 
-% desvantagens decorrentes de seu uso, além de sugestões de 
-% técnicas de implementação e a existência de considerações 
-% específicas para determinadas linguagens de programação. 
-% É demonstrado um exemplo 
-% em código ilustrando como utilizar o padrão seguido de 
-% referências de uso em sistemas reais. Por fim, são 
-% enumerados outros padrões que podem estar relacionados 
-% e como ocorre esse relacionamento.
 
 \section{Exemplo de padrão de projeto: Singleton}
 
@@ -92,7 +68,7 @@ demonstrado com uma breve explicação de cada tópico.
 Uma descrição mais sucinta dos outros padrões será 
 apresentada durante o desenvolvimento deste 
 trabalho, onde serão considerados apenas os elementos 
-essenciais dos padrões e sua análise 
+essenciais dos padrões na análise 
 a partir do paradigma funcional.
 
 \subsection*{Intenção}
@@ -198,9 +174,21 @@ redefinam operações estáticas polimorficamente.
 Explicita sugestões, técnicas ou riscos que devem 
 ser conhecidos durante a implementação do padrão, 
 além de considerações específicas de algumas 
-linguagens. 
+linguagens. Para o Singleton, existem duas 
+explicações de implementação.
 
-[falta inserir implementação do singleton aqui]
+A primeira refere-se à garantia da existência de 
+apenas uma instância, onde é sugerido tornar a operação 
+de criação do Singleton em uma operação de classe 
+que possui acesso a um atributo que armazena a 
+instância do Singleton, caso já exista. A segunda 
+trata da criação de subclasses da classe Singleton, 
+onde é sugerido registrar cada instância por nome 
+para que uma classe cliente possa acessar o singleton 
+desejado sem precisar conhecer todas as instâncias 
+existentes. Ambas as implementações são 
+exemplificadas na seção de exemplo de código.
+
 
 \subsection*{Exemplo de Código}
 

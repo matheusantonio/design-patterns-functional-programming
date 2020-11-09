@@ -4,19 +4,19 @@
 \chapter{O Paradigma Funcional}
 % ---
 
-
 %Menionar:
 
 % Cálculo lambda (história)
 
-No mesmo ano (1936) em que Alan Turing publicava sua 
+No mesmo ano em que Alan Turing publicava sua 
 tese sobre as Máquinas de Turing, Alonzo Church publicava 
 a sua sobre o Cálculo Lambda. Essa abordagem da computação 
 era mais embasada na matemática e foi provada como 
-equivalente à Máquina de Turing pelo próprio Alan Turing 
-no ano seguinte. É nele que o paradigma funcional 
+equivalente à Máquina de Turing pelo próprio Alan Turing. 
+É nele que o paradigma funcional 
 baseia-se para definir as características que serão 
 melhor exploradas em seguida.
+
 
 % É necessário definir melhor o que é cálculo lambda 
 % aqui ou essa introdução histórica é suficiente?
@@ -40,8 +40,8 @@ A função acima opera apenas nos valores x e y que
 são passados como parâmetro da função. A partir 
 dessa restrição, algumas conclusões relevantes podem 
 ser tiradas. Por exemplo, uma função pura sempre 
-retornará o mesmo valor para os mesmos parâmetros. 
-Caso a função add acima recebe os parâmetros 1 para x 
+retornará o mesmo valor para os mesmos parâmetros: 
+caso a função add acima receba os parâmetros 1 para x 
 e 2 para y, não importa quantas vezes ela seja chamada, 
 o resultado da operação sempre será 3.
 
@@ -58,7 +58,7 @@ Em seguida, um exemplo de função não pura:
 \end{lstlisting}
 
 Essa função não é pura pois ela depende de um 
-valor externo - o da variável z - para realizar 
+valor externo - a variável z - para realizar 
 uma operação. Existe ainda um outro problema 
 com esse tipo de função: sua execução implica em 
 um efeito colateral.
@@ -70,7 +70,7 @@ servidor. Também ocorrem quando variáveis fora
 do escopo da função são modificadas ou lidas. 
 Esse tipo de comportamento é muito comum em 
 paradigmas de programação imperativos ou 
-orientados a objetos e, apesar de limitadores, 
+orientados a objetos, porém 
 podem causar dificuldades no processo de 
 debug de um código, afinal, se uma variável 
 pode ser alterada em qualquer lugar, um 
@@ -84,14 +84,15 @@ dados, requisições em servidores, exibição em
 uma tela. Por isso, a ideia no design de software 
 funcional não é apenas utilizar funções puras, 
 mas concentrar os efeitos colaterais em um local 
-só, limitando a busca por problemas relacionados.
+isolado das funções puras, o que facilita o 
+processo de debugging.
 
 
 % imutabilidade
 \section{Imutabilidade}
 
 Em programação funcional, a ideia de variáveis não 
-existe, ou ao menos, possui uma ideia diferente. 
+existe, ou ao menos possui uma definição diferente. 
 Em paradigmas procedurais é comum encontrarmos trechos 
 de código parecidos com:
 
@@ -103,12 +104,13 @@ de código parecidos com:
 
 \end{lstlisting}
 
-Porém, esse tipo de operação não é permitida em um 
-paradigma funcional, já que é seguido o princípio 
-da imutabilidade. Uma variável \footnote{Aqui, 
+Porém, esse tipo de operação não é permitida no 
+paradigma funcional. Aqui é seguido o princípio 
+da imutabilidade, onde uma variável \footnote{Aqui, 
 variável é entendida como um valor armazenado 
 e não um valor variável.} que armazena um valor 
-não pode ter esse valor alterado. Dessa forma, 
+não pode ter esse valor alterado até o fim da 
+execução do programa. Dessa forma, 
 o código apresentado anteriormente não seria 
 possível.
 
@@ -128,13 +130,13 @@ como:
 
 Isso pode parecer problemático quando é necessário 
 modificar um único valor em uma lista ou uma estrutura 
-maior e mais complexa, porém, por baixo dos panos isso 
+maior e mais complexa, porém por baixo dos panos isso 
 é feito de uma forma mais eficiente, sem que seja 
-necessário copiar de fato toda a estrutura. Dessa forma, 
-a imutabilidade está presente apenas a nível de 
+necessário de fato copiar toda a estrutura. Dessa forma, 
+a imutabilidade está presente apenas durante a 
 programação, impedindo que um valor seja alterado 
 acidentalmente pelo programador ou de forma imprevista 
-no caso de um programa multi-thread.
+no caso de um programa multi-thread, por exemplo.
 
 
 % Funções de alta ordem
@@ -172,7 +174,7 @@ Por exemplo:
 
 Em uma linguagem que não aceita funções sendo 
 passadas por parâmetro, uma operação simples como 
-essa poderia tornar-se um pouco menos legível:
+essa poderia tornar-se mais verbosa e menos legível:
 
 \begin{lstlisting}[caption={Exemplo sem Funções de Alta Ordem},label=nohof]
 
@@ -218,7 +220,7 @@ Considerando a seguinte função:
 
 Nele, definimos uma função de alta ordem, adder, que 
 recebe como parâmetro um valor x e retorna uma função 
-que recebe como parâmetro y outro valor e retorna a 
+que recebe como parâmetro outro valor y e retorna a 
 soma dos dois valores. A variável add10 receberá 
 o retorno da chamada da função adder para o valor 10. 
 Com isso, add10 será uma função que receberá como 
@@ -268,8 +270,8 @@ O código abaixo exemplifica esse recurso:
 
 \end{lstlisting}
 
-Nada do que foi feito acima é muito novidade em 
-qualquer linguagem de programação comum. Entretanto, 
+É comum qualquer linguagem permitir esse tipo 
+de comportamento. Entretanto, 
 utilizar funções menores e mais simples para compor 
 funções maiores e mais complicadas é uma forma de 
 design comum em linguagens funcionais. A diferença é 
@@ -322,118 +324,3 @@ nativamente.
 % mônads
 \section{Mônadas}
 
-
-% ------------------------------------------------------
-
-Para que uma linguagem seja considerada funcional, existem 
-algumas funcionalidades que ela deve implementar, assim 
-como características que ela não deve possuir. Algumas dessas 
-características serão exploradas a seguir. É importante 
-lembrar que o fato de uma linguagem não prevenir contra 
-algumas dessas características desencorajadas não significa 
-que elas não podem ser evitadas. Por mais que uma linguagem 
-não seja implementada baseada em um determinado paradigma, 
-nada impede que as características e convenções dele sejam 
-seguidos como boas práticas. Também é comum linguagens que 
-não são exatamente funcionais implementarem parte desses 
-recursos. É comum esse tipo de linguagem ser referida como 
-multiparadigma, mesmo que um determinado paradigma se 
-sobressaia sobre os demais.
-Também é importante ressaltar, apesar de isso ser 
-evidente tanto pelo que foi descrito no parágrafo anterior 
-quanto pela linguagem utilizada no decorrer deste trabalho, 
-que o fato de alguns paradigmas apresentarem características 
-muito diferentes ou até mutuamente exclusivas, nada impede 
-que mais de um paradigma seja usado de forma complementar 
-durante a construção de um programa. O ideal é que a melhor 
-solução seja usada para o problema proposto, independente 
-do paradigma utilizado.
-
-
-
-É comum entre os paradigmas imperativo ou orientado a objetos 
-o uso de operações que consultam tabelas de um banco de dados 
-ou escrevem um valor em um arquivo. Existe algo em comum 
-entre todas essas operações: os efeitos colaterais. 
-
-Quando uma função acessa dados externos à aplicação ou 
-mesmo ao seu escopo, é difícil prever o que pode acontecer. 
-Normalmente, medidas como tratamento de exceções são tomadas 
-para interromper uma tentativa de acesso mau sucedida cuja 
-causa não pode ser reparada pelo programa (por exemplo, 
-o usuário fornecer um nome para um arquivo que não existe e 
-o programa tenta acessá-lo). Esse comportamento, por mais 
-que inevitável, faz com que uma função acabe nem sempre se 
-comportando da forma que ela deveria: Esse tipo de função é 
-conhecida como impura.
-
-Partindo da definição de uma função impura, uma função pura 
-pode ser definida como uma que opera apenas sobre os valores 
-passados a ela como parâmetro. Ou seja, ela não realiza 
-nenhuma operação que possa causar um efeito colateral 
-inesperado que quebre o propósito para o qual a função foi 
-construída.
-
-Uma propriedade importante de funções puras é que, 
-independente de quantas vezes uma função for executada, 
-para os mesmos parâmetros de entrada, a saída será sempre 
-a mesma. Essa é uma propriedade muito útil para a realização 
-de testes e para isolar erros em um programa, tornando muito 
-mais simples o processo de debug. Isso seria impossível para 
-funções que lidam com efeitos colaterais, onde uma função 
-pode retornar um valor incorreto independente de estar se 
-comportando da forma correta ou não.
-
-É importante notar que um programa que possui apenas funções 
-puras é praticamente inviável, já que é constantemente 
-necessário realizar operações que dependem de acessos 
-externos ao programa. O paradigma funcional orienta, porém, 
-que esses efeitos colaterais sejam isolados na aplicação. 
-Dessa forma, as funções que realizam efeitos colaterais como 
-recuperar dados de uma API ou atualizar uma base de dados 
-devem ser executadas no início e no fim de uma execução, 
-preservando o máximo de pureza possível.
-
-
-Em orientação a objetos, dados costumam ser encapsulados em 
-objetos, onde métodos de acesso podem recuperá-los ou 
-modificá-los. A ideia de modificar um valor é desencorajada 
-no paradigma funcional, ou seja, não existem variáveis.
-
-Em um programa funcional, se um nome x em um determinado 
-escopo recebe um valor, é impossível assosciar a x um 
-valor diferente: esse é o conceito de imutabilidade. O 
-problema é que é comum que um determinado valor seja 
-modificado no decorrer de um programa. Por exemplo, uma 
-estrutura que armazene um 
-
-
-Apesar de ser um recurso não tão incomum, funções de alta 
-ordem são importantes para definir uma linguagem funcional. 
-Em linguagens que implementam o paradigma funcional, funções 
-costumam ser tratadas como tipos, da mesma forma que inteiros, 
-caracteres e booleanos. Dessa forma, uma função pode também 
-ser considerada um valor que possui um tipo que depende de 
-outros tipos, da mesma forma que uma lista é um tipo que 
-depende do tipo de dado armazenado.
-
-Essa propriedade é importante pois permite que funções 
-sejam também passadas como parâmetros por outras funções e 
-serem retornadas por outras funções. E essa é exatamente a 
-definição de uma função de alta ordem: É uma função que 
-pode receber funções como parâmetro e retornar funções (ou 
-ambos).
-
-
-Mônada é considerado um conceito difícil da programação 
-funcional por ser definido através de leis matemáticas 
-que podem ser complexas. Iniciando pelo básico, um Monad 
-é uma forma de estruturar e combinar sequências de 
-operações em um programa funcional. Algo que é alcançado 
-de forma simples em um paradigma imperativo ou orientado 
-a objetos acaba sendo teoricamente mais difícil em um 
-paradigma funcional graças aos outros conceitos de 
-programação funcional que impedem ou desencorajam que 
-operações sejam simplesmente executadas sequencialmente.
-
-Normalmente, um Monad encapsula um valor.
