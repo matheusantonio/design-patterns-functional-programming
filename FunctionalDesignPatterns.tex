@@ -68,7 +68,7 @@
 % Pacotes de citações
 % ---
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
-\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+\usepackage[num]{abntex2cite}	% Citações padrão ABNT
 
 % ---
 % Formatação de código-fonte
@@ -268,7 +268,7 @@ as normas ABNT apresentado à comunidade de usuários \LaTeX.}
 
 \include{1_capa/capa}
 
-\include{2_introducao/introducao}
+%\include{2_introducao/introducao}
 
 % ----------------------------------------------------------
 % PARTE
@@ -282,6 +282,45 @@ as normas ABNT apresentado à comunidade de usuários \LaTeX.}
 \include{4_referencial_teorico/1_paradigma-funcional/paradigma-funcional}
 
 \include{4_referencial_teorico/2_padroes-projeto/padroes-projeto}
+
+
+
+% ----------------------------------------------------------
+% Essa parte é um requisito apenas para TCC I e deverá 
+% ser removida após a aprovação na disciplina.
+% ----------------------------------------------------------
+\phantompart
+
+\chapter{Resumo dos demais capítulos}
+
+Na parte de desenvolvimento, haverá uma introdução 
+sobre como alguns conceitos de orientação a objetos, 
+como classes e encapsulamento, serão representados na 
+linguagem funcional. Em seguida, os capítulos serão 
+dividos entre padrões criacionais, estruturais e 
+comportamentais. Ao todos, os vinte e três padrões 
+GoF serão abordados nesses três capítulos, onde serão 
+apresentadas as ideias básicas do problema que o padrão 
+busca resolver e como o resolve, seguido da abordagem 
+funcional de resolver o mesmo problema.
+
+Após analisar todos os padrões, o capítulo de resultados 
+analisará as vantagens e desvantagens da abordagem 
+funcional para cada solução, destacando onde ela 
+contribuiu, onde atrapalhou, ou onde não fazia sentido ser 
+implementada. Essas classificações dependerão das análises 
+que serão realizadas na etapa de desenvolvimento.
+
+Por fim, no capítulo de conclusão serão analisadas 
+as consequências dessas análises e como elas podem 
+impactar o conceito de padrões de projeto e as vantagens 
+e desvantagens de revisá-los no ponto de vista funcional.
+
+% ----------------------------------------------------------
+% Remover até aqui após TCC I
+% ----------------------------------------------------------
+
+
 
 % ----------------------------------------------------------
 % PARTE

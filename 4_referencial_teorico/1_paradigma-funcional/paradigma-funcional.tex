@@ -26,7 +26,7 @@ melhor exploradas em seguida.
 
 Funções puras operam apenas nos parâmetros fornecidos. 
 Elas não leem ou escrevem em qualquer valor que esteja 
-fora do corpo da função. Por exemplo:
+fora do corpo da função.\cite{purefunctionscala} \cite{functionalscala} Por exemplo:
 
 \begin{lstlisting}[caption={Exemplo de Função Pura},label=purefunction]
 
@@ -43,7 +43,7 @@ ser tiradas. Por exemplo, uma função pura sempre
 retornará o mesmo valor para os mesmos parâmetros: 
 caso a função add acima receba os parâmetros 1 para x 
 e 2 para y, não importa quantas vezes ela seja chamada, 
-o resultado da operação sempre será 3.
+o resultado da operação sempre será 3. \cite{functionalscala}
 
 Em seguida, um exemplo de função não pura:
 
@@ -66,7 +66,7 @@ um efeito colateral.
 Efeitos colaterais ocorrem em consultas ou 
 alterações a bases de dados, modificação de 
 arquivos ou até mesmo envio de dados a um 
-servidor. Também ocorrem quando variáveis fora 
+servidor.\cite{purefunctionscala} \cite{functionalscala} Também ocorrem quando variáveis fora 
 do escopo da função são modificadas ou lidas. 
 Esse tipo de comportamento é muito comum em 
 paradigmas de programação imperativos ou 
@@ -85,7 +85,7 @@ uma tela. Por isso, a ideia no design de software
 funcional não é apenas utilizar funções puras, 
 mas concentrar os efeitos colaterais em um local 
 isolado das funções puras, o que facilita o 
-processo de debugging.
+processo de debugging.\cite{purefunctionscala}
 
 
 % imutabilidade
@@ -145,15 +145,15 @@ no caso de um programa multi-thread, por exemplo.
 % C# e Java já possuem suporte para HoF, mencionar aqui
 Funções de alta ordem são funções que recebem 
 outras funções como parâmetro e ainda podem 
-retornar funções. Esse é um recurso 
+retornar funções.\cite{realworldhaskell} \cite{functionalscala} Esse é um recurso 
 não tão presente em linguagens orientadas a 
 objeto ou procedurais, mas não é exclusivo das 
 linguagens funcionais. Javascript é um bom 
 exemplo de linguagem que pode receber funções 
-como parâmetro em outras funções [citação aqui].
+como parâmetro em outras funções. \cite{eloquentjs}
 
 Um bom exemplo de simplicidade do uso de 
-funções de alta ordem é a função map. Seu objetivo 
+funções de alta ordem é a função map.\cite{hofscala} Seu objetivo 
 é aplicar uma função a todos os elementos de uma 
 coleção e retornar a nova coleção resultante. 
 Para que isso seja possível, a função map precisa 
@@ -234,7 +234,7 @@ após o fim da execução de adder. Isso foi possível
 por a variável x estar dentro do escopo da função 
 quando ela foi criada. Esse comportamento, que torna 
 o retorno de funções muito mais interessante, é chamado 
-de closure.
+de closure. \cite{mflambdas}
 
 
 % Composição de funções
@@ -291,7 +291,7 @@ tornar-se mais legíveis:
 
 Currying é uma técnica de programação funcional que 
 permite que uma função com mais de um parâmetro seja 
-chamada como se possuísse apenas um. Por exemplo, a 
+chamada como se possuísse apenas um. \cite{realworldhaskell} \cite{functionalscala} Por exemplo, a 
 função:
 
 \begin{lstlisting}[caption={Exemplo sem Currying},label=nocurrex]
@@ -317,7 +317,7 @@ que possuem quantidades diferentes de parâmetros.
 Normalmente, em linguagens funcionais não é 
 necessário refatorar o código como foi feito 
 acima, já que as funções implementam essa técnica 
-nativamente.
+nativamente. \cite{realworldhaskell}
 
 
 
