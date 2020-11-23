@@ -111,10 +111,11 @@ em diagramas de interação. No caso do Singleton, apenas o
 seguinte diagrama é utilizado:
 
 \begin{figure}[htb]
-	\caption{\label{fig_grafico}Estrutura do Singleton utilizada como exemplo \cite{gamma:1995}}
+	\caption{\label{fig_grafico}Estrutura do Singleton utilizada como exemplo}
 	\begin{center}
 	    \includegraphics[scale=0.5]{4_referencial_teorico/2_padroes-projeto/singleton_structure.png}
-	\end{center}
+    \end{center}
+    \legend{Fonte: \cite{gamma:1995}}
 \end{figure}
 
 \subsection*{Participantes}
@@ -200,7 +201,7 @@ de apenas uma instância. São apresentadas duas versões:
 uma onde não há uso de subclasses e uma onde há o 
 uso.
 
-\begin{lstlisting}[caption={Exemplo de Singleton sem subclasses \cite{gamma:1995}},label=singletonnosub]
+\begin{lstlisting}[caption={Exemplo de Singleton sem subclasses}, label=singletonnosub]
     
     class MazeFactory {
     public:
@@ -226,9 +227,10 @@ uso.
     } 
 
 \end{lstlisting}
+\legend{Fonte: \cite{gamma:1995}}
 
 
-\begin{lstlisting}[caption={Exemplo de Singleton com subclasses \cite{gamma:1995}},label=singletonsub]
+\begin{lstlisting}[caption={Exemplo de Singleton com subclasses},label=singletonsub]
     
     MazeFactory* MazeFactory::Instance () {
         if (_instance == 0) {
@@ -250,6 +252,7 @@ uso.
     } 
 
 \end{lstlisting}
+\legend{Fonte: \cite{gamma:1995}}
 
 
 \subsection*{Usos Conhecidos}
