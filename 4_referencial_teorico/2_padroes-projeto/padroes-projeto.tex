@@ -4,7 +4,8 @@
 \chapter{Padrões de Projeto}
 % ---
 
-Durante o processo de desenvolvimento de software, 
+Durante o processo de desenvolvimento de software 
+orientado a objetos, 
 problemas de design são comuns durante a 
 fase de projeto. Alguns desses problemas 
 eram tão comuns que foi feito um esforço para catalogá-los 
@@ -30,7 +31,7 @@ padrões foram catalogados, os mesmos que serão o alvo
 deste trabalho.
 
 De acordo com o livro, um padrão possui quatro elementos 
-essenciais: Um nome, um problema, uma solução e suas 
+essenciais: um nome, um problema, uma solução e suas 
 consequências. O nome é uma característica importante 
 por tornar mais fácil referenciar um padrão. O problema 
 descreve a situação em que o padrão é aplicado e 
@@ -85,7 +86,7 @@ do padrão o soluciona, tornando mais simples a compreensão
 das descrições mais abstratas que vêm a seguir. Para o 
 Singleton, é utilizado como exemplo o spooler de uma 
 impressora, um sistema de arquivos ou um gerenciador de 
-janelas. Para todos esses casos, apenas um precisa existir, 
+janelas. Para todos esses casos, apenas um objeto precisa existir, 
 ou seja, uma classe que representa algum desses elementos 
 só precisa possuir uma instância de fácil acesso. É proposto 
 tornar a própria classe responsável por gerenciar essa 
@@ -197,9 +198,16 @@ Como o nome já diz, demonstra o padrão através de
 um exemplo em código. O exemplo do Singleton é um 
 construtor de labirintos, onde a classe que é 
 responsável pela fabricação dos labirintos necessita 
-de apenas uma instância. São apresentadas duas versões: 
-uma onde não há uso de subclasses e uma onde há o 
-uso.
+de apenas uma instância. O código \ref{singletonnosub}
+apresenta a implementação do padrão sem o uso de 
+subclasses, enquanto o código \ref{singletonsub} 
+apresenta uma versão com o uso de subclasses, 
+onde as subclasses referenciadas são BombedMazeFactory  
+e EnchantedMazeFactory. 
+Ambos estão na linguagem C++ e foram retirados 
+do livro, porém a implementação pode ser feita 
+de forma equivalente em qualquer linguagem 
+orientada a objetos.
 
 \begin{lstlisting}[caption={Exemplo de Singleton sem subclasses}, label=singletonnosub]
     
@@ -259,10 +267,10 @@ uso.
 
 Demonstra usos desse padrão em sistemas reais. No caso 
 do Singleton, é mencionado o relacionamento entre 
-classes e suas metaclasses e o toolkit para construção 
-de interfaces de usuário InterViews, que usa o padrão para 
-acessar as únicas instâncias das classes Session e 
-WidketKit, entre outras.
+classes e suas metaclasses. Um exemplo atual de uso 
+de Singleton é a ferramenta de injeção de dependência 
+do .NET Core, onde um serviço 
+pode comportar-se como um Singleton\cite{didotnet}.
 
 \subsection*{Padrões Relacionados}
 

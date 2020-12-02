@@ -1,0 +1,48 @@
+% mônads
+\section{Mônadas}
+
+Diferente dos conceitos anteriores, a ideia de 
+mônadas 
+vem da teoria das categorias \cite{functionalscala}. 
+Mônadas são definidas em função de outros conceitos de 
+teoria das categorias, por isso é mais simples explicá-las 
+através do que elas pode fazer ao invés do que elas são. 
+
+Diferente de um paradigma imperativo, em um programa 
+funcional normalmente não possuímos a ideia de 
+sequências de código, ou seja, uma sequência de 
+operações seguindo uma ordem de execução. Mônadas 
+trazem sequenciamento e ordem para o programa através 
+de leis que definem uma estrutura parecida com as 
+sentenças de um paradigma imperativo\cite{camargomonads}.
+É possível observar esse comportamento nos \textit{for 
+comprehensions} da linguagem Scala\cite{functionalscala}:
+
+\begin{lstlisting}[caption={Exemplo de notação for},label=foropscala]
+
+    for {
+        y <- f(x)
+        z <- g(y)
+    } yield z
+    
+
+\end{lstlisting}
+
+Nesse código, a operação f precisa ser executada 
+antes da operação g, já que ela depende de seu 
+resultado. É possível observar que esse é um caso 
+simples de composição de funções, e de fato os 
+\textit{for comprehensions} são apenas \textit{syntatic 
+sugar}\footnote{\textit{syntatic sugar} são sintaxes 
+definidas em linguagens de programação com a intenção 
+de facilitar a leitura ou expressividade do código.} 
+para o encadeamento de operações monádicas\cite{yieldscala}. 
+Ou seja, o código acima poderia ser escrito 
+da seguinte forma:
+
+\begin{lstlisting}[caption={Exemplo de fmap},label=fmapscala]
+
+    flatMap()
+    
+
+\end{lstlisting}

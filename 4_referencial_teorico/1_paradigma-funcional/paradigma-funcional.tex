@@ -20,10 +20,6 @@ maior no cálculo lambda, o que deu origem aos conceitos
 que serão vistos a seguir.
 
 
-% É necessário definir melhor o que é cálculo lambda 
-% aqui ou essa introdução histórica é suficiente?
-
-
 
 % Funções puras
 \section{Funções Puras}
@@ -51,7 +47,7 @@ o resultado da operação sempre será 3\cite{functionalscala}.
 
 Em seguida, um exemplo de função não pura:
 
-\begin{lstlisting}[caption={Exemplo de Função Pura},label=purefunction]
+\begin{lstlisting}[caption={Exemplo de Função Pura},label=impurefunction]
 
     var z = 10;
 
@@ -145,61 +141,6 @@ acidentalmente pelo programador ou de forma imprevista
 no caso de um programa multi-thread, por exemplo.
 
 
-% Composição de funções
-\section{Composição de Funções}
-
-Reuso de código é um objetivo desejável para qualquer 
-paradigma de programação, e o paradigma funcional 
-proporciona uma facilidade para isso através de 
-composição de funções\cite{realworldhaskell}.
-
-O código abaixo exemplifica esse recurso:
-
-\begin{lstlisting}[caption={Exemplo de Composição de Funções},label=fogex]
-
-    def add1(x){
-        return x + 1
-    }
-
-    def mul2(x){
-        return x * 2
-    }
-
-    def sub4(x){
-        return x - 4
-    }
-
-    def add1ThenMul2ThenSub4(x) {
-        return sub4(mul2(add1(x)))
-    }
-
-    let res = add1ThenMul2ThenSub4(1);
-    // O resultado da função é 0
-
-\end{lstlisting}
-
-É comum qualquer linguagem permitir esse tipo 
-de comportamento. Entretanto, 
-utilizar funções menores e mais simples para compor 
-funções maiores e mais complicadas é uma forma de 
-design comum em linguagens funcionais. Uma vantagem é 
-que em linguagens funcionais as composições podem 
-tornar-se mais legíveis utilizando funções 
-de alta ordem \footnote{Aqui, a função compose 
-recebe as funções add1 e mul2 e retorna a 
-composição delas. A função resultante 
-é recebida como parâmetro de compose novamente, 
-assim como a função sub4, resultando em uma função 
-equivalente a sub4(mul2(add1()))}:
-
-\begin{lstlisting}[caption={Exemplo de Composição de Funções},label=fogex]
-
-
-    let res = (add1 compose mul2 compose sub4)(1);
-    // O resultado da função é 0
-
-\end{lstlisting}
-
 
 % Funções de alta ordem
 \section{Funções de Alta Ordem}
@@ -207,12 +148,14 @@ equivalente a sub4(mul2(add1()))}:
 % C# e Java já possuem suporte para HoF, mencionar aqui
 Funções de alta ordem são funções que recebem 
 outras funções como parâmetro e ainda podem 
-retornar funções\cite{realworldhaskell, functionalscala}. Esse é um recurso 
+retornar funções\cite{realworldhaskell, functionalscala}. 
+Esse é um recurso 
 não tão comum em linguagens orientadas a 
 objeto ou procedurais, mas não é exclusivo das 
-linguagens funcionais. Javascript é um 
-exemplo de linguagem que pode receber funções 
-como parâmetro em outras funções\cite{eloquentjs}.
+linguagens funcionais. Javascript\cite{eloquentjs}, 
+Python\cite{denerocomposing} e C\#\cite{buonannofunctcsharp}
+são alguns exemplos de linguagens que possuem suporte 
+para funções de alta ordem.
 
 Um bom exemplo de simplicidade do uso de 
 funções de alta ordem é a função map\cite{hofscala}. Seu objetivo 
@@ -318,9 +261,9 @@ Considerando a seguinte função:
 
 \end{lstlisting}
 
-Nele, definimos uma função de alta ordem, adder, que 
+Nele, definimos uma função adder que 
 recebe como parâmetro um valor x e retorna uma função 
-que recebe como parâmetro outro valor y e retorna a 
+que recebe como parâmetro outro valor y, retornando a 
 soma dos dois valores. A variável add10 receberá 
 o retorno da chamada da função adder para o valor 10. 
 Com isso, add10 será uma função que receberá como 
@@ -337,51 +280,58 @@ novas possibilidades para o retorno de funções,
 é chamado de closure\cite{mflambdas}.
 
 
-% mônads
-\section{Mônadas}
 
-Diferente dos conceitos anteriores, a ideia de 
-mônadas 
-vem da teoria das categorias \cite{functionalscala}. 
-Mônadas são definidas em função de outros conceitos de 
-teoria das categorias, por isso é mais simples explicá-las 
-através do que elas pode fazer ao invés do que elas são. 
+% Composição de funções
+\section{Composição de Funções}
 
-Diferente de um paradigma imperativo, em um programa 
-funcional normalmente não possuímos a ideia de 
-sequências de código, ou seja, uma sequência de 
-operações seguindo uma ordem de execução. Mônadas 
-trazem sequenciamento e ordem para o programa através 
-de leis que definem uma estrutura parecida com as 
-sentenças de um paradigma imperativo\cite{camargomonads}.
-É possível observar esse comportamento nos \textit{for 
-comprehensions} da linguagem Scala\cite{functionalscala}:
+Reuso de código é um objetivo desejável para qualquer 
+paradigma de programação, e o paradigma funcional 
+proporciona uma facilidade para isso através de 
+composição de funções\cite{realworldhaskell}.
 
-\begin{lstlisting}[caption={Exemplo de notação for},label=foropscala]
+O código abaixo exemplifica esse recurso:
 
-    for {
-        y <- f(x)
-        z <- g(y)
-    } yield z
-    
+\begin{lstlisting}[caption={Exemplo de Composição de Funções},label=fogex]
+
+    def add1(x){
+        return x + 1
+    }
+
+    def mul2(x){
+        return x * 2
+    }
+
+    def sub4(x){
+        return x - 4
+    }
+
+    def add1ThenMul2ThenSub4(x) {
+        return sub4(mul2(add1(x)))
+    }
+
+    let res = add1ThenMul2ThenSub4(1);
+    // O resultado da função é 0
 
 \end{lstlisting}
 
-Nesse código, a operação f precisa ser executada 
-antes da operação g, já que ela depende de seu 
-resultado. É possível observar que esse é um caso 
-simples de composição de funções, e de fato os 
-\textit{for comprehensions} são apenas \textit{syntatic 
-sugar}\footnote{\textit{syntatic sugar} são sintaxes 
-definidas em linguagens de programação com a intenção 
-de facilitar a leitura ou expressividade do código.} 
-para o encadeamento de operações monádicas\cite{yieldscala}. 
-Ou seja, o código acima poderia ser escrito 
-da seguinte forma:
+É comum qualquer linguagem permitir esse tipo 
+de comportamento. Entretanto, 
+utilizar funções menores e mais simples para compor 
+funções maiores e mais complicadas é uma forma de 
+design comum em linguagens funcionais. Uma vantagem é 
+que em linguagens funcionais as composições podem 
+tornar-se mais legíveis utilizando funções 
+de alta ordem \footnote{Aqui, a função compose 
+recebe as funções add1 e mul2 e retorna a 
+composição delas. A função resultante 
+é recebida como parâmetro de compose novamente, 
+assim como a função sub4, resultando em uma função 
+equivalente a sub4(mul2(add1()))}:
 
-\begin{lstlisting}[caption={Exemplo de fmap},label=fmapscala]
+\begin{lstlisting}[caption={Exemplo de Composição de Funções},label=hofogex]
 
-    flatMap()
-    
+
+    let res = (sub4 compose mul2 compose add1)(1);
+    // O resultado da função é 0
 
 \end{lstlisting}
