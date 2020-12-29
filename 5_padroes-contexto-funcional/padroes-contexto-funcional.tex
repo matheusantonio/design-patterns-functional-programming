@@ -5,25 +5,36 @@
 \chapter{Orientação a Objetos no Contexto Funcional}
 % ---
 
-O conceito de objeto não existe no paradigma funcional. 
-Para ater-se a não reaproveitar recursos e conceitos 
-oriundos da Orientação a Objetos nos exemplos que 
-utilizam os recursos e conceitos oriundos da 
-programação funcional, será usada uma estrutura 
-equivalente quando for necessário o uso de alguma 
-estrutura semelhante a um objeto.
+% Conceitos para mapear
+
+Parte dos padrões de projeto que serão 
+analisados usam ou dependem de conceitos 
+de orientação a objetos como classes ou 
+encapsulamento, logo é necessário 
+realizar um mapeamento desses conceitos 
+para o paradigma funcional. A intenção 
+desse mapeamento não é implementar 
+orientação a objetos em uma linguagem 
+funcional, mas entender qual é a utilidade 
+de cada um desses conceitos e quais 
+recursos em programação funcional podem 
+oferecer essa mesma utilidade.
+
+
+% classes e objetos
+\section{Classes e Objetos}
+
 Um objeto pode ser definido como uma representação 
-do mundo real que possui características (atributos) 
-e comportamentos (métodos). Para representar as 
-características, será utilizado o recurso case 
-class de scala. Já os comportamentos serão definidos 
-por funções que recebem como entrada um valor do 
-case class criado e retorna uma nova variável do 
-mesmo tipo case class ou o valor de alguma de suas 
-características. Por exemplo, a classe a seguir, 
-construída a partir do paradigma orientado a objetos:
-
-
+do mundo real que possui características e comportamentos, 
+enquanto uma classe é uma abstração dessa representação, 
+que define quais características e comportamentos um objeto 
+deve possuir\cite{umlsystems}. Essas características 
+e comportamentos são representados, em orientação a 
+objetos, como atributos e métodos, respectivamente. 
+O código \ref{ooclass} demonstra uma classe que 
+possui os atributos name e age, além dos métodos 
+getName, setName, getAge e setAge, que realizam 
+operações sobre esses atributos.
 
 \begin{lstlisting}[caption={Classe comum em Orientação a Objetos},label=ooclass]
     
@@ -41,11 +52,37 @@ construída a partir do paradigma orientado a objetos:
 
 \end{lstlisting}
 
+Dessa forma, é necessário definir uma estrutura em 
+programação funcional que possua características e 
+funções que operam sobre essas características. 
+Um recurso da linguagem Scala que pode representar 
+as características é a case class, uma estrutura de 
+dados imutável que pode definir valores nomeados, 
+da mesma forma que uma classe\cite{functionalscala}. 
+\footnote{As case classes em Scala são um \textit{syntatic 
+sugar} para classes imutáveis, portanto, estruturas 
+semelhantes não serão encontradas em muitas linguagens 
+funcionais. Porém, para o propósito desse mapeamento, 
+qualquer estrutura de dados imutável que possa guardar 
+qualquer quantidade de valores, como uma tupla, possui a 
+mesma utilidade.}
+
+Para representar os métodos de uma classe em uma 
+linguagem funcional, já que nossa estrutura de dados 
+imutável não armazena funções\footnote{Apesar de não 
+ser uma abordagem utilizada neste trabalho, é 
+possível armazenar funções nessas estruturas.} e já 
+que é necessário seguir o princípio de funções puras, 
+onde uma função opera apenas sobre os parâmetros 
+fornecidos, uma abordagem de implementar esses 
+métodos é simplesmente definir funções que recebam 
+como parâmetro um valor do tipo definido em nossa 
+estrutura de dados imutável. Seguindo esses dois 
+princípios, uma versão funcional da classe apresentada 
+no código \ref{ooclass} pode ser vista no código \ref{fpclass}.
 
 
-Pode ser representada da seguinte forma no paradigma funcional:
-
-\begin{lstlisting}[caption={Representação de uma classe no contexto funcional},label=pfclass]
+\begin{lstlisting}[caption={Representação de uma classe no contexto funcional},label=fpclass]
     
     case class Person(name: String, age: Int)
 
@@ -61,19 +98,8 @@ Pode ser representada da seguinte forma no paradigma funcional:
 
 \end{lstlisting}
 
-
-% Conceitos para mapear
-
-Todos os padrões de projeto abordados usam ou 
-dependem de conceitos de orientação a objetos 
-como classes ou encapsulamento. 
-
-% classes e objetos
-
-
-
 % encapsulamento
-
+\section{Encapsulamento}
 
 
 % interfaces
