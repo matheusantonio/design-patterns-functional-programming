@@ -145,13 +145,120 @@ ou modificados\cite{mlmodules}.
 
 
 % interfaces
-\section{Interfaces}
+\section{Interfaces e Polimorfismo}
+
+[Explicação do que é uma interface aqui]
+
+Existe mais de uma alternativa para as interfaces 
+e elas dependem da situação na qual a interface é 
+utilizada. Considerando o código \ref{oopinterface1}, 
+a interface 
+
+% Exemplo 1 de Interfaces
+
+\begin{lstlisting}[caption={Interfaces em Orientação a Objetos},label=oopinterface1]
+    
+    trait InterfaceUser {
+        def operation(x : Int) : Int
+    }
+
+    class InterfaceUserA extends InterfaceUser {
+        def operation(x : Int) : Int = x + 1
+    }
+
+    class InterfaceUserB extends InterfaceUser {
+        def operation(x : Int) : Int = 2*x
+    }
+
+    def runInterface(x : Int, interfaceUser : InterfaceUser) : Int {
+        return interfaceUser.operation(x)
+    }
+
+\end{lstlisting}
 
 
-% polimorfismo
-\section{Polimorfismo}
+\begin{lstlisting}[caption={Interfaces em Programação Funcional},label=fpinterface1]
+    
+    def operation1(x : Int) : Int = x + 1
+
+    def operation(x : Int) : Int = 2*x
+
+    def runInterface(x : Int, operation : (Int => Int)) =
+        operation(x)
+    
+
+\end{lstlisting}
+
+
+
+
+
+
+
+% Exemplo 2 de interfaces
+
+\begin{lstlisting}[caption={Interfaces em Orientação a Objetos},label=oopinterface2]
+    
+    trait Animal {
+        def makeSound() : Unit
+    }
+
+    class Dog {
+
+        var dogSound = "Bark bark!"
+
+        def makeSound() : Unit {
+            print(dogSound)
+        }
+    }
+
+    class Cat {
+
+        var catSound = "Meow!"
+
+        def makeSound() : Unit {
+            print(catSound)
+        }
+    }
+
+    def makeAnimalSpeak(animal : Animal) {
+        animal.makeSound()
+    }
+
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption={Interfaces em Programação Funcional},label=fpinterface2]
+    
+    sealed trait Animal
+    case class Dog(val dogSound = "Bark bark!") extends Animal
+    case class Cat(val catSound = "Meow!") extends Animal
+
+    def makeAnimalSpeak(soundOperation : (Animal => Unit)) =
+        soundOperation()
+    
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+\begin{lstlisting}[caption={},label=]
+    
+    
+
+\end{lstlisting}
+
+
+
+
 
 % herança
+%\section{Herança}
 
-\section{Herança}
 
