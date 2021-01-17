@@ -145,14 +145,18 @@ ou modificados\cite{mlmodules}.
 
 
 % interfaces
-\section{Interfaces e Polimorfismo}
+\section{Interfaces}
 
 [Explicação do que é uma interface aqui]
 
 Existe mais de uma alternativa para as interfaces 
 e elas dependem da situação na qual a interface é 
 utilizada. Considerando o código \ref{oopinterface1}, 
-a interface 
+a interface é necessária para garantir que as 
+classes InterfaceUserA e InterfaceUserB possuam 
+a operação operation, que recebe como parâmetro 
+um valor do tipo inteiro e retorna outro valor 
+inteiro.
 
 % Exemplo 1 de Interfaces
 
@@ -176,6 +180,15 @@ a interface
 
 \end{lstlisting}
 
+Utilizando funções de alta ordem e levando em 
+consideração que as funções que representam nossos 
+métodos não estão encapsulados em classes e 
+não dependem de atributos, podemos substituir o 
+objeto sendo passado por parâmetro na função 
+runInterface por uma função qualquer que recebe 
+como parâmetro um valor inteiro e retorna outro 
+valor inteiro. Essa alternativa pode ser vista 
+no código \ref{fpinterface1}.
 
 \begin{lstlisting}[caption={Interfaces em Programação Funcional},label=fpinterface1]
     
@@ -186,16 +199,18 @@ a interface
     def runInterface(x : Int, operation : (Int => Int)) =
         operation(x)
     
-
 \end{lstlisting}
 
 
-
-
-
-
-
 % Exemplo 2 de interfaces
+
+Outra situação em que interfaces são necessárias 
+é quando deseja-se especificar um tipo ao qual 
+dois tipos diferentes pertencem em comum. Por 
+exemplo, no código \ref{oopinterface2} a função 
+makeAnimalSound deve receber apenas objetos 
+do tipo Animal, ou seja, que implementem 
+a interface Animal.
 
 \begin{lstlisting}[caption={Interfaces em Orientação a Objetos},label=oopinterface2]
     
@@ -204,7 +219,6 @@ a interface
     }
 
     class Dog {
-
         var dogSound = "Bark bark!"
 
         def makeSound() : Unit {
@@ -213,7 +227,6 @@ a interface
     }
 
     class Cat {
-
         var catSound = "Meow!"
 
         def makeSound() : Unit {
@@ -227,38 +240,37 @@ a interface
 
 \end{lstlisting}
 
+Linguagens de programação funcionais podem 
+recorrer às \textit{typeclasses}\footnote{
+    No caso de Scala, elas recebem o nome trait, 
+    o mesmo utilizado para declarar interfaces.
+}, que definem um tipo em comum para tipos 
+diferentes. Esse recurso pode ser acompanhado 
+de mais funcionalidades, como exigir que seus 
+membros implementem certas operações - o que 
+o torna mais semelhante ainda a uma interface - 
+porém, esse recurso não será utilizado neste 
+trabalho. O código \ref{fpinterface2} demonstra 
+seu uso.
+
 
 \begin{lstlisting}[caption={Interfaces em Programação Funcional},label=fpinterface2]
     
-    sealed trait Animal
+    trait Animal
     case class Dog(val dogSound = "Bark bark!") extends Animal
+    def makeDogSound(dog : Dog) : Unit = print(dog.dogSound)
+    
     case class Cat(val catSound = "Meow!") extends Animal
+    def makeCatSound(cat : Cat) : Unit = print(cat.catSound)
 
-    def makeAnimalSpeak(soundOperation : (Animal => Unit)) =
+    def makeAnimalSpeak(animal : Animal, soundOperation : (Animal => Unit)) =
         soundOperation()
     
+    makeAnimalSpeak(dog, makeDogSound)
+    makeAnimalSpeak(cat, makeCatSound)
 
 \end{lstlisting}
-
-
-
-
-
-
-
-
-
-\begin{lstlisting}[caption={},label=]
-    
-    
-
-\end{lstlisting}
-
-
-
 
 
 % herança
 %\section{Herança}
-
-
