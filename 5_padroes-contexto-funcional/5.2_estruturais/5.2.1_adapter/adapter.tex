@@ -9,10 +9,11 @@ solução que evita a refatoração e a dependência da interface
 do cliente para a interface desejada.
 
 Existem duas formas de realizar essa adaptação. Um Adapter 
-de classe, que só é possível para linguagens que implementam 
-herança múltipla, implementa uma classe que herda tanto da 
-classe que representa a interface da aplicação quanto da 
-classe que representa a interface que deseja ser utilizada. 
+de classe (Figura \ref{adapter_struct}), que só é possível 
+para linguagens que implementam herança múltipla, implementa 
+uma classe que herda tanto da classe que representa a interface 
+da aplicação quanto da classe que representa a interface que 
+deseja ser utilizada. 
 
 \begin{figure}[htb]
 	\caption{\label{adapter_struct}Estrutura do Adapter de Classe}
@@ -21,7 +22,8 @@ classe que representa a interface que deseja ser utilizada.
 	\end{center}
 \end{figure}
 
-Já o Adapter de Objeto herda apenas da classe que representa 
+Já o Adapter de Objeto (Figura \ref{adapter_alt_struct}) 
+herda apenas da classe que representa 
 a interface da aplicação e reimplementa a operação desejada 
 de forma que, após adaptar para a operação para a interface 
 desejada, delega a realização da mesma para um objeto que 
@@ -34,15 +36,60 @@ implemente essa interface.
 	\end{center}
 \end{figure}
 
-Exemplo Orientado a Objetos:
+\subsection*{Exemplo Orientado a Objetos}
+
+Como exemplo é apresentada uma ferramenta gráfica 
+que permite a edição de diversos objetos gráficos 
+simples, entre eles linhas e polígonos. Porém, 
+a aplicação deseja também editar elementos textuais, 
+que são mais complexos de se gerenciar. Como já existem 
+ferramentas prontas para gerenciar esse tipo de 
+elemento, é desejado reutilizá-lo. Já que as 
+ferramentas prontas não foram feitas pensando na 
+aplicação de ferramenta gráfica do exemplo, uma 
+classe Adapter é implementada para adaptar a 
+ferramenta textual para a aplicação que deseja 
+utilizá-la. Para esse exemplo, é utilizada a 
+abordagem de Adapter de objeto, onde um objeto 
+do tipo da ferramenta textual é armazenado. O 
+diagrama de classes do exemplo pode ser visto na 
+figura \ref{adapter_exemplo}, enquanto a 
+implementação em código pode ser vista no código 
+\ref{ooadapter}.
+
+
+\begin{figure}[htb]
+	\caption{\label{adapter_exemplo}Exemplo de Adapter}
+	\begin{center}
+	    \includegraphics[scale=0.45]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/exemplo_adapter.png}
+	\end{center}
+\end{figure}
+
 
 \begin{lstlisting}[caption={Adapter Orientado a Objetos},label=ooadapter]
 
+class Shape() {
+
+}
+
+class Line() extends Shape {
+
+}
+
+class TextShape(textView : TextView) extends Shape {
+
+}
+
+class TextView() {
+
+}
 
 
 \end{lstlisting}
 
-Contexto Funcional:
+
+
+\subsection*{Contexto Funcional}
 
 Existem duas formas simples de implementar um Adapter em uma linguagem 
 funcional: usando funções de alta ordem e composição de funções.
