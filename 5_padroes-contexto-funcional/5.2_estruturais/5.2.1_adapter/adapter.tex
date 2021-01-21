@@ -68,7 +68,10 @@ implementação em código pode ser vista no código
 
 \begin{lstlisting}[caption={Adapter Orientado a Objetos},label=ooadapter]
 
-class Shape() {
+class Shape(
+	var bottomLeft : Point, 
+	var topRight : Point
+) {
 
 }
 
@@ -76,11 +79,18 @@ class Line() extends Shape {
 
 }
 
-class TextShape(textView : TextView) extends Shape {
+class TextShape(
+	textView : TextView,
+	var bottomLeft : Point, 
+	var topRight : Point) extends Shape {
 
 }
 
-class TextView() {
+class TextView(
+	var x : Coord, var y : Coord,
+	var width : Coord : var height : Coord
+) {
+
 
 }
 
