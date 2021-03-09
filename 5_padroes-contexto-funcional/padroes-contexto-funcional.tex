@@ -55,21 +55,16 @@ operações sobre esses atributos.
 Dessa forma, é necessário definir uma estrutura em 
 programação funcional que possua características e 
 funções que operam sobre essas características. 
-Um recurso da linguagem Scala que pode agrupar 
-as características é a case class, uma estrutura de 
-dados imutável que pode definir valores nomeados, 
-da mesma forma que uma classe\cite{functionalscala}. 
-\footnote{As case classes em Scala são um \textit{syntatic 
-sugar} para classes imutáveis, portanto estruturas 
-semelhantes não serão encontradas em muitas linguagens 
-funcionais. Porém, para o propósito desse mapeamento, 
-qualquer estrutura de dados imutável que possa guardar 
-qualquer quantidade de valores, como uma tupla, possui a 
-mesma utilidade.}
+Para agrupar características pode ser utilizada uma 
+tupla, uma estrutura que armazena uma quantidade 
+fixa de valores com tipos predefinidos\cite{tuplesscala}. 
+Como as tuplas não podem ser modificadas, elas 
+respeitam o conceito de imutabilidade das 
+linguagens funcionais.
 
 Para representar os métodos de uma classe em uma 
 linguagem funcional, já que nossa estrutura de dados 
-imutável não armazena funções\footnote{Apesar de não 
+imutável não armazenará funções\footnote{Apesar de não 
 ser uma abordagem utilizada neste trabalho, é 
 possível armazenar funções nessas estruturas.} e já 
 que é necessário que nossas funções sejam puras, 
@@ -83,17 +78,17 @@ no código \ref{ooclass} pode ser vista no código \ref{fpclass}.
 
 \begin{lstlisting}[caption={Representação de uma classe no contexto funcional},label=fpclass]
     
-    case class Person(name: String, age: Int)
+    type Person = (String, Int)
 
-    def getName(person : Person) : String = person.name
+    def getName(person : Person) : String = person._1 
 
     def setName(person : Person, name : String) : Person = 
-        person.copy(name = name)
+        (name, person._2)
 
-    def getAge(person : Person) : Int = person.age
+    def getAge(person : Person) : Int = person._2
 
     def setAge(person : Person, age : Int) : Person =
-        person.copy(age = age)
+        (person._1, age)
 
 \end{lstlisting}
 
@@ -131,29 +126,117 @@ contexto funcional.
 
 Existe mais de uma abordagem que torna 
 possível implementar o encapsulamento em 
-linguagens funcionais, entre elas o uso 
-de closures\cite{classlessjs} ou de 
-GADTs - \textit{Generalized Algebraic 
-Data Types}\cite{existentialhaskell}. 
-Porém, a abordagem utilizada neste 
-trabalho levará em consideração os 
-módulos do sistema ML, já que eles 
-possibilitam esconder informações, 
-o que será utilizado para esconder a 
-forma como nossos tipos são criados 
-ou modificados\cite{mlmodules}.
+linguagens funcionais, o uso de GADTs - 
+\textit{Generalized Algebraic 
+Data Types}\cite{existentialhaskell} é uma 
+delas. Closures também podem 
+ser utilizadas ao armazenar valores de 
+atributos enquanto retorna as funções 
+necessárias para acessá-los ou modificá-los. 
+Um exemplo equivalente ao do código \ref{fpclass} 
+pode ser visto no código \ref{fpclosure}, 
+implementado utilizando a linguagem funcional Clojure. \cite{classlessjs}
 
+\begin{lstlisting}[caption={Representação de uma classe com closures},label=fpclosure]
+    
+    (defn person [name age]
+        {:getName name
+         :setName (fn [_name] (person _name age))
+         :getAge age
+         :setAge (fn [_age] (person name _age))})
+
+\end{lstlisting}
+
+Apesar de não ser um conceito de programação 
+funcional, também é possível aproveitar a ideia 
+de modularização para esconder detalhes de 
+implementação \cite{mlmodules}. Por exemplo, o 
+código \ref{modulesencap}, implementado em 
+Haskell, mostra o tipo Person com um construtor 
+P. Enquanto Person é exportado para fora do 
+módulo P não é, tornando impossível para qualquer 
+função que acesse esse módulo criar algo do tipo 
+Person. Dessa forma, apenas a função newPerson 
+pode por criar novos valores do tipo 
+Person. Funções implementadas dentro do módulo 
+também podem deixar de ser exportadas, o que 
+as tornaria semelhantes a métodos privados 
+de uma classe.
+
+\begin{lstlisting}[caption={Módulos como forma de encapsulamento},label=modulesencap]
+    
+    module Person (Person, getName, setName, getAge, setAge) where
+
+    data Person = P (String, Int)
+
+    newPerson :: String -> Int -> Person
+    newPerson name age = P (name, age)
+
+    getName :: Person -> String
+    getName (P (name, _)) = name
+
+    setName :: Person -> String -> Person
+    setName (P (_, age)) name = P (name, age)
+
+    getAge :: Person -> Int
+    getAge (P (_, age)) = age
+
+    setAge :: Person -> Int -> Person
+    setAge (P (name, _)) age = P (name, age)
+
+\end{lstlisting}
+
+Todas essas abordagens são válidas para a 
+implementação do encapsulamento, sendo a 
+linguagem utilizada um fator mais decisivo 
+do que a abordagem em si. Por exemplo, é 
+mais simples implementar a abordagem de closures 
+em Clojure por ser fracamente tipada, 
+permitindo que um dicionário sem estrutura 
+definida seja retornado. Linguagens que exijam 
+uma definição mais estrita do tipo de retorno 
+de uma função podem dificultar tanto a 
+implementação dessas funções quanto seu uso 
+no resto do programa.
+
+Sendo o objetivo dessa seção demostrar que 
+o encapsulamento pode ser implementado e 
+não definir como implementá-lo, 
+a abordagem utilizada para o encapsulamento 
+durante a análise dos padrões será 
+omitida, a menos que ela seja relevante para 
+sua implementação. Essa omissão 
+também tem como objetivo facilitar o entendimento 
+da abordagem funcional que será utilizada nos padrões.
 
 % interfaces
 \section{Interfaces}
 
-[Explicação do que é uma interface aqui]
+Uma interface pode ser entendida como um contrato 
+entre uma classe e o mundo externo, indicando que 
+uma classe que implementa uma interface também 
+implementará as operações definidas 
+pela mesma\cite{oracleooconcepts}. Diferente 
+da orientação a objetos, na programação funcional 
+nossas características e comportamentos são separados, 
+o que faz com que a implementação de uma interface 
+não seja a mesma como é para todos os casos de 
+orientação a objetos. Em seguida, serão abordadas 
+algumas situações que requerem interfaces e como 
+elas poderiam ser implementadas.
 
-Existe mais de uma alternativa para as interfaces 
-e elas dependem da situação na qual a interface é 
-utilizada. Considerando o código \ref{oopinterface1}, 
-a interface é necessária para garantir que as 
-classes InterfaceUserA e InterfaceUserB possuam 
+% Quando definimos uma interface (trait) e as funções 
+% (métodos) que recebem algo do tipo dessa trait como 
+% parâmetro, nossa interface é a trait + as funções.
+% Portanto, se definimos um tipo, X, como pertencente 
+% a essa trait, dizemos que ele é recebível por essas 
+% funções e deve se comportar como tal. (verificar 
+% outros casos possíveis)
+
+A primeira situação é considerada no código 
+\ref{oopinterface1}, 
+onde a interface é necessária para garantir que as 
+classes InterfaceUserA e InterfaceUserB implementem 
 a operação operation, que recebe como parâmetro 
 um valor do tipo inteiro e retorna outro valor 
 inteiro.
@@ -248,8 +331,8 @@ recorrer às \textit{typeclasses}\footnote{
 diferentes. Esse recurso pode ser acompanhado 
 de mais funcionalidades, como exigir que seus 
 membros implementem certas operações - o que 
-o torna mais semelhante ainda a uma interface - 
-porém, esse recurso não será utilizado neste 
+o torna mais semelhante ainda a uma interface. 
+Porém, esse recurso não será utilizado neste 
 trabalho. O código \ref{fpinterface2} demonstra 
 seu uso.
 
@@ -271,6 +354,26 @@ seu uso.
 
 \end{lstlisting}
 
+% Incluir comentário sobre tipagem da linguagem?
 
 % herança
-%\section{Herança}
+\section{Herança}
+
+Quando é desejado que uma classe seja 
+utilizada como base para a criação de outra, 
+o mecanismo da herança permite relacioná-las\cite{quarkoo}. 
+Por exemplo, o código \ref{fpinheritance} demonstra 
+o uso da herança entre as classes Product e Book.
+
+\begin{lstlisting}[caption={Herança em Programação Funcional},label=fpinheritance]
+    
+    class Product {
+
+    }
+
+    class Book {
+
+    }
+
+\end{lstlisting}
+
