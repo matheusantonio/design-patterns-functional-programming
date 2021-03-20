@@ -191,9 +191,9 @@ implementação do encapsulamento, sendo a
 linguagem utilizada um fator mais decisivo 
 do que a abordagem em si. Por exemplo, é 
 mais simples implementar a abordagem de closures 
-em Clojure por ser fracamente tipada, 
+em Clojure por ela ser dinamicamente tipada, 
 permitindo que um dicionário sem estrutura 
-definida seja retornado. Linguagens que exijam 
+definida seja retornado. Linguagens que exigem 
 uma definição mais estrita do tipo de retorno 
 de uma função podem dificultar tanto a 
 implementação dessas funções quanto seu uso 
@@ -216,12 +216,11 @@ Uma interface pode ser entendida como um contrato
 entre uma classe e o mundo externo, indicando que 
 uma classe que implementa uma interface também 
 implementará as operações definidas 
-pela mesma\cite{oracleooconcepts}. Diferente 
-da orientação a objetos, na programação funcional 
-nossas características e comportamentos são separados, 
-o que faz com que a implementação de uma interface 
-não seja a mesma como é para todos os casos de 
-orientação a objetos. Em seguida, serão abordadas 
+pela mesma\cite{oracleooconcepts}. 
+Como na programação funcional 
+as características e comportamentos são separados, 
+a implementação de uma interface pode variar de acordo  
+com o objetivo desejado. Em seguida, serão abordadas 
 algumas situações que requerem interfaces e como 
 elas poderiam ser implementadas.
 
@@ -357,23 +356,23 @@ seu uso.
 % Incluir comentário sobre tipagem da linguagem?
 
 % herança
-\section{Herança}
-
-Quando é desejado que uma classe seja 
-utilizada como base para a criação de outra, 
-o mecanismo da herança permite relacioná-las\cite{quarkoo}. 
-Por exemplo, o código \ref{fpinheritance} demonstra 
-o uso da herança entre as classes Product e Book.
-
-\begin{lstlisting}[caption={Herança em Programação Funcional},label=fpinheritance]
-    
-    class Product {
-
-    }
-
-    class Book {
-
-    }
-
-\end{lstlisting}
+%\section{Herança}
+%
+%Quando é desejado que uma classe seja 
+%utilizada como base para a criação de outra, 
+%o mecanismo da herança permite relacioná-las\cite{quarkoo}. 
+%Por exemplo, o código \ref{fpinheritance} demonstra 
+%o uso da herança entre as classes Product e Book.
+%
+%\begin{lstlisting}[caption={Herança em Programação Funcional},label=fpinheritance]
+%    
+%    class Product {
+%
+%    }
+%
+%    class Book {
+%
+%    }
+%
+%\end{lstlisting}
 
