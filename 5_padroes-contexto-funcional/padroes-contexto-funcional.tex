@@ -92,6 +92,70 @@ no código \ref{ooclass} pode ser vista no código \ref{fpclass}.
 
 \end{lstlisting}
 
+%associação
+\section{Associação, Agregação e Composição}
+
+Uma associação pode ser definida como uma 
+conexão entre as classes que indica algum 
+relacionamento entre elas\cite{Sommerville10}. 
+O código \ref{ooassociation} demonstra uma 
+associação entre as classes City e State, onde 
+a classe State possui uma coleção de atributos 
+do tipo City. Para que haja uma associação 
+entre duas classes, basta que pelo menos 
+uma delas tenha em seus atributos uma 
+referência à outra.
+
+\begin{lstlisting}[caption={Exemplo de associação entre classes},label=ooassociation]
+    
+    class City(var name : String){
+
+        def getName() : String = this.name;
+        def setName(name : String) : Unit {
+            this.name = name;
+        }
+    }
+
+    class State(var name : String, var cities : List[City]){
+
+        def getName() : String = this.name;
+        def setName(name : String) : Unit {
+            this.name = name;
+        }
+        def getCities() : List[City] = this.cities;
+        def addCity(city : City) : Unit {
+            this.cities = this.cities :+ city;
+        }
+    }
+
+\end{lstlisting}
+
+Como foi visto anteriormente, os atributos 
+podem ser representados por valores salvos 
+dentro de uma tupla associada a um tipo. 
+Portanto, uma associação dentro do contexto 
+funcional pode ser implementada armazenando 
+um valor de um tipo A entre os valores da tupla 
+de um tipo B. O código \ref{fpassociation}.
+
+\begin{lstlisting}[caption={Exemplo de associação no contexto funcional},label=fpassociation]
+    
+    type City = (String)
+    
+    def getName(city : City) : String = city._1;
+    def setName(city : City, name : String) : City = (name)
+
+    type State = (String, City)
+    
+    def getName(state : State) : String = state._1;
+    def setName(state : State, name : String) : State = (name, state._2)
+    
+    def getCities(state : State) : List[City] = state._2;
+    def addCity(state : State, city : City) : State =
+        (state._1, state._2 :+ city)
+
+\end{lstlisting}
+
 % encapsulamento
 \section{Encapsulamento}
 
@@ -308,7 +372,7 @@ a interface Animal.
         }
     }
 
-    class Cat extends Cat {
+    class Cat extends Animal {
         var catSound = "Meow!"
 
         def makeSound() : Unit {
@@ -353,26 +417,104 @@ seu uso.
 
 \end{lstlisting}
 
-% Incluir comentário sobre tipagem da linguagem?
-
 % herança
-%\section{Herança}
-%
-%Quando é desejado que uma classe seja 
-%utilizada como base para a criação de outra, 
-%o mecanismo da herança permite relacioná-las\cite{quarkoo}. 
-%Por exemplo, o código \ref{fpinheritance} demonstra 
-%o uso da herança entre as classes Product e Book.
-%
-%\begin{lstlisting}[caption={Herança em Programação Funcional},label=fpinheritance]
-%    
-%    class Product {
-%
-%    }
-%
-%    class Book {
-%
-%    }
-%
-%\end{lstlisting}
+\section{Herança}
 
+Quando é desejado que uma classe seja incluída ou 
+utilizada como base para a criação de outra classe, 
+usa-se a herança\cite{quarkoo}. Desas forma, é 
+possível criar implementações mais específicas 
+de classes já existentes e reaproveitar o código. 
+O exemplo \ref{ooinheritance} demonstra 
+o uso da herança entre as classes Animal e Dog. 
+Ao invés de reimplementar os métodos da classe 
+Animal, a classe Dog usa herança para reaproveitá-los. 
+
+\begin{lstlisting}[caption={Herança em Orientação a Objetos},label=ooinheritance]
+    
+    class Animal(var name : String) {
+        def getName() : String = name
+        
+        def eat() : String {
+            return "Meu nome é " + name + " e eu posso comer";
+        }
+    }
+
+    class Dog extends Animal {
+        
+        def Dog(name : String) {
+            super(name);
+        }
+
+        def bark() : String {
+            return "Bark! Meu nome é " + super.getName();
+        }
+
+        def eat() : String {
+            return super.eat() + "\nEu como comida de cachorro";
+        }
+    }
+
+\end{lstlisting}
+
+No contexto funcional, um comportamento semelhante 
+pode ser alcançado através da composição. Um tipo A 
+que deseja herdar as funcionalidades de um tipo B 
+deve possuir uma instância desse mesmo tipo em seus 
+atributos. Para os métodos do tipo A, basta que as 
+funções do tipo B sejam compostas das funções 
+necessárias do tipo A. O código \ref{fpinheritance} 
+demonstra o exemplo anterior, onde um tipo Animal 
+armazena um valor String que representa o nome 
+enquanto o tipo Dog armazena um valor Animal. 
+As funções bark e eat que recebem como parâmetro 
+um valor do tipo Dog reutilizam as funções getName 
+e eat que recebem como parâmetro um valor do tipo 
+Animal. Nesse exemplo, o tipo Animal representa 
+uma classe pai e o tipo Dog uma class filha.
+
+\begin{lstlisting}[caption={Herança em Programação Funcional},label=fpinheritance]
+    
+    type Animal = (String)
+
+    def getName(animal : Animal) : String = animal._1;
+    def eat(animal : Animal) : String = 
+        "Meu nome é " + getName(animal) + " e eu posso comer"
+
+    type Dog = (Animal)
+
+    def getAnimal(dog : Dog) : Animal = dog._1;
+    def bark(dog : Dog) : String = 
+        "Bark! Meu nome é " + getName(getAnimal(dog))
+    def eat(dog : Dog) : String = 
+        eat(getAnimal(dog)) + "\nEu como comida de cachorro";
+
+\end{lstlisting}
+
+É possível perceber que a implementação da herança 
+assemelha-se à implementação de uma associação. 
+Esses dois relacionamentos são diferentes, pois a 
+herança trata-se de um relacionamento entre 
+classes enquanto a associação é um relacionamento 
+entre objetos\cite{umlsystems}. Foi possível 
+obervar que essa implementação cumpre o objetivo 
+da herança - favorecer o reúso - e como os valores 
+no contexto funcional são imutáveis, não é possível 
+que o valor que representa a classe pai seja 
+modificado externamente.
+
+Essa implementação apresenta uma desvantagem: 
+qualquer função do tipo que representa 
+a classe pai, que poderia ser acessada 
+diretamente a partir da classe filho 
+no contexto orientado a objetos, 
+necessitaria de uma função intermediária 
+do tipo que representa a classe filha 
+para acessá-la. Para contornar esse 
+problema, basta implementar uma função 
+de acesso que retorne o valor do tipo 
+da classe pai, como a função getAnimal 
+no código \ref{fpinheritance}. Porém, isso 
+faz com que, do ponto de vista orientado a 
+objetos, a implementação se torne uma 
+associação e não uma herança. 

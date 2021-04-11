@@ -52,6 +52,7 @@ class Lamp(state : State) {
 
 \subsection*{Contexto Funcional}
 
+\begin{comment}
 Normalmente, a primeira alternativa que se tem em mente é 
 o monad State. Porém, esse monad é focado em comportamentos 
 que alteram o estado atual do nosso valor. Por mais que isso 
@@ -88,3 +89,5 @@ val offState : LampState = LampState(() => onState)
 principal precisa ser supostamente modificado, o que na 
 verdade acontecerá é que a função da case class State 
 irá retornar o nosso valor atualizado.
+
+\end{comment}
