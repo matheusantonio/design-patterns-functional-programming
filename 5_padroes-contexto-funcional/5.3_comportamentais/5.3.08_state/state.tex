@@ -1,25 +1,43 @@
 \section{State}
 
-O State permite alterar o comportamento de um objeto baseado 
-em seu estado interno. Uma interface define os comportamentos 
-que dependem do estado do objeto e classes que a implementam 
-definem a implementação dos mesmos. Dessa forma, o objeto 
-principal delega as operações às classes que representam 
-seu estado.
+O padrão State permite alterar o comportamento de um objeto 
+alterando seu estado interno. As operações que dependem do 
+estado do objeto são definidas em uma interface conhecida 
+pelo objeto, de forma que ele delegue essas operações 
+para outra classe que implemente essa interface. 
 
-Esse padrão contribui para o reuso de operações comuns quando 
-diversas classes relacionadas teriam que ser reinstanciadas 
-durante uma mudança de estado. Também é permitido que o 
-estado mude dinamicamente durante a execução.
+Essa abordagem contribui para o reuso de operações 
+que se repetem em classes relacionadas. Sem o State, 
+essas classes teriam que ser instanciadas novamente 
+a cada mudança de estado. Outra vantagem é que o 
+padrão permite que o estado seja trocado dinamicamente 
+durante a execução. A estrutura do padrão pode ser 
+vista na figura \ref{state_struct}.
 
 \begin{figure}[htb]
 	\caption{\label{state_struct}Estrutura do State}
 	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.08_state/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.08_state/state_estrutura.png}
 	\end{center}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
+
+Como exemplo, é considerada uma classe TCPConnection 
+que define uma conexão de rede que pode estar em diversos 
+estados: Estabelecida, escutando e fechada. Dependendo 
+do estado em que a conexão se encontra, ela deve 
+responder de forma diferente às operações que uma 
+conexão TCP pode realizar. O padrão Strategy, cuja 
+implementação pode ser vista no diagrama da imagem 
+\ref{state_exemplo} e no código \ref{oostate}, é 
+utilizado para encapsular em classes diferentes as 
+operações referentes a cada estado da conexão. 
+Dessa forma, a classe TCPConnection delega a uma classe 
+que implementa a interface TCPState a execução das 
+operações necessárias. Quando o estado interno da classe 
+for modificado, a operação referente ao novo estado 
+também será alterada automaticamente.
 
 \begin{figure}[htb]
 	\caption{\label{state_exemplo}Exemplo de State}
@@ -30,24 +48,54 @@ estado mude dinamicamente durante a execução.
 
 \begin{lstlisting}[caption={State Orientação a Objetos},label=oostate]
 
-trait State{
-    def pressButton() : State
+class TCPConnection(var state : TCPState) {
+  def Open(): Unit = state.Open()
+  def Close(): Unit = state.Close()
+  def Acknowledge(): Unit = state.Acknowledge()
 }
 
-class OnState() extends State {
-    def pressButton() : State = new OffState()
+trait TCPState {
+  def Open()
+  def Close()
+  def Acknowledge()
 }
 
-class OffState() extends State {
-    def pressButton() : State = new OnState()
+class TCPEstabilished extends TCPState {
+  def Open():Unit = {
+    //Implementação para conexão estabelecida
+  }
+  def Close(): Unit = {
+    //Implementação para conexão estabelecida
+  }
+  def Acknowledge(): Unit = {
+    //Implementação para conexão estabelecida
+  }
 }
 
-class Lamp(state : State) {
-    def pressButton() : Unit {
-        this.state = state.pressButton()
-    }
+class TCPListen extends TCPState {
+  def Open():Unit = {
+    //Implementação para conexão escutando
+  }
+  def Close(): Unit = {
+    //Implementação para conexão escutando
+  }
+  def Acknowledge(): Unit = {
+    //Implementação para conexão escutando
+  }
 }
-    
+
+class TCPClosed extends TCPState {
+  def Open():Unit = {
+    //Implementação para conexão fechada
+  }
+  def Close(): Unit = {
+    //Implementação para conexão fechada
+  }
+  def Acknowledge(): Unit = {
+    //Implementação para conexão fechada
+  }
+}
+
 \end{lstlisting}
 
 \subsection*{Contexto Funcional}
@@ -72,16 +120,57 @@ de comportamentos a case class principal deverá possuir.
 
 \begin{lstlisting}[caption={State Funcional},label=fpstate]
     
-case class LampState(pressButton : () => Lamp)
+type TCPState = (() => Unit,
+                 () => Unit,
+                 () => Unit)
 
-case class Lamp(state : LampState)
+def Open(state : TCPState) : Unit = state._1()
 
-def pressButton(lamp : Lamp) : Lamp =
-    lamp.state.pressButton()
+def Close(state : TCPState) : Unit = state._2()
 
-val onState : LampState = LampState(() => offState)
+def Acknowledge(state : TCPState) : Unit = state._3()
+    
+\end{lstlisting}
 
-val offState : LampState = LampState(() => onState)
+
+
+\begin{lstlisting}[caption={State Funcional},label=fpstate]
+    
+val TCPEstabilished = (
+  () => {
+    //Operação Open para conexão estabelecida
+  },
+  () => {
+    //Operação Close para conexão estabelecida
+  },
+  () => {
+    //Operação Acknowledge para conexão estabelecida
+  }
+)
+
+val TCPClosed = (
+  () => {
+    //Operação Open para conexão fechada
+  },
+  () => {
+    //Operação Close para conexão fechada
+  },
+  () => {
+    //Operação Acknowledge para conexão fechada
+  }
+)
+
+val TCPListen = (
+  () => {
+    //Operação Open para conexão escutando
+  },
+  () => {
+    //Operação Close para conexão escutando
+  },
+  () => {
+    //Operação Acknowledge para conexão escutando
+  }
+)
     
 \end{lstlisting}
 

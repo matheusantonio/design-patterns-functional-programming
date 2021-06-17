@@ -22,11 +22,9 @@ indiretamente por outro Colleague.
 \begin{figure}[htb]
 	\caption{\label{mediator_struct}Estrutura do Mediator}
 	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/mediator_estrutura.png}
 	\end{center}
 \end{figure}
-
-
 
 \subsection*{Exemplo Orientado a Objetos}
 
@@ -45,63 +43,53 @@ apresenta a implementação do padrão para esse exemplo.
 \begin{figure}[htb]
 	\caption{\label{mediator_exemplo}Exemplo de Mediator}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/exemplo_mediator.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/mediator_exemplo.png}
 	\end{center}
 \end{figure}
 
 \begin{lstlisting}[caption={Mediator Orientado a Objetos},label=oomediator]
 
-trait DialogDirector {
-    
-    def ShowDialog() {
-        // Operação que exibe o Dialog
-    }
+abstract class DialogDirector {
 
-    def CreateWidgets() : Unit
-    def WidgetChanged(widget : Widget) : Unit
+  def ShowDialog() : Unit = {
+    //Exibe o dialog
+  }
+
+  def CreateWidget()
+  def WidgetChanged(widget: Widget)
 }
 
-class FontDialogDirector extends DialogDirector {
-    
-    val list : ListBox
-    val field : EntryField
-    
-    def CreateWidgets() {
-        this.list = new ListBox(this)
-        this.field = new EntryField(this)
-    }
+class FontDialogDirector() extends DialogDirector {
 
-    def WidgetChanged(widget : Widget) {
-        this.field.SetText(
-            this.list.GetSelection()
-        )
-    }
+  private var list : ListBox = null
+  private var field : EntryField = null
 
+  override def CreateWidget(): Unit = {
+    this.list = new ListBox(this)
+    this.field = new EntryField(this)
+  }
+
+  override def WidgetChanged(widget: Widget): Unit = {
+    this.field.text = this.list.selection
+  }
 }
 
-abstract class Widget(val director : DialogDirector){
-
-    def Changed() : Unit = this.director.WidgetChanged(this)
-
+abstract class Widget(val director : DialogDirector) {
+  def Changed() : Unit = director.WidgetChanged(this)
 }
 
 class EntryField(director : DialogDirector) extends Widget(director) {
-    var text : String
-
-    def SetText(text : String) {
-        this.text = text
-    }
+  var text : String = ""
 }
 
 class ListBox(director : DialogDirector) extends Widget(director){
-    var selection : String
+  private var _selection : String = ""
+  def selection : String = _selection
 
-    def GetSelection() : String = selection
-
-    def SetSelection(selection : String) {
-        this.selection = selection
-        Changed()
-    }
+  def SetSelection(selection : String) : Unit = {
+    this._selection = selection
+    Changed()
+  }
 }
     
 \end{lstlisting}

@@ -2,28 +2,28 @@
 
 \section{Factory Method}
 
-O padrão Factory Method define uma interface 
-para criar objetos de forma que a responsabilidade 
-para a criação desses objetos seja da classe que 
-irá implementá-la. Dessa forma, versões diferentes 
-ou implementações específicas de um mesmo tipo 
-de objeto podem ser implementadas sem que a 
-aplicação que utilizará essas implementações 
-precise conhecê-las.
+O Factory Method define uma interface para criar 
+objetos de forma que a responsabilidade de criação 
+desses objetos seja da classe que irá implementá-la. 
+Dessa forma, a interface não precisa saber qual 
+classe deve ser instanciada, permitindo que versões 
+diferentes ou implementações específicas de um mesmo 
+tipo de objeto possam ser criadas.
 
 Na figura \ref{fmethod_struct} é demonstrada 
 a estrutura do padrão, onde a classe abstrata Creator 
-é responsável por definir a operação abstrata 
-que cria o objeto, FactoryMethod. A classe 
-ConcreteCreator herda dessa interface e 
-implementa o FactoryMethod criando um objeto 
+define a operação abstrata que cria o objeto, 
+o FactoryMethod. A classe ConcreteCreator 
+implementa o FactoryMethod, criando um objeto 
 do tipo ConcreteProduct, que é uma implementação 
-específica de Product.
+específica de Product. Dessa forma, a classe 
+abstrata Creator não precisa saber qual implementação 
+de Product será criada.
 
 \begin{figure}[htb]
 	\caption{\label{fmethod_struct}Estrutura do Factory Method}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/factorymethod_struct.png}
 	\end{center}
 \end{figure}
 
@@ -34,7 +34,7 @@ Como exemplo é apresentado um \textit{framework}
 que cria e apresenta para o usuário múltiplos 
 documentos. Para isso, a classe abstrata 
 Application é definida com a operação abstrata 
-CreateDocument e possuindo uma lista de objetos 
+CreateDocument e com uma lista de objetos 
 que implementam a interface Document. A classe 
 concreta MyDocument implementa Document e define 
 um tipo de documento que pode ser utilizado pelo 
@@ -50,57 +50,66 @@ código \ref{oofactory}.
 \begin{figure}[htb]
 	\caption{\label{fmethod_example}Exemplo de Factory Method}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/exemplo_factory.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/factorymethod_exemplo.png}
 	\end{center}
 \end{figure}
 
 \begin{lstlisting}[caption={Factory Method Orientado a Objetos},label=oofactory]
     
-    abstract class Document {
-        def Open() : Unit
-        def Close() : Unit
-        def Save() : Unit
-        def Revert() : Unit
-    }
+abstract class Document {
+  def Open()
+  def Close()
+  def Save()
+  def Revert()
+}
 
-    abstract class Application {
-        
-        var docs : List[Document] = List()
+abstract class Application {
+  var documents : List[Document] = List()
 
-        def CreateDocument() : Unit
+  def CreateDocument() : Document
 
-        def NewDocument() : Unit {
-            var doc = CreateDocument()
-            docs.Add(doc)
-            doc.open()
-        }
+  def NewDocument() : Unit = {
+    val doc = CreateDocument()
+    this.documents = doc :: this.documents
+    doc.Open()
+  }
 
-        def OpenDocument() : Unit {
-            // Implementação de abertura de documento
-        }
+  def OpenDocument(): Unit = {
+    println("Abre um documento")
+  }
+}
 
-    }
+class MyApplication extends Application {
+  def CreateDocument(): Document = new MyDocument()
+}
 
-    class MyApplication : Application {
-        def CreateDocument() {
-            return new MyDocument()
-        }
-    }
+class MyDocument extends Document {
+  def Open(): Unit ={
+    //...
+  }
 
-    class MyDocument : Document {
-        // Implementação dos métodos abstratos de Document
-    }
+  def Close(): Unit ={
+    //...
+  }
+
+  def Save(): Unit ={
+    //...
+  }
+
+  def Revert(): Unit ={
+    //...
+  }
+}
 
 \end{lstlisting}
 
-
-
-
 \subsection*{Contexto Funcional}
+
+
 
 \begin{lstlisting}[caption={Factory Method Funcional},label=fpfactory]
     
-    
+
 
 \end{lstlisting}
 

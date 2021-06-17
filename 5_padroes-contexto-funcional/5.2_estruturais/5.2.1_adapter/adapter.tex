@@ -6,33 +6,35 @@ Quando a interface de uma classe, objeto ou biblioteca não
 é compatível com a interface atual do cliente que deseja 
 utilizar essa interface, o padrão Adapter fornece uma 
 solução que evita a refatoração e a dependência da interface 
-do cliente para a interface desejada.
+do cliente da interface desejada.
 
 Existem duas formas de realizar essa adaptação. Um Adapter 
-de classe (Figura \ref{adapter_struct}), que só é possível 
-para linguagens que implementam herança múltipla, implementa 
-uma classe que herda tanto da classe que representa a interface 
-da aplicação quanto da classe que representa a interface que 
-deseja ser utilizada. 
+de classe, apresentado na figura \ref{adapter_struct},  
+só é possível para linguagens que implementam herança múltipla.
+Ele define uma classe que herda tanto da classe que 
+apresenta a interface da aplicação quanto da classe que 
+representa a interface que deseja ser utilizada. Ao 
+reescrever a operação Request, ele adapta sua entrada 
+para a de SpecificRequest, repassando a solicitação.
 
 \begin{figure}[htb]
 	\caption{\label{adapter_struct}Estrutura do Adapter de Classe}
 	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/diagram2.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter_classe_estrutura.png}
 	\end{center}
 \end{figure}
 
-Já o Adapter de Objeto (Figura \ref{adapter_alt_struct}) 
-herda apenas da classe que representa 
-a interface da aplicação e reimplementa a operação desejada 
-de forma que, após adaptar para a operação para a interface 
-desejada, delega a realização da mesma para um objeto que 
-implemente essa interface.
+Já o Adapter de Objeto, apresentado na figura \ref{adapter_alt_struct}, 
+herda apenas da classe que apresenta a interface 
+da aplicação, também reimplementando a operação Request. 
+A diferença é que ela repassa a solicitação para a 
+classe que apresenta a interface que deseja ser 
+utilizada através de uma delegação.
 
 \begin{figure}[htb]
 	\caption{\label{adapter_alt_struct}Estrutura do Adapter de Objeto}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter_objeto_estrutura.png}
 	\end{center}
 \end{figure}
 
@@ -61,64 +63,75 @@ implementação em código pode ser vista no código
 \begin{figure}[htb]
 	\caption{\label{adapter_exemplo}Exemplo de Adapter}
 	\begin{center}
-	    \includegraphics[scale=0.45]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/exemplo_adapter.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter_exemplo.png}
 	\end{center}
 \end{figure}
 
 
 \begin{lstlisting}[caption={Adapter Orientado a Objetos},label=ooadapter]
 
-class Shape(
-	var bottomLeft : Point, 
-	var topRight : Point
-) {
-
+abstract class Shape(var bottomLeft : Point, var topRight : Point) {
+  def BoundingBox() : Int
+  def CreateManipulator()
 }
 
-class Line() extends Shape {
+class Line(bottomLeft : Point, topRight : Point)
+  extends Shape(bottomLeft, topRight) {
 
+  def BoundingBox() : Int = 0
+  def CreateManipulator() : Unit = {
+    //Line Manipulator
+  }
 }
 
-class TextShape(
-	textView : TextView,
-	var bottomLeft : Point, 
-	var topRight : Point) extends Shape {
+class TextShape(bottomLeft : Point, topRight : Point, text : TextView)
+  extends Shape(bottomLeft, topRight) {
 
+  def BoundingBox() : Int = text.GetExtent()
+  def CreateManipulator() : Unit = {
+    //TextManipulator
+  }
 }
 
-class TextView(
-	var x : Coord, var y : Coord,
-	var width : Coord : var height : Coord
-) {
-
-
+class TextView(var x : Point, var y : Point, var width : Int, var height : Int) {
+  def GetExtent() : Int = {
+    // Retorna extensão do texto
+  }
 }
-
 
 \end{lstlisting}
 
-
-
 \subsection*{Contexto Funcional}
 
-\begin{comment}
-Existem duas formas simples de implementar um Adapter em uma linguagem 
-funcional: usando funções de alta ordem e composição de funções.
-
-Através de funções de alta ordem é possível passar por parâmetro, 
-quando necessário, uma função que adapta o valor definido no cliente 
-para o valor que precisa ser recebido pela função incompatível. O 
-problema dessa abordagem é a necessidade do cliente conhecer a função 
-Adapter e a biblioteca.
-
-Já com composição de funções, uma função composta da função Adapter 
-e da função incompatível é fornecida para o cliente, que sem precisar 
-saber que está usando um Adapter, pode realizar a operação incompatível 
-sem problemas.
-\end{comment}
+No código \ref{fpadapter}, a função BoudingBox, declarada 
+na linha 2, recebe como parâmetro uma operação de um 
+objeto gráfico. Porém, é desejado utilizar a operação 
+GetExtent, declarada na linha 7, de um \textit{text view} 
+que não é comportado pela ferramenta. Para que essa 
+operação possa ser reutilizada, a função 
+AdaptTextShapeBoundingBox, declarada na linha 11, 
+recebe como parâmetro o \textit{text view} e retorna 
+uma função que executa GetExtent, com a assinatura 
+necessária para ser recebida pela função BoundingBox. 
+Com o uso das funções de alta ordem, foi necessário 
+apenas uma nova função intermediária para realizar a 
+adaptação.
 
 \begin{lstlisting}[caption={Adapter Funcional},label=fpadapter]
     
+def BoundingBox(CalculateBounding : () => Int) : Int = {
+  // ...
+  CalculateBounding()
+}
 
+def GetExtent(view : TextView) : Int = {
+  //Retorna extensão do texto
+}
+
+def AdaptTextShapeBoundingBox(view : TextView): () => Int =
+  () => {
+    // ...
+    GetExtent(view)
+  }
     
 \end{lstlisting}

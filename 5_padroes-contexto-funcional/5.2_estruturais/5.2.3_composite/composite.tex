@@ -3,7 +3,7 @@
 Esse padrão fornece uma estrutura de objetos 
 organizados como uma árvore, representados 
 por uma hierarquia parte-todo. 
-Com isso, é possível tratar tanto o conjunto 
+Ele torna possível tratar tanto o conjunto 
 quanto os objetos individuais de forma 
 uniforme, sem que seja necessário conhecer 
 os elementos pertencentes a um conjunto para 
@@ -22,7 +22,7 @@ ou se são objetos folha.
 \begin{figure}[htb]
 	\caption{\label{composite_struct}Estrutura do Composite}
 	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.3_composite/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.3_composite/composite_estrutura.png}
 	\end{center}
 \end{figure}
 
@@ -46,58 +46,51 @@ classes para esse exemplo, enquanto o código
 \begin{figure}[htb]
 	\caption{\label{composite_exemplo}Exemplo de Composite}
 	\begin{center}
-	    \includegraphics[scale=0.45]{5_padroes-contexto-funcional/5.2_estruturais/5.2.3_composite/exemplo_composite.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.3_composite/composite_exemplo.png}
 	\end{center}
 \end{figure}
 
 \begin{lstlisting}[caption={Composite Orientado a Objetos},label=oocomposite]
 
-	trait Graphic {
-		def Draw();
-		def Add(graphic : Graphic);
-		def Remove(graphic : Graphic);
-		def GetChild(pos : Int) : Graphic;
-	}
+trait Graphic {
+  def Draw();
+}
 
-	class Picture() extends Graphic {
-		
-		var graphics : List[Graphic]
-	
-		def Draw() {
-			// desenha o elemento na tela
-		}
+class Picture extends Graphic {
+  private var graphics : List[Graphic] = List()
 
-		def Add(graphic : Graphic) {
-			graphics.add(graphic);
-		}
+  def Draw() : Unit = {
+    graphics.foreach(f => f.Draw())
+  }
 
-		def Remove(graphic : Graphic) {
-			graphics.remove(graphic);
-		}
+  def Add(graphic: Graphic): Unit = {
+    graphics = graphic :: graphics
+  }
 
-		def GetChild(pos : Int) {
-			return graphics.get(pos);
-		}
-	}
+  def Remove(graphic: Graphic) : Unit = {
+    graphics = graphics.filter(g => g != graphic)
+  }
 
-	class Text() extends Graphic {
-		def Draw() {
-			// desenha o elemento na tela
-		}
-	}
+  def GetChild(pos : Int) : Graphic = graphics(pos)
+}
 
-	class Rectangle() extends Graphic {
-		def Draw() {
-			// desenha o elemento na tela
-		}
-	}
+class Text extends Graphic {
+  def Draw() : Unit = {
+    //Desenha o elemento na tela
+  }
+}
 
-	class Line() extends Graphic {
-		def Draw() {
-			// desenha o elemento na tela
-		}
-	}
+class Rectangle extends Graphic {
+  def Draw() : Unit = {
+    //Desenha o elemento na tela
+  }
+}
 
+class Line extends Graphic {
+  def Draw() : Unit = {
+    //Desenha o elemento na tela
+  }
+}
 
 \end{lstlisting}
 

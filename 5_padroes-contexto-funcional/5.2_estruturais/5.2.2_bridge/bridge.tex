@@ -1,66 +1,93 @@
 \section{Bridge}
 
+O padrão Bridge permite variar as abstrações e as 
+implementações de um problema de forma independente, 
+definindo uma interface que serve como ponte entre ambas. 
+As operações da implementação são delegadas para essa 
+nova interface, permitindo que as abstrações sejam 
+implementadas sem precisar conhecer o tipo de 
+implementação que está sendo utilizado. A estrutura do 
+padrão pode ser vista na figura \ref{bridge_struct}.
+
 \begin{figure}[htb]
 	\caption{\label{bridge_struct}Estrutura do Bridge}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.2_estruturais/5.2.2_bridge/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.2_bridge/bridge_estrutura.png}
 	\end{center}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
 
+Como exemplo, pode ser considerada a implementação de 
+uma janela em um \textit{toolkit} para construir interfaces 
+de usuários, que permite o uso de implementações diferentes 
+de janela: PM e XWindow. Além disso, é preciso definir tipos 
+diferentes de janela, como janelas para ícones e janelas 
+de transitórias. Para que não seja necessário implementar 
+uma versão diferente de janela de ícone e transitória 
+para cada implementação diferente de janela, o padrão 
+Bridge pode ser usado para separar a implementação 
+da abstração em duas hierarquias diferentes. O diagrama 
+de classes da figura \ref{bridge_exemplo} e o código 
+\ref{oobridge} demonstram o uso do padrão para esse 
+exemplo.
+
 \begin{figure}[htb]
 	\caption{\label{bridge_exemplo}Exemplo de Bridge}
 	\begin{center}
-	    \includegraphics[scale=0.45]{5_padroes-contexto-funcional/5.2_estruturais/5.2.2_bridge/exemplo_bridge.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.2_bridge/bridge_exemplo.png}
 	\end{center}
 \end{figure}
 
 \begin{lstlisting}[caption={Bridge Orientado a Objetos},label=oobridge]
 
-abstract class Window{
-	var imp : WindowImp;
+abstract class Window(imp : WindowImp) {
+  def DrawText() : Unit = {
+    imp.DevDrawText()
+  }
 
-	def DrawText();
-	def DrawRect();
+  def DrawRect() : Unit = {
+    imp.DevDrawLine()
+    imp.DevDrawLine()
+    imp.DevDrawLine()
+    imp.DevDrawLine()
+  }
 }
 
-class WindowImp(){
-	def DevDrawText();
-	def DevDrawLine();
+class IconWindow(imp : WindowImp) extends Window(imp) {
+  def DrawBorder() : Unit = {
+    DrawRect()
+    DrawText()
+  }
 }
 
-class IconWindow() extends Window {
-	def DrawBorder() {
-		DrawRect();
-		DrawText();
-	}
+class TransientWindow(imp : WindowImp) extends Window(imp){
+  def DrawCloseBox() : Unit = {
+    DrawRect()
+  }
 }
 
-class TransientWindow() extends Window {
-	def DrawCloseBox() {
-		DrawRect();
-	}
+trait WindowImp {
+  def DevDrawText()
+  def DevDrawLine()
 }
 
-class XWindowImp() extends WindowImp {
-	def DevDrawText() {
-		XDrawString();
-	}
-
-	def DevDrawLine() {
-		XDrawLine();
-	}
+class XWindowImp extends WindowImp {
+  def DevDrawText() : Unit = {
+    //Desenha texto para janela X
+  }
+  def DevDrawLine() : Unit = {
+    //Desenha linha para janela X
+  }
 }
 
-class PMWindowImp() extends WindowImp {
-	def DevDrawLine() {
-		PMDrawLine();
-	}
-
-	def DevDrawText() {
-		PMDrawString();
-	}
+class PMWindowImp extends WindowImp {
+  def DevDrawLine(): Unit = {
+    //Desenha linha para janela PM
+  }
+  def DevDrawText(): Unit = {
+    //Desenha texo para janela PM
+  }
 }
 
 \end{lstlisting}

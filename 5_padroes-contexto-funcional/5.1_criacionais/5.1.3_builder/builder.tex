@@ -2,29 +2,27 @@
 
 Quando é necessário criar objetos  
 complexos, o padrão Builder retira a 
-responsabilidade da criação do objeto e 
-a coloca em classes separadas. Dessa forma, 
-um mesmo processo de criação pode criar 
-representações diferentes desse mesmo 
-objeto. Essas novas classes devem ser 
-independentes de todas as partes que 
-compõem o objeto que será criado.
+responsabilidade de criação do objeto a 
+ser criado e a coloca em classes separadas, 
+que constroem o objeto por partes. 
+Isso permite que um mesmo processo de criação 
+possa gerar representações diferentes desse mesmo 
+objeto.
 
 A figura \ref{builder_struct} apresenta 
 a estrutura do Builder, onde a interface 
-Builder representa uma classe responsável 
-por criar uma parte de um objeto. A classe 
-ConcreteBuilder, do tipo dessa interface, 
+Builder é responsável por criar uma parte 
+do objeto. A classe ConcreteBuilder, que 
+implementa a interface Builder, 
 implementa os métodos de construção de 
 uma parte do tipo Product. A classe Director 
-é responsável por chamar o método de criação 
-das classes que criam cada parte do objeto 
-complexo.
+é responsável por executar a criação das 
+partes do objeto.
 
 \begin{figure}[htb]
 	\caption{\label{builder_struct}Estrutura do Builder}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.1_criacionais/5.1.3_builder/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.3_builder/builder_estrutura.png}
 	\end{center}
 \end{figure}
 
@@ -56,93 +54,80 @@ código \ref{oobuilder}.
 \begin{figure}[htb]
 	\caption{\label{builder_exemplo}Exemplo de Builder}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.1_criacionais/5.1.3_builder/exemplo_builder.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.3_builder/builder_exemplo.png}
 	\end{center}
 \end{figure}
 
 \begin{lstlisting}[caption={Builder Orientado a Objetos},label=oobuilder]
 
-	trait TextConverter {
-		def ConvertCharacter(char : Char)
-		def ConvertFontChange(font : String)
-		def ConvertParagraph()
-	} 
+trait TextConverter {
+  def ConvertCharacter(char : Char)
+  def ConvertFontChange(font : String)
+  def ConvertParagraph()
+} 
 
-	class TextConverter {
-		
-		private var asciiText : ASCIIText
+class ASCIIConverter(val asciiText: ASCIIText) extends TextConverter {
 
-		def ConvertCharacter(char : Char){
-			// Conversão para ASCIIText
-		}
+  def ConvertCharacter(char : Char): Unit = {
+    //Converter char
+  }
 
-		def GetASCIIText() : ASCIIText {
-			return this.asciiText
-		}
-	} 
+  def ConvertFontChange(font : String): Unit = {
+    //Converter fonte
+  }
 
-	class TeXConverter {
-		
-		private var texText : TeXText
+  def ConvertParagraph(): Unit = {
+    //Converte parágrafo
+  }
+}
 
-		def ConvertCharacter(char : Char){
-			// Conversão para TeXText
-		}
+class TeXConverter(val texText : TeXText) extends TextConverter {
+  def ConvertCharacter(char: Char): Unit = {
+    //Converter char
+  }
 
-		def ConvertFontChange(font : String) {
-			// Conversão para TeXText
-		}
+  def ConvertFontChange(font : String): Unit = {
+    //Converter fonte
+  }
 
-		def ConvertParagraph() {
-			// Conversão para TeXText
-		}
+  def ConvertParagraph(): Unit = {
+    //Converte parágrafo
+  }
+}
 
-		def GetTeXText() : TeXText {
-			return this.texText
-		}
-	} 
+class TextWidgetConverter(val textWidget: TextWidget) extends TextConverter {
+  def ConvertCharacter(char: Char): Unit = {
+    //Converter char
+  }
 
-	class TextWidgetConverter {
-		
-		private var textWidget : TextWidget
+  def ConvertFontChange(font : String): Unit = {
+    //Converter fonte
+  }
 
-		def ConvertCharacter(char : Char){
-			// Conversão para TextWidget
-		}
+  def ConvertParagraph(): Unit = {
+    //Converte parágrafo
+  }
+}
 
-		def ConvertFontChange(font : String) {
-			// Conversão para TextWidget
-		}
+class RTFReader(var textConverter: TextConverter) {
 
-		def ConvertParagraph() {
-			// Conversão para TextWidget
-		}
+  def SetTextConverter(textConverter: TextConverter): Unit = {
+    this.textConverter = textConverter
+  }
 
-		def GetTeXText() : TextWidget {
-			return this.textWidget
-		}
-	} 
-
-	class RTFReader() {
-
-		private var builder : Builder
-
-		def ParseRTF() {
-			// ...
-
-			for(t <- tokens) {
-				t.Type match {
-					case CHAR => builder.ConvertCharacter(t.Char)
-					case FONT => builder.ConvertFontChange(t.Font)
-					case PARA => builder.ConvertParagraph()
-				}
-			}
-
-			// ...
-		}
-
-	}
-
+  def ParseRTF(): Unit = {
+    val tokens : List[Token] = List()
+    // ...
+    for(t <- tokens) {
+      t.Type match {
+        case TokenType.CHAR => textConverter.ConvertCharacter(t.Character)
+        case TokenType.FONT => textConverter.ConvertFontChange(t.Font)
+        case TokenType.PARAGRAPH => textConverter.ConvertParagraph()
+      }
+    }
+    // ...
+  }
+}
 
 \end{lstlisting}
 

@@ -125,12 +125,14 @@
   morekeywords={*, :-},
   numberbychapter=false,
   % the style that is used for the line-numbers
-  %numberstyle=\tiny\color{theframe}\sffamily, 
+  numbers=left,
+  numberstyle=\footnotesize, %\tiny\color{theframe}\sffamily, 
+  numbersep=6pt,
   %rulecolor=\color{theframe},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
-  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  %showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
   showstringspaces=false,          % underline spaces within strings only
   showtabs=false,                  % show tabs within strings adding particular underscores
-  stepnumber=4,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
   stringstyle=\color{YellowOrange}\itshape,     % string literal style
   tabsize=2,                       % sets default tabsize to 2 spaces
   title=\lstname,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
@@ -289,12 +291,14 @@ Federal Fluminense.}
 
 \include{4_referencial_teorico/2_padroes-projeto/padroes-projeto}
 
-\include{4_referencial_teorico/3_scala/scala.tex}
+\include{4_referencial_teorico/3_scala/scala}
 
 % ----------------------------------------------------------
 % Essa parte é um requisito apenas para TCC I e deverá 
 % ser removida após a aprovação na disciplina.
 % ----------------------------------------------------------
+\begin{comment}
+
 \phantompart
 
 \chapter{Resumo dos demais capítulos}
@@ -326,7 +330,7 @@ e desvantagens de revisá-los no ponto de vista funcional.
 % ----------------------------------------------------------
 % Remover até aqui após TCC I
 % ----------------------------------------------------------
-
+\end{comment}
 
 
 % ----------------------------------------------------------
@@ -373,7 +377,7 @@ e desvantagens de revisá-los no ponto de vista funcional.
 \include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.04_iterator/iterator}
 \include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/mediator}
 \include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.06_memento/memento}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.07_observer/osberver}
+\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.07_observer/observer}
 \include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.08_state/state}
 \include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/strategy}
 \include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.10_template-method/template-method}

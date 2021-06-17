@@ -3,10 +3,10 @@
 O padrão Prototype permite reduzir a quantidade 
 de subclasses definidas em uma aplicação 
 substituindo-as por instâncias predefinidas 
-que podem ser especificadas em tempo de 
-execução. Objetos que funcionm como 
+que podem ser reutilizadas em tempo de 
+execução. Objetos que funcionam como 
 protótipos podem ser clonados e assim 
-reutilizados por outros objetos como uma 
+reutilizados por outros objetos, sendo uma 
 alternativa à herança. 
 
 A estrutura do padrão, apresentada na imagem 
@@ -15,17 +15,16 @@ Prototype que define a operação Clone, responsável
 por copiar o protótipo reutilizável de um objeto. 
 As classes ConcretePrototype implementam essa 
 interface e a operação que retorna essa cópia. 
-Por fim, a classe Client possui uma referência 
-para um protótipo, recebida através da operação 
+A classe Client acessa o protótipo através da operação 
 Clone. Essa dinâmica permite que a classe cliente 
-não precise conhecer o objeto protótipo nem sua 
+não precise conhecer o objeto clonado nem sua 
 implementação, o que as torna independentes e 
 diminui o acoplamento.
 
 \begin{figure}[htb]
 	\caption{\label{prototype_struct}Estrutura do Prototype}
 	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.4_prototype/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.4_prototype/prototype_estrutura.png}
 	\end{center}
 \end{figure}
 
@@ -52,65 +51,52 @@ o código \ref{ooprototype} ilustram esse cenário.
 \begin{figure}[htb]
 	\caption{\label{prototype_exemplo}Exemplo de Prototype}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.1_criacionais/5.1.4_prototype/exemplo_prototype.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.4_prototype/prototype_exemplo.png}
 	\end{center}
 \end{figure}
 
 \begin{lstlisting}[caption={Prototype Orientado a Objetos},label=ooprototype]
 
 trait Graphic {
-	def Draw(position : Position);
-	def Clone() : Graphic;
+  def Draw(position : Position)
+  def Clone() : Graphic
 }
 
-class Staff implements Graphic() {
-	def Draw(position : Position) {
-		// operação de desenho do elemento
-	}
+class Staff extends Graphic {
+  def Draw(position : Position) :Unit = {
+    println("Desenha elemento")
+  }
 
-	def Clone() : Graphic {
-		return this.copy();
-	}
+  def Clone() : Graphic = this.Clone()
 }
 
-trait MusicalNote implements Graphic
+trait MusicalNote extends Graphic
 
-class WholeNote implements MusicalNote() {
-	def Draw(position : Position) {
-		// operação de desenho do elemento
-	}
+class WholeNote extends MusicalNote {
+  def Draw(position : Position) : Unit = {
+    println("Desenha nota musical")
+  }
 
-	def Clone() : Graphic {
-		return this.copy();
-	}
+  def Clone() : Graphic = this.Clone()
 }
 
-class HalfNote implements MusicalNote() {
-	def Draw(position : Position) {
-		// operação de desenho do elemento
-	}
-	
-	def Clone() : Graphic {
-		return this.copy();
-	}
+class HalfNote extends MusicalNote {
+  def Draw(position: Position): Unit = {
+    println("Desenha nota musical")
+  }
+
+  def Clone() : Graphic = this.Clone()
 }
 
-class GraphicTool() {
+class GraphicTool(var prototype : Graphic) {
 
-	val prototype : Graphic;
-
-	def Manipulate() {
-		
-	p = prototype.Clone();
-
-		while(user.DragsMouse()){
-			p.Draw(newPosition)
-		}
-
-		// ...
-	}
-
-
+  def Manipulate() : Unit = {
+    var p = this.prototype.Clone()
+    while(User.DragsMouse()) {
+      p.Draw(newPosition)
+    }
+    //...
+  }
 }
 
 \end{lstlisting}
@@ -118,8 +104,17 @@ class GraphicTool() {
 \subsection*{Contexto Funcional}
 
 
+
 \begin{lstlisting}[caption={Prototype Funcional},label=fpprototype]
     
+def GeneratePrototype(graphic : Graphic): () => Graphic =
+  () => graphic 
 
+def ManipulateGraphic(Clone : () => Graphic) = {
+  val p = Clone()
+  while(dragsMouse){
+    Draw(p, newPosition)
+  }
+}
     
 \end{lstlisting}

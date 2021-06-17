@@ -1,21 +1,276 @@
 \chapter{Scala}
 
-[Aqui serão incluídas explicações de 
-particularidades da linguagem Scala, 
-como traits]
+A maior parte deste trabalho utiliza demonstrações 
+e exemplos implementados na linguagem de programação Scala. 
+Por ser uma linguagem que mistura os conceitos de 
+orientação e objetos e programação funcional, ela traz 
+facilidades para transpor os conceitos e os padrões, porém, 
+traz uma sintaxe que destoa do que é comumente visto 
+em linguagens orientadas a objetos, o que pode prejudicar 
+a compreensão dos exemplos em código dos padrões de projeto. 
+O objetivo deste capítulo é explicar alguns conceitos e 
+sintaxes da linguagem que serão vistos posteriormente.
 
-\section{Construtor}
+
+\section{Construtores}
+
+Em Scala, um construtor pode ser definido como todo o 
+bloco de código envolvido pelas chaves na definição da 
+classe, o que inclui também a declaração dos métodos 
+e dos atributos\cite{wampler2021}. O exemplo mais 
+simples de um construtor 
+está no código \ref{scalaconstructor1}, onde a classe 
+Person define os atributos firstName e lastName, que 
+devem ser passados durante a instanciação da classe. 
+Apenas essa linha é equivalente ao código \ref{javaconstructor1}, 
+implementado em Java.
+
+\begin{lstlisting}[caption={Construtor Simples em Scala},label=scalaconstructor1]
+
+    class Person(var firstName : String, var lastName : String)
+
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption={Construtor Simples em Java},label=javaconstructor1]
+
+    public class Person {
+        
+        private string firstName;
+        private string lastName;
+        
+        public Person(String firstName, string lastName){
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+        
+        public String getFirstName(){
+            return this.firstName;
+        }
+        
+        public String getLastName(){
+            return this.lastName;
+        }
+        
+        public void setFirstName(String firstName){
+            this.firstName = firstName;
+        }
+        
+        public void setLastName(String lastName){
+            this.lastName = lastName;
+        }
+    }
+
+\end{lstlisting}
+
+Scala também faz uso de construtores auxiliares, definidos 
+através de métodos com o nome this\cite{wampler2021}. 
+Dessa forma, é possível 
+definir instâncias mais flexíveis para uma classe. Esse 
+recurso pode ser visto no código \ref{scalaconstructor2}.
+
+\begin{lstlisting}[caption={Construtor Auxiliar em Scala},label=scalaconstructor2]
+
+    class Person(var firstName : String, var lastName : String) {
+       
+        def this(firstName : String) {
+          this(firstName, "Bar")
+        }
+    
+        def this() {
+          this("Foo", "Bar")
+        }
+      
+        def Operation(): Unit = {
+          println(lastName + ", " + firstName)
+        }
+  
+    }
+  
+\end{lstlisting}
+
+
+
+\section{Var e Val}
+
+A linguagem também permite definir, através das 
+palavras chave var e val, valores 
+mutáveis ou imutáveis. Ao declarar um atributo com 
+a palavra chave val, o atributo torna-se imutável, 
+sendo impossível alterar seu valor.\cite{wampler2021, ordesky2008} 
+Definir um atributo 
+como val é semelhante a definir uma classe sem um 
+método \textit{setter} para aquele atributo. Caso 
+o código \ref{scalaconstructor1} seja refatorado 
+para tornar o atributo lastName imutável, como no código 
+\ref{immutableattr}, a implementação em Java vista no 
+código \ref{javaconstructor1} tornaria-se semelhante à do código 
+\ref{javaimmutableattr}.
+
+\begin{lstlisting}[caption={Exemplo de Atributo Imutável},label=immutableattr]
+
+    class Person(var firstName : String, var lastName : String)
+
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Construtor Simples em Java},label=javaimmutableattr]
+
+    public class Person {
+        
+        private string firstName;
+        private string lastName;
+        
+        public Person(String firstName, string lastName){
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+        
+        public String getFirstName(){
+            return this.firstName;
+        }
+        
+        public String getLastName(){
+            return this.lastName;
+        }
+        
+        public void setFirstName(String firstName){
+            this.firstName = firstName;
+        }
+    }
+
+\end{lstlisting}
+
 
 \section{Trait}
 
+Uma trait é semelhante a uma interface em qualquer 
+linguagem orientada a objetos. Ela define uma abstração 
+de um comportamento e pode ser implementada por uma 
+classe para indicar que ela implementa esse comportamento.\cite{ordesky2008} 
+O código \ref{traitexample} define uma trait IButton com 
+o método Click. Qualquer classe que implemente essa trait 
+precisará definir uma implementação para o método Click. 
+Já o código \ref{traitclassexample} mostra a classe 
+Button, que implementa a trait IButton, e define a 
+implementação de Click.
+
+\begin{lstlisting}[caption={Exemplo de Trait},label=traitexample]
+
+    trait IButton {
+      def Click();
+    }
+
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Exemplo de classe que implementa uma trait},label=traitclassexample]
+
+    class Button extends IButton {
+      def Click(): Unit = println("Clicked")
+    }
+
+\end{lstlisting}
+
+Apesar das semelhanças, diferente das interfaces em 
+linguagens como Java, as traits podem definir métodos 
+com implementações e até atributos, podendo servir 
+como \textit{mixins}\cite{wampler2021}. Porém, essas 
+diferenças vão além do uso que elas terão neste 
+trabalho.
+
+
+\section{Operadores e Atributos de Classe}
+
+A linguagem Scala não possui o modificador \textit{static}, 
+utilizado para definir atributos e métodos de classe - 
+ou seja, atributos e métodos que existem independentes 
+da instância de uma classe. 
+
+Isso pode ser contornado através de \textit{companion objects}. 
+Um exemplo pode ser visto no código \ref{coexample}, onde 
+existe a classe Companion e seu \textit{companion object}, que 
+deve possuir o mesmo nome e ser definido no mesmo arquivo 
+que a classe. A operação StaticOperation é executada 
+independente de existir uma instância da classe, acessada 
+apenas através do nome Companion.
+
+Externamente, os \textit{companion objects} são acessados 
+de forma semelhante aos membros estáticos de uma classe 
+em Java, por exemplo. Isso pode ser visto no código 
+\ref{coexample2}, onde o método StaticOperation é acessado 
+na função principal de um programa.
+
+\begin{lstlisting}[caption={Exemplo de companion object},label=coexample]
+
+class Companion(private var name : String) {
+  def ClassOperation(): Unit = {
+    Companion.StaticOperation(name)
+  }
+}
+
+object Companion {
+  def StaticOperation(name : String): Unit = {
+    println("Hello, " + name)
+  }
+}
+
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Chamada de operações de um companion object},label=coexample2]
+
+object Main {
+  def main(args : Array[String]) : Unit = {
+    Companion.StaticOperation("Name1")
+    var companion = new Companion("Name2")
+    companion.ClassOperation()
+  }
+}
+
+\end{lstlisting}
+
 \section{Listas imutáveis}
 
-\section{Laços de repetição}
+Diferente das coleções vistas comumente em linguagens 
+orientadas a objeto, em Scala as listas são tipos 
+imutáveis. Isso significa que uma operação de adição 
+ou concatenação em uma lista não modificará a lista 
+que realiza a operação, mas sim retornará uma nova 
+lista\cite{ordesky2008}. 
+
+Os códigos \ref{listadd} e \ref{listconcat} demonstram 
+as operações de adição e concatenação em uma lista, 
+respectivamente. É importante ressaltar que, mesmo 
+as as listas sendo imutáveis, o fato do 
+atributo numbers ter sido declarado como var 
+faz com que ele possa ser reatribuído com a nova lista 
+resultante da operação.
+
+\begin{lstlisting}[caption={Exemplo de adição em uma lista imutável},label=listadd]
+
+  var numbers : List[Int] = List()
+  
+  def AddElement(number : Int): Unit ={
+    numbers = number :: numbers
+  }
+
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Exemplo de concatenação em uma lista imutável},label=listconcat]
+
+  var numbers : List[Int] = List()
+  
+  def ConcatElements(newNumbers : List[Int]): Unit = {
+    numbers = newNumbers ::: numbers
+  }    
+
+\end{lstlisting}
 
 \section{Unit}
 
-%Conceitos pra abordar:
-% - trait
-% - Construtor
-% - Listas (sao imutáveis)
-% - blocos de repetição (acho que não tem foreach e while)
+Em diversos exemplos em código desse capítulo 
+(linha 12 em \ref{scalaconstructor2}, linha 3 em 
+\ref{traitclassexample}, linha 4 em 
+\ref{listadd} e linha 4 em \ref{listconcat}) 
+foi possível ver a palavra chave Unit. Ela é semelhante ao 
+valor void utilizado em linguagens de programação como C e 
+Java para indicar que uma função ou método não retorna 
+nenhum valor\cite{wampler2021}.

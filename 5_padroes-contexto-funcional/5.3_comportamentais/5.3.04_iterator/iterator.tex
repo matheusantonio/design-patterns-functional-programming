@@ -1,13 +1,42 @@
 \section{Iterator}
 
+O padrão Iterator traz uma forma de acessar ou 
+percorrer objetos agregados sem expor sua representação. 
+Isso é feito através de uma classe separada, o iterador, 
+que implementa as operações necessárias para percorrer 
+o objeto. 
+
+Para que a classe cliente não precise conhecer o tipo 
+de estrutura sendo percorrida, os objetos agregados 
+são acessados através de uma interface. Também, para 
+que não seja do cliente a responsabilidade de saber 
+qual iterador instanciar, os objetos agregados devem 
+definir uma operação que retorna o iterador adequado. 
+Essa abordagem pode ser vista na figura \ref{iterator_struct}, 
+onde o cliente conhece apenas as interfaces 
+Aggregate e Iterator.
+
 \begin{figure}[htb]
 	\caption{\label{iterator_struct}Estrutura do Iterator}
 	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.04_iterator/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.04_iterator/iterator_struct.png}
 	\end{center}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
+
+Como exemplo, é desejado implementar um código 
+que funcione para estruturas de lista comuns, mas 
+que também funcione para \textit{skiplists}, uma 
+estrutura de dados diferente que também se comporta 
+como uma coleção. Para isso, é necessário que 
+tanto as listas como as \textit{skiplists} implementem 
+uma interface abstrata de lista, conhecida pela 
+classe cliente. Da mesma forma, um iterador diferente 
+é definido para cada um dos tipos, também de forma 
+abstrata para o cliente. A imagem \ref{iterator_exemplo} 
+demonstra o diagrama de classes para o exemplo, com a 
+implementação no código \ref{ooiterator}.
 
 \begin{figure}[htb]
 	\caption{\label{iterator_exemplo}Exemplo de Iterator}
@@ -18,7 +47,90 @@
 
 \begin{lstlisting}[caption={Iterator Orientação a Objetos},label=ooiterator]
 
+trait AbstractList[A] {
+  def CreateIterator() : Iterator[A]
+  def Count() : Int
+  def AppendItem(item : A)
+  def RemoveItem(item : A)
+}
 
+class SimpleList[A] extends AbstractList[A] {
+
+  private var elements : List[A] = List()
+
+  def GetItem(pos : Int) : A = elements(pos)
+
+  def CreateIterator(): Iterator[A] = new ListIterator[A](this)
+
+  def Count(): Int = //Implementação para listas simples
+
+  def AppendItem(item: A): Unit = {
+    //Implementação para listas simples
+  }
+  def RemoveItem(item: A): Unit = {
+    //Implementação para listas simples
+  }
+}
+
+class SkipList[A] extends AbstractList[A] {
+
+  def GetItem(pos : Int) : A = //Implementação para SkipLists
+
+  override def CreateIterator(): Iterator[A] = new SkipListIterator[A]()
+
+  override def Count(): Int = //Implementação para SkipLists
+
+  override def AppendItem(item: A): Unit = {
+    //Implementação para SkipLists
+  }
+
+  override def RemoveItem(item: A): Unit = {
+    //Implementação para SkipLists
+  }
+}
+
+trait Iterator[A] {
+  def First() : A
+  def Next() : A
+  def IsDone() : Boolean
+  def CurrentItem() : A
+}
+
+class ListIterator[A](elements : SimpleList[A]) extends Iterator[A] {
+  private var pos : Int = 0
+  private val list : SimpleList[A] = elements
+
+  override def First(): A = list.GetItem(0)
+
+  override def Next(): A = {
+    if(pos+1<elements.Count()){
+      pos = pos+1
+    }
+    elements.GetItem(pos)
+  }
+
+  override def IsDone(): Boolean = pos == elements.Count()
+
+  override def CurrentItem(): A = elements.GetItem(pos)
+}
+
+class SkipListIterator[A](elements : SkipList[A]) extends Iterator[A] {
+  private var pos : Int = 0
+  private val list : SkipList[A] = elements
+
+  override def First(): A = list.GetItem(0)
+
+  override def Next(): A = {
+    if(pos+1<elements.Count()){
+      pos = pos+1
+    }
+    elements.GetItem(pos)
+  }
+
+  override def IsDone(): Boolean = pos == elements.Count()
+
+  override def CurrentItem(): A = elements.GetItem(pos)
+}
     
 \end{lstlisting}
 

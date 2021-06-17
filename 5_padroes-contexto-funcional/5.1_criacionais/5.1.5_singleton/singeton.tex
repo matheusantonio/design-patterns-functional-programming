@@ -1,39 +1,75 @@
 \section{Singleton}
 
-O padrão Singleto fornece um ponto de acesso global a um objeto 
-e garante que ele possuirá apenas uma instância. Esse padrão 
-é importante para implementar serviços e oferecer acesso a eles
-sem instanciar vários objetos iguais em diversos pontos diferentes 
-do código.
+O padrão Singleton garante que um objeto possuirá apenas uma 
+instância. Além disso, fornece um único ponto, acessível 
+globalmente, a essa instância. Essa implementação é útil 
+para implementar classes que fornecem serviços sem que seja 
+necessário instanciar vários objetos idênticos em 
+locais diferentes do código.
 
+A figura \ref{singleton_struct} demonstra a implementação 
+do padrão. A classe Singleton possui um método construtor 
+privado e armazena no atributo estático uniqueInstance uma 
+instância de Singleton. Através do método de classe 
+Instance, é verificado se já existe uma instância 
+armazenada no atributo uniqueInstance. Caso já exista, 
+ela é retornada. Caso não, a instância única é criada 
+para ser retornada nas chamadas posteriores de Instance.
 
 \begin{figure}[htb]
 	\caption{\label{singleton_struct}Estrutura do Singleton}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/diagram.png}
+	    \includegraphics[scale=0.6]{5_padroes-contexto-funcional/5.1_criacionais/5.1.5_singleton/singleton_estrutura.png}
 	\end{center}
 \end{figure}
 
-Exemplo Orientado a Objetos:
+\subsection*{Exemplo Orientado a Objetos}
+
+Uma classe define as operações para realizar transações com 
+uma base de dados. Como a instância dela é idêntica independente 
+do cliente que a utiliza, não existe a necessidade de replicar 
+essas instâncias pelo código. Ela pode ser transformada em 
+um Singleton, o que faz com que toda classe que deseja fazer 
+uma transação na base de dados apenas solicite uma instância 
+e realize as operações. A definição da classe do exemplo 
+pode ser vista na figura \ref{singleton_exemplo} e no 
+código \ref{oosingleton}.
+
+\begin{figure}[htb]
+	\caption{\label{singleton_exemplo}Exemplo de Singleton}
+	\begin{center}
+	    \includegraphics[scale=0.6]{5_padroes-contexto-funcional/5.1_criacionais/5.1.5_singleton/singleton_exemplo.png}
+	\end{center}
+\end{figure}
 
 \begin{lstlisting}[caption={Singleton Orientação a Objetos},label=oosingleton]
-    
-    class Database private () {
 
-        def query(sql)
+class Database private(){
+  def Query(sql : String) : Object = {
+    //Execute query
+    null
+  }
+  def Command(sql : String) : Unit = {
+    //Execute command
+  }
+}
 
+object Database {
+  private var instance : Database = null
+
+  def Instance() : Database = {
+    if(instance == null){
+      instance = new Database()
     }
-
-    object Database {
-
-        private val _instance = new Database()
-        def instance() = _instance
-
-    }
+    instance
+  }
+}
 
 \end{lstlisting}
 
-Contexto Funcional:
+\subsection*{Contexto Funcional}
+
+\begin{comment}
 
 Não existe uma forma de implementar o Singleton no contexto funcional 
 por que ele viola o conceito de função pura, ou seja, a função não 
@@ -82,3 +118,5 @@ dessa função, que poderia ser reaproveitada em um contexto onde o serviço nã
 é necessário. Também há a poluição visual ao incluir, em diversas funções, 
 parâmetros diferentes para fornecer os serviços. Em casos em que mais de um serviço 
 é utilizado, a situação torna-se ainda mais caótica.
+
+\end{comment}

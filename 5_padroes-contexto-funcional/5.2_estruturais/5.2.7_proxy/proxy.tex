@@ -1,11 +1,11 @@
 \section{Proxy}
 
-O padrão Proxy adiciona uma camada a um 
-objeto, permitindo que haja um controle de 
-acesso ao mesmo. Qualquer interação com o 
-objeto Proxy é repassada para o objeto 
-real. Existe mais de uma motivação 
-para seu uso, apesar da estrutura do padrão, 
+O padrão Proxy adiciona uma camada de acesso 
+a um objeto, fazendo com que qualquer interação 
+com o objeto Proxy seja controlada antes de ser 
+repassada para o objeto real. Existe mais 
+de uma motivação para seu uso, apesar 
+da estrutura do padrão, 
 apresentada na figura \ref{proxy_struct},  
 permanecer a mesma. Essas motivações 
 podem ser divididas em três grupos de 
@@ -27,7 +27,7 @@ acessar o objeto real.
 \begin{figure}[htb]
 	\caption{\label{proxy_struct}Estrutura do Proxy}
 	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.7_proxy/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.7_proxy/proxy_estrutura.png}
 	\end{center}
 \end{figure}
 
@@ -52,76 +52,69 @@ e a implementação no código \ref{ooproxy}.
 \begin{figure}[htb]
 	\caption{\label{proxy_exemplo}Exemplo de Proxy}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.2_estruturais/5.2.7_proxy/proxy_exemplo.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.7_proxy/proxy_exemplo.png}
 	\end{center}
 \end{figure}
 
 \begin{lstlisting}[caption={Proxy Orientado a Objetos},label=ooproxy]
 
 trait Graphic {
-	def Draw(point : Point);
-	def GetExtent() : Point;
-	def Store(ostream : Stream);
-	def Load(istream : Stream);
+  def Draw(point : Point)
+  def GetExtent() : Point
+  def Store(ostream : Stream[Byte])
+  def Load(istream : Stream[Byte])
 }
 
-class Image() extends Graphic{
-	
-	var extent : Point;
+class Image (private val filename : String) extends Graphic {
 
-	def Image(fileName : String) {
-		
-	}
+  private var extent : Point = new Point
 
-	def Draw(point : Point){
-		// Operação de desenho da imagem
-	}
+  def Draw(point: Point): Unit = {
+    //Desenha imagem na tela
+  }
 
-	def GetExtent() : Point {
-		return extent;
-	}
+  def GetExtent(): Point = extent
 
-	def Store(ostream : Stream) {
-		// Salva imagem em um arquivo
-	}
+  def Store(ostream: Stream[Byte]): Unit = {
+    //Salva imagem em um arquivo
+  }
 
-	def Load(istream : Stream) {
-		// Carrega imagem de um arquivo
-	}
+  def Load(istream: Stream[Byte]): Unit = {
+    //Carrega imagem de um arquivo
+  }
 }
 
-class ImageProxy(var fileName : String, var extent : Point) extends Graphic{
+class ImageProxy(var filename : String, var extent : Point) extends Graphic {
 
-	var image : Image = null;
+  private var image : Image = null
 
-	def Draw(point : Point){
-		if(image == null){
-			image = new Image(fileName);
-		}
-		image.Draw();
-	}
+  override def Draw(point: Point): Unit = {
+    if(image == null){
+      image = new Image(filename)
+    }
+    image.Draw(point)
+  }
 
-	def GetExtent() : Point {
-		if(image == null){
-			return extent;
-		} else {
-			return image.GetExtent();
-		}
-	}
+  override def GetExtent(): Point = {
+    if(image==null){
+      image = new Image(filename)
+    }
+    image.GetExtent()
+  }
 
-	def Store(ostream : Stream) {
-		// Salva imagem em um arquivo
-	}
+  def Store(ostream: Stream[Byte]): Unit = {
+    //Salva imagem em um arquivo
+  }
 
-	def Load(istream : Stream) {
-		// Carrega imagem de um arquivo
-	}
-
+  def Load(istream: Stream[Byte]): Unit = {
+    //Carrega imagem de um arquivo
+  }
 }
 
 \end{lstlisting}
 
 \subsection*{Contexto Funcional}
+
 
 
 \begin{lstlisting}[caption={Proxy Funcional},label=fpproxy]

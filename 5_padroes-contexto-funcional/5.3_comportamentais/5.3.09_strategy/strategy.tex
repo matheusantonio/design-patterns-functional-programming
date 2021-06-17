@@ -26,7 +26,7 @@ operações desejadas.
 \begin{figure}[htb]
 	\caption{\label{strategy_struct}Estrutura do Strategy}
 	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/strategy_estrutura.png}
 	\end{center}
 \end{figure}
 
@@ -47,120 +47,130 @@ ser visto na figura \ref{strategy_exemplo}.
 \begin{figure}[htb]
 	\caption{\label{strategy_exemplo}Exemplo de Strategy}
 	\begin{center}
-	    \includegraphics[scale=0.45]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/exemplo_strategy.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/strategy_exemplo.png}
 	\end{center}
 \end{figure}
 
 \begin{lstlisting}[caption={Strategy Orientação a Objetos},label=oostrategy]
     
-    trait Compositor {
-        def compose(
-            natural : Array(Coord), stretch : Array(Coord), shrink : Array(Coord),
-            componentCount : Int, lineWidth : Int, breaks : Int
-        ) : Int
-    }
+trait Compositor {
+  def Compose(
+             natural : Vector[Coord],
+             stretch : Vector[Coord],
+             shrink : Vector[Coord],
+             componentCount : Int,
+             lineWidth : Int,
+             breaks : Vector[Coord]
+             ) : Int
+}
 
-    class SimpleCompositor() extends Compositor {
-        def compose(
-            natural : Array(Coord), stretch : Array(Coord), shrink : Array(Coord),
-            componentCount : Int, lineWidth : Int, breaks : Int
-        ) : Int = {
-            // implementação para SimpleCompositor
-        }
-    }
+class SimpleCompositor extends Compositor {
+  override def Compose(natural: Vector[Coord],
+                       stretch: Vector[Coord],
+                       shrink: Vector[Coord],
+                       componentCount: Int,
+                       lineWidth: Int,
+                       breaks: Vector[Coord])
+  : Int = {
+    //Implementação do Simple Compositor
+    0
+  }
+}
 
-    class TeXCompositor() extends Compositor {
-        def compose(
-            natural : Array(Coord), stretch : Array(Coord), shrink : Array(Coord),
-            componentCount : Int, lineWidth : Int, breaks : Int
-        ) : Int = {
-            // implementação para TeXCompositor
-        }
-    }
+class TeXCompositor extends Compositor {
+  override def Compose(natural: Vector[Coord],
+                       stretch: Vector[Coord],
+                       shrink: Vector[Coord],
+                       componentCount: Int,
+                       lineWidth: Int,
+                       breaks: Vector[Coord])
+  : Int = {
+    //Implementação do TeX Compositor
+    0
+  }
+}
 
-    class ArrayCompositor() extends Compositor {
-        def compose(
-            natural : Array(Coord), stretch : Array(Coord), shrink : Array(Coord),
-            componentCount : Int, lineWidth : Int, breaks : Int
-        ) : Int = {
-            // implementação para ArrayCompositor
-        }
-    }
+class ArrayCompositor extends Compositor {
+  override def Compose(natural: Vector[Coord],
+                       stretch: Vector[Coord],
+                       shrink: Vector[Coord],
+                       componentCount: Int,
+                       lineWidth: Int,
+                       breaks: Vector[Coord])
+  : Int = {
+    //Implementação do Array Compositor
+    0
+  }
+}
 
-    class Composition(compositor : Compositor) {
-        
-        private var lineWidth : Int
-        private var lineBreaks : Array[Int]
-        private var lineCount : Int
+class Composition(var compositor: Compositor) {
+  private var lineWidth : Int = 0
+  private var lineBreaks : Vector[Coord] = Vector.empty
+  private var lineCount : Int = 0
 
-        def repair() : Unit = {
-
-            // Implementação da função repair
-
-            val breakCount = compositor.compose(
-                natural, stretchability, shrinkability,
-                componentCount, _lineWidth, breaks
-            )
-    
-        }
-
-    }
+  def Repair() : Unit = {
+    var natural = new Vector[Coord]
+    var stretchability = new Vector[Coord]
+    var shrinkability = new Vector[Coord]
+    // Implementação da função repair
+    val breakCount = compositor.Compose(
+      natural, stretchability, shrinkability,
+      lineCount, lineWidth, lineBreaks)
+  }
+}
 
 \end{lstlisting}
 
 \subsection*{Contexto Funcional}
 
-No contexto funcional, a interface que define 
-as operações que cada estratégia deve implementar 
-não se faz necessária caso a função repair seja 
-convertida em uma função de alta ordem que recebe 
-como parâmetro uma função cuja assinatura seja 
-igual à função compose. Dessa forma, qualquer 
-função que possa implementar a quebra de linhas 
-do exemplo pode ser passada por parâmetro sem 
-que seja necessário implementar interfaces. 
-A abordagem pode ser vista no código \ref{fpstrategy}.
-
+Como a intenção do padrão é permitir a criação de 
+grupos de algoritmos, ele é um candidato para o uso 
+de funções de alta ordem. Ao invés de definir 
+uma classe nova para cada implementação, a 
+função Repair pode receber como parâmetro uma 
+função compose, cuja assinatura predefinida 
+recebe um parâmetro do tipo Compositor e retorna 
+um inteiro. Dessa forma, basta definir as 
+funções ComposeSimple, ComposeTeX e ComposeArray 
+que podem ser passadas por parâmetro quando a 
+função Repair for chamada. A implementação pode 
+ser vista no código \ref{fpstrategy}.
 
 \begin{lstlisting}[caption={Strategy Funcional},label=fpstrategy]
     
-    def simpleCompose(
-        natural : Array(Coord), stretch : Array(Coord), shrink : Array(Coord),
-        componentCount : Int, lineWidth : Int, breaks : Int
-    ) : Int = {
-        // implementação para SimpleCompositor
-    }
+type Composition = (Int, List[Coord], Int)
 
-    def texCompose(
-        natural : Array(Coord), stretch : Array(Coord), shrink : Array(Coord),
-        componentCount : Int, lineWidth : Int, breaks : Int
-    ) : Int = {
-        // implementação para TeXCompositor
-    }
+type Compositor = (
+    List[Coord],
+      List[Coord],
+      List[Coord],
+      Int, Int,
+      List[Coord])
 
-    def arrayCompose(
-        natural : Array(Coord), stretch : Array(Coord), shrink : Array(Coord),
-        componentCount : Int, lineWidth : Int, breaks : Int
-    ) : Int = {
-        // implementação para ArrayCompositor
-    }
+def Repair(composition: Composition,
+        compose : (Compositor) => Int): Unit = {
+  var natural = List.empty
+  var stretchability = List.empty
+  var shrinkability = List.empty
+  //Implementação da função Repair
+  val breakCount = compose(
+      (natural, stretchability, shrinkability,
+     composition._3, composition._1, composition._2)
+  )
+}
 
-    def repair(
-        compose : (
-            natural : Array(Coord), stretch : Array(Coord), shrink : Array(Coord),
-            componentCount : Int, lineWidth : Int, breaks : Int) => Int
-        ) : Unit {
-        
-        // Implementação da função repair
+def ComposeSimple(compositor : Compositor) : Int = {
+  // implementação para SimpleCompositor
+}
+
+def ComposeTeX(compositor : Compositor) : Int = {
+  // implementação para TeXCompositor
+}
+
+def ComposeArray(compositor : Compositor) : Int = {
+  // implementação para ArrayCompositor
+}
     
-        val breakCount = compose(
-            natural, stretchability, shrinkability,
-            componentCount, _lineWidth, breaks
-        )
-
-    }
-        
-
 \end{lstlisting}
 
 
@@ -174,22 +184,4 @@ foram planejadas para ser usadas como estratégias
 diferentes de implementação. Porém, traz a desvantagem 
 de permitir que funções que possuam a mesma assinatura 
 porém não realizem a operação desejada sejam passadas 
-como estratégias válidas. Por exemplo, a função 
-definida no código \ref{fpstrategyproblem} possui a 
-mesma assinatura que as funções apresentadas no exemplo, 
-mesmo que não esteja relacionada ao cálculo de quebras 
-de linha.
-
-
- \begin{lstlisting}[caption={Strategy Funcional: Problema},label=fpstrategyproblem]
-    
-    def roundedModuleOfCrossProductVectors(
-        vectors1 : Array(Coord), vectors2 : Array(Coord), vectors3 : Array(Coord),
-        multiplier : Int, adder : Int, n_vecs : Int
-    ) : Int = {
-        // Retorna o módulo arredondado do produto vetorial 
-        // entre os 3 grupos de N vetores recebidos, 
-        // multiplicados por X e adicionado a Y
-    }
-
-\end{lstlisting}
+como estratégias válidas.

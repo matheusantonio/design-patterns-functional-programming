@@ -29,7 +29,7 @@ FlyweightFactory.
 \begin{figure}[htb]
 	\caption{\label{flyweight_struct}Estrutura do Flyweight}
 	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight_estrutura.png}
 	\end{center}
 \end{figure}
 
@@ -60,49 +60,46 @@ desse exemplo.
 \begin{figure}[htb]
 	\caption{\label{flyweight_exemplo}Exemplo de Flyweight}
 	\begin{center}
-	    \includegraphics[scale=0.45]{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight_exemplo.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight_exemplo.png}
 	\end{center}
 \end{figure}
 
 \begin{lstlisting}[caption={Flyweight Orientado a Objetos},label=ooflyweight]
 
 trait Glyph {
-	def Draw(context : Context);
-	def Intersects(point : Point, context : Context);
+  def Draw(context : Context)
+  def Intersects(point : Point, context : Context)
 }
 
-class Character(val c) extends Glyph {
-	def Draw(context : Context) {
-		// Desenha o caracter
-	}
+class Character(val character: Char) extends Glyph {
+  def Draw(context: Context): Unit = {
+    //Desenha o caracter
+  }
 
-	def Intersects(point : Point, context : Context) {
-		// Verifica a interseção com o ponto
-	}
+  def Intersects(point: Point, context: Context): Unit = {
+    //Verifica a interseção com o ponto
+  }
 }
 
 class Row(var children : List[Glyph]) extends Glyph {
+  def Draw(context: Context): Unit = {
+    //Desenha a linha
+  }
 
-	def Draw(context : Context) {
-		// Desenha a linha
-	}
-
-	def Intersects(point : Point, context : Context) {
-		// Verifica a interseção com o ponto
-	}
+  def Intersects(point: Point, context: Context): Unit = {
+    //Verifica a interseção com o ponto
+  }
 }
 
 class Column(var children : List[Glyph]) extends Glyph {
+  def Draw(context: Context) : Unit = {
+    //Desenha a coluna
+  }
 
-	def Draw(context : Context) {
-		// Desenha a coluna
-	}
-
-	def Intersects(point : Point, context : Context) {
-		// Verifica a interseção com o ponto
-	}
+  def Intersects(point: Point, context: Context): Unit = {
+    //Verifica a interseção com o ponto
+  }
 }
-
 
 \end{lstlisting}
 

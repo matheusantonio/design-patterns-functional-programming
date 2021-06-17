@@ -2,15 +2,18 @@
 
 O padrão Decorator permite adicionar responsabilidades a um 
 objeto de forma dinâmica. Essa dinamicidade é alcançada 
-substituindo a herança por uma agregação, permitindo que a 
-classe decorada delegue responsabilidades para as classes que 
-a estendem. As classes de extensão implementam uma 
-interface em comum com as classes decoradas, também 
-armazenando em seus atributos um objeto que também 
-implementa essa interface. Dessa forma, uma classe 
-de extensão pode tanto referenciar outra classe de extensão 
-quanto o objeto decorado, formando uma estrutura de pilha 
-onde o elemento ao fundo é o objeto decorado. Ele será o 
+substituindo a herança por uma delegação, fazendo com 
+que a classe decorada delegue à classe que a estende 
+a nova responsabilidade.
+
+Para que o processo seja transparente, tanto as 
+as classes de extensão quanto a classe decorada 
+implementam uma interface em comum. As classes 
+de extensão podem também ser decoradas por 
+novas classes de extensão, permitindo adicionar 
+diversas responsabilidades para a classe decorada, 
+formando uma estrutura de pilha onde o elemento ao 
+fundo é o objeto decorado. Ele será o 
 alvo das operações acumuladas de todos os extensores 
 presentes na estrutura. O diagrama de classes que 
 demonstra essa estrutura pode ser visto na figura 
@@ -26,7 +29,7 @@ funcionalidades possíveis.
 \begin{figure}[htb]
 	\caption{\label{decorator_struct}Estrutura do Decorator}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.2_estruturais/5.2.4_decorator/diagram.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.4_decorator/decorator_estrutura.png}
 	\end{center}
 \end{figure}
 
@@ -60,64 +63,104 @@ abordagem.
 \begin{figure}[htb]
 	\caption{\label{decorator_exemplo}Exemplo de Decorator}
 	\begin{center}
-	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.2_estruturais/5.2.4_decorator/decorator_exemplo.png}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.4_decorator/decorator_exemplo.png}
 	\end{center}
 \end{figure}
 
 \begin{lstlisting}[caption={Decorator Orientado a Objetos},label=oodecorator]
 
-trait VisualComponent{
-	def Draw();
+trait VisualComponent {
+  def Draw()
 }
 
-class TextView() extends VisualComponent {
-	def Draw() {
-		// Desenha o TextView
-	}
+class TextView extends VisualComponent {
+  def Draw(): Unit = {
+    //Desenha o componente
+  }
 }
 
-abstract class Decorator(val component : VisualComponent){
-	def Draw() {
-		component.Draw();
-	}
+abstract class Decorator(val component : VisualComponent) extends VisualComponent {
+  override def Draw(): Unit = {
+    component.Draw()
+  }
 }
 
-class ScrollDecorator() {
-	
-	var scrollPosition : Int;
+class ScrollDecorator(visualComponent: VisualComponent)
+  extends Decorator(visualComponent) {
 
-	def Draw() {
-		// Desenha o Scroll
-		super.Draw();
-	}
+  var ScrollPosition : Int = 0
+
+  override def Draw() : Unit = {
+    //Desenha Scroll
+    super.Draw()
+  }
 }
 
-class BorderDecorator() {
-	
-	var borderWidth : Int;
+class BorderDecorator(visualComponent: VisualComponent)
+  extends Decorator(visualComponent){
 
-	def Draw() {
-		// Desenha o Border
-		super.Draw();
-	}
+  var BorderWidth : Int = 0
+
+  override def Draw(): Unit = {
+    //Desenha Border
+    super.Draw()
+  }
 }
 
 \end{lstlisting}
 
 \subsection*{Contexto Funcional}
 
-\begin{comment}
-O mesmo objetivo é alcançado de forma simples através de 
-composição de funções. Caso um valor precise ser decorado 
-com diversas funções, uma função recebe esse valor como 
-parâmetro e uma lista com todas as funcionalidades que irão 
-estendê-lo. Essas funções são então chamadas uma por uma, 
-gerando também uma pilha de chamadas que finalmente 
-retorna o resultado da combinação de todas as operações.
-\end{comment}
+Para que o Decorator possa ser usado no contexto 
+funcional para estender operações, as funções 
+decoradoras devem receber como parâmetro uma função 
+que possua a mesma assinatura da função decorada. 
+Elas também devem retornar uma função que receba 
+como parâmetro os valores de entrada para a 
+função decorada. Internamente, as funções decoradoras 
+chamam a função recebida como parâmetro e realizam 
+qualquer operação adicional necessária. 
+
+Com essa implementação, a função resultante de uma 
+função decoradora possui a mesma assinatura da função 
+decorada, fazendo com que a aplicação não precise adaptar 
+os parâmetros ao utilizá-la. Isso também permite 
+encadear as funções decoradoras, trazendo uma estrutura de 
+pilha, semelhante à implementação orientada a objetos.
+
+O código \ref{fpdecorator} demonstra o exemplo anterior, onde 
+a função DrawTextView, na linha 2, recebe como parâmetro uma 
+String e cria um \textit{text view} que a exibe. As funções 
+DrawTextScroll, na linha 4, e DrawBorder, na linha 11, decoram 
+a função DrawTextView, exibindo também uma barra de \textit{scroll} 
+e bordas para o componente. Por fim, o valor DecoratedDraw, na 
+linha 18, encadeia as três funções, criando uma nova função 
+com a mesma assinatura de DrawTextView com as funcionalidades 
+adicionais.
 
 \begin{lstlisting}[caption={Decorator Funcional},label=fpdecorator]
     
+def DrawTextView(text : String) : Unit = println(text)
 
+def DrawTextScroll(position : Int, Draw : (String) => Unit) : (String) => Unit = {
+  (text : String) => {
+    println("Scroll at " + position)
+    Draw(text)
+  }
+}
+
+def DrawBorder(width : Int, Draw : (String) => Unit) : (String) => Unit = {
+  (text : String) => {
+  println("Border of width " + width)
+  Draw(text)
+  }
+}
+
+val DecoratedDraw : (String) => Unit =
+  DrawBorder(3,
+    DrawTextScroll(5,
+      Draw))
     
 \end{lstlisting}
+
+\subsection*{Vantagens e Desvantagens}
