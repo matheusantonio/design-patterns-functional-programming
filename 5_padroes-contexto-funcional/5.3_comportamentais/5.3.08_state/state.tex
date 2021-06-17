@@ -100,23 +100,18 @@ class TCPClosed extends TCPState {
 
 \subsection*{Contexto Funcional}
 
-\begin{comment}
-Normalmente, a primeira alternativa que se tem em mente é 
-o monad State. Porém, esse monad é focado em comportamentos 
-que alteram o estado atual do nosso valor. Por mais que isso 
-seja possível através do padrão State, por definição, sua 
-intenção é fornecer comportamentos que não necessariamente 
-altera o estado interno do valor.
-
-Dessa forma, uma maneira interessante de definir o State 
-no contexto funcional é utilizando uma case class que armazena, 
-além dos valores comuns, um valor referente a um State. 
-Esse State nada mais é do que outra clase class que 
-irá armazenar, através de funções, os comportamentos que 
-dependem de um estado. Da mesma forma que uma interface 
-define as assinaturas das operações no exemplo orientado a 
-objetos, aqui a definição da case class definirá que tipos 
-de comportamentos a case class principal deverá possuir.
+Para que o comportamento de um valor possa 
+ser alterado ao alterar seu estado, ele 
+pode ser encapsulado dentro de outro valor. 
+No código \ref{fpstate}, o tipo TCPState 
+é declarado na linha 2, onde armazena 
+três funções: uma para a ação \textit{open}, 
+uma para a ação \textit{close} e uma para 
+a ação \textit{acknowledge}. Da mesma forma, 
+as operações Open, Close e Acknowledge, 
+definidas em seguida, recebem como 
+parâmetro uma tupla do tipo TCPState e 
+executam as funções desejadas.
 
 \begin{lstlisting}[caption={State Funcional},label=fpstate]
     
@@ -132,7 +127,13 @@ def Acknowledge(state : TCPState) : Unit = state._3()
     
 \end{lstlisting}
 
-
+O código \ref{fpstate} demonstra como seriam 
+declaradas as tuplas para cada estado visto 
+no exemplo orientado a objetos. Dessa forma, 
+os valores TCPEstabilished, TCPClosed e 
+TCPListen são utilizados para definir que 
+tipo de comportamento o programa deverá 
+adotar para cada estado possível.
 
 \begin{lstlisting}[caption={State Funcional},label=fpstate]
     
@@ -173,10 +174,3 @@ val TCPListen = (
 )
     
 \end{lstlisting}
-
-É importante notar que, aqui, quando o estado do valor 
-principal precisa ser supostamente modificado, o que na 
-verdade acontecerá é que a função da case class State 
-irá retornar o nosso valor atualizado.
-
-\end{comment}

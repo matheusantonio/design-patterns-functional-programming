@@ -109,21 +109,68 @@ class Application(topic: Topic.Value)
 
 \subsection*{Contexto Funcional}
 
-\begin{comment}
-Dependendo da abordagem do problema, alguns tipos de Monads 
-podem ser usados para resolvê-lo. Basta encapsular a 
-solicitação em um Monad e fazê-la passar pelos Handlers, que 
-agora seriam funções, até que a solicitação seja tratada. Em 
-um exemplo em que é desejado que a cadeia de solicitação seja 
-interrompida assim que um problema for encontrado, a opção 
-mais indicada é o Monad Option. Um Option pode retornar algum 
-valor (Some x) ou nenhum valor (None). Se alguma das operações 
-retornar None, a cadeia é interrompida e os handlers 
-seguintes não são executados.
-\end{comment}
+O Chain of Responsability encadeia funções que 
+tratam solicitações, de forma que uma próxima 
+função seja chamada quando a solicitação não 
+pode ser tratada. É possível implementá-lo 
+utilizando funções de alta ordem, onde um 
+\textit{handler} é uma função, ao invés de 
+uma classe, que armazena em uma \textit{closure} 
+a função do próximo elemento da cadeia. 
+
+O código \ref{fpchresponsibility} demonstra a 
+criação dos \textit{handlers}. Na linha 2, a 
+função HandleButton recebe como parâmetro um 
+tópico e o próximo \textit{handler} da cadeia, 
+assim como a classe Button do exemplo orientado 
+a objetos. Ela retorna uma função que verifica 
+se a solicitação pode ser tratada e, caso 
+não seja, chama o \textit{handler} armazenado. 
+A função HandleDialog, na linha 12, é 
+implementada de forma análoga. Já a função 
+HandleHelp, na linha 22, não recebe novos 
+\textit{handlers}, oferecendo ajuda de forma 
+genérica, da mesma forma que a classe 
+Application do exemplo orientado a objetos.
 
 \begin{lstlisting}[caption={Chain of Responsibility Funcional},label=fpchresponsibility]
     
+def HandleButton(topic : Topic.Value, handler : () => Unit) : () => Unit = {
+  () => {
+    if(HasHelp(topic)){
+      //Oferece ajuda sobre o botão
+    } else {
+      handler()
+    }
+  }
+}
 
+def HandleDialog(topic : Topic.Value, handler : () => Unit) : () => Unit = {
+  () => {
+    if(HasHelp(topic)){
+      //Oferece ajuda sobre o dialog
+    } else {
+      handler()
+    }
+  }
+}
+
+def HandleHelp() : Unit = {
+  //Apresenta uma lista de tópicos de ajuda
+}
     
+\end{lstlisting}
+
+O código \ref{fpchainfunction} demonstra a criação 
+da cadeia, onde as funções apresentadas anteriormente 
+são criadas e encadeadas, criando a função 
+ChainofResponsibility que será utilizada para 
+tratar todas as solicitações.
+
+\begin{lstlisting}[caption={Função Chain of Responsability},label=fpchainfunction]
+    
+val ChainofResponsibility: () => Unit = HandleButton(Topic.BUTTON,
+  HandleDialog(Topic.DIALOG,
+    HandleHelp))
+      
 \end{lstlisting}
