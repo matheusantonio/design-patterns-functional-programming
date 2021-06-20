@@ -93,8 +93,89 @@ class MotifScrollBar extends ScrollBar {
 
 \subsection*{Contexto Funcional}
 
+As classes e interfaces \textit{factory} podem 
+ser substituídas por funções de alta ordem 
+recebidas pela função cliente. 
+No código \ref{fpabfactory}, são definidos, 
+nas linhas 2 e 3,  
+os tipos ScrollBar e Window, referentes aos 
+\textit{widgets} suportados pela ferramenta. 
+Da mesma forma, são definidas as operações de 
+criação desses \textit{widgets} para os tipos 
+PM e Motif. Nas linhas 5 e 8 são definidas as 
+operações para o tipo PM, enquanto nas linhas 
+12 e 15 são definidas as para o tipo Motif. 
+
+Na linha 19, é definida uma função cliente, 
+que no diagrama da figura \ref{abfactory_exemplo} 
+poderia estar definida na classe Client. Ela 
+recebe como parâmetro as funções para criação de 
+cada \textit{widget}. Por fim, na linha 28, é 
+demonstrada a chamada dessa função receendo 
+como parâmetro as funções para criar um 
+\textit{scrollbar} e uma janela para o tipo 
+PM.
+
 \begin{lstlisting}[caption={Abstract Factory Funcional},label=fpabfactory]
     
+type Scrollbar
+type Window
+
+def CreatePMScrollBar() : Scrollbar = {
+  // Criação da scrollbar PM
+}
+def CreatePMWindow() : Window = {
+  // Criação da janela PM
+}
+
+def CreateMotifScrollBar() : Scrollbar = {
+  // Criação da scrollbar Motif
+}
+def CreateMotifWindow() : Window = {
+  // Criação da janela Motif
+}
+
+def ClientFunction(
+  scrollBarFactory : () => Scrollbar, 
+  windowFactory : () => Window): Unit = {
+  // ...
+  val scrollbar = scrollBarFactory()
+  val window = windowFactory()
+  // ...
+}
+
+ClientFunction(CreatePMScrollBar, CreatePMWindow)
+
+\end{lstlisting}
+
+No código \ref{fpabfactory}, seria possivel passar 
+para a classe cliente \textit{widgets} de tipos 
+misturados, já que são definidos parâmetros 
+diferentes para cada função de criação. Caso 
+seja desejado um exemplo mais próximo do demonstrado 
+no diagrama da firua \ref{abfactory_exemplo}, 
+é possível encapsular as funções de criação 
+em uma tupla. Isso pode ser visto no código 
+\ref{fpabfactory2}, onde o tipo WidgetFactory, 
+definido na linha 2, armazena tanto uma função 
+para a criação de um \textit{scrollbar} quanto a função 
+para a criação de uma janela. A função 
+cliente, redefinida na linha 10, agora 
+recebe como parâmetro um valor do tipo 
+WidgetFactory.
+
+\begin{lstlisting}[caption={Abstract Factory Funcional usando tuplas},label=fpabfactory2]
     
+type WidgetFactory = (
+  () => ScrollBar, 
+  () => Window
+)
+
+val PMWidgetFactory : WidgetFactory = 
+  (CreatePMScrollBar, CreatePMWindow)
+
+def ClientFunction(factory : WidgetFactory) : Unit = // ...
+
+ClientFunction(PMWidgetFactory)
 
 \end{lstlisting}

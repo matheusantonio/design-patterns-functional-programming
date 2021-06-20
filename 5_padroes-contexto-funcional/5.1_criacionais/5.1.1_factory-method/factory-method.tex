@@ -105,11 +105,41 @@ class MyDocument extends Document {
 
 \subsection*{Contexto Funcional}
 
+As funções de alta ordem tornam desnecessária 
+a criação de uma especialização para a classe 
+Application vista no exemplo orientado a 
+objetos. Uma função da aplicação pode 
+receber como parâmetro a função responsável 
+pela criação do documento, bastando que ao 
+ser chamada, seja passada a função de criação 
+do documento específico. 
 
+O código \ref{fpfactory} demonstra a definição 
+do tipo Document, na linha 2, além da função 
+que cria um tipo específico de documento, na 
+linha 4. Uma função qualquer da aplicação, 
+por exemplo, a função ApplicationFunction 
+definida na linha 8, recebe como parâmetro 
+uma função que retorna um documento. Por 
+fim, na linha 14, pode ser vista a chamada 
+da função ApplicationFunction recebendo a 
+função de criação CreateMyDocument.
 
 \begin{lstlisting}[caption={Factory Method Funcional},label=fpfactory]
     
+type Document
 
+def CreateMyDocument() : Document = {
+  // Cria o documento específico para o framework
+}
+
+def ApplicationFunction(createDocument : () => Document): Unit = {
+  // ...
+  val docuemnt = createDocument()
+  // ...
+}
+
+ApplicationFunction(CreateMyDocument)
 
 \end{lstlisting}
 
