@@ -134,8 +134,21 @@ class RTFReader(var textConverter: TextConverter) {
 \subsection*{Contexto Funcional}
 
 
+
 \begin{lstlisting}[caption={Builder Funcional},label=fpbuilder]
     
-
+def ParseRTF(convertCharacter : Char => Token,
+  convertFontChange : String => Token,
+  convertParagraph : String => Token)
+: List[Token] => List[Token] = (tokens : List[Token]) => {
+  val parseRest = (tokens : List[Token]) => ParseRTF(convertCharacter, convertFontChange, convertParagraph)(tokens)
+  // ...
+  tokens.head.Type match {
+  case TokenType.CHAR => convertCharacter(tokens.head.Character) :: parseRest(tokens.tail)
+  case TokenType.FONT => convertFontChange(tokens.head.Font) :: parseRest(tokens.tail)
+  case TokenType.PARAGRAPH => convertParagraph(tokens.head.Paragraph) :: parseRest(tokens.tail)
+  }
+  // ...
+}
     
 \end{lstlisting}

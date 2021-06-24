@@ -127,7 +127,7 @@ def Acknowledge(state : TCPState) : Unit = state._3()
     
 \end{lstlisting}
 
-O código \ref{fpstate} demonstra como seriam 
+O código \ref{fpstate2} demonstra como seriam 
 declaradas as tuplas para cada estado visto 
 no exemplo orientado a objetos. Dessa forma, 
 os valores TCPEstabilished, TCPClosed e 
@@ -135,7 +135,7 @@ TCPListen são utilizados para definir que
 tipo de comportamento o programa deverá 
 adotar para cada estado possível.
 
-\begin{lstlisting}[caption={State Funcional},label=fpstate]
+\begin{lstlisting}[caption={State Funcional},label=fpstate2]
     
 val TCPEstabilished = (
   () => {
