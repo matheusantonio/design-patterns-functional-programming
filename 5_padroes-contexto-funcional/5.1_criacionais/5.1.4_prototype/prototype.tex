@@ -103,17 +103,22 @@ class GraphicTool(var prototype : Graphic) {
 
 \subsection*{Contexto Funcional}
 
-
+Graças à ideia de imutabilidade presente na 
+programação funcional, valores definidos podem 
+ser reutilizados sem que haja preocupação 
+quanto a alterações que outras classes possam 
+realizar. 
 
 \begin{lstlisting}[caption={Prototype Funcional},label=fpprototype]
     
-def GeneratePrototype(graphic : Graphic): () => Graphic =
-  () => graphic 
+def DrawPrototype(graphic: Graphic) : Position => Unit =
+  (newPosition : Position) => {
+    // Desenha elemento gráfico
+  }
 
-def ManipulateGraphic(Clone : () => Graphic) = {
-  val p = Clone()
+def ManipulateGraphic(Draw : Position => Graphic) : Unit = {
   while(dragsMouse){
-    Draw(p, newPosition)
+    Draw(newPosition)
   }
 }
     

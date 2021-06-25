@@ -133,22 +133,46 @@ class RTFReader(var textConverter: TextConverter) {
 
 \subsection*{Contexto Funcional}
 
-
+É possível aproveitar as funções de alta ordem 
+da programação funcional para simplificar o 
+padrão Builder. Ao invés de definir novas 
+classes para tipo de builder, uma função pode 
+ser definida para receber como parâmetro cada 
+operação de construção que deve ser definida. 
+No código \ref{fpbuilder}, essa função é a 
+ParseRTFBuilder, definida na linha 2. Ela 
+retorna uma nova função que recebe como 
+parâmetro uma lista de \textit{tokens} e 
+retorna uma nova lista no formato desejado. 
+A função retornada é análoga ao método 
+ParseRTF da classe RTFReader no exemplo 
+orientado a objetos. Com essa implementação, 
+para definir um novo Builder é necessário apenas 
+chamar a função ParseRTFBuilder com as operações 
+desejadas. Isso pode ser visto na linha 16, 
+onde o valor ParseRTFToASCII é o resultado 
+da definição do Builder que converte RTF para 
+texto em ASCII.
 
 \begin{lstlisting}[caption={Builder Funcional},label=fpbuilder]
     
-def ParseRTF(convertCharacter : Char => Token,
-  convertFontChange : String => Token,
-  convertParagraph : String => Token)
+def ParseRTFBuilder(convertCharacter : Char => Token,
+             convertFontChange : String => Token,
+             convertParagraph : String => Token)
 : List[Token] => List[Token] = (tokens : List[Token]) => {
-  val parseRest = (tokens : List[Token]) => ParseRTF(convertCharacter, convertFontChange, convertParagraph)(tokens)
+  val parseRest = (tokens : List[Token]) => ParseRTFBuilder(convertCharacter, convertFontChange, convertParagraph)(tokens)
   // ...
   tokens.head.Type match {
-  case TokenType.CHAR => convertCharacter(tokens.head.Character) :: parseRest(tokens.tail)
-  case TokenType.FONT => convertFontChange(tokens.head.Font) :: parseRest(tokens.tail)
-  case TokenType.PARAGRAPH => convertParagraph(tokens.head.Paragraph) :: parseRest(tokens.tail)
+    case TokenType.CHAR => convertCharacter(tokens.head.Character) :: parseRest(tokens.tail)
+    case TokenType.FONT => convertFontChange(tokens.head.Font) :: parseRest(tokens.tail)
+    case TokenType.PARAGRAPH => convertParagraph(tokens.head.Paragraph) :: parseRest(tokens.tail)
   }
   // ...
 }
+
+val ParseRTFToASCII = ParseRTFBuilder(
+              ConvertASCIICharacter,
+              ConvertASCIIFontChange,
+              ConvertASCIIParagraph)
     
 \end{lstlisting}
