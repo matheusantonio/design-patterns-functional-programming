@@ -103,11 +103,27 @@ class GraphicTool(var prototype : Graphic) {
 
 \subsection*{Contexto Funcional}
 
-Graças à ideia de imutabilidade presente na 
+Graças ao conceito de imutabilidade presente na 
 programação funcional, valores definidos podem 
 ser reutilizados sem que haja preocupação 
-quanto a alterações que outras classes possam 
-realizar. 
+quanto a diversas referências para um mesmo valor. 
+Dessa forma, o problema resolvido pelo Prototype 
+deixa de existir. 
+
+O código \ref{fpprototype} demonstra como o 
+exemplo orientado a objetos anterior poderia 
+ser implementado. A função DrawPrototype, 
+definida na linha 2, recebe como parâmetro um 
+valor do tipo Graphic - sem preocupar-se se 
+esse valor está sendo clonado, reutilizado ou 
+se existem mais referências para ele em outras 
+funções da aplicação. Ela retorna uma função 
+responsável por desenhar esse elemento. Dessa 
+forma, a função ManipulateGraphic, na linha 
+7, pode apenas receber como parâmetro uma função 
+que desenha um elemento gráfico, que pode ser 
+alterada dinamicamente de acordo com o elemento 
+gráfico desejado.
 
 \begin{lstlisting}[caption={Prototype Funcional},label=fpprototype]
     

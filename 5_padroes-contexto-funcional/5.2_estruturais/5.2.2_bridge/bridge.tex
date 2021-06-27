@@ -95,8 +95,58 @@ class PMWindowImp extends WindowImp {
 
 \subsection*{Contexto Funcional}
 
-\begin{lstlisting}[caption={Bridge Funcional},label=fpbridge]
-    
+Funções de alta ordem podem ser utilizadas 
+para separar as abstrações das implementações. 
+No código \ref{fpbridgeabs}, são definidas, nas 
+linhas 2 e 10 respectivamente, as 
+duas funções equivalentes aos métodos das 
+classes IconWindow e TransientWindow do exemplo 
+orientado a objetos. Ao invés de reutilizar 
+funções de uma superclasse, as funções 
+DrawText e DrawRect são recebidas por parâmetro.
 
+\begin{lstlisting}[caption={Abstrações no Bridge Funcional},label=fpbridgeabs]
+    
+def DrawIconBorder(text : String,
+                   height : Int, width : Int,
+                   DrawText : String => Unit,
+                   DrawRect : (Int, Int) => Unit) : Unit = {
+  DrawText(text)
+  DrawRect(height, width)
+}
+
+def DrawTransientCloseBox(height : Int, width : Int,
+                          DrawRect : (Int, Int) => Unit) : Unit = {
+  DrawRect(height, width)
+}
+    
+\end{lstlisting}
+
+No código \ref{fpbridgeimp}, são definidas as 
+funções referentes às implementações diferentes 
+de Window. Essas são as funções que podem ser 
+passadas como parâmetro para as funções vistas 
+no código \ref{fpbridgeabs}. Dessa forma, as 
+abstrações de Window tornam-se independentes 
+da forma como ela é implementada, resolvendo 
+o problema encontrado pelo padrão.
+
+\begin{lstlisting}[caption={Implementaçoes no Bridge Funcional},label=fpbridgeimp]
+    
+def XDrawLine(size : Int) : Unit = {
+  // Desenha linha
+}
+
+def XDrawText(text : String) : Unit = {
+  // Desenha texto
+}
+
+def PMDrawLine(size : Int) : Unit = {
+  // Desenha linha
+}
+
+def PMDrawText(text : String) : Unit = {
+  // Desenha texto
+}
     
 \end{lstlisting}
