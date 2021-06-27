@@ -96,10 +96,87 @@ class Line extends Graphic {
 
 \subsection*{Contexto Funcional}
 
+O código \ref{fpcomposite} demonstra como é 
+possível declarar a estrutura do padrão Composite 
+utilizando funções de alta ordem. A função 
+Draw, definida na linha 2, é equivalente à função 
+Draw da classe Picture do exemplo orientado a 
+objetos. A diferença é que ela recebe como parâmetro 
+uma lista de funções e retorna uma nova função, 
+com a mesma assinatura, que executa todas as 
+funções da lista. As funções DrawLine, DrawRectangle 
+e DrawText, definidas nas linhas 5, 10 e 15, 
+respectivamente, são equivalentes aos elementos 
+folha da estrutura de árvore proposta pelo 
+Composite. Elas recebem como parâmetro todos 
+os valores necessários para desenhar os elementos 
+gráficos e retornam uma função para 
+desenhá-los.
 
+As funções retornadas são adicionadas a uma 
+lista que deve ser passada para a função Draw. 
+Como a assinatura de Draw é igual à das funções 
+que ela recebe, uma nova chamada de Draw pode 
+conter tanto "funções folha" quanto funções 
+que são resultado da chamada de Draw. Isso 
+favorece a vantagem do padrão Composite de 
+permitir que toda a estrutura seja tratada 
+de forma indefinida, sem que a função 
+cliente precise saber se está tratando de um 
+grupo de elementos ou de um elemento apenas. 
 
 \begin{lstlisting}[caption={Composite Funcional},label=fpcomposite]
     
+def Draw(functions : List[() => Unit]) : () => Unit =
+  () => functions.foreach((function) => function())
 
+def DrawLine(length : Int) : () => Unit =
+  () => {
+    // Desenha linha
+  }
+
+def DrawRectangle(width : Int, height : Int) : () => Unit =
+  () => {
+    // Desenha retângulo
+  }
+
+def DrawText(text : String) : () => Unit =
+  () => {
+    // Escreve texto
+  }
+    
+\end{lstlisting}
+
+O código \ref{fpcompositeapp} demonstra a 
+aplicação do padrão. O valor DrawGraphics, 
+definido na linha 2, é o resultado da aplicação 
+de Draw para uma lista contendo uma função que 
+desenha uma linha e uma função que desenha 
+um retângulo. Já o valor DrawAllText, definido 
+na linha 7, é definida através de duas funções 
+que desenham texto. Na linha 12, o valor 
+DrawEverything é definido a partir das funções 
+armazenadas nos valores DrawGraphics e 
+DrawAllText. Ao ser executado, ele executará 
+também todas as funções definidas anteriormente 
+tratando todo o conjunto como um único elemento, 
+da forma como o padrão Composite propõe.
+
+\begin{lstlisting}[caption={Aplicação do Composite Funcional},label=fpcompositeapp]
+    
+val DrawGraphics : () => Unit = Draw(
+  List(
+    DrawLine(5),
+    DrawRectangle(4, 5)))
+
+val DrawAllText : () => Unit = Draw(
+  List(
+    DrawText("Text 1"),
+    DrawText("Text 2")))
+
+val DrawEverything : () => Unit = Draw(
+  List(
+    DrawGraphics,
+    DrawAllText))
     
 \end{lstlisting}
