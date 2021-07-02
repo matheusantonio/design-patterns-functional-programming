@@ -160,66 +160,30 @@ reutilizada por mais de um \textit{widget} da aplicação.
 
 \begin{lstlisting}[caption={Mediator Funcional},label=fpmediator]
     
-	object FontDialogDirector {
+type EntryField = String
 
-		import EntryField._
-		import ListBox._
-	
-		def ChangeWidget[A, B](
-			changedWidget : A,
-			affectedWidgets : B,
-			f : (A, B) => (A, B)) 
-		: (A, B) = f(changedWidget, affectedWidgets)
-	
-	
-		def ChangeSelectionFunction(selection : String) = 
-			(listBox : ListBox, entryField : EntryField) => 
-				(SetSelection(listBox, selection), 
-				 SetText(entryField, selection))
-	
-	}
-	
-	object EntryField {
-	
-		case class EntryField(val text : String)
-	
-		def SetText(entryField : EntryField, text : String) = 
-			entryField.copy(text)
-		
-		def GetText(entryField : EntryField) = 
-			entryField.text
-	}
-	
-	object ListBox {
-	
-		case class ListBox(val selection : String)
-		
-		def SetSelection(listBox : ListBox, selection : String) = 
-			listBox.copy(selection=selection)
-		
-		def GetSelection(listBox : ListBox) = 
-			listBox.selection
-	}
-	
-    
+def ChangeEntryFieldText(text : String,
+						 entryField: EntryField)
+: EntryField =
+  text
+  
+def GetText(entryField : EntryField) : String =
+  entryField
+  
+type ListBox = String
+  
+def ChangeListBoxSelection(selection : String,
+						   listBox: ListBox)
+: ListBox =
+  selection
+  
+def GetSelection(listBox : ListBox)  : String=
+  listBox
+  
+def ChangeSelection(selection : String,
+					entryField: EntryField,
+					listBox : ListBox) : (EntryField, ListBox) = {
+  (ChangeListBoxSelection(selection, listBox), ChangeEntryFieldText(selection, entryField))
+}
+	    
 \end{lstlisting}
-
-\subsection*{Vantagens e Desvantagens}
-
-Uma vantagem observável da abordagem funcional é 
-que os colleagues não precisam conhecer o Mediator. 
-Dessa forma, os \textit{widgets} poderiam ser 
-reutilizados em outros trechos da aplicação onde 
-eles não precisam depender ou ser dependentes 
-de outros elementos. 
-
-Uma desvantagem é o gerenciamento dos \textit{widgets}, 
-já que é sempre necessário desestruturar a tupla retornada 
-pela função ChangeWidget para recuperar os novos 
-valores. Essa operação pode tornar-se ainda mais 
-difícil se a quantidade de Colleagues afetados 
-aumentar ou se eles estiverem organizados em uma estrutura 
-mais complexa. Outra desvantagem é que as operações 
-precisam passar explicitamente pelo Mediator para 
-serem executadas, tornando uma refatoração 
-onde o Mediator não é mais necessário mais custosa.

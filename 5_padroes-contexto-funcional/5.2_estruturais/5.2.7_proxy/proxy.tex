@@ -115,10 +115,55 @@ class ImageProxy(var filename : String, var extent : Point) extends Graphic {
 
 \subsection*{Contexto Funcional}
 
+Para implementar um Proxy, uma função do 
+editor de documentos pode receber como 
+parâmetro uma função cuja assinatura seja 
+a mesma do método Draw no exemplo orientado 
+a objetos. Dessa forma, tanto é possível 
+receber a função real quanto a função 
+intermediária, sem que a função cliente 
+esteja ciente de qual está sendo utilizada. 
+A função intermediária, assim como nos 
+métodos da classe intermediária no exemplo 
+orientado a objetos, executará a função 
+real, de acordo com o tipo de proxy que 
+deve ser implementado. 
 
+Para o exemplo orientado a objetos visto, 
+onde é desejado adiar a criação de um 
+determinado valor, é possível definir 
+uma implementação semelhante através 
+de valores \textit{lazy}. Ela permite que 
+o resultado da atribuição a um determinado 
+valor seja atrasado até o momento em que 
+o valor é referenciado\cite{functionalscala}. 
+No código \ref{fpproxy}, a função DrawProxy, 
+na linha 8, é a função intermediária para a 
+função DrawImage, na linha 2. DrawImage recebe 
+um caminho e retorna um valor que representa 
+a imagem criada, enquanto DrawProxy atribui 
+o resultado dessa função a um valor \textit{lazy} 
+retornado.
 
 \begin{lstlisting}[caption={Proxy Funcional},label=fpproxy]
     
+def DrawImage(filename : String) : Image = {
+  // Cria a imagem
+}
 
+def GetImageExtent(image : Image) : Point = image._1
+
+def DrawProxy(filename : String) : Image = {
+  lazy val img = DrawImage(filename)
+  img
+}
+
+def EditorFunction(filename : String, Draw : String => Image, GetExtent : Image => Point) : Unit = {
+  //...
+  val img = Draw(filename)
+    //...
+  val extent = GetExtent(img)
+  //...
+}
     
 \end{lstlisting}

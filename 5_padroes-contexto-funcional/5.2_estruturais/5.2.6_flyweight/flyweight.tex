@@ -105,23 +105,37 @@ class Column(var children : List[Glyph]) extends Glyph {
 
 \subsection*{Contexto Funcional}
 
-\begin{comment}
-A ideia do Flyweight assemelha-se à de memoização, onde o 
-retorno de uma função pura é armazenado para que seu valor 
-não precise ser recalculado quando os mesmos parâmetros 
-são passados. Essa abordagem só é possível para funções 
-puras pois, caso ocorram efeitos colaterais ou a função 
-dependa de dados externos, o resultado pode ser diferente 
-para os mesmos parâmetros, gerando um resultado não 
-confiável.
-
-Apesar da ideia de memoização parecer mais focada no tempo 
-de execução no que no espaço em memória, dependendo da 
-implementação é possível economizar ambos.
-\end{comment}
+Esse padrão utiliza uma técnica também conhecida 
+como memoização, que salva computações já realizadas 
+para serem reutilizadas e economizar espaço em 
+memória\cite{scalafunctpatterns}. O código \ref{fpflyweight} 
+demonstra como o exemplo anterior poderia ser 
+implementado. O tipo GlyphFactory, definido na 
+linha 3, é um dicionário cuja chave é do tipo 
+String e o valor é do tipo Glyph. A função 
+GetGlyph recebe como parâmetro um valor de um 
+Glyph e uma fábrica de Glyphs. A função verifica 
+se o valor já está contido nos Glyphs criados, 
+retornando-o caso exista e criando um novo 
+caso não. A desvantagem dessa abordagem é que, 
+por a função GetGlyph ser pura, é necessário 
+sempre receber e retornar o \textit{factory} 
+atualizado.
 
 \begin{lstlisting}[caption={Flyweight Funcional},label=fpflyweight]
     
+type Glyph
+type GlyphFactory = Map[String, Glyph]
 
+def GetGlyph(value : String, factory : GlyphFactory)
+  : (Glyph, GlyphFactory) = {
+  factory.get(value) match {
+    case Some(glyph) => (glyph, factory)
+    case None => {
+      val newGlyph = // Cria novo glyph 
+      (newGlyph, factory + (value -> newGlyph))
+    }
+  }
+}
     
 \end{lstlisting}
