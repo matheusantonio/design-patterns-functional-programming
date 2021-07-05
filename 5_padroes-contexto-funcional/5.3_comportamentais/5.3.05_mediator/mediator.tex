@@ -96,67 +96,29 @@ class ListBox(director : DialogDirector) extends Widget(director){
 
 \subsection*{Contexto Funcional}
 
-Como o objetivo do padrão é gerenciar as interdependências 
-entre elementos diferentes sem que eles precisem se conhecer, 
-o objeto ConcreteMediator pode ser equivalente a um módulo 
-que define as funções que serão executadas nos Colleagues 
-afetados quando algum Colleague alvo realizar uma operação. 
-Para simplificar a descrição do exemplo funcional, será 
-definido como "Colleague alvo" um Colleague que, no 
-exemplo orientado a objetos, teria executado uma operação 
-que avisa o Mediator e "Colleague afetado" como um 
-Colleague que, após o Mediator ter sido avisado, foi 
-modificado ou referenciado. É importante notar que qualquer 
-Colleague pode agir tanto como alvo quanto como afetado, 
-dependendo do contexto.
+O código \ref{fpmediator} demonstra a implementação 
+funcional do Mediator. Uma função é responsável por 
+gerenciar as interdependências entre os valores 
+dos tipos EntryField, definido na linha 2, e ListBox, 
+definido na linha 12. Quando a função mediadora ChangeSelection, 
+definida na linha 22, é chamada, ela precisa receber 
+como parâmetro o elemento alvo e o elemento dependente, 
+além das informações necessárias para executar a 
+operação ChangeListBoxSelection. A função retorna 
+tanto o \textit{colleague} alvo da operação 
+quanto os \textit{colleagues} afetados, mantendo 
+a função cliente que chama essa operação atualizada 
+quanto ao estado de ambos os valores. 
 
-Como as funções devem ser puras, uma função de um Colleague 
-alvo não pode modificar um Colleague afetado sem que o mesmo seja 
-passado por parâmetro. Seguindo essa abordagem, os Colleagues 
-tornariam-se dependentes uns dos outros novamente, o que não 
-é desejado. Uma forma de resolver esse problema é trazendo 
-para o Mediator a responsabilidade de chamar as operações 
-dos Colleagues de forma que as funções do Mediator serão 
-compostas por uma função que faz a modificação no Colleague alvo  
-e de todas as funções necessárias para modificar os 
-Colleagues afetados. Essas funções podem receber como parâmetro 
-os valores necessários para modificar o Colleague alvo, 
-mas para que a abordagem seja equivalente à orientada a 
-objetos, elas não deveriam receber nenhum parâmetro 
-exclusivo das funções que alteram os Colleagues afetados. 
-Outra consequência do uso de funções puras, que também 
-é uma consequência da imutabilidade, é que também será 
-responsabilidade das funções do Mediator retornar todos 
-os Colleagues alterados.
-
-O código \ref{fpmediator} demonstra o exemplo visto 
-anteriormente utilizando as ideias apresentadas. Um módulo 
-FontDialogDirector possui a operação ChangeWidget, que 
-trabalha com os tipos abstratos A, representando o tipo 
-do Colleague alvo e B representando o tipo do Colleague 
-afetado. Como a função ChangeWidget não define a forma 
-como os Colleagues afetados são alterados, o tipo B pode 
-ser tanto um único Colleague quanto uma tupla ou lista 
-de Colleagues afetados. A função ChangeWidget também 
-recebe uma função que recebe como parâmetros valores 
-dos tipos A e B e retorna uma tupla contendo valores 
-dos mesmos tipos. A implementação da função é apenas a chamada 
-de f para os widgets dos tipos A e B recebidos como entrada.
-
-A função f recebida como parâmetro é responsável por 
-definir qual função do Colleague alvo será chamada e 
-como isso modificará os Colleagues afetados. No exemplo, 
-ela pode ser definida através da função ChangeSelectionFunction, 
-que recebe como parâmetro o valor da seleção para o \textit{widget} 
-de lista de seleção e retorna uma função que recebe como parâmetro 
-um ListBox como Colleague alvo e um EntryField como 
-Colleague afetado. O valor da seleção será armazenado 
-em uma closure e será utilizado na chamada das funções 
-SetSelection e SetText. Essa abordagem contribui 
-para que novas funções para valores diferentes de 
-seleção não precisem ser criadas e também para que 
-uma mesma função que seleciona um valor possa ser 
-reutilizada por mais de um \textit{widget} da aplicação.
+A vantagem dessa abordagem é que ela torna possível 
+que as funções dos \textit{colleagues} (no código 
+\ref{fpmediator}, ChangeEntryFieldText e 
+ChangeListBoxSelection) sejam idependentes dos 
+mediadodores, favorecendo seu reuso. A desvantagem 
+é que é necessário realizar, na função cliente, 
+um gerenciamento quanto ao estado de todos os 
+\textit{colleagues}, já que a função mediadora não 
+deve realizar efeitos colaterais.
 
 \begin{lstlisting}[caption={Mediator Funcional},label=fpmediator]
     

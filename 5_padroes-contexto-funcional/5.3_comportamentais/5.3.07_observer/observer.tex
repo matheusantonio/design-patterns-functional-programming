@@ -104,6 +104,18 @@ class BarGraphic(data: ApplicationData) extends DataSubscriber {
 
 \subsection*{Contexto Funcional}
 
+O padrão Observer depende bastante de 
+efeitos colaterais em sua implementação, 
+já que depende de outros objetos serem avisados 
+quando o estado do objeto observado for 
+atualizado. Uma abordagem semelhante à vista 
+no padrão Mediator, onde as funções clientes 
+gerenciam os observáveis e os subordinados, 
+poderia ser utilizada para trazer um resultado 
+semelhante. Porém, outra abordagem costuma ser 
+utilizada como alternativa a esse padrão que 
+se encaixa no contexto funcional: programação 
+reativa funcional. [Citar referência aqui]
 
 \begin{lstlisting}[caption={Observer Funcional},label=fpobserver]
     

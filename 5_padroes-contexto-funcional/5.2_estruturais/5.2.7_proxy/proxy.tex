@@ -147,22 +147,25 @@ retornado.
 
 \begin{lstlisting}[caption={Proxy Funcional},label=fpproxy]
     
-def DrawImage(filename : String) : Image = {
-  // Cria a imagem
+type Image = (Point, String, Ref)
+
+def DrawImage(point : Point, image : Image) : Image = {
+  (point, image._2, image._3)
 }
 
 def GetImageExtent(image : Image) : Point = image._1
 
-def DrawProxy(filename : String) : Image = {
-  lazy val img = DrawImage(filename)
-  img
+def DrawImageProxy(point : Point, image : Image) : Image = {
+  if(image._3 == 0){
+    DrawImage(point, (point, image._2, 1))
+  } else{
+    DrawImage(point, image)
+  }
 }
 
-def EditorFunction(filename : String, Draw : String => Image, GetExtent : Image => Point) : Unit = {
+def EditorFunction(filename : String, Draw : (Point, Image) => Image, GetExtent : Image => Point) : Unit = {
   //...
-  val img = Draw(filename)
-    //...
-  val extent = GetExtent(img)
+  img = Draw(point, img)
   //...
 }
     
