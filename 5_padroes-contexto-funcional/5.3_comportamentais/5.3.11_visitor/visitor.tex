@@ -92,24 +92,70 @@ class CodeGeneratingVisitor extends NodeVisitor {
 
 \subsection*{Contexto Funcional}
 
-\begin{comment}
-att
-O Visitor é mais um caso em que funções de alta ordem ajudam a 
-economizar novas classes e interfaces. Basta definir uma função 
-que receba como parâmetro um valor do tipo encapsulado pela 
-coleção e retornar um valor do mesmo tipo com a operação 
-realizada. Funções do tipo map, que podem ser usadas para 
-realizar uma operação em uma coleção, contribuem para essa 
-implementação.
+Uma das maiores vantagens do padrão Visitor 
+é o uso de multimétodos, onde um método é 
+executado de forma dinâmica, baseado no tipo 
+de um objeto em tempo de execução. Essa 
+funcionalidade é possível através do polimorfismo 
+nas linguagens orientadas a objetos.\cite{gamma:1995}
 
-Porém, a funcionalidade do Visitor que permite realizar 
-operações diferentes dependendo da implementação do objeto 
-também é interessante e pode ser alcançada utilizando 
-pattern matching. [terminar esse texto]
-\end{comment}
+Uma funcionalidade semelhante que algumas 
+linguagens funcionais implementam é o 
+\textit{pattern matching}\cite{realworldhaskell,
+functionalscala}. 
+Ela consiste em avaliar um valor a partir de 
+um padrão predefinido, ou seja, a operação 
+que será realizada dependerá do valor avaliado
+\cite{functionalscala}. 
+No caso do padrão Visitor, todos os métodos 
+sobrecarregados que executam a operação 
+em cada tipo de elemento da coleção são 
+substituídos por um único método que 
+reconhece o tipo de valor da estrutura. 
+Essa abordagem possui suas desvantagens, 
+dependendo de como a linguagem implementa 
+o \textit{pattern matching}. No caso de Scala, 
+pode ser necessário incluir nos valores da 
+estrutura um valor enumerável que identifica o 
+tipo do elemento. 
+
+O código \ref{fpvisitor} demonstra como o 
+exemplo orientado a objetos pode ser implementado. 
+O tipo Node, definido na linha 2, armazena um valor 
+enumerável com os tipos de nó suportados 
+pela aplicação, além dos outros valores 
+armazenados por um nó - representados pelo tipo 
+NodeValue. A função DefineNodeVisitor, definida 
+na linha 4, aproveita o uso de funções de alta ordem 
+para gerar tipos diferentes de Visitor. Ela 
+recebe como parâmetro duas funções, uma que 
+realiza uma operação para o tipo de nó Assignment e 
+outra que realiza uma operação para o tipo de 
+nó VariableRef. Ela retorna uma nova função - o 
+Visitor - que recebe como parâmetro uma coleção 
+de nós e retorna a mesma coleção após aplicadas 
+todas as operações. Nas linhas 9 e 11 é onde 
+ocorre o \textit{pattern matching}. Uma operação 
+de desconstrução é aplicada na tupla que representa 
+um nó. Caso o nó seja do tipo Assignment, o 
+primeiro caso é executado. Caso seja do tipo 
+VariableRef, o segundo caso é executado.
 
 \begin{lstlisting}[caption={Visitor Funcional},label=fpvisitor]
     
+type Node = (NodeType.Value, NodeValue)
 
+def DefineNodeVisitor(AssignmentNodeVisitor : NodeValue => Node,
+                      VariableRefNodeVisitor : NodeValue => Node) :
+List[Node] => List[Node] = {
+  (nodes : List[Node]) => {
+    nodes.map {
+      case (NodeType.AssignmentNode, value) => 
+        AssignmentNodeVisitor(value)
+      case (NodeType.VariableRefNode, value) => 
+        VariableRefNodeVisitor(value)
+    }
+  }
+}
     
 \end{lstlisting}
