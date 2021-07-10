@@ -136,6 +136,20 @@ class SkipListIterator[A](elements : SkipList[A]) extends Iterator[A] {
 
 \subsection*{Contexto Funcional}
 
+O tipo de iterador apresentado no padrão pode 
+ser considerado um Iterator externo, onde a 
+resposabilidade de acessar o elemento atual, 
+passar para o próximo elemento ou verificar se 
+a coleção terminou é da classe cliente. Por 
+outro lado, um Iterator interno funciona de forma 
+que o cliente precisa apenas especificar qual 
+operação deve ser executada, enquanto a 
+coleção fica responsável por definir como ela 
+deve ser percorrida. Essa abordagem de Iterator 
+pode ser alcançada através de funções muito 
+utilizadas na programação funcional, 
+\textit{map} e \textit{reduce}\footnote{Também 
+chamada de \textit{fold}}.%\cite{Gibbons&amp;Oliveira2008:Essence}
 
 \begin{lstlisting}[caption={Iterator Funcional},label=fpiterator]
     
