@@ -129,41 +129,41 @@ orientado a objetos, executará a função
 real, de acordo com o tipo de proxy que 
 deve ser implementado. 
 
-Para o exemplo orientado a objetos visto, 
-onde é desejado adiar a criação de um 
-determinado valor, é possível definir 
-uma implementação semelhante através 
-de valores \textit{lazy}. Ela permite que 
-o resultado da atribuição a um determinado 
-valor seja atrasado até o momento em que 
-o valor é referenciado\cite{functionalscala}. 
-No código \ref{fpproxy}, a função DrawProxy, 
-na linha 8, é a função intermediária para a 
-função DrawImage, na linha 2. DrawImage recebe 
-um caminho e retorna um valor que representa 
-a imagem criada, enquanto DrawProxy atribui 
-o resultado dessa função a um valor \textit{lazy} 
-retornado.
+No código \ref{fpproxy}, a função intermediária 
+DrawImageProxy, definida na linha 6, chama a 
+função real DrawImage, definida na linha 2. 
+A função EditorFunction, definid na linha 11, 
+representa uma função cliente qualquer que 
+precisa desenhar a imagem. Ao invés de chamar 
+diretamente a função DrawImage, ela recebe 
+como parâmetro uma função com a mesma assinatura, 
+para que seja possível que ela receba a função 
+Proxy.
+
+Existem algumas desvantagens quanto a essa 
+implementação. Não é possível que haja 
+estado atrelado ao Proxy, pois para que 
+esse estado seja refletido na função 
+cliente, é necessário que uma nova função, 
+atualizada com o novo estado do Proxy, seja 
+retornada pelas funções intermediárias. 
+Isso faz com que o cliente precise gerenciar 
+a mudança do Proxy, tornando sua existência 
+evidente e consequentemente tirando 
+um dos propósitos do padrão. 
 
 \begin{lstlisting}[caption={Proxy Funcional},label=fpproxy]
     
-type Image = (Point, String, Ref)
-
 def DrawImage(point : Point, image : Image) : Image = {
-  (point, image._2, image._3)
+  // Desenha a imagem
 }
-
-def GetImageExtent(image : Image) : Point = image._1
 
 def DrawImageProxy(point : Point, image : Image) : Image = {
-  if(image._3 == 0){
-    DrawImage(point, (point, image._2, 1))
-  } else{
-    DrawImage(point, image)
-  }
+  // Proxy realiza as operações necessárias antes de desenhar a imagem
+  DrawImage(point, image)
 }
 
-def EditorFunction(filename : String, Draw : (Point, Image) => Image, GetExtent : Image => Point) : Unit = {
+def EditorFunction(filename : String, Draw : (Point, Image) => Image) : Unit = {
   //...
   img = Draw(point, img)
   //...

@@ -18,7 +18,19 @@ orientação a objetos em uma linguagem
 funcional, mas entender qual é a utilidade 
 de cada um desses conceitos e quais 
 recursos em programação funcional podem 
-oferecer essa mesma utilidade.
+oferecer essa mesma utilidade. Isso também 
+significa que o mapeamento não será seguido 
+de forma rigorosa, ou seja, um padrão 
+cuja estrutura possui um objeto, por 
+exemplo, não necessariamente terá a 
+implementação desse objeto como será 
+demonstrada em seguida refletida 
+na implementação funcional. Esse 
+mapeamento também deve ser usado como 
+referência para entender como a 
+implementação funcional pode se encaixar 
+no contexto dos exemplos utilizados 
+para explicar os padrões. 
 
 
 % classes e objetos
@@ -284,19 +296,9 @@ pela mesma\cite{oracleooconcepts}.
 Como na programação funcional 
 as características e comportamentos são separados, 
 a implementação de uma interface pode variar de acordo  
-com o objetivo desejado. Em seguida, serão abordadas 
-algumas situações que requerem interfaces e como 
-elas poderiam ser implementadas.
+com o objetivo desejado.
 
-% Quando definimos uma interface (trait) e as funções 
-% (métodos) que recebem algo do tipo dessa trait como 
-% parâmetro, nossa interface é a trait + as funções.
-% Portanto, se definimos um tipo, X, como pertencente 
-% a essa trait, dizemos que ele é recebível por essas 
-% funções e deve se comportar como tal. (verificar 
-% outros casos possíveis)
-
-A primeira situação é considerada no código 
+Um exemplo do uso de interfaces é demonstrado no código 
 \ref{oopinterface1}, 
 onde a interface é necessária para garantir que as 
 classes InterfaceUserA e InterfaceUserB implementem 
@@ -329,7 +331,7 @@ inteiro.
 Utilizando funções de alta ordem e levando em 
 consideração que as funções que representam nossos 
 métodos não estão encapsulados em classes e 
-não dependem de atributos, podemos substituir o 
+não dependem de atributos, é possível substituir o 
 objeto sendo passado por parâmetro na função 
 runInterface por uma função qualquer que recebe 
 como parâmetro um valor inteiro e retorna outro 
@@ -347,80 +349,6 @@ no código \ref{fpinterface1}.
     
 \end{lstlisting}
 
-
-% Exemplo 2 de interfaces
-
-Outra situação em que interfaces são necessárias 
-é quando deseja-se especificar um tipo ao qual 
-dois tipos diferentes pertencem em comum. Por 
-exemplo, no código \ref{oopinterface2} a função 
-makeAnimalSound deve receber apenas objetos 
-do tipo Animal, ou seja, que implementem 
-a interface Animal.
-
-\begin{lstlisting}[caption={Interfaces em Orientação a Objetos},label=oopinterface2]
-    
-    trait Animal {
-        def makeSound() : Unit
-    }
-
-    class Dog extends Animal {
-        var dogSound = "Bark bark!"
-
-        def makeSound() : Unit {
-            print(dogSound)
-        }
-    }
-
-    class Cat extends Animal {
-        var catSound = "Meow!"
-
-        def makeSound() : Unit {
-            print(catSound)
-        }
-    }
-
-    def makeAnimalSpeak(animal : Animal) {
-        animal.makeSound()
-    }
-
-\end{lstlisting}
-
-Linguagens de programação funcionais podem 
-recorrer às \textit{typeclasses}\footnote{
-    No caso de Scala, elas recebem o nome trait, 
-    o mesmo utilizado para declarar interfaces.
-}, que definem um tipo em comum para tipos 
-diferentes. Esse recurso pode ser acompanhado 
-de mais funcionalidades, como exigir que seus 
-membros implementem certas operações - o que 
-o torna mais semelhante ainda a uma interface. 
-Porém, esse recurso não será utilizado neste 
-trabalho. O código \ref{fpinterface2} demonstra 
-seu uso.
-
-
-\begin{lstlisting}[caption={Interfaces em Programação Funcional},label=fpinterface2]
-    
-    trait Animal
-    case class Dog(val dogSound = "Bark bark!") extends Animal
-    def makeDogSound(dog : Dog) : Unit = print(dog.dogSound)
-    
-    case class Cat(val catSound = "Meow!") extends Animal
-    def makeCatSound(cat : Cat) : Unit = print(cat.catSound)
-
-    def makeAnimalSpeak(animal : Animal, soundOperation : (Animal => Unit)) =
-        soundOperation()
-    
-    makeAnimalSpeak(dog, makeDogSound)
-    makeAnimalSpeak(cat, makeCatSound)
-
-\end{lstlisting}
-
-
-% polimorfismo
-\section{Polimorfismo}
-% Falar sobre polimorfismo ad hoc
 
 
 % herança
