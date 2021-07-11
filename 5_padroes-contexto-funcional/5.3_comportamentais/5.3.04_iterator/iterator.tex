@@ -146,14 +146,61 @@ que o cliente precisa apenas especificar qual
 operação deve ser executada, enquanto a 
 coleção fica responsável por definir como ela 
 deve ser percorrida. Essa abordagem de Iterator 
-pode ser alcançada através de funções muito 
-utilizadas na programação funcional, 
+pode ser alcançada através de funções como  
 \textit{map} e \textit{reduce}\footnote{Também 
-chamada de \textit{fold}}.%\cite{Gibbons&amp;Oliveira2008:Essence}
+chamada de \textit{fold}}, que percorrem coleções 
+de elementos enquanto executam uma função 
+passada por parâmetro.\cite{iteratoressence}
 
-\begin{lstlisting}[caption={Iterator Funcional},label=fpiterator]
+O código \ref{fpiterator} demonstra a definição 
+das funções Map e Reduce. Na função Map, definida 
+na linha 2, são recebidos como parâmetro uma 
+função e uma lista de elementos de um tipo 
+genérico A. A função recebida recebe um valor 
+do tipo A e retorna um valor do tipo B. A função 
+Map percorre todos os elementos da lista e 
+aplica a função f em todos os elementos, 
+retornando uma nova lista do tipo B, cujos 
+elementos são o resultado da aplicação de f nos 
+elementos da lista inicial.
+
+Já na linha 9, é definida a função Reduce, que 
+recebe como parâmetro uma função que recebe dois 
+valores dos tipos A e B e retorna um valor do 
+tipo B, um elemento acumulador do tipo B e uma 
+lista de elementos do tipo A. O acumulador 
+é um valor repassado pelas próximas iterações 
+recursivas da função e sempre será o resultado 
+da aplicação da função f recebendo o elemento 
+atual da lista e o acumulador recebido. 
+Por fim, quando a lista acaba, é retornado o 
+acumulador. 
+
+\begin{lstlisting}[caption={Exemplos de Iterator: Map e Reduce},label=fpiterator]
     
-  
-    
+def Map[A,B](f : A => B, elems : List[A]) : List[B] = {
+  elems.head match {
+    case Nil => Nil
+    case e => f(e) :: Map(f, elems.tail)
+  }
+}
+
+def Reduce[A,B](f : (A, B) => B, acc : B, elems : List[A]) : B = {
+  elems.head match {
+    case Nil => acc
+    case e => Reduce(f, f(e, acc), elems.tail)
+  }
+}
+
 \end{lstlisting}
 
+Da mesma forma que o Iterator orientado a 
+objetos visto no exemplo anterior, as funções 
+Map e Reduce são genéricas em relação ao tipo 
+de elemento armazenado pelas coleções. Da 
+mesma forma, versões diferentes de Map e 
+Reduce podem ser implementadas para tipos 
+diferentes de coleção - da mesma forma que 
+seriam implementadas classes diferentes de 
+Iterator para os tipos diferentes de listas 
+no exemplo orientado a objetos. 
