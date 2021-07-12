@@ -1,0 +1,60 @@
+% ---
+% Resultados
+% ---
+\chapter{Resultados}
+% ---
+
+\section{Padrões resolvidos por funções de alta ordem}
+
+Entre as soluções vistas, a que é aplicada na 
+maior parte dos padrões é o uso de funções de alta 
+ordem como alternativa a interfaces ou classes. 
+
+
+\section{Padrões com soluções alternativas}
+
+Os padrões Iterator, Observer e Visitor possuem 
+implementações alternativas que não necessariamente 
+seguem à risca a ideia do padrão. No caso do Iterator, 
+existe a diferença entre o gerencimaneto por parte 
+do cliente e por parte da coleção entre as 
+alternativas orientada a objetos e funcional. No 
+caso do Observer, o conceito no qual ele se 
+baseia - programação reativa - é levado em 
+consideração ao substituí-lo pela programação 
+reativa funcional. Já o Visitor, apesar de também 
+aproveitar-se de funções de alta ordem, na verdade 
+é resolvido pelo recurso \textit{pattern matching}, 
+que não é um conceito exclusivamente funcional, 
+porém costuma ser implementado em linguagens 
+funcionais. Nesse caso, o padrão não foi 
+resolvido por programação funcional em si, 
+mas sim por uma alternativa próxima. 
+
+\section{Padrões sem diferenças relevantes}
+
+Da mesma forma que o padrão Façade orientado 
+a objetos baseia-se no acesso entre as classes, 
+a implementação funcional baseia-se no acesso 
+entre módulos. Como ambas as ideias são 
+análogas, a implementação do padrão na verdade 
+não possui mudanças significativas. 
+
+Da mesma forma, o padrão Flyweight, tanto no 
+contexto orientado a objetos quanto no funcional, 
+é implementado através de memoização. Já o Mediator 
+baseia-se em possuir uma função (ou classe) que 
+gerencia as dependências entre valores (ou objetos). 
+No caso desses dois padrões, ambos possuem 
+pequenas diferenças como consequência de suas 
+implementações - por exemplo, não existem os dois 
+tipos de Flyweight intrínseco ou extrínseco 
+graças à imutabilidade e há a necessidade do 
+cliente gerenciar a mudança de estado dos 
+\textit{colleagues} no Mediator -, mas a ideia 
+por trás da implementação de ambos é análoga 
+à versão orientada a objetos.
+
+\section{Padrões que não fazem sentido no contexto funcional}
+
+
