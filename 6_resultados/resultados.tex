@@ -9,6 +9,60 @@
 Entre as soluções vistas, a que é aplicada na 
 maior parte dos padrões é o uso de funções de alta 
 ordem como alternativa a interfaces ou classes. 
+Um total de catorze dos vinte e três padrões 
+se encaixa nessa categoria. Por isso, ainda foi 
+possível dividir esses padrões em três  
+subcategorias quanto a como as funções de alta 
+ordem foram aplicadas. Alguns padrões acabam se 
+encaixando em mais de uma delas, mas para 
+evitar repetições e para simplificar o agrupamento, 
+cada padrão será explicado no grupo mais próximo 
+da solução proposta. 
+
+\subsection{Funções de alta ordem como alternativa a 
+            classes abstratas ou interfaces}
+
+Como foi visto no mapeamento de conceitos orientados 
+a objeto para conceitos de programação funcional, 
+funções de alta ordem podem servir como alternativas 
+para o uso de interfaces. Alguns dos padrões analisados 
+baseiam-se no uso de interfaces para definir a assinatura 
+de funções que a classe cliente deve receber. De forma 
+equivalente, é possível que uma função cliente recebe, 
+por parâmetro, uma função com a assinatura equivalente 
+à da interface. Essa é a abordagem utilizada com os 
+padrões Builder, Adapter, Bridge, Proxy e Strategy. 
+
+De forma semelhante, as funções de alta ordem são 
+alternativas ainda mais interessantes ao uso de 
+classes abstratas, como é o caso dos padrões 
+Factory Method e Template Method. Ambos baseiam-se 
+em definir uma operação abstrata que deve ser 
+implementada por uma subclasse. Uma alternativa 
+a essa implementação é fazer com que as funções 
+que dependam dessa operação abstrata a recebam 
+por parâmetro.
+
+\subsection{Valores que armazenam funções}
+
+Os padrões Abstract Factory, Command e 
+State também baseiam-se em passar funções de 
+alta ordem como parâmetro para funções clientes. 
+Porém, para esses três padrões existe uma quantidade 
+maior de funções que o cliente deve receber. Além 
+disso, pode ser mais interessante que as implementações 
+dessas funções sejam dependentes entre si, ou seja, 
+todas as funções de um Strategy pertençam a uma mesma 
+estratégia, todas as funções do Abstract Factory criem 
+o mesmo tipo de valor e a função de desfazer do 
+Command esteja relacionada à função principal executada. 
+Agrupar essas funções em um mesmo valor pode 
+contribuir para retirar das funções clientes a 
+responsabilidade de garantir que elas possuam 
+essa equivalência.
+
+\subsection{Agrupando dados em funções com closures}
+
 
 
 \section{Padrões com soluções alternativas}
@@ -32,6 +86,16 @@ resolvido por programação funcional em si,
 mas sim por uma alternativa próxima. 
 
 \section{Padrões sem diferenças relevantes}
+
+Alguns dos padrões analisados possuem 
+uma implementação muito semelhante ou 
+equivalente entre os contextos orientados 
+a objeto e funcionais, como se a solução 
+proposta pelo padrão estivesse apenas 
+sendo reutilizada por si só, sem 
+recursos adicionais oriundos da programação 
+funcional que contribuem para a 
+resolução do problema. 
 
 Da mesma forma que o padrão Façade orientado 
 a objetos baseia-se no acesso entre as classes, 
@@ -57,4 +121,30 @@ por trás da implementação de ambos é análoga
 
 \section{Padrões que não fazem sentido no contexto funcional}
 
+Para alguns padrões, o problema proposto deixa 
+de existir graças aos conceitos já implementados 
+em linguagens funcionais. No caso dos padrões 
+analisados neste trabalho, encaixam-se nessa 
+categoria o Singleton, o Prototype e o Memento. 
 
+Como a intenção do padrão Singleton pode 
+ser entendida como a definição de uma variável 
+global, sua implementação no contexto funcional 
+viola o conceito de funções puras e imutabilidade - 
+para o caso em que o Singleton armazena algum 
+estado compartilhado. Portanto, tentar 
+implementá-lo não faz sentido. 
+
+Para o caso do Prototype, como visto anteriormente, 
+o uso de estruturas de dados imutáveis trazem um 
+gerenciamento mais simples de memória. Não existe 
+preocupação quanto a uma referência compartilhada 
+para um mesmo valor, já que seu estado não pode ser 
+modificado. Dessa forma, não há a necessidade de 
+definir uma implementação que compartilhe dados.
+
+Por fim, o padrão Memento, também graças à 
+imutabilidade, não precisaria se preocupar quanto 
+a expor o estado interno de um valor. Assim, é 
+possível gerar \textit{snapshots} apenas copiando 
+valores anteriores, sem preocupações adicionais. 
