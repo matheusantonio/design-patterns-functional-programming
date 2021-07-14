@@ -4,6 +4,68 @@
 \chapter{Resultados}
 % ---
 
+Nos capítulos anteriores, foram analisados todos 
+vinte e três padrões de projeto \textit{Gang of 
+Four}, com o objetivo de extrair o problema 
+resolvido pelo padrão e analisar, a partir dos 
+conceitos de programação funcional apresentados, 
+como uma solução para o mesmo problema poderia ser 
+alcançada. 
+
+Foi possível separar as análises realizadas em 
+quatro grandes grupos, com o primeiro sendo 
+dividido em três subgrupos: 
+
+\begin{alineas}
+    \item Padrões resolvidos por funções de alta ordem
+    \begin{alineas}
+        \item Funções de alta ordem como alternativa a classes abstratas ou interfaces
+        \item Valores que armazenam funções
+        \item Funções que armazenam valores em closures
+    \end{alineas}
+    \item Padrões com soluções alternativas
+    \item Padrões sem diferenças relevantes
+    \item Padrões que não fazem sentido no contexto funcional
+\end{alineas}
+
+Esses grupos estão organizados na tabela 
+\ref{resultados}, onde são apresentados os 
+padrões pertencentes a cada grupo com a 
+quantidade de padrões pertencentes ao grupo. 
+Cada grupo será explicado com mais detalhes 
+no decorrer do capítulo.
+
+\begin{quadro}[htb]
+    \caption{\label{resultados}Agrupamento de análises dos padrões}
+    \begin{tabular}{@{}llll@{}}
+        \toprule
+                                  &                            & Padrões                 & Quantidade         \\ \midrule
+        \multirow{14}{*}{Grupo A} & \multirow{7}{*}{A.1} & Factory Method          & \multirow{7}{*}{7} \\
+                                  &                            & Builder                 &                    \\
+                                  &                            & Adapter                 &                    \\
+                                  &                            & Bridge                  &                    \\
+                                  &                            & Proxy                   &                    \\
+                                  &                            & Strategy                &                    \\
+                                  &                            & Template Method         &                    \\ \cmidrule(r){2-4}
+                                  & \multirow{3}{*}{A.2} & Abstract Factory        & \multirow{3}{*}{3} \\
+                                  &                            & Command                 &                    \\
+                                  &                            & State                   &                    \\ \cmidrule(r){2-4}
+                                  & \multirow{4}{*}{A.3} & Composite               & \multirow{4}{*}{4} \\
+                                  &                            & Decorator               &                    \\
+                                  &                            & Chain of Responsibility &                    \\
+                                  &                            & Interpreter             &                    \\ \cmidrule(r){1-4}
+        \multicolumn{2}{l}{\multirow{3}{*}{Grupo B}}           & Iterator                & \multirow{3}{*}{3} \\
+        \multicolumn{2}{l}{}                                   & Observer                &                    \\
+        \multicolumn{2}{l}{}                                   & Visitor                 &                    \\ \cmidrule(r){1-4}
+        \multicolumn{2}{l}{\multirow{3}{*}{Grupo C}}           & Façade                  & \multirow{3}{*}{3} \\
+        \multicolumn{2}{l}{}                                   & Flyweight               &                    \\
+        \multicolumn{2}{l}{}                                   & Mediator                &                    \\ \cmidrule(r){1-4}
+        \multicolumn{2}{l}{\multirow{3}{*}{Grupo D}}           & Prototype               & \multirow{3}{*}{3} \\ 
+        \multicolumn{2}{l}{}                                   & Singleton               &                    \\
+        \multicolumn{2}{l}{}                                   & Memento                 &                    \\ \cmidrule(r){1-4} %\cmidrule(l){4-4} 
+    \end{tabular}
+\end{quadro}
+
 \section{Padrões resolvidos por funções de alta ordem}
 
 Entre as soluções vistas, a que é aplicada na 
@@ -19,6 +81,8 @@ evitar repetições e para simplificar o agrupamento,
 cada padrão será explicado no grupo mais próximo 
 da solução proposta. 
 
+% Factory Method, Builder, Adapter, Bridge, 
+% Proxy, Strategy, Template Method
 \subsection{Funções de alta ordem como alternativa a 
             classes abstratas ou interfaces}
 
@@ -43,6 +107,7 @@ a essa implementação é fazer com que as funções
 que dependam dessa operação abstrata a recebam 
 por parâmetro.
 
+% Abstract Factory, Command, State
 \subsection{Valores que armazenam funções}
 
 Os padrões Abstract Factory, Command e 
@@ -61,10 +126,41 @@ contribuir para retirar das funções clientes a
 responsabilidade de garantir que elas possuam 
 essa equivalência.
 
-\subsection{Agrupando dados em funções com closures}
+% Composite, Decorator, Chain of Responsibility, Interpreter
+\subsection{Funções que armazenam valores em closures}
 
+Algumas implementações basearam-se em definir funções 
+que retornam novas funções. Isso é necessário para 
+que seja possível configurar as funções retornadas 
+com valores recebidos por parâmetro pelas funções 
+que as criam. Esse é o comportamento definido pelas 
+closures, onde uma determinada função armazena 
+um valor do escopo da função que a retornou. 
 
+O padrão Composite define funções para gerar os 
+elementos nós e os elementos folha. Dessa forma, 
+a partir de uma única função, vários elementos 
+folha e nó configurados com valores diferentes 
+podem ser gerados.
 
+De forma semelhante, o padrão Decorator define 
+funções que podem receber como parâmetro valores 
+variados enquanto retorna uma nova função com 
+a mesma assinatura da função decorada. 
+
+O padrão Chain of Responsibility aproveita a mesma 
+ideia para gerar as funções da cadeia. O tópico e 
+a próxima função da cadeia são passadas por parâmetro 
+previamente, armazenadas na closure e reaproveitadas 
+na função retornada. 
+
+Por fim, o padrão Interpreter apresenta um comportamento 
+semelhante ao Composite, definindo funções que retornam 
+os elementos terminais e não terminais, permitindo 
+inclusive definir funções mais genéricas que recebem 
+a função que aplica a regra da gramática por parâmetro.
+
+% Iterator, Observer, Visitor
 \section{Padrões com soluções alternativas}
 
 Os padrões Iterator, Observer e Visitor possuem 
@@ -85,6 +181,7 @@ funcionais. Nesse caso, o padrão não foi
 resolvido por programação funcional em si, 
 mas sim por uma alternativa próxima. 
 
+% Façade, Flyweight, Mediator
 \section{Padrões sem diferenças relevantes}
 
 Alguns dos padrões analisados possuem 
@@ -119,6 +216,8 @@ cliente gerenciar a mudança de estado dos
 por trás da implementação de ambos é análoga 
 à versão orientada a objetos.
 
+% Prototype (imutabilidade), Singleton (funções puras), 
+% Memento (imutabilidade)
 \section{Padrões que não fazem sentido no contexto funcional}
 
 Para alguns padrões, o problema proposto deixa 
