@@ -2,18 +2,19 @@
 
 \section{Adapter}
 
-Quando a interface de uma classe, objeto ou biblioteca não 
-é compatível com a interface atual do cliente que deseja 
-utilizar essa interface, o padrão Adapter fornece uma 
-solução que evita a refatoração e a dependência da interface 
-do cliente da interface desejada.
+Quando a interface de uma classe não 
+é compatível com a interface do cliente que deseja 
+utilizá-la, o padrão Adapter fornece uma 
+solução que evita a refatoração e a dependência da 
+interface do cliente com a interface desejada.
 
 Existem duas formas de realizar essa adaptação. Um Adapter 
 de classe, apresentado na figura \ref{adapter_struct},  
-só é possível para linguagens que implementam herança múltipla.
+só é possível para linguagens que implementam herança 
+múltipla.
 Ele define uma classe que herda tanto da classe que 
-apresenta a interface da aplicação quanto da classe que 
-representa a interface que deseja ser utilizada. Ao 
+apresenta a interface do cliente quanto da classe que 
+apresenta a interface que deseja ser utilizada. Ao 
 reescrever a operação Request, ele adapta sua entrada 
 para a de SpecificRequest, repassando a solicitação.
 
@@ -46,8 +47,8 @@ simples, entre eles linhas e polígonos. Porém,
 a aplicação deseja também editar elementos textuais, 
 que são mais complexos de se gerenciar. Como já existem 
 ferramentas prontas para gerenciar esse tipo de 
-elemento, é desejado reutilizá-lo. Já que as 
-ferramentas prontas não foram feitas pensando na 
+elemento, é desejado reutilizá-las. Como essas 
+ferramentas não foram feitas pensando na 
 aplicação de ferramenta gráfica do exemplo, uma 
 classe Adapter é implementada para adaptar a 
 ferramenta textual para a aplicação que deseja 
@@ -103,13 +104,13 @@ class TextView(var x : Point, var y : Point, var width : Int, var height : Int) 
 
 \subsection*{Contexto Funcional}
 
-No código \ref{fpadapter}, a função BoudingBox, declarada 
-na linha 2, recebe como parâmetro uma operação de um 
+No código \ref{fpadapter}, a função BoudingBox declarada 
+na linha 2 recebe como parâmetro uma operação de um 
 objeto gráfico. Porém, é desejado utilizar a operação 
 GetExtent, declarada na linha 7, de um \textit{text view} 
 que não é comportado pela ferramenta. Para que essa 
 operação possa ser reutilizada, a função 
-AdaptTextShapeBoundingBox, declarada na linha 11, 
+AdaptTextShapeBoundingBox declarada na linha 11 
 recebe como parâmetro o \textit{text view} e retorna 
 uma função que executa GetExtent, com a assinatura 
 necessária para ser recebida pela função BoundingBox. 

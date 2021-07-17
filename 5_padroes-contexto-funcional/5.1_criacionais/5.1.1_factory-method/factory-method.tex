@@ -5,7 +5,7 @@
 O Factory Method define uma interface para criar 
 objetos de forma que a responsabilidade de criação 
 desses objetos seja da classe que irá implementá-la. 
-Dessa forma, a interface não precisa saber qual 
+Assim, a interface não precisa saber qual 
 classe deve ser instanciada, permitindo que versões 
 diferentes ou implementações específicas de um mesmo 
 tipo de objeto possam ser criadas.
@@ -13,10 +13,10 @@ tipo de objeto possam ser criadas.
 Na figura \ref{fmethod_struct} é demonstrada 
 a estrutura do padrão, onde a classe abstrata Creator 
 define a operação abstrata que cria o objeto, 
-o FactoryMethod. A classe ConcreteCreator 
-implementa o FactoryMethod, criando um objeto 
+o \textit{factory method}. A classe ConcreteCreator 
+implementa a operação FactoryMethod, criando um objeto 
 do tipo ConcreteProduct, que é uma implementação 
-específica de Product. Dessa forma, a classe 
+específica de um tipo Product. Dessa forma, a classe 
 abstrata Creator não precisa saber qual implementação 
 de Product será criada.
 
@@ -75,7 +75,7 @@ abstract class Application {
   }
 
   def OpenDocument(): Unit = {
-    println("Abre um documento")
+    // Abre um documento
   }
 }
 
@@ -106,22 +106,24 @@ class MyDocument extends Document {
 \subsection*{Contexto Funcional}
 
 As funções de alta ordem tornam desnecessária 
-a criação de uma especialização para a classe 
+a criação de uma especialização da classe 
 Application vista no exemplo orientado a 
-objetos. Uma função da aplicação pode 
-receber como parâmetro a função responsável 
-pela criação do documento, bastando que ao 
-ser chamada, seja passada a função de criação 
-do documento específico. 
+objetos. Ao invés de criar uma nova classe 
+apenas para definir o tipo de documento 
+que será instanciado, basta que 
+uma função da aplicação receba como parâmetro 
+a função responsável pela criação do documento. 
+Assim, qualquer função que crie um documento 
+pode ser usada. 
 
 O código \ref{fpfactory} demonstra a definição 
-do tipo Document, na linha 2, além da função 
-que cria um tipo específico de documento, na 
+do tipo Document na linha 2, além da função 
+que cria um tipo específico de documento na 
 linha 4. Uma função qualquer da aplicação, 
-por exemplo, a função ApplicationFunction 
+como a função ApplicationFunction 
 definida na linha 8, recebe como parâmetro 
 uma função que retorna um documento. Por 
-fim, na linha 14, pode ser vista a chamada 
+fim, na linha 14 pode ser vista a chamada 
 da função ApplicationFunction recebendo a 
 função de criação CreateMyDocument.
 

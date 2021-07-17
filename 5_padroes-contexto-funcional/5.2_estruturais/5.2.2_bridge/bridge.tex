@@ -1,7 +1,7 @@
 \section{Bridge}
 
 O padrão Bridge permite variar as abstrações e as 
-implementações de um problema de forma independente, 
+implementações de uma solução de forma independente, 
 definindo uma interface que serve como ponte entre ambas. 
 As operações da implementação são delegadas para essa 
 nova interface, permitindo que as abstrações sejam 
@@ -20,10 +20,10 @@ padrão pode ser vista na figura \ref{bridge_struct}.
 
 Como exemplo, pode ser considerada a implementação de 
 uma janela em um \textit{toolkit} para construir interfaces 
-de usuários, que permite o uso de implementações diferentes 
+de usuários que permite o uso de implementações diferentes 
 de janela: PM e XWindow. Além disso, é preciso definir tipos 
 diferentes de janela, como janelas para ícones e janelas 
-de transitórias. Para que não seja necessário implementar 
+transitórias. Para que não seja necessário implementar 
 uma versão diferente de janela de ícone e transitória 
 para cada implementação diferente de janela, o padrão 
 Bridge pode ser usado para separar a implementação 
@@ -95,10 +95,10 @@ class PMWindowImp extends WindowImp {
 
 \subsection*{Contexto Funcional}
 
-Funções de alta ordem podem ser utilizadas 
+Funções de alta ordem também podem ser utilizadas 
 para separar as abstrações das implementações. 
-No código \ref{fpbridgeabs}, são definidas, nas 
-linhas 2 e 10 respectivamente, as 
+No código \ref{fpbridgeabs}, são definidas nas 
+linhas 2 e 10, respectivamente, as 
 duas funções equivalentes aos métodos das 
 classes IconWindow e TransientWindow do exemplo 
 orientado a objetos. Ao invés de reutilizar 

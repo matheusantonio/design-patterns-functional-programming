@@ -93,8 +93,8 @@ class MacroCommand extends Command {
 \subsection*{Contexto Funcional}
 
 A a intenção do Command é encapsular operações 
-em objetos. Com as funções de alta ordem da programação 
-funcional, essa funcionalidade já é alcançada. 
+em objetos. Isso já é possível no contexto 
+funcional graças às funções de alta ordem. 
 Entretanto, existem duas particularidades 
 do padrão Command que devem ser consideradas. 
 
@@ -111,13 +111,11 @@ A segunda particularidade é que o padrão
 também permite uma operação de desfazer. Como 
 tanto a operação de fazer quanto a de desfazer 
 são encapsuladas em um mesmo objeto, é necessário 
-possuir um valor que armazena ambas as operações 
-no contexto funcional. Isso pode ser feito 
-através de uma tupla que armazena as duas 
-operações.
+definir um valor, como uma tupla, que armazene ambas 
+as operações.
 
 O código \ref{fpcommand} demonstra uma implementação 
-genérica do padrão no contexto funcional. Na linha 2, 
+genérica do padrão no contexto funcional. Na linha 2 
 é definido um tipo Command que é uma tupla que 
 armazena duas funções: fazer e desfazer. A função 
 CreateCommand, na linha 4, é uma função auxiliar para 
@@ -130,9 +128,8 @@ As funções auxiliares Execute, na linha 12, e
 Unexecute, na linha 14, recebem como parâmetro o valor 
 alvo e um comando. Elas executam a primeira e a 
 segunda função armazenadas na tupla Command, 
-respectivamente.
-
-A função CommandMany, da linha 16, é uma função auxiliar 
+respectivamente. A função CommandMany, da linha 16, 
+é uma função auxiliar 
 para executar uma lista de \textit{commands}. Ela recebe 
 como parâmetro um alvo, uma lista de \textit{commands} e 
 uma operação que recebe um alvo e um comando. Essa 

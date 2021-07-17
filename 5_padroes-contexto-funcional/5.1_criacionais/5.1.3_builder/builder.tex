@@ -4,20 +4,21 @@ Quando é necessário criar objetos
 complexos, o padrão Builder retira a 
 responsabilidade de criação do objeto a 
 ser criado e a coloca em classes separadas, 
-que constroem o objeto por partes. 
+que constroem partes do objeto. 
 Isso permite que um mesmo processo de criação 
-possa gerar representações diferentes desse mesmo 
+possa gerar representações diferentes de um mesmo 
 objeto.
 
 A figura \ref{builder_struct} apresenta 
 a estrutura do Builder, onde a interface 
-Builder é responsável por criar uma parte 
-do objeto. A classe ConcreteBuilder, que 
+Builder define uma operação para criar uma 
+parte do objeto. A classe ConcreteBuilder, que 
 implementa a interface Builder, 
 implementa os métodos de construção de 
 uma parte do tipo Product. A classe Director 
 é responsável por executar a criação das 
-partes do objeto.
+partes do objeto, através da operação 
+Construct.
 
 \begin{figure}[htb]
 	\caption{\label{builder_struct}Estrutura do Builder}
@@ -33,7 +34,7 @@ documentos do tipo RTF (\textit{Rich Text Format}),
 que deve permitir a conversão de documentos RTF 
 para outros formatos, como texto em ASCII ou em um 
 \textit{widget} de texto que pode ser editado de 
-forma iterativa. Como a quantidade de formatos 
+forma interativa. Como a quantidade de formatos 
 possíveis é grande, deve ser possível adicionar 
 novos formatos sem que seja necessário modificar 
 a classe do leitor de documentos RTF. 
@@ -45,9 +46,9 @@ de conversão, uma nova classe Builder é criada.
 As classes ASCIIConverter, TeXConverter e 
 TextWidgetConverter representam, respectivamente, 
 os \textit{builders} para os conversores para texto 
-em ASCII, LaTeX e \textit{widget} de texto. A classe 
-RTFReader chama as operações de construção 
-apenas dos conversores desejados. O exemplo de 
+em ASCII, LaTeX e \textit{widget} de texto interativo. 
+A classe RTFReader chama as operações de construção 
+dos conversores desejados. O exemplo de 
 implementação dessa abordagem é apresentado no 
 código \ref{oobuilder}.
 
@@ -136,23 +137,27 @@ class RTFReader(var textConverter: TextConverter) {
 É possível aproveitar as funções de alta ordem 
 da programação funcional para simplificar o 
 padrão Builder. Ao invés de definir novas 
-classes para tipo de builder, uma função pode 
-ser definida para receber como parâmetro cada 
-operação de construção que deve ser definida. 
+classes para cada tipo de builder, uma função 
+pode receber como 
+parâmetro as operações de construção desejadas. 
 No código \ref{fpbuilder}, essa função é a 
-ParseRTFBuilder, definida na linha 2. Ela 
-retorna uma nova função que recebe como 
-parâmetro uma lista de \textit{tokens} e 
+ParseRTFBuilder, definida na linha 2. 
+Para facilitar o reuso de tipos diferentes 
+de \textit{builder}, ela retorna uma nova 
+função que recebe como parâmetro uma 
+lista de \textit{tokens} e 
 retorna uma nova lista no formato desejado. 
+
 A função retornada é análoga ao método 
-ParseRTF da classe RTFReader no exemplo 
+ParseRTF da classe RTFReader do exemplo 
 orientado a objetos. Com essa implementação, 
-para definir um novo Builder é necessário apenas 
-chamar a função ParseRTFBuilder com as operações 
+para cada variação de \textit{builder}, 
+basta executar a função 
+ParseRTFBuilder passando as operações 
 desejadas. Isso pode ser visto na linha 16, 
 onde o valor ParseRTFToASCII é o resultado 
-da definição do Builder que converte RTF para 
-texto em ASCII.
+da definição do \textit{builder} que converte 
+RTF em texto no formato ASCII.
 
 \begin{lstlisting}[caption={Builder Funcional},label=fpbuilder]
     

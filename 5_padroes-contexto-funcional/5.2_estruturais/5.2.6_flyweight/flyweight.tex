@@ -15,8 +15,8 @@ Duas classes merecem atenção nesse diagrama. A primeira
 é a FlyweightFactory. Essa classe é adicionada para 
 gerenciar a criação dos Flyweights e garantir que as 
 instâncias da classe serão reutilizadas. Ela armazena, em 
-seus atributos, uma lista de objetos Flyweight para que, 
-quando o cliente solicitar, seja verificado se a instância 
+seus atributos, uma lista de objetos Flyweight para que,  
+quando solicitada pelo cliente, seja verificado se a instância 
 desejada já existe. Caso não exista, ela é criada e 
 adicionada à lista. 
 
@@ -40,7 +40,7 @@ de formatação e edição de textos. Para reduzir o
 custo de memória, as classes que armazenam os 
 caracteres do alfabeto devem ser compartilhadas, 
 dada a quantidade de instâncias de um mesmo caracter 
-que existiriam em um texto com centenas de palavras. 
+que existiriam em um texto com milhares de palavras. 
 Ao mesmo tempo, a ferramenta deve armazenar dois 
 elementos que não podem ser compartilhados com as 
 letras - a linha e a coluna onde cada letra está 
@@ -117,7 +117,7 @@ GetGlyph recebe como parâmetro um valor de um
 Glyph e uma fábrica de Glyphs. A função verifica 
 se o valor já está contido nos Glyphs criados, 
 retornando-o caso exista e criando um novo 
-caso não. A desvantagem dessa abordagem é que, 
+caso não. A desvantagem dessa abordagem é que 
 por a função GetGlyph ser pura, é necessário 
 sempre receber e retornar o \textit{factory} 
 atualizado.

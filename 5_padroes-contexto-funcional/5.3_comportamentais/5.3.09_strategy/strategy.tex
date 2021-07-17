@@ -34,7 +34,7 @@ operações desejadas.
 
 O exemplo do Strategy apresenta uma \textit{stream} 
 de texto que pode ser quebrada em linhas utilizando 
-estratégias diferentes. Nele, a classe Composition 
+estratégias diferentes. A classe Composition 
 gerencia as quebras de linha do texto exibidas em 
 um editor, enquanto a interface Compositor define 
 uma estratégia de quebra de linha. As estratégias 
@@ -128,8 +128,8 @@ grupos de algoritmos, ele é um candidato para o uso
 de funções de alta ordem. Ao invés de definir 
 uma classe nova para cada implementação, a 
 função Repair pode receber como parâmetro uma 
-função compose, cuja assinatura predefinida 
-recebe um parâmetro do tipo Compositor e retorna 
+função compose que recebe como parâmetro um valor 
+do tipo Compositor e retorna 
 um inteiro. Dessa forma, basta definir as 
 funções ComposeSimple, ComposeTeX e ComposeArray 
 que podem ser passadas por parâmetro quando a 

@@ -1,12 +1,12 @@
 \section{Observer}
 
 O padrão Observer permite criar uma dependência de muitos 
-objetos para um entre objetos. Dessa forma, quando um 
+para um entre objetos. Dessa forma, quando um 
 objeto em específico é alterado, um grupo de objetos 
 pré-configurados é notificado. Esse comportamento é 
 semelhante a um \textit{publish and subscribe}, onde 
-um objeto é um \textit{publisher} que publica notificações 
-para os objetos inscritos. A dinâmica do padrão pode ser 
+um objeto é um \textit{publisher} que envia notificações 
+para os objetos inscritos. A estrutura do padrão pode ser 
 vista no diagrama da figura \ref{observer_struct}.
 
 \begin{figure}[htb]
@@ -24,9 +24,10 @@ barras que apresentam informações de grupos
 A, B e C. Essas informações são dados utilizados 
 pela aplicação que podem ser alterados por outros 
 elementos gráficos, como botões ou caixas de texto. 
-Para que a tabela e o gráfico estejam atualizados, 
-eles são armazenados pela classe que centraliza 
-esses dados de forma que ela os notifique 
+Para que a tabela e o gráfico mantenham-se atualizados, 
+eles são armazenados pela classe que armazena 
+os dados exibidos, possibilitando que 
+notificações sejam enviadas 
 caso os dados sejam atualizados. O diagrama 
 de classes para o exemplo pode ser visto na figura 
 \ref{observer_exemplo}, enquanto a implementação 
@@ -104,9 +105,9 @@ class BarGraphic(data: ApplicationData) extends DataSubscriber {
 
 \subsection*{Contexto Funcional}
 
-O padrão Observer depende bastante de 
+O padrão Observer depende de 
 efeitos colaterais em sua implementação, 
-já que depende de outros objetos serem avisados 
+já que precisa que outros objetos sejam avisados 
 quando o estado do objeto observado for 
 atualizado. Uma abordagem semelhante à vista 
 no padrão Mediator, onde as funções clientes 

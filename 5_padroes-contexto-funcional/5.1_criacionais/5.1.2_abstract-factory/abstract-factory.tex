@@ -2,11 +2,11 @@
 
 O padrão Abstract Factory define uma família 
 de objetos relacionados e uma interface para 
-criá-los, sem definir a implementação. Dessa 
+criá-los, sem definir sua implementação. Dessa 
 forma, diferentes implementações desse 
 conjunto de objetos podem ser utilizadas 
 sem que as classes cliente que os utilizam 
-precisem conhecer sua implementação.
+precisem conhecê-las.
 
 O diagrama apresentado na figura \ref{abfactory_struct} 
 demonstra a estrutura desse padrão, onde a 
@@ -28,9 +28,9 @@ utilizadas.
 Como exemplo, é apresentado um \textit{toolkit} 
 que suporta tipos diferentes de interação para 
 seus \textit{widgets}, como Motif ou Presentation 
-Maneger (PM). Dessa forma, para que a aplicação 
-não precise ser dependente de cada tipo 
-diferente de \textit{widgets}, é 
+Maneger (PM). Dessa forma, para que o \textit{toolkit} 
+não precise ser implementado tendo conhecimento 
+de cada tipo diferente de \textit{widget}, é 
 utilizado o padrão Abstract Factory para 
 definir uma família de objetos de Widget 
 diferente para cada tipo de interação. 
@@ -96,9 +96,9 @@ class MotifScrollBar extends ScrollBar {
 As classes e interfaces \textit{factory} podem 
 ser substituídas por funções de alta ordem 
 recebidas pela função cliente. 
-No código \ref{fpabfactory}, são definidos, 
+No código \ref{fpabfactory} são definidos, 
 nas linhas 2 e 3,  
-os tipos ScrollBar e Window, referentes aos 
+os tipos ScrollBar e Window referentes aos 
 \textit{widgets} suportados pela ferramenta. 
 Da mesma forma, são definidas as operações de 
 criação desses \textit{widgets} para os tipos 
@@ -106,12 +106,13 @@ PM e Motif. Nas linhas 5 e 8 são definidas as
 operações para o tipo PM, enquanto nas linhas 
 12 e 15 são definidas as para o tipo Motif. 
 
-Na linha 19, é definida uma função cliente, 
-que no diagrama da figura \ref{abfactory_exemplo} 
-poderia estar definida na classe Client. Ela 
+Na linha 19 é definida uma função cliente, 
+que seria equivalente a uma operação da classe 
+Client apresentada no diagrama da figura 
+\ref{abfactory_exemplo}. Ela 
 recebe como parâmetro as funções para criação de 
-cada \textit{widget}. Por fim, na linha 28, é 
-demonstrada a chamada dessa função receendo 
+cada \textit{widget}. Por fim, na linha 28 é 
+demonstrada a chamada dessa função recebendo 
 como parâmetro as funções para criar um 
 \textit{scrollbar} e uma janela para o tipo 
 PM.
@@ -153,11 +154,11 @@ para a classe cliente \textit{widgets} de tipos
 misturados, já que são definidos parâmetros 
 diferentes para cada função de criação. Caso 
 seja desejado um exemplo mais próximo do demonstrado 
-no diagrama da firua \ref{abfactory_exemplo}, 
-é possível encapsular as funções de criação 
+no diagrama da figura \ref{abfactory_exemplo}, 
+pode-se encapsular as funções de criação 
 em uma tupla. Isso pode ser visto no código 
-\ref{fpabfactory2}, onde o tipo WidgetFactory, 
-definido na linha 2, armazena tanto uma função 
+\ref{fpabfactory2}, onde o tipo WidgetFactory 
+definido na linha 2 armazena tanto uma função 
 para a criação de um \textit{scrollbar} quanto a função 
 para a criação de uma janela. A função 
 cliente, redefinida na linha 10, agora 

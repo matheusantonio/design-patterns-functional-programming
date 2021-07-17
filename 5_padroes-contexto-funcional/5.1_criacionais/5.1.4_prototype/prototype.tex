@@ -14,7 +14,7 @@ A estrutura do padrão, apresentada na imagem
 Prototype que define a operação Clone, responsável 
 por copiar o protótipo reutilizável de um objeto. 
 As classes ConcretePrototype implementam essa 
-interface e a operação que retorna essa cópia. 
+interface e a operação que retorna a cópia. 
 A classe Client acessa o protótipo através da operação 
 Clone. Essa dinâmica permite que a classe cliente 
 não precise conhecer o objeto clonado nem sua 
@@ -35,14 +35,13 @@ Como exemplo de uso do Prototype, um
 \textit{framework} de editores gráficos deseja 
 ser utilizado para construir um editor de 
 partituras musicais. A classe responsável pelo 
-desenho de elemntos gráficos na tela não 
-conhece as classes de notas musicais que 
+desenho de elementos gráficos na tela não 
+conhece as classes que definem as notas musicais que 
 precisam ser desenhadas. Ao invés de criar uma 
 subclasse para cada novo elemento gráfico, 
 a classe responsável pelo desenho 
-pode ser implementada de forma que receba 
-um objeto protótipo que não precisa ser 
-conhecido. Dessa forma, trocando a herança 
+pode receber um objeto protótipo qualquer. 
+Dessa forma, trocando a herança 
 por uma delegação, é possível desenhar qualquer 
 elemento musical, desde que ele possa ser 
 clonado. A figura \ref{prototype_exemplo} e 
@@ -106,9 +105,9 @@ class GraphicTool(var prototype : Graphic) {
 Graças ao conceito de imutabilidade presente na 
 programação funcional, valores definidos podem 
 ser reutilizados sem que haja preocupação 
-quanto a diversas referências para um mesmo valor. 
+quanto a múltiplas referências para um mesmo valor. 
 Dessa forma, o problema resolvido pelo Prototype 
-deixa de existir. 
+deixa de existir.
 
 O código \ref{fpprototype} demonstra como o 
 exemplo orientado a objetos anterior poderia 

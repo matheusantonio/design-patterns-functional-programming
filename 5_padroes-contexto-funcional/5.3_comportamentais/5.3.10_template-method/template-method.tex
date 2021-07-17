@@ -6,7 +6,7 @@ compõem esse algoritmo. Uma classe abstrata define a operação Template
 Method, onde são executas as etapas do algoritmo, definidas em função 
 das operações abstratas ainda não implementadas.
 
-Dessa forma, esse padrão ajuda a evitar repetição de código, concentrando 
+Esse padrão ajuda a evitar repetição de código, concentrando 
 em apenas uma classe a estrutura de uma operação. Além disso, 
 não só apenas a estrutura do algoritmo como qualquer etapa em 
 comum para todas as subclasses pode ser concentrada na superclasse, 
@@ -96,13 +96,10 @@ class MyApplication extends Application {
 
 No contexto funcional, a mesma ideia pode ser alcançada 
 através de funções de alta ordem e composição de funções. 
-Nosso método OpenDocument (o \textit{template method}) é 
+O método OpenDocument (o \textit{template method}) é 
 uma função de alta ordem que recebe como parâmetro todas 
-as funções necessárias para executar o algoritmo pré-definido. 
-Qualquer função predefinida (como a função AddDocument) é 
-chamada de forma comum, exatamente como no exemplo 
-orientado a objetos. O exemplo pode ser visto no 
-código \ref{fptpmethod}.
+as funções necessárias para executar o algoritmo. 
+O exemplo pode ser visto no código \ref{fptpmethod}.
 
 \begin{lstlisting}[caption={Template Method Funcional},label=fptpmethod]
     

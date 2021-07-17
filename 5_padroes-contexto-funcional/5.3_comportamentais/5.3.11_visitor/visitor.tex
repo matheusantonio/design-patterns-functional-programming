@@ -1,20 +1,22 @@
 \section{Visitor}
 
-O padrão Visitor define uma estrutura que permite realizar 
+O padrão Visitor permite realizar 
 operações em uma estrutura de objetos sem precisar alterá-los 
-e sem precisar que os objetos dessa estrutura conheçam as 
+e sem precisar que os objetos conheçam as 
 operações que estão sendo realizadas. 
 
 Uma estrutura alvo de um Visitor pode possuir objetos de 
 classes diferentes. Por isso, o padrão deve implementar 
-uma operação \textit{visit} para cada uma dessas classes, 
+uma operação Visit para cada uma dessas classes, 
 através de uma sobrecarga de métodos. Para que essa 
 abordagem funcione, as classes da estrutura devem implementar 
-uma operação \textit{accept} que recebe como parâmetro um 
-Visitor genérico e chama sua operação \textit{visit}, 
-passando uma referência para a instância atual (this) 
+uma operação Accept que recebe como parâmetro um 
+Visitor genérico e chama sua operação Visit, 
+passando uma referência para a instância atual 
+(através da palavra chave this) 
 como parâmetro. Dessa forma, a função chamada é a 
-que recebe a classe em questão como parâmetro.
+que recebe como parâmetro uma instância da 
+classe em questão.
 
 Esse padrão permite estender objetos para novas operações 
 sem comprometer sua implementação ou poluir as classes com 

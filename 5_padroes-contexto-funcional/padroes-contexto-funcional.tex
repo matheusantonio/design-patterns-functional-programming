@@ -8,7 +8,7 @@
 % Conceitos para mapear
 
 Parte dos padrões de projeto que serão 
-analisados usam ou dependem de conceitos 
+analisados dependem de conceitos 
 de orientação a objetos como classes ou 
 encapsulamento, o que torna necessário 
 realizar um mapeamento desses conceitos 
@@ -16,21 +16,14 @@ para o paradigma funcional. A intenção
 desse mapeamento não é implementar 
 orientação a objetos em uma linguagem 
 funcional, mas entender qual é a utilidade 
-de cada um desses conceitos e quais 
-recursos em programação funcional podem 
-oferecer essa mesma utilidade. Isso também 
-significa que o mapeamento não será seguido 
-de forma rigorosa, ou seja, um padrão 
-cuja estrutura possui um objeto, por 
-exemplo, não necessariamente terá a 
-implementação desse objeto como será 
-demonstrada em seguida refletida 
-na implementação funcional. Esse 
-mapeamento também deve ser usado como 
-referência para entender como a 
-implementação funcional pode se encaixar 
-no contexto dos exemplos utilizados 
-para explicar os padrões. 
+de cada um desses conceitos e de que 
+forma a programação funcional pode 
+oferecer essa mesma utilidade. É importante 
+ressaltar que esse mapeamento não será usado 
+de forma metódica ao analisar os padrões. 
+Ele é uma referência para contextualizar 
+o leitor nos exemplos em código 
+implementados de forma funcional. 
 
 
 % classes e objetos
@@ -44,21 +37,21 @@ deve possuir\cite{umlsystems}. Essas características
 e comportamentos são representados em orientação a 
 objetos como atributos e métodos, respectivamente. 
 O código \ref{ooclass} demonstra uma classe que 
-possui os atributos name e age, além dos métodos 
-getName, setName, getAge e setAge, que realizam 
-operações sobre esses atributos.
+possui os atributos nome e idade, além dos métodos 
+getNome, setNome, getIdade e setIdade, que realizam 
+operações com esses atributos.
 
 \begin{lstlisting}[caption={Classe comum em Orientação a Objetos},label=ooclass]
     
-    class Person(var name : String, var age : Int){
+    class Pessoa(var nome : String, var idade : Int){
 
-        def getName() : String = this.name
+        def getNome() : String = this.nome
 
-        def setName(name : String) : Unit = this.name = name
+        def setNome(nome : String) : Unit = this.nome = nome
 
-        def getAge() : Int = this.age
+        def getIdade() : Int = this.idade
 
-        def setAge(age : Int) : Unit = this.age = age
+        def setIdade(idade : Int) : Unit = this.idade = idade
 
     }   
 
@@ -77,8 +70,8 @@ linguagens funcionais.
 Para representar os métodos de uma classe em uma 
 linguagem funcional, já que nossa estrutura de dados 
 imutável não armazenará funções\footnote{Apesar de não 
-ser uma abordagem utilizada neste trabalho, é 
-possível armazenar funções nessas estruturas.} e já 
+ser uma abordagem utilizada para este mapeamento, é 
+possível armazenar funções em tuplas.} e já 
 que é necessário que nossas funções sejam puras, 
 uma abordagem de implementação desses 
 métodos é definir funções que recebam 
@@ -90,17 +83,17 @@ no código \ref{ooclass} pode ser vista no código \ref{fpclass}.
 
 \begin{lstlisting}[caption={Representação de uma classe no contexto funcional},label=fpclass]
     
-    type Person = (String, Int)
+    type Pessoa = (String, Int)
 
-    def getName(person : Person) : String = person._1 
+    def getNome(pessoa : Pessoa) : String = pessoa._1 
 
-    def setName(person : Person, name : String) : Person = 
-        (name, person._2)
+    def setNome(pessoa : Pessoa, name : String) : Pessoa = 
+        (name, pessoa._2)
 
-    def getAge(person : Person) : Int = person._2
+    def getIdade(pessoa : Pessoa) : Int = pessoa._2
 
-    def setAge(person : Person, age : Int) : Person =
-        (person._1, age)
+    def setIdade(pessoa : Pessoa, age : Int) : Pessoa =
+        (pessoa._1, age)
 
 \end{lstlisting}
 
@@ -111,32 +104,32 @@ Uma associação pode ser definida como uma
 conexão entre as classes que indica algum 
 relacionamento entre elas\cite{Sommerville10}. 
 O código \ref{ooassociation} demonstra uma 
-associação entre as classes City e State, onde 
-a classe State possui uma coleção de atributos 
-do tipo City. Para que haja uma associação 
+associação entre as classes Cidade e Estado, onde 
+a classe Estado possui uma coleção de atributos 
+do tipo Cidade. Para que haja uma associação 
 entre duas classes, basta que pelo menos 
 uma delas tenha em seus atributos uma 
 referência à outra.
 
 \begin{lstlisting}[caption={Exemplo de associação entre classes},label=ooassociation]
     
-    class City(var name : String){
+    class Cidade(var nome : String){
 
-        def getName() : String = this.name;
-        def setName(name : String) : Unit {
-            this.name = name;
+        def getNome() : String = this.nome;
+        def setNome(nome : String) : Unit {
+            this.nome = nome;
         }
     }
 
-    class State(var name : String, var cities : List[City]){
+    class Estado(var nome : String, var cidades : List[Cidade]){
 
-        def getName() : String = this.name;
-        def setName(name : String) : Unit {
-            this.name = name;
+        def getNome() : String = this.nome;
+        def setNome(nome : String) : Unit {
+            this.nome = nome;
         }
-        def getCities() : List[City] = this.cities;
-        def addCity(city : City) : Unit {
-            this.cities = this.cities :+ city;
+        def getCidades() : List[Cidade] = this.cidades;
+        def addCidade(cidade : Cidade) : Unit {
+            this.cidades = this.cidades :+ cidade;
         }
     }
 
@@ -148,23 +141,25 @@ dentro de uma tupla associada a um tipo.
 Portanto, uma associação dentro do contexto 
 funcional pode ser implementada armazenando 
 um valor de um tipo A entre os valores da tupla 
-de um tipo B. O código \ref{fpassociation}.
+de um tipo B. O código \ref{fpassociation} 
+demonstra o exemplo anterior implementado 
+de forma funcional.
 
 \begin{lstlisting}[caption={Exemplo de associação no contexto funcional},label=fpassociation]
     
-    type City = (String)
+    type Cidade = (String)
     
-    def getName(city : City) : String = city._1;
-    def setName(city : City, name : String) : City = (name)
+    def getNome(cidade : Cidade) : String = cidade._1;
+    def setNome(cidade : Cidade, nome : String) : Cidade = (nome)
 
-    type State = (String, City)
+    type Estado = (String, List[Cidade])
     
-    def getName(state : State) : String = state._1;
-    def setName(state : State, name : String) : State = (name, state._2)
+    def getNome(estado : Estado) : String = estado._1;
+    def setNome(estado : Estado, nome : String) : Estado = (nome, estado._2)
     
-    def getCities(state : State) : List[City] = state._2;
-    def addCity(state : State, city : City) : State =
-        (state._1, state._2 :+ city)
+    def getCities(estado : Estado) : List[Cidade] = estado._2;
+    def addCity(estado : Estado, cidade : Cidade) : Estado =
+        (estado._1, estado._2 :+ cidade)
 
 \end{lstlisting}
 
@@ -195,7 +190,7 @@ que funções responsáveis por criar ou modificar\footnote{
 um valor de um determinado tipo estejam 
 espalhadas pela aplicação, facilitando uma 
 situação em que um estado que não deveria ser 
-representável por esse valor seja criado. 
+representado por esse valor seja criado. 
 Dessa forma, implementar alguma forma de 
 encapsulamento ainda é importante no 
 contexto funcional.
@@ -211,15 +206,16 @@ atributos enquanto retorna as funções
 necessárias para acessá-los ou modificá-los. 
 Um exemplo equivalente ao do código \ref{fpclass} 
 pode ser visto no código \ref{fpclosure}, 
-implementado utilizando a linguagem funcional Clojure. \cite{classlessjs}
+implementado utilizando a linguagem funcional Clojure. 
+\cite{classlessjs}
 
 \begin{lstlisting}[caption={Representação de uma classe com closures},label=fpclosure]
     
-    (defn person [name age]
-        {:getName name
-         :setName (fn [_name] (person _name age))
-         :getAge age
-         :setAge (fn [_age] (person name _age))})
+    (defn pessoa [nome idade]
+        {:getNome nome
+         :setNome (fn [_nome] (pessoa _nome idade))
+         :getIdade idade
+         :setIdade (fn [_idade] (pessoa nome _idade))})
 
 \end{lstlisting}
 
@@ -228,37 +224,38 @@ funcional, também é possível aproveitar a ideia
 de modularização para esconder detalhes de 
 implementação \cite{mlmodules}. Por exemplo, o 
 código \ref{modulesencap}, implementado em 
-Haskell, mostra o tipo Person com um construtor 
-P. Enquanto Person é exportado para fora do 
-módulo P não é, tornando impossível para qualquer 
+Haskell, mostra o tipo Pessoa com um construtor 
+P. Apesar do tipo Pessoa ser exportado para fora do 
+módulo, P não é, tornando impossível para qualquer 
 função que acesse esse módulo criar algo do tipo 
-Person. Dessa forma, apenas a função newPerson 
-pode por criar novos valores do tipo 
-Person. Funções implementadas dentro do módulo 
+Pessoa. Dessa forma, apenas a função newPessoa, 
+também exportada pelo módulo, 
+pode criar novos valores do tipo 
+Pessoa. Funções implementadas dentro do módulo 
 também podem deixar de ser exportadas, o que 
 as tornaria semelhantes a métodos privados 
 de uma classe.
 
 \begin{lstlisting}[caption={Módulos como forma de encapsulamento},label=modulesencap]
     
-    module Person (Person, getName, setName, getAge, setAge) where
+    module Pessoa (Pessoa, getNome, setNome, getIdade, setIdade) where
 
-    data Person = P (String, Int)
+    data Pessoa = P (String, Int)
 
-    newPerson :: String -> Int -> Person
-    newPerson name age = P (name, age)
+    newPessoa :: String -> Int -> Pessoa
+    newPessoa nome idade = P (nome, idade)
 
-    getName :: Person -> String
-    getName (P (name, _)) = name
+    getNome :: Pessoa -> String
+    getNome (P (nome, _)) = nome
 
-    setName :: Person -> String -> Person
-    setName (P (_, age)) name = P (name, age)
+    setNome :: Pessoa -> String -> Pessoa
+    setNome (P (_, idade)) nome = P (nome, idade)
 
-    getAge :: Person -> Int
-    getAge (P (_, age)) = age
+    getIdade :: Pessoa -> Int
+    getIdade (P (_, idade)) = idade
 
-    setAge :: Person -> Int -> Person
-    setAge (P (name, _)) age = P (name, age)
+    setIdade :: Pessoa -> Int -> Pessoa
+    setIdade (P (nome, _)) idade = P (nome, idade)
 
 \end{lstlisting}
 
@@ -269,7 +266,7 @@ do que a abordagem em si. Por exemplo, é
 mais simples implementar a abordagem de closures 
 em Clojure por ela ser dinamicamente tipada, 
 permitindo que um dicionário sem estrutura 
-definida seja retornado. Linguagens que exigem 
+predefinida seja retornado. Linguagens que exigem 
 uma definição mais estrita do tipo de retorno 
 de uma função podem dificultar tanto a 
 implementação dessas funções quanto seu uso 
@@ -283,7 +280,7 @@ durante a análise dos padrões será
 omitida, a menos que ela seja relevante para 
 sua implementação. Essa omissão 
 também tem como objetivo facilitar o entendimento 
-da abordagem funcional que será utilizada nos padrões.
+da abordagem funcional que será utilizada nos padrões. 
 
 % interfaces
 \section{Interfaces}
@@ -293,16 +290,12 @@ entre uma classe e o mundo externo, indicando que
 uma classe que implementa uma interface também 
 implementará as operações definidas 
 pela mesma\cite{oracleooconcepts}. 
-Como na programação funcional 
-as características e comportamentos são separados, 
-a implementação de uma interface pode variar de acordo  
-com o objetivo desejado.
 
 Um exemplo do uso de interfaces é demonstrado no código 
 \ref{oopinterface1}, 
 onde a interface é necessária para garantir que as 
-classes InterfaceUserA e InterfaceUserB implementem 
-a operação operation, que recebe como parâmetro 
+classes SomadorMaisUm e MultiplicadorPorDois implementem 
+a operação calcular, que recebe como parâmetro 
 um valor do tipo inteiro e retorna outro valor 
 inteiro.
 
@@ -310,20 +303,20 @@ inteiro.
 
 \begin{lstlisting}[caption={Interfaces em Orientação a Objetos},label=oopinterface1]
     
-    trait InterfaceUser {
-        def operation(x : Int) : Int
+    trait ICalculaInteiro {
+        def calcular(x : Int) : Int
     }
 
-    class InterfaceUserA extends InterfaceUser {
-        def operation(x : Int) : Int = x + 1
+    class SomadorMaisUm extends ICalculaInteiro {
+        def calcular(x : Int) : Int = x + 1
     }
 
-    class InterfaceUserB extends InterfaceUser {
-        def operation(x : Int) : Int = 2*x
+    class MultiplicadorPorDois extends ICalculaInteiro {
+        def calcular(x : Int) : Int = 2*x
     }
 
-    def runInterface(x : Int, interfaceUser : InterfaceUser) : Int {
-        return interfaceUser.operation(x)
+    def calcularInteiro(x : Int, calculador : ICalculaInteiro) : Int {
+        return calculador.calcular(x)
     }
 
 \end{lstlisting}
@@ -333,19 +326,19 @@ consideração que as funções que representam nossos
 métodos não estão encapsulados em classes e 
 não dependem de atributos, é possível substituir o 
 objeto sendo passado por parâmetro na função 
-runInterface por uma função qualquer que recebe 
+calcularInteiro por uma função qualquer que recebe 
 como parâmetro um valor inteiro e retorna outro 
 valor inteiro. Essa alternativa pode ser vista 
 no código \ref{fpinterface1}.
 
 \begin{lstlisting}[caption={Interfaces em Programação Funcional},label=fpinterface1]
     
-    def operation1(x : Int) : Int = x + 1
+    def somaUm(x : Int) : Int = x + 1
 
-    def operation(x : Int) : Int = 2*x
+    def multiplicaPorDois(x : Int) : Int = 2*x
 
-    def runInterface(x : Int, operation : (Int => Int)) =
-        operation(x)
+    def calcularInteiro(x : Int, calcular : (Int => Int)) =
+        calcular(x)
     
 \end{lstlisting}
 
@@ -362,30 +355,30 @@ de classes já existentes e reaproveitar o código.
 O exemplo \ref{ooinheritance} demonstra 
 o uso da herança entre as classes Animal e Dog. 
 Ao invés de reimplementar os métodos da classe 
-Animal, a classe Dog usa herança para reaproveitá-los. 
+Animal, a classe Cachorro usa herança para reaproveitá-los. 
 
 \begin{lstlisting}[caption={Herança em Orientação a Objetos},label=ooinheritance]
     
-    class Animal(var name : String) {
-        def getName() : String = name
+    class Animal(var nome : String) {
+        def getNome() : String = nome
         
-        def eat() : String {
-            return "Meu nome é " + name + " e eu posso comer";
+        def comer() : String {
+            return "Meu nome é " + nome + " e eu posso comer";
         }
     }
 
-    class Dog extends Animal {
+    class Cachorro extends Animal {
         
-        def Dog(name : String) {
-            super(name);
+        def Cachorro(nome : String) {
+            super(nome);
         }
 
-        def bark() : String {
-            return "Bark! Meu nome é " + super.getName();
+        def latir() : String {
+            return "Au! Meu nome é " + super.getNome();
         }
 
-        def eat() : String {
-            return super.eat() + "\nEu como comida de cachorro";
+        def comer() : String {
+            return super.comer() + "\nEu como comida de cachorro";
         }
     }
 
@@ -400,12 +393,12 @@ funções do tipo B sejam compostas das funções
 necessárias do tipo A. O código \ref{fpinheritance} 
 demonstra o exemplo anterior, onde um tipo Animal 
 armazena um valor String que representa o nome 
-enquanto o tipo Dog armazena um valor Animal. 
-As funções bark e eat que recebem como parâmetro 
-um valor do tipo Dog reutilizam as funções getName 
-e eat que recebem como parâmetro um valor do tipo 
+enquanto o tipo Cachorro armazena um valor Animal. 
+As funções latir e comer que recebem como parâmetro 
+um valor do tipo Cachorro reutilizam as funções getNome 
+e comer que recebem como parâmetro um valor do tipo 
 Animal. Nesse exemplo, o tipo Animal representa 
-uma classe pai e o tipo Dog uma class filha.
+uma classe pai e o tipo Cachorro uma class filha.
 
 \begin{lstlisting}[caption={Herança em Programação Funcional},label=fpinheritance]
     
@@ -413,42 +406,27 @@ uma classe pai e o tipo Dog uma class filha.
 
     def getName(animal : Animal) : String = animal._1;
     def eat(animal : Animal) : String = 
-        "Meu nome é " + getName(animal) + " e eu posso comer"
+        "Meu nome é " + getNome(animal) + " e eu posso comer"
 
-    type Dog = (Animal)
+    type Cachorro = (Animal)
 
-    def getAnimal(dog : Dog) : Animal = dog._1;
-    def bark(dog : Dog) : String = 
-        "Bark! Meu nome é " + getName(getAnimal(dog))
-    def eat(dog : Dog) : String = 
-        eat(getAnimal(dog)) + "\nEu como comida de cachorro";
+    def getAnimal(cachorro : Cachorro) : Animal = cachorro._1;
+    def bark(cachorro : Cachorro) : String = 
+        "Au! Meu nome é " + getNome(getAnimal(cachorro))
+    def eat(cachorro : Cachorro) : String = 
+        eat(getAnimal(Cachorro)) + "\nEu como comida de cachorro";
 
 \end{lstlisting}
 
 É possível perceber que a implementação da herança 
-assemelha-se à implementação de uma associação. 
-Esses dois relacionamentos são diferentes, pois a 
+assemelha-se à implementação de uma associação, 
+por isso ela apresenta uma desvantagem: 
+qualquer função do tipo que representa 
+a classe pai necessitará de uma função 
+intermediária do tipo que representa a classe 
+filha para acessá-la. 
+No contexto orientado a objetos, esses dois 
+relacionamentos são diferentes, pois a 
 herança trata-se de um relacionamento entre 
 classes enquanto a associação é um relacionamento 
-entre objetos\cite{umlsystems}. Foi possível 
-obervar que essa implementação cumpre o objetivo 
-da herança - favorecer o reúso - e como os valores 
-no contexto funcional são imutáveis, não é possível 
-que o valor que representa a classe pai seja 
-modificado externamente.
-
-Essa implementação apresenta uma desvantagem: 
-qualquer função do tipo que representa 
-a classe pai, que poderia ser acessada 
-diretamente a partir da classe filho 
-no contexto orientado a objetos, 
-necessitaria de uma função intermediária 
-do tipo que representa a classe filha 
-para acessá-la. Para contornar esse 
-problema, basta implementar uma função 
-de acesso que retorne o valor do tipo 
-da classe pai, como a função getAnimal 
-no código \ref{fpinheritance}. Porém, isso 
-faz com que, do ponto de vista orientado a 
-objetos, a implementação se torne uma 
-associação e não uma herança. 
+entre objetos\cite{umlsystems}. 

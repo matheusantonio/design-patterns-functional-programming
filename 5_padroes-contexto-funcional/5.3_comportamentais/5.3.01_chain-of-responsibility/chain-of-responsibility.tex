@@ -7,15 +7,14 @@ tratar solicitações feitas por um objeto cliente. As classes
 que tratam as solicitações são chamadas de \textit{handlers}. 
 Uma solicitação é passada adiante por uma cadeia de 
 \textit{handlers} até que seja tratada ou 
-até que a cadeia chegue ao fim e a solicitação 
-não possa ser atendida, retornando uma indicação 
-de que a solicitação não pôde ser atendida.
+até que a cadeia chegue ao fim, retornando uma 
+indicação de que a solicitação não pôde ser atendida.
 
 Essa abordagem permite desacoplar os clientes das classes 
 que tratam as solicitações e permite que os \textit{handlers} 
 sejam definidos dinamicamente. Por outro lado, pode não ser 
 possível prever se uma solicitação de um cliente será atendida, 
-caso o \textit{handler} adequado não esteja na cadeia. A 
+caso um \textit{handler} adequado não esteja na cadeia. A 
 estrutura do padrão pode ser vista na figura \ref{chain_struct}.
 
 \begin{figure}[htb]
@@ -28,7 +27,7 @@ estrutura do padrão pode ser vista na figura \ref{chain_struct}.
 \subsection*{Exemplo Orientado a Objetos}
 
 O exemplo do Chain of Responsibility traz um recurso 
-de \textit{help} utilizado nos componentes de uma 
+de ajuda utilizado nos componentes de uma 
 interface gráfica. O recurso é sensível ao contexto, 
 bastando que o usuário solicite a ajuda no local 
 desejado. O objeto que fornece a ajuda não é 
@@ -163,7 +162,7 @@ def HandleHelp() : Unit = {
 
 O código \ref{fpchainfunction} demonstra a criação 
 da cadeia, onde as funções apresentadas anteriormente 
-são criadas e encadeadas, criando a função 
+são executadas e encadeadas, criando a função 
 ChainofResponsibility que será utilizada para 
 tratar todas as solicitações.
 
