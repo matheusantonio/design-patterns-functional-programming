@@ -105,11 +105,6 @@ O exemplo pode ser visto no código \ref{fptpmethod}.
     
 object Application {
 
-  trait Document {
-    def Open()
-    def DoRead()
-  }
-
   def AddDocument(document : Document,
                   documents : List[Document]) : List[Document] =
     document :: documents
@@ -127,8 +122,8 @@ object Application {
       val doc = DoCreateDocument()
       _documents = AddDocument(doc, documents)
       AboutToOpenDocument(doc)
-      doc.Open()
-      doc.DoRead()
+      OpenDocument(doc)
+      ReadDocument(doc)
     }
   }
 

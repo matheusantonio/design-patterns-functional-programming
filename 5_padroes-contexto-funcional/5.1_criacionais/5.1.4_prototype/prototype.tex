@@ -102,12 +102,14 @@ class GraphicTool(var prototype : Graphic) {
 
 \subsection*{Contexto Funcional}
 
-Graças ao conceito de imutabilidade presente na 
-programação funcional, valores definidos podem 
+O padrão Prototype fornece uma operação de 
+clonagem para que o estado de um objeto seja 
+copiado sem ser compartilhado entre todos 
+os objetos que o utilizam. Graças ao conceito 
+de imutabilidade presente na programação 
+funcional, valores definidos podem 
 ser reutilizados sem que haja preocupação 
-quanto a múltiplas referências para um mesmo valor. 
-Dessa forma, o problema resolvido pelo Prototype 
-deixa de existir.
+quanto a alterações de seu estado.
 
 O código \ref{fpprototype} demonstra como o 
 exemplo orientado a objetos anterior poderia 
