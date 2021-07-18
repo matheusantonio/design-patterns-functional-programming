@@ -1,7 +1,7 @@
 % ---
 % Apresentação dos Resultados
 % ---
-\chapter{Apresentação dos Resultados}
+\chapter{Resultados}
 % ---
 
 Nos capítulos anteriores, foram analisados todos 
@@ -10,9 +10,7 @@ Four}, com o objetivo de extrair o problema
 resolvido pelo padrão e analisar, a partir dos 
 conceitos de programação funcional apresentados, 
 como uma solução para o mesmo problema poderia ser 
-alcançada. 
-
-Foi possível separar as análises realizadas em 
+alcançada. Foi possível separar as análises realizadas em 
 quatro grandes grupos, com o primeiro sendo 
 dividido em três subgrupos: 
 
@@ -76,7 +74,7 @@ se encaixa nessa categoria. Por isso, ainda foi
 possível dividir esses padrões em três  
 subcategorias quanto a como as funções de alta 
 ordem foram aplicadas. Alguns padrões acabam se 
-encaixando em mais de uma delas, mas para 
+encaixando em mais de uma das categorias, mas para 
 evitar repetições e para simplificar o agrupamento, 
 cada padrão será explicado no grupo mais próximo 
 da solução proposta. 
@@ -92,14 +90,14 @@ funções de alta ordem podem servir como alternativas
 para o uso de interfaces. Alguns dos padrões analisados 
 baseiam-se no uso de interfaces para definir a assinatura 
 de funções que a classe cliente deve receber. De forma 
-equivalente, é possível que uma função cliente recebe, 
+equivalente, é possível que uma função cliente receba, 
 por parâmetro, uma função com a assinatura equivalente 
 à da interface. Essa é a abordagem utilizada com os 
 padrões Builder, Adapter, Bridge, Proxy e Strategy. 
 
 De forma semelhante, as funções de alta ordem são 
-alternativas ainda mais interessantes ao uso de 
-classes abstratas, como é o caso dos padrões 
+alternativas ao uso de 
+classes abstratas, como é o caso dos padrõess 
 Factory Method e Template Method. Ambos baseiam-se 
 em definir uma operação abstrata que deve ser 
 implementada por uma subclasse. Uma alternativa 
@@ -113,14 +111,12 @@ por parâmetro.
 Os padrões Abstract Factory, Command e 
 State também baseiam-se em passar funções de 
 alta ordem como parâmetro para funções clientes. 
-Porém, para esses três padrões existe uma quantidade 
-maior de funções que o cliente deve receber. Além 
-disso, pode ser mais interessante que as implementações 
-dessas funções sejam dependentes entre si, ou seja, 
-todas as funções de um Strategy pertençam a uma mesma 
-estratégia, todas as funções do Abstract Factory criem 
+Porém, para esses três padrões, as funções 
+passadas são relacionadas, ou seja, 
+todas as funções de um Strategy pertencem a uma mesma 
+estratégia, todas as funções do Abstract Factory criam 
 o mesmo tipo de valor e a função de desfazer do 
-Command esteja relacionada à função principal executada. 
+Command está relacionada à função principal executada. 
 Agrupar essas funções em um mesmo valor pode 
 contribuir para retirar das funções clientes a 
 responsabilidade de garantir que elas possuam 
@@ -164,7 +160,8 @@ a função que aplica a regra da gramática por parâmetro.
 \section{Padrões com soluções alternativas}
 
 Os padrões Iterator, Observer e Visitor possuem 
-implementações alternativas que não necessariamente 
+implementações alternativas existentes que não 
+necessariamente 
 seguem à risca a ideia do padrão. No caso do Iterator, 
 existe a diferença entre o gerencimaneto por parte 
 do cliente e por parte da coleção entre as 
@@ -200,8 +197,7 @@ a implementação funcional baseia-se no acesso
 entre módulos. Como ambas as ideias são 
 análogas, a implementação do padrão na verdade 
 não possui mudanças significativas. 
-
-Da mesma forma, o padrão Flyweight, tanto no 
+O padrão Flyweight, tanto no 
 contexto orientado a objetos quanto no funcional, 
 é implementado através de memoização. Já o Mediator 
 baseia-se em possuir uma função (ou classe) que 
@@ -247,3 +243,103 @@ imutabilidade, não precisaria se preocupar quanto
 a expor o estado interno de um valor. Assim, é 
 possível gerar \textit{snapshots} apenas copiando 
 valores anteriores, sem preocupações adicionais. 
+
+\section{Avaliação dos Resultados}
+% É importante descrever quais resultados são mais
+% relevantes e como eles contribuem com a área 
+% de estudo
+%\section{Avaliação}
+
+Como pôde ser visto, a aplicação dos 
+conceitos de programação funcional pode 
+contribuir para a solução de alguns dos padrões. 
+Com o uso de funções de alta ordem, problemas 
+que exigem poucas funções, como o do Template 
+Method, ou problemas que usam muitas funções 
+porém não necessariamente relacionadas, como 
+o do padrão Builder, poderiam aproveitar-se do 
+uso de funções de alta ordem para diminuir a 
+quantidade de classes definidas pela 
+aplicação. Para os casos em que as funções 
+são relacionadas e agrupadas em 
+novos valores como no padrão State, 
+o comportamento final torna-se semelhante 
+ao de uma interface, onde são definidas 
+as assinaturas das funções na interface 
+(a declaração das funções armazenadas 
+no tipo) e a classe que as implementa 
+(a criação do valor que armazena as 
+funções e a definição das funções que 
+serão armazenadas). O diferencial é que 
+é mais simples reaproveitar uma mesma 
+função para valores diferentes, já que 
+em um contexto orientado a objetos seria 
+necessário definir classes abstratas 
+para definir um comportamento compartilhado 
+por várias classes que implementem uma 
+mesma interface.
+A última abordagem, usando closures, também 
+demonstrou flexibilidade e possibilidade 
+de reuso, como visto no padrão Interpreter. 
+
+O uso de conceitos de programação funcional 
+para resolver alguns dos problemas propostos 
+pelos padrões não é algo novo, como foi visto 
+pelos padrões que já possuíam soluções alternativas 
+conhecidas. As funções \textit{map} e \textit{reduce} 
+usadas como alternativa para o Iterator já 
+são definidas em diversas linguagens funcionais
+[FONTES AQUI], 
+enquanto o conceito de programação reativa, 
+um tipo de Observer, já é 
+utilizado em \textit{frameworks} de SPA 
+(\textit{single page application})[FONTES AQUI]. 
+O recurso de \textit{pattern matching} 
+utilizado na análise do Visitor também já 
+é um conceito conhecido como alternativa 
+aos multimétodos.
+
+Em seguida, com os padrões sem diferenças 
+relevantes de implementação, pôde ser visto 
+que nem todos os padrões utilizam abordagens 
+exclusivamente orientadas a objetos. Dessa forma, 
+transpô-los para o contexto funcional faz com 
+que apenas a mesma solução seja utilizada. 
+Apesar de terem sido enumeradas algumas 
+ressalvas, elas não estão diretamente ligadas 
+à solução proposta, mas a consequências de 
+se utilizar a mesma, como é o caso do Mediator. 
+
+Por fim, foi visto o grupo dos padrões 
+que não fazem sentido no contexto funcional 
+por os problemas propostos não existirem, 
+para o caso do Prototype e do Memento, ou 
+violarem a ideia da programação funcional, 
+que foi o caso do Singleton. O primeiro caso 
+demonstra como, para alguns casos, a 
+programação funcional pode se mostrar 
+de fato vantajosa se comparada à orientada 
+a objetos. Para o segundo caso, é relevante 
+informar que o padrão Singleton é considerado 
+um antipadrão que poderia ser substituído 
+pela injeção de dependência.[FONTES AQUI SOBRE 
+ANTIPADRÃO, SINGLETON SER ANTIPADRÃO E 
+INJEÇÃO DE DEPENDÊNCIA COMO ALTERNATIVA PARA 
+O SINGLETON]. Isso pode ser um indício 
+de que um padrão não implementável no contexto 
+funcional indica que o mesmo possui alguma 
+deficiência, mas seriam necessárias 
+mais evidências para dar apoio a essa ideia.
+
+% Um bom embasamento teórico é fundamental para 
+% dar credibilidade aos resultados da pesquisa 
+% Portanto, o investigador deve comparar as 
+% ideais de outros autores com a descoberta do 
+% seu trabalho
+%\section{Comparação com a literatura}
+
+
+
+% Quando a coleta de dados é representativa, 
+% o pesquisador pode fazer generalizações
+%\section{Generalização}
