@@ -266,7 +266,7 @@ novos valores como no padrão State,
 o comportamento final torna-se semelhante 
 ao de uma interface, onde são definidas 
 as assinaturas das funções na interface 
-(a declaração das funções armazenadas 
+(a declaração da assinatura das funções armazenadas 
 no tipo) e a classe que as implementa 
 (a criação do valor que armazena as 
 funções e a definição das funções que 
@@ -288,48 +288,45 @@ pelos padrões não é algo novo, como foi visto
 pelos padrões que já possuíam soluções alternativas 
 conhecidas. As funções \textit{map} e \textit{reduce} 
 usadas como alternativa para o Iterator já 
-são definidas em diversas linguagens funcionais
-[FONTES AQUI], 
+são implementadas em diversas linguagens funcionais
+\cite{realworldhaskell,wampler2021,braveclojure}, 
 enquanto o conceito de programação reativa, 
 um tipo de Observer, já é 
-utilizado em \textit{frameworks} de SPA 
-(\textit{single page application})[FONTES AQUI]. 
+utilizado em \textit{frameworks} de  
+\textit{single page application}\cite{rxjs}. 
 O recurso de \textit{pattern matching} 
 utilizado na análise do Visitor também já 
 é um conceito conhecido como alternativa 
-aos multimétodos.
+aos multimétodos\cite{patternmatchingvisitor}.
 
 Em seguida, com os padrões sem diferenças 
 relevantes de implementação, pôde ser visto 
 que nem todos os padrões utilizam abordagens 
 exclusivamente orientadas a objetos. Dessa forma, 
-transpô-los para o contexto funcional faz com 
-que apenas a mesma solução seja utilizada. 
+transpô-los para o contexto funcional 
+permite que a mesma solução seja reaproveitada. 
 Apesar de terem sido enumeradas algumas 
 ressalvas, elas não estão diretamente ligadas 
 à solução proposta, mas a consequências de 
-se utilizar a mesma, como é o caso do Mediator. 
+se utilizar a mesma, como é o caso do Mediator 
+precisar que a função cliente gerencie o 
+estado dos \textit{colleagues}. 
 
 Por fim, foi visto o grupo dos padrões 
 que não fazem sentido no contexto funcional 
-por os problemas propostos não existirem, 
-para o caso do Prototype e do Memento, ou 
-violarem a ideia da programação funcional, 
-que foi o caso do Singleton. O primeiro caso 
-demonstra como, para alguns casos, a 
-programação funcional pode se mostrar 
-de fato vantajosa se comparada à orientada 
-a objetos. Para o segundo caso, é relevante 
+por os problemas propostos não existirem. 
+Isso foi visto nos padrões Prototype e Memento, 
+que demonstraram como a abordagem funcional pode 
+corrigir problemas que existem em outros 
+paradigmas. 
+
+Outro caso desse grupo foi a existência de 
+padrões cuja intenção viola algum conceito da 
+programação funcional, o que foi visto 
+com o padrão Singleton. É relevante 
 informar que o padrão Singleton é considerado 
 um antipadrão que poderia ser substituído 
-pela injeção de dependência.[FONTES AQUI SOBRE 
-ANTIPADRÃO, SINGLETON SER ANTIPADRÃO E 
-INJEÇÃO DE DEPENDÊNCIA COMO ALTERNATIVA PARA 
-O SINGLETON]. Isso pode ser um indício 
-de que um padrão não implementável no contexto 
-funcional indica que o mesmo possui alguma 
-deficiência, mas seriam necessárias 
-mais evidências para dar apoio a essa ideia.
+pela injeção de dependência.\cite{singletonantipattern}. 
 
 % Um bom embasamento teórico é fundamental para 
 % dar credibilidade aos resultados da pesquisa 
