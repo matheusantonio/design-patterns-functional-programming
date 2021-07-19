@@ -253,24 +253,22 @@ valores anteriores, sem preocupações adicionais.
 Como pôde ser visto, a aplicação dos 
 conceitos de programação funcional pode 
 contribuir para a solução de alguns dos padrões. 
-Com o uso de funções de alta ordem, problemas 
-que exigem poucas funções, como o do Template 
-Method, ou problemas que usam muitas funções 
-porém não necessariamente relacionadas, como 
-o do padrão Builder, poderiam aproveitar-se do 
+Com o uso de funções de alta ordem, padrões 
+que apresentam interfaces com poucas funções, como o 
+Template Method, ou muitas funções 
+não necessariamente relacionadas, como 
+o Builder, poderiam aproveitar-se do 
 uso de funções de alta ordem para diminuir a 
 quantidade de classes definidas pela 
 aplicação. Para os casos em que as funções 
 são relacionadas e agrupadas em 
 novos valores como no padrão State, 
 o comportamento final torna-se semelhante 
-ao de uma interface, onde são definidas 
-as assinaturas das funções na interface 
-(a declaração da assinatura das funções armazenadas 
-no tipo) e a classe que as implementa 
-(a criação do valor que armazena as 
-funções e a definição das funções que 
-serão armazenadas). O diferencial é que 
+ao de uma interface, onde são declarados 
+tipos que armazenam funções e criados 
+valores que definem quais funções são 
+equivalentes àquele tipo. 
+O diferencial é que 
 é mais simples reaproveitar uma mesma 
 função para valores diferentes, já que 
 em um contexto orientado a objetos seria 
@@ -281,6 +279,9 @@ mesma interface.
 A última abordagem, usando closures, também 
 demonstrou flexibilidade e possibilidade 
 de reuso, como visto no padrão Interpreter. 
+Além de permitir a criação de novas funções, 
+é possível parametrizá-las através de 
+outras funções.
 
 O uso de conceitos de programação funcional 
 para resolver alguns dos problemas propostos 
@@ -305,28 +306,32 @@ que nem todos os padrões utilizam abordagens
 exclusivamente orientadas a objetos. Dessa forma, 
 transpô-los para o contexto funcional 
 permite que a mesma solução seja reaproveitada. 
-Apesar de terem sido enumeradas algumas 
+Apesar de terem sido apresentadas algumas 
 ressalvas, elas não estão diretamente ligadas 
-à solução proposta, mas a consequências de 
-se utilizar a mesma, como é o caso do Mediator 
+à solução proposta, mas às consequências de 
+se utilizá-la, como é o caso do Mediator 
 precisar que a função cliente gerencie o 
 estado dos \textit{colleagues}. 
 
 Por fim, foi visto o grupo dos padrões 
-que não fazem sentido no contexto funcional 
-por os problemas propostos não existirem. 
-Isso foi visto nos padrões Prototype e Memento, 
-que demonstraram como a abordagem funcional pode 
-corrigir problemas que existem em outros 
-paradigmas. 
-
+que não fazem sentido no contexto funcional, 
+já que os problemas propostos não existem. 
+Esse foi o caso dos padrões Prototype e Memento.
 Outro caso desse grupo foi a existência de 
-padrões cuja intenção viola algum conceito da 
-programação funcional, o que foi visto 
-com o padrão Singleton. É relevante 
-informar que o padrão Singleton é considerado 
-um antipadrão que poderia ser substituído 
-pela injeção de dependência.\cite{singletonantipattern}. 
+um padrão cuja intenção viola algum conceito da 
+programação funcional, o Singleton. 
+É relevante informar que o padrão Singleton 
+pode ser considerado um antipadrão que poderia 
+ser substituído pela injeção de dependência.
+\cite{singletonantipattern}. Isso poderia 
+ser um indício de que a aplicação de 
+conceitos funcionais contribui para 
+identificar problemas de \textit{design} de 
+\textit{software}, mas como o Singleton 
+foi o único dos vinte e três padrões que 
+apresentou esse comportamento, faltam 
+evidências para considerar essa 
+possibilidade.
 
 % Um bom embasamento teórico é fundamental para 
 % dar credibilidade aos resultados da pesquisa 
@@ -334,8 +339,6 @@ pela injeção de dependência.\cite{singletonantipattern}.
 % ideais de outros autores com a descoberta do 
 % seu trabalho
 %\section{Comparação com a literatura}
-
-
 
 % Quando a coleta de dados é representativa, 
 % o pesquisador pode fazer generalizações
