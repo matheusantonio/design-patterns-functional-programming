@@ -6,7 +6,7 @@ Quando a interface de uma classe não
 é compatível com a interface do cliente que deseja 
 utilizá-la, o padrão Adapter fornece uma 
 solução que evita a refatoração e a dependência da 
-interface do cliente com a interface desejada.
+interface do cliente com a interface desejada.\cite{gamma:1995}
 
 Existem duas formas de realizar essa adaptação. Um Adapter 
 de classe, apresentado na figura \ref{adapter_struct},  
@@ -16,7 +16,7 @@ Ele define uma classe que herda tanto da classe que
 apresenta a interface do cliente quanto da classe que 
 apresenta a interface que deseja ser utilizada. Ao 
 reescrever a operação Request, ele adapta sua entrada 
-para a de SpecificRequest, repassando a solicitação.
+para a de SpecificRequest, repassando a solicitação.\cite{gamma:1995}
 
 \begin{figure}[htb]
 	\caption{\label{adapter_struct}Estrutura do Adapter de Classe}
@@ -30,7 +30,7 @@ herda apenas da classe que apresenta a interface
 da aplicação, também reimplementando a operação Request. 
 A diferença é que ela repassa a solicitação para a 
 classe que apresenta a interface que deseja ser 
-utilizada através de uma delegação.
+utilizada através de uma delegação.\cite{gamma:1995}
 
 \begin{figure}[htb]
 	\caption{\label{adapter_alt_struct}Estrutura do Adapter de Objeto}
