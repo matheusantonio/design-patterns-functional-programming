@@ -8,27 +8,122 @@
 % [esclarecer como isso é útil para contribuir para a evolução de linguagens que não possuem certos recursos que tornam necessários padrões complexos] {relevância da pesquisa}
 % [explicar o que é PF → explicar o que são padrões de projeto → abordar cada padrão GOF no contexto funcional → Abordar possíveis padrões vindos do paradigma funcional → mostrar os resultados obtidos nas análises → concluir] {estrutura do trabalho}
 
-
-
 % ----------------------------------------------------------
 % Introdução (exemplo de capítulo sem numeração, mas presente no Sumário)
 % ----------------------------------------------------------
 \chapter{Introdução}
 % ----------------------------------------------------------
+%
+%contextualização
+
+Enquanto Alan Turing definia o que viria a 
+se tornar a Máquina de Turing, Alonzo Church 
+trabalhava em uma abordagem diferente: o Cálculo Lambda
+\cite{church1932set,church1936unsolvable,sep-turing-machine}. 
+O primeiro baseia-se em modificação do estado em 
+uma fita, enquanto o segundo abordava a aplicação 
+de funções. Apesar do princípio por trás de ambos 
+ser bem diferente, sua aplicação é computacionalmente 
+equivalente, permitindo que as duas ideias possam 
+ser usadas para resolver os mesmos problemas
+\cite{sep-church-turing}.
+
+%delimitação do tema
+
+Durante o processo de construção de um 
+software, podem surgir problemas de \textit{design} 
+recorrentes, sendo alguns desses problemas 
+tão comuns que tornaram necessário definir soluções 
+reutilizáveis para os mesmos, os padrões 
+de projeto. Por o paradigma 
+de programação orientado a objetos ser o mais 
+popular e mais utilizado no mercado de trabalho, 
+existem catálogos de padrões de projetos voltados 
+para o desenvolvimento orientado a objetos. 
+Entretanto, existem outros paradigmas de 
+programação, como a programação funcional, 
+que apresenta uma abordagem diferente 
+do desenvolvimento de software.
+
+%problema de pesquisa
+
+O paradigma orientado a objetos possui uma 
+abordagem mais equivalente à máquina de Turing, 
+enquanto o paradigma funcional 
+tem como origem o próprio cálculo lambda. 
+Dessa forma, é possível que os padrões de 
+projeto desenvolvidos com base no paradigma 
+orientado a objetos também sejam aplicáveis 
+durante o desenvolvimento no contexto funcional. 
+
+%objetivos gerais e específicos do trabalho
+
+Com isso, este trabalho tem como objetivo 
+analisar um conjunto de padrões de projeto 
+conhecidos utilizando conceitos de programação 
+funcinal. A intenção é verificar se os 
+problemas mencionados pelo padrão existem 
+em um contexto funcional e quais 
+seriam as consequências de implementá-lo 
+levando em consideração tanto as vantagens 
+quanto as limitações desse paradigma.
+
+%justificativa das escolhas
+
+O conjunto de padrões de projeto escolhido 
+para a análise é composto dos vinte e três 
+padrões de projeto \textit{Gang of Four}. 
+Esses padrões foram catalogados em um livro 
+por quatro desenvolvedores e representam 
+um conjunto conhecido de padrões de projeto 
+de desenvolvimento orientado a objetos. 
+Já a linguagem funcional escolhida é a 
+linguagem Scala. Essa linguagem 
+apresenta tanto conceitos de orientação 
+a objetos quanto de programação funcional, 
+o que permite que os exemplos em código 
+apresentados no trabalho sejam feitos 
+utilizando a mesma linguagem, facilitando 
+a assimilação dos mesmos por parte do 
+leitor. Entretanto, ela permite tanto 
+escrever código apenas orientado a 
+objetos quanto código apenas funcional, 
+o que permite que os exemplos em 
+código não misturem ambos os conceitos 
+quando não desejado.
+
+%metodologia
 
 
-Durante o processo de construção de um software diversos problemas de design são 
-enfrentados, alguns mais simples, outros mais trabalhosos. Alguns desses problemas 
-são tão comuns que achou-se necessário definir um padrão de solução para eles, 
-reduzindo o tempo que desenvolvedores que passariam pelo mesmo problema futuramente 
-gastariam tentando chegar até a mesma solução que outros desenvolvedores chegaram 
-no passado. Essa ideia deu origem ao que chamamos de Padrões de Projeto, soluções 
-ideais para problemas comuns ou difíceis de se resolver no desenvolvimento de software.
-Alguns desses problemas deram origem a padrões tão comuns que quatro desenvolvedores, 
-conhecidos como Gang of Four, reuniram-se para catalogar esses padrões, dando 
-origem aos vinte e três Padrões de Projeto GOF.
-Entretanto, esses padrões comuns são voltados para um paradigma de programação 
-tão comum quanto: o Orientado a Objetos. Sendo um paradigma mais conhecido através 
-de linguagens de programação famosas como Java, normalmente são esses os padrões 
-aprendidos pelos estudantes ou desenvolvedores comuns. O problema é que a 
-Orientação a Objetos não é o único paradigma 
+
+%estrutura de capitulos
+
+\begin{comment}
+    
+Na parte de desenvolvimento, haverá uma introdução 
+sobre como alguns conceitos de orientação a objetos, 
+como classes e encapsulamento, podem ser representados 
+em uma 
+linguagem funcional. Em seguida, os capítulos serão 
+divididos entre padrões criacionais, estruturais e 
+comportamentais. Ao todo, os vinte e três padrões 
+GoF serão abordados nesses três capítulos, onde serão 
+apresentadas as ideias básicas do problema que o padrão 
+busca resolver e como o resolve, seguido da abordagem 
+funcional de resolver o mesmo problema.
+    
+Após analisar todos os padrões, o capítulo de resultados 
+analisará as vantagens e desvantagens da abordagem 
+funcional para cada solução, destacando onde ela 
+contribuiu, onde atrapalhou, ou onde não fazia sentido ser 
+implementada. Essas classificações dependerão das análises 
+que serão realizadas na etapa de desenvolvimento.
+    
+Por fim, no capítulo de conclusão serão analisadas 
+as consequências dessas análises e como elas podem 
+impactar o conceito de padrões de projeto e as vantagens 
+e desvantagens de revisá-los no ponto de vista funcional.
+    
+\end{comment}
+
+
