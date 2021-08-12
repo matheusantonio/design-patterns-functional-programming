@@ -17,7 +17,7 @@ padrões de projeto.
 
 Funções puras operam apenas nos parâmetros fornecidos. 
 Elas não leem ou escrevem em qualquer valor que esteja 
-fora do corpo da função\cite{purefunctionscala, functionalscala}. Por exemplo:
+fora do corpo da função\cite{purefunctionscala, functionalscala}.
 
 \begin{lstlisting}[caption={Exemplo de Função Pura},label=purefunction]
 
@@ -27,16 +27,15 @@ fora do corpo da função\cite{purefunctionscala, functionalscala}. Por exemplo:
 
 \end{lstlisting}
 
-A função acima opera apenas nos valores x e y que 
+A função apresentada no código \ref{purefunction} 
+opera apenas nos valores x e y que 
 são passados como parâmetro da função. A partir 
 dessa restrição, algumas conclusões relevantes podem 
 ser tiradas. Por exemplo, uma função pura sempre 
 retornará o mesmo valor para os mesmos parâmetros: 
-caso a função add acima receba os parâmetros 1 para x 
+caso a função add vista receba os parâmetros 1 para x 
 e 2 para y, não importa quantas vezes ela seja chamada, 
 o resultado da operação sempre será 3\cite{functionalscala}.
-
-Em seguida, um exemplo de função não pura:
 
 \begin{lstlisting}[caption={Exemplo de Função Pura},label=impurefunction]
 
@@ -48,9 +47,10 @@ Em seguida, um exemplo de função não pura:
 
 \end{lstlisting}
 
-Essa função não é pura pois ela depende de um 
-valor externo - a variável z - para realizar 
-uma operação. Existe ainda um outro problema 
+O código \ref{impurefunction} apresenta uma função 
+não pura, modify. Essa função não é pura pois 
+depende de um valor externo - a variável z - para 
+realizar uma operação. Existe ainda um outro problema 
 com esse tipo de função: sua execução implica em 
 um efeito colateral.
 
@@ -64,20 +64,23 @@ Esse tipo de comportamento é muito comum em
 paradigmas de programação imperativos ou 
 orientados a objetos, porém 
 podem causar dificuldades no processo de 
-debug de um código, afinal, se uma variável 
-pode ser alterada em qualquer lugar, um 
-valor errado que ela está assumindo pode 
-estar vindo de qualquer lugar.
+\textit{debug} de um código, afinal, 
+quanto maior for a quantidade de locais onde 
+uma variávei pode ser modificada, maior 
+será o esforço para encontrar a origem de 
+um problema relacionado ao valor que essa 
+variável pode assumir.
 
 Apesar disso, um programa precisa realizar 
 efeitos colaterais, como os já citados: 
 leitura e escrita em arquivos ou bancos de 
 dados, requisições em servidores, exibição em 
-uma tela. Por isso, a ideia no design de software 
-funcional não é apenas utilizar funções puras, 
-mas concentrar os efeitos colaterais em um local 
-isolado das funções puras, o que facilita o 
-processo de debugging\cite{purefunctionscala}.
+uma tela. Por isso, a ideia no \textit{design} de 
+\textit{software} funcional não é apenas utilizar 
+funções puras, mas concentrar esses efeitos 
+colaterais necessários em um local isolado das 
+funções puras, o que facilita o 
+processo de \textit{debugging}\cite{purefunctionscala}.
 
 
 
@@ -86,8 +89,8 @@ processo de debugging\cite{purefunctionscala}.
 
 Em programação funcional, a ideia de variáveis não 
 existe, ou ao menos possui uma definição diferente\cite{braveclojure}.
-Em paradigmas procedurais é comum encontrarmos trechos 
-de código parecidos com:
+Em paradigmas procedurais é comum encontar trechos 
+de código parecidos com o apresentado no código \ref{mutablevar}.
 
 \begin{lstlisting}[caption={Exemplo de Código Mutável},label=mutablevar]
 
@@ -98,20 +101,19 @@ de código parecidos com:
 \end{lstlisting}
 
 Porém, esse tipo de operação não é permitida no 
-paradigma funcional. Aqui é seguido o princípio 
+paradigma funcional, já que ele segue o princípio 
 da imutabilidade, onde uma variável \footnote{Aqui, 
 variável é entendida como um valor armazenado 
 e não um valor variável.} que armazena um valor 
 não pode ter esse valor alterado até o fim da 
-execução do programa. Dessa forma, 
-o código apresentado anteriormente não seria 
-possível.
+execução do programa. Esse princípio é violado  
+pelo código \ref{mutablevar}.
 
 Em um programa funcional, a modificação do valor 
 de uma variável é feita copiando o valor para uma 
 nova variável que passará a representar esse valor\cite{functionalscala}.
-Por exemplo, o código acima poderia ser escrito 
-como:
+Por exemplo, o código \textit{mutablevar} poderia ser 
+escrito como no código \ref{imutablevar}.
 
 \begin{lstlisting}[caption={Exemplo de Código Imutável},label=imutablevar]
 
@@ -121,16 +123,14 @@ como:
 
 \end{lstlisting}
 
-Isso pode parecer problemático quando é necessário 
+Apesar de parecer problemático quando é necessário 
 modificar um único valor em uma lista ou uma estrutura 
-maior e mais complexa. Porém, o compilador faz isso 
-de uma forma mais eficiente, sem que seja 
+de dados maior e mais complexa, o compilador torna o 
+processo de cópia mais eficiente, sem que seja 
 necessário de fato copiar toda a estrutura\cite{functionalscala}. 
-Dessa forma, a imutabilidade está presente apenas durante a 
-programação, impedindo que um valor seja alterado 
-acidentalmente pelo programador ou de forma imprevista 
-no caso de um programa multi-thread, por exemplo.
-
+Dessa forma, a imutabilidade impede que um valor 
+atribuído seja alterado apenas durante a 
+programação.
 
 
 % Funções de alta ordem
@@ -154,7 +154,7 @@ funções de alta ordem é a função map\cite{hofscala}. Seu objetivo
 coleção e retornar a nova coleção resultante. 
 Para que isso seja possível, a função map precisa 
 receber como parâmetro a função que será aplicada. 
-Por exemplo:
+O código \ref{hof} demonstra o uso dessa função.
 
 \begin{lstlisting}[caption={Exemplo de Função de Alta Ordem},label=hof]
 
@@ -170,7 +170,8 @@ Por exemplo:
 
 Em uma linguagem que não aceita funções sendo 
 passadas por parâmetro, uma operação simples como 
-essa poderia tornar-se mais verbosa e menos legível:
+essa poderia se tornar mais verbosa e menos legível, 
+como no código \ref{nohof}.
 
 \begin{lstlisting}[caption={Exemplo sem Funções de Alta Ordem},label=nohof]
 
@@ -187,6 +188,7 @@ essa poderia tornar-se mais verbosa e menos legível:
 
 \end{lstlisting}
 
+\begin{comment}
 Talvez a implementação da função map seja parecida 
 com a função acima, porém, um programador que não 
 conhece o programa levaria muito menos tempo para 
@@ -194,7 +196,7 @@ entender a primeira implementação do que a segunda.
 Além disso, para cada função diferente que poderia 
 ser aplicada a essa mesma coleção, a mesma 
 implementação teria que ser repetida.
-
+\end{comment}
 
 
 
@@ -204,7 +206,9 @@ implementação teria que ser repetida.
 Currying é uma técnica de programação funcional que 
 permite que uma função com mais de um parâmetro seja 
 chamada como se possuísse apenas um\cite{realworldhaskell, functionalscala}. 
-Por exemplo, a função:
+Por exemplo, a função add apresentada no código 
+\ref{nocurrex} poderia ser escrita como no código 
+\ref{currex}.
 
 \begin{lstlisting}[caption={Exemplo sem Currying},label=nocurrex]
 
@@ -213,8 +217,6 @@ Por exemplo, a função:
     }
 
 \end{lstlisting}
-
-Poderia ser escrita da seguinte forma:
 
 \begin{lstlisting}[caption={Exemplo de Currying},label=currex]
 
@@ -226,7 +228,7 @@ Poderia ser escrita da seguinte forma:
 
 Essa técnica simplifica a composição de funções 
 que possuem quantidades diferentes de parâmetros. 
-Normalmente, em linguagens funcionais não é 
+Em algumas linguagens funcionais não é 
 necessário refatorar o código como foi feito 
 acima, já que as funções implementam essa técnica 
 nativamente\cite{realworldhaskell}.
@@ -236,7 +238,15 @@ nativamente\cite{realworldhaskell}.
 % Closures
 \section{Closures}
 
-Considerando a seguinte função:
+No código \ref{closureex} é definida a função adder que 
+recebe como parâmetro um valor x e retorna uma função 
+que recebe como parâmetro outro valor y, retornando a 
+soma dos dois valores. A variável add10 receberá 
+o retorno da chamada da função adder para o valor 10. 
+Com isso, add10 será uma função que receberá como 
+parâmetro um número e adicionará 10 a ele. Quando 
+add10 é chamada com o valor 5 sendo passado como 
+parâmetro, o retorno da função é 15.
 
 \begin{lstlisting}[caption={Exemplo de Closure},label=closureex]
 
@@ -252,24 +262,13 @@ Considerando a seguinte função:
 
 \end{lstlisting}
 
-Nele, definimos uma função adder que 
-recebe como parâmetro um valor x e retorna uma função 
-que recebe como parâmetro outro valor y, retornando a 
-soma dos dois valores. A variável add10 receberá 
-o retorno da chamada da função adder para o valor 10. 
-Com isso, add10 será uma função que receberá como 
-parâmetro um número e adicionará 10 a ele. Quando 
-add10 é chamada com o valor 5 sendo passado como 
-parâmetro, o retorno da função é 15.
-
 Para que isso seja possível, a função retornada por 
 adder precisou ter acesso ao valor da variável x mesmo 
 após o fim da execução de adder. Isso foi possível 
 por a variável x estar dentro do escopo da função 
-quando ela foi criada. Esse comportamento, que trás 
-novas possibilidades para o retorno de funções, 
+quando ela foi criada. Esse comportamento, 
+possível através do retorno de funções, 
 é chamado de closure\cite{mflambdas}.
-
 
 
 % Composição de funções
@@ -277,10 +276,9 @@ novas possibilidades para o retorno de funções,
 
 Reuso de código é um objetivo desejável para qualquer 
 paradigma de programação, e o paradigma funcional 
-proporciona uma facilidade para isso através de 
-composição de funções\cite{realworldhaskell}.
-
-O código abaixo exemplifica esse recurso:
+aproveita a composição de funções para seguir esse 
+princípio\cite{realworldhaskell}.
+O código \ref{fogex} exemplifica esse recurso.
 
 \begin{lstlisting}[caption={Exemplo de Composição de Funções},label=fogex]
 
@@ -309,15 +307,16 @@ O código abaixo exemplifica esse recurso:
 de comportamento. Entretanto, 
 utilizar funções menores e mais simples para compor 
 funções maiores e mais complicadas é uma forma de 
-design comum em linguagens funcionais. Uma vantagem é 
+\textit{design} comum em linguagens funcionais. Uma vantagem é 
 que em linguagens funcionais as composições podem 
 tornar-se mais legíveis utilizando funções 
-de alta ordem \footnote{Aqui, a função compose 
+de alta ordem, como pode ser visto no código 
+\ref{hofogex} \footnote{Aqui, a função compose 
 recebe as funções add1 e mul2 e retorna a 
 composição delas. A função resultante 
 é recebida como parâmetro de compose novamente, 
 assim como a função sub4, resultando em uma função 
-equivalente a sub4(mul2(add1()))}:
+equivalente a sub4(mul2(add1()))}.
 
 \begin{lstlisting}[caption={Exemplo de Composição de Funções},label=hofogex]
 
