@@ -207,7 +207,13 @@ necessárias para acessá-los ou modificá-los.
 Um exemplo equivalente ao do código \ref{fpclass} 
 pode ser visto no código \ref{fpclosure}, 
 implementado utilizando a linguagem funcional Clojure. 
-\cite{classlessjs}
+\cite{classlessjs} Nele, a função pessoa 
+funciona como um construtor que recebe como 
+parâmetro o nome e a idade de uma pessoa e 
+retorna um dicionário com as funções para 
+recuperar ou modificar o estado de uma pessoa.
+As funções de modificação retornam uma nova versão 
+da pessoa com o estado alterado.
 
 \begin{lstlisting}[caption={Representação de uma classe com closures},label=fpclosure]
     
@@ -238,7 +244,7 @@ de uma classe.
 
 \begin{lstlisting}[caption={Módulos como forma de encapsulamento},label=modulesencap]
     
-    module Pessoa (Pessoa, getNome, setNome, getIdade, setIdade) where
+    module Pessoa (Pessoa, newPessoa, getNome, setNome, getIdade, setIdade) where
 
     data Pessoa = P (String, Int)
 
@@ -272,15 +278,16 @@ de uma função podem dificultar tanto a
 implementação dessas funções quanto seu uso 
 no resto do programa.
 
-Sendo o objetivo dessa seção demostrar que 
+Sendo o objetivo dessa seção demonstrar que 
 o encapsulamento pode ser implementado e 
 não definir como implementá-lo, 
 a abordagem utilizada para o encapsulamento 
 durante a análise dos padrões será 
 omitida, a menos que ela seja relevante para 
 sua implementação. Essa omissão 
-também tem como objetivo facilitar o entendimento 
-da abordagem funcional que será utilizada nos padrões. 
+também tem como objetivo não particularizar o 
+método de encapsulamento utilizado durante a 
+implementação dos exemplos.
 
 % interfaces
 \section{Interfaces}
@@ -349,7 +356,7 @@ no código \ref{fpinterface1}.
 
 Quando é desejado que uma classe seja incluída ou 
 utilizada como base para a criação de outra classe, 
-usa-se a herança\cite{quarkoo}. Desas forma, é 
+usa-se a herança\cite{quarkoo}. Dessa forma, é 
 possível criar implementações mais específicas 
 de classes já existentes e reaproveitar o código. 
 O exemplo \ref{ooinheritance} demonstra 
@@ -412,7 +419,7 @@ uma classe pai e o tipo Cachorro uma class filha.
 
     def getAnimal(cachorro : Cachorro) : Animal = cachorro._1;
     def bark(cachorro : Cachorro) : String = 
-        "Au! Meu nome é " + getNome(getAnimal(cachorro))
+        "Au! Meu nome é " + getName(getAnimal(cachorro))
     def eat(cachorro : Cachorro) : String = 
         eat(getAnimal(Cachorro)) + "\nEu como comida de cachorro";
 
