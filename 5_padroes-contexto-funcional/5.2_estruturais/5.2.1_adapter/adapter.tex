@@ -71,6 +71,10 @@ implementação em código pode ser vista no código
 
 \begin{lstlisting}[caption={Adapter Orientado a Objetos},label=ooadapter]
 
+class DrawingEditor(shape : Shape) {
+
+}
+
 abstract class Shape(var bottomLeft : Point, var topRight : Point) {
   def BoundingBox() : Int
   def CreateManipulator()
@@ -104,8 +108,8 @@ class TextView(var x : Point, var y : Point, var width : Int, var height : Int) 
 
 \subsection*{Contexto Funcional}
 
-No código \ref{fpadapter}, a função BoudingBox declarada 
-na linha 2 recebe como parâmetro uma operação de um 
+No código \ref{fpadapter}, a função DrawingEditorFunction 
+declarada na linha 2 recebe como parâmetro uma operação de um 
 objeto gráfico. Porém, é desejado utilizar a operação 
 GetExtent, declarada na linha 7, de um \textit{text view} 
 que não é comportado pela ferramenta. Para que essa 
@@ -113,14 +117,14 @@ operação possa ser reutilizada, a função
 AdaptTextShapeBoundingBox declarada na linha 11 
 recebe como parâmetro o \textit{text view} e retorna 
 uma função que executa GetExtent, com a assinatura 
-necessária para ser recebida pela função BoundingBox. 
-Com o uso das funções de alta ordem, foi necessário 
-apenas uma nova função intermediária para realizar a 
-adaptação.
+necessária para ser recebida pela função 
+DrawingEditorFunction. Com o uso das funções de alta 
+ordem, foi necessário apenas uma nova função intermediária 
+para realizar a adaptação. 
 
 \begin{lstlisting}[caption={Adapter Funcional},label=fpadapter]
     
-def BoundingBox(CalculateBounding : () => Int) : Int = {
+def DrawingEditorFunction(CalculateBounding : () => Int) : Int = {
   // ...
   CalculateBounding()
 }
@@ -134,5 +138,5 @@ def AdaptTextShapeBoundingBox(view : TextView): () => Int =
     // ...
     GetExtent(view)
   }
-    
+
 \end{lstlisting}

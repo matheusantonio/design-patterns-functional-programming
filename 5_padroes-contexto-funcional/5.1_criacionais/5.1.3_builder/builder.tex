@@ -157,7 +157,10 @@ ParseRTFBuilder passando as operações
 desejadas. Isso pode ser visto na linha 16, 
 onde o valor ParseRTFToASCII é o resultado 
 da definição do \textit{builder} que converte 
-RTF em texto no formato ASCII.
+RTF em texto no formato ASCII. Como as funções 
+podem ser definidas em tempo de execução, essa 
+implementação permite que os \textit{builders} 
+sejam criados dinamicamente.
 
 \begin{lstlisting}[caption={Builder Funcional},label=fpbuilder]
     
