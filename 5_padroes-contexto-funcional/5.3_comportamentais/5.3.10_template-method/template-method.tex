@@ -11,10 +11,10 @@ em apenas uma classe a estrutura de uma operação. Além disso,
 não só apenas a estrutura do algoritmo como qualquer etapa em 
 comum para todas as subclasses pode ser concentrada na superclasse, 
 evitando mais ainda a repetição do código. A estrutura do padrão 
-pode ser vista na figura \ref{tpmethod_struct}.
+pode ser vista na Figura \ref{tpmethod_struct}.
 
 \begin{figure}[htb]
-	\caption{\label{tpmethod_struct}Estrutura do Template Method}
+	\caption{\label{tpmethod_struct}Estrutura do Template Method.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.10_template-method/templatemethod_estrutura.png}
 	\end{center}
@@ -23,17 +23,17 @@ pode ser vista na figura \ref{tpmethod_struct}.
 \subsection*{Exemplo Orientado a Objetos}
 
 Como exemplo pode ser consideraro um \textit{framework} que fornece uma classe para abrir documentos. Essa classe possui operações abstratas para cada etapada da abertura de um documento, de forma que as subclasses que a estendem podem definir formas diferentes de abrir documentos de tipos diferentes. A operação AddDocument é o template method, responsável por chamar as demais operações implementadas pelas subclasses. 
-O diagrama de classes do exemplo pode ser visto na imagem \ref{tpmethod_exemplo}, 
-enquanto a implementação pode ser vista no código \ref{ootpmethod}.
+O diagrama de classes do exemplo pode ser visto na Figura \ref{tpmethod_exemplo}, 
+enquanto a implementação pode ser vista no Código \ref{ootpmethod}.
 
 \begin{figure}[htb]
-	\caption{\label{tpmethod_exemplo}Exemplo de Template Method}
+	\caption{\label{tpmethod_exemplo}Exemplo de Template Method.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.10_template-method/templatemethod_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Template Method Orientação a Objetos},label=ootpmethod]
+\begin{lstlisting}[caption={Template Method Orientação a Objetos.},label=ootpmethod]
 
 abstract class Document {
   def Save() : Unit = {
@@ -99,9 +99,9 @@ através de funções de alta ordem e composição de funções.
 O método OpenDocument (o \textit{template method}) é 
 uma função de alta ordem que recebe como parâmetro todas 
 as funções necessárias para executar o algoritmo. 
-O exemplo pode ser visto no código \ref{fptpmethod}.
+O exemplo pode ser visto no Código \ref{fptpmethod}.
 
-\begin{lstlisting}[caption={Template Method Funcional},label=fptpmethod]
+\begin{lstlisting}[caption={Template Method Funcional.},label=fptpmethod]
     
 object Application {
 
@@ -134,7 +134,7 @@ object Application {
 Para definir uma implementação do algoritmo, basta 
 definir uma nova função que é a combinação do método 
 template com as funções que representam as etapas do 
-algoritmo. O código \ref{algotpmethod} define uma 
+algoritmo. O Código \ref{algotpmethod} define uma 
 nova função, MyApplicationOpenDocument, que recebe 
 como parâmetro o nome do arquivo e uma lista de 
 documentos. Ela retorna a função OpenDocument com as 
@@ -145,7 +145,7 @@ pode ser reutilizada da mesma forma que a classe
 MyApplication seria reutilizada no exemplo orientado 
 a objetos.
 
-\begin{lstlisting}[caption={Definição do algoritmo},label=algotpmethod]
+\begin{lstlisting}[caption={Definição do algoritmo.},label=algotpmethod]
     
 val MyApplicationOpenDocument = 
     (filename : String, documents : List[Document]) => 

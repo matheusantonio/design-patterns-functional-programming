@@ -2,7 +2,7 @@
 
 \section{Factory Method}
 
-O Factory Method define uma interface para criar 
+O \textit{Factory Method} define uma interface para criar 
 objetos de forma que a responsabilidade de criação 
 desses objetos seja da classe que irá implementá-la. 
 Assim, a interface não precisa saber qual 
@@ -10,18 +10,18 @@ classe deve ser instanciada, permitindo que versões
 diferentes ou implementações específicas de um mesmo 
 tipo de objeto possam ser criadas.\cite{gamma:1995}
 
-Na figura \ref{fmethod_struct} é demonstrada 
-a estrutura do padrão, onde a classe abstrata Creator 
+Na Figura \ref{fmethod_struct} é demonstrada 
+a estrutura do padrão, onde a classe abstrata \texttt{Creator} 
 define a operação abstrata que cria o objeto, 
-o \textit{factory method}. A classe ConcreteCreator 
-implementa a operação FactoryMethod, criando um objeto 
-do tipo ConcreteProduct, que é uma implementação 
-específica de um tipo Product. Dessa forma, a classe 
-abstrata Creator não precisa saber qual implementação 
-de Product será criada.
+o \textit{factory method}. A classe \texttt{ConcreteCreator} 
+implementa a operação \texttt{FactoryMethod}, criando um objeto 
+do tipo \texttt{ConcreteProduct}, que é uma implementação 
+específica de um tipo \texttt{Product}. Dessa forma, a classe 
+abstrata \texttt{Creator} não precisa saber qual implementação 
+de \texttt{Product} será criada.
 
 \begin{figure}[htb]
-	\caption{\label{fmethod_struct}Estrutura do Factory Method}
+	\caption{\label{fmethod_struct}Estrutura do \textit{Factory Method}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/factorymethod_struct.png}
 	\end{center}
@@ -33,22 +33,22 @@ de Product será criada.
 Como exemplo é apresentado um \textit{framework} 
 que cria e apresenta para o usuário múltiplos 
 documentos. Para isso, a classe abstrata 
-Application é definida com a operação abstrata 
-CreateDocument e com uma lista de objetos 
-que implementam a interface Document. A classe 
-concreta MyDocument implementa Document e define 
+\texttt{Application} é definida com a operação abstrata 
+\texttt{CreateDocument} e com uma lista de objetos 
+que implementam a interface \texttt{Document}. A classe 
+concreta \texttt{MyDocument} implementa \texttt{Document} e define 
 um tipo de documento que pode ser utilizado pelo 
 \textit{framework}, enquanto a classe concreta 
-MyApplication herda de Application e implementa 
-a operação CreateDocument para que ela crie 
-um objeto do tipo MyDocument. O diagrama de classes 
-para o exemplo pode ser visto na figura \ref{fmethod_example}, 
+\texttt{MyApplication} herda de \texttt{Application} e implementa 
+a operação \texttt{CreateDocument} para que ela crie 
+um objeto do tipo \texttt{MyDocument}. O diagrama de classes 
+para o exemplo pode ser visto na Figura \ref{fmethod_example}, 
 enquanto a implementação pode ser vista no 
-código \ref{oofactory}.
+Código \ref{oofactory}.
 
 
 \begin{figure}[htb]
-	\caption{\label{fmethod_example}Exemplo de Factory Method}
+	\caption{\label{fmethod_example}Exemplo de \textit{Factory Method}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/factorymethod_exemplo.png}
 	\end{center}
@@ -107,7 +107,7 @@ class MyDocument extends Document {
 
 As funções de alta ordem tornam desnecessária 
 a criação de uma especialização da classe 
-Application vista no exemplo orientado a 
+\texttt{Application} vista no exemplo orientado a 
 objetos. Ao invés de criar uma nova classe 
 apenas para definir o tipo de documento 
 que será instanciado, basta que 
@@ -116,16 +116,16 @@ a função responsável pela criação do documento.
 Assim, qualquer função que crie um documento 
 pode ser usada. 
 
-O código \ref{fpfactory} demonstra a definição 
-do tipo Document na linha 2, além da função 
+O Código \ref{fpfactory} demonstra a definição 
+do tipo \texttt{Document} na linha 2, além da função 
 que cria um tipo específico de documento na 
 linha 4. Uma função qualquer da aplicação, 
-como a função ApplicationFunction 
+como a função \texttt{ApplicationFunction} 
 definida na linha 8, recebe como parâmetro 
 uma função que retorna um documento. Por 
 fim, na linha 14 pode ser vista a chamada 
-da função ApplicationFunction recebendo a 
-função de criação CreateMyDocument.
+da função \texttt{ApplicationFunction} recebendo a 
+função de criação \texttt{CreateMyDocument}.
 
 \begin{lstlisting}[caption={Factory Method Funcional},label=fpfactory]
     
@@ -137,7 +137,7 @@ def CreateMyDocument() : Document = {
 
 def ApplicationFunction(createDocument : () => Document): Unit = {
   // ...
-  val docuemnt = createDocument()
+  val document = createDocument()
   // ...
 }
 

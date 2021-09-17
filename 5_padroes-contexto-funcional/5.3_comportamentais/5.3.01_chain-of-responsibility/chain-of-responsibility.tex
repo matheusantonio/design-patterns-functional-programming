@@ -15,10 +15,10 @@ que tratam as solicitações e permite que os \textit{handlers}
 sejam definidos dinamicamente. Por outro lado, pode não ser 
 possível prever se uma solicitação de um cliente será atendida, 
 caso um \textit{handler} adequado não esteja na cadeia. A 
-estrutura do padrão pode ser vista na figura \ref{chain_struct}.
+estrutura do padrão pode ser vista na Figura \ref{chain_struct}.
 
 \begin{figure}[htb]
-	\caption{\label{chain_struct}Estrutura do Chain of Responsibility}
+	\caption{\label{chain_struct}Estrutura do Chain of Responsibility.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.01_chain-of-responsibility/chainofresponsibility_struct.png}
 	\end{center}
@@ -34,17 +34,17 @@ desejado. O objeto que fornece a ajuda não é
 conhecido pelos objetos dos \textit{widgets} da 
 interface, ele pertence a uma cadeia que é 
 percorrida sempre que o usuário solicita 
-a ajuda. A figura \ref{chain_exemplo} e o código 
+a ajuda. A Figura \ref{chain_exemplo} e o Código 
 \ref{oochresponsibility} demonstram esse exemplo.
 
 \begin{figure}[htb]
-	\caption{\label{chain_exemplo}Exemplo de Chain of Responsibility}
+	\caption{\label{chain_exemplo}Exemplo de Chain of Responsibility.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.01_chain-of-responsibility/chainofresponsibility_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Chain of Responsibility Orientação a Objetos},label=oochresponsibility]
+\begin{lstlisting}[caption={Chain of Responsibility Orientação a Objetos.},label=oochresponsibility]
 
 class HelpHandler(handler: HelpHandler = null, topic : Topic.Value = Topic.NO_HELP_TOPIC) {
 
@@ -117,7 +117,7 @@ utilizando funções de alta ordem, onde um
 uma classe, que armazena em uma \textit{closure} 
 a função do próximo elemento da cadeia. 
 
-O código \ref{fpchresponsibility} demonstra a 
+O Código \ref{fpchresponsibility} demonstra a 
 criação dos \textit{handlers}. Na linha 2, a 
 função HandleButton recebe como parâmetro um 
 tópico e o próximo \textit{handler} da cadeia, 
@@ -132,7 +132,7 @@ HandleHelp, na linha 22, não recebe novos
 genérica, da mesma forma que a classe 
 Application do exemplo orientado a objetos.
 
-\begin{lstlisting}[caption={Chain of Responsibility Funcional},label=fpchresponsibility]
+\begin{lstlisting}[caption={Chain of Responsibility Funcional.},label=fpchresponsibility]
     
 def HandleButton(topic : Topic.Value, handler : () => Unit) : () => Unit = {
   () => {
@@ -160,13 +160,13 @@ def HandleHelp() : Unit = {
     
 \end{lstlisting}
 
-O código \ref{fpchainfunction} demonstra a criação 
+O Código \ref{fpchainfunction} demonstra a criação 
 da cadeia, onde as funções apresentadas anteriormente 
 são executadas e encadeadas, criando a função 
 ChainofResponsibility que será utilizada para 
 tratar todas as solicitações.
 
-\begin{lstlisting}[caption={Função Chain of Responsability},label=fpchainfunction]
+\begin{lstlisting}[caption={Função Chain of Responsability.},label=fpchainfunction]
     
 val ChainofResponsibility: () => Unit = HandleButton(Topic.BUTTON,
   HandleDialog(Topic.DIALOG,

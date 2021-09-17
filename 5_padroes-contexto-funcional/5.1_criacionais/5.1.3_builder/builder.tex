@@ -9,7 +9,7 @@ Isso permite que um mesmo processo de criação
 possa gerar representações diferentes de um mesmo 
 objeto.\cite{gamma:1995}
 
-A figura \ref{builder_struct} apresenta 
+A Figura \ref{builder_struct} apresenta 
 a estrutura do Builder, onde a interface 
 Builder define uma operação para criar uma 
 parte do objeto. A classe ConcreteBuilder, que 
@@ -21,7 +21,7 @@ partes do objeto, através da operação
 Construct.
 
 \begin{figure}[htb]
-	\caption{\label{builder_struct}Estrutura do Builder}
+	\caption{\label{builder_struct}Estrutura do Builder.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.3_builder/builder_estrutura.png}
 	\end{center}
@@ -29,7 +29,7 @@ Construct.
 
 \subsection*{Exemplo Orientado a Objetos}
 
-Como exemplo, podemos observar um leitor de 
+Como exemplo, é possível observar um leitor de 
 documentos do tipo RTF (\textit{Rich Text Format}), 
 que deve permitir a conversão de documentos RTF 
 para outros formatos, como texto em ASCII ou em um 
@@ -39,7 +39,7 @@ possíveis é grande, deve ser possível adicionar
 novos formatos sem que seja necessário modificar 
 a classe do leitor de documentos RTF. 
 
-O diagrama de classes apresentado na imagem 
+O diagrama de classes apresentado na Figura 
 \ref{builder_exemplo} demonstra o uso do padrão 
 Builder para esse exemplo. Para cada formato possível 
 de conversão, uma nova classe Builder é criada. 
@@ -50,10 +50,10 @@ em ASCII, LaTeX e \textit{widget} de texto interativo.
 A classe RTFReader chama as operações de construção 
 dos conversores desejados. O exemplo de 
 implementação dessa abordagem é apresentado no 
-código \ref{oobuilder}.
+Código \ref{oobuilder}.
 
 \begin{figure}[htb]
-	\caption{\label{builder_exemplo}Exemplo de Builder}
+	\caption{\label{builder_exemplo}Exemplo de Builder.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.3_builder/builder_exemplo.png}
 	\end{center}
@@ -140,7 +140,7 @@ padrão Builder. Ao invés de definir novas
 classes para cada tipo de builder, uma função 
 pode receber como 
 parâmetro as operações de construção desejadas. 
-No código \ref{fpbuilder}, essa função é a 
+No Código \ref{fpbuilder}, essa função é a 
 ParseRTFBuilder, definida na linha 2. 
 Para facilitar o reuso de tipos diferentes 
 de \textit{builder}, ela retorna uma nova 
@@ -162,7 +162,7 @@ podem ser definidas em tempo de execução, essa
 implementação permite que os \textit{builders} 
 sejam criados dinamicamente.
 
-\begin{lstlisting}[caption={Builder Funcional},label=fpbuilder]
+\begin{lstlisting}[caption={Builder Funcional.},label=fpbuilder]
     
 def ParseRTFBuilder(convertCharacter : Char => Token,
              convertFontChange : String => Token,

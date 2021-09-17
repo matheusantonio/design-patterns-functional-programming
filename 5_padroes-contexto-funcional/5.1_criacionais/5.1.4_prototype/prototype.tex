@@ -9,7 +9,7 @@ protótipos podem ser clonados e assim
 reutilizados por outros objetos, sendo uma 
 alternativa à herança. \cite{gamma:1995}
 
-A estrutura do padrão, apresentada na imagem 
+A estrutura do padrão, apresentada na Figura 
 \ref{prototype_struct}, mostra uma interface 
 Prototype que define a operação Clone, responsável 
 por copiar o protótipo reutilizável de um objeto. 
@@ -22,7 +22,7 @@ implementação, o que as torna independentes e
 diminui o acoplamento.
 
 \begin{figure}[htb]
-	\caption{\label{prototype_struct}Estrutura do Prototype}
+	\caption{\label{prototype_struct}Estrutura do Prototype.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.4_prototype/prototype_estrutura.png}
 	\end{center}
@@ -44,17 +44,17 @@ pode receber um objeto protótipo qualquer.
 Dessa forma, trocando a herança 
 por uma delegação, é possível desenhar qualquer 
 elemento musical, desde que ele possa ser 
-clonado. A figura \ref{prototype_exemplo} e 
-o código \ref{ooprototype} ilustram esse cenário.
+clonado. A Figura \ref{prototype_exemplo} e 
+o Código \ref{ooprototype} ilustram esse cenário.
 
 \begin{figure}[htb]
-	\caption{\label{prototype_exemplo}Exemplo de Prototype}
+	\caption{\label{prototype_exemplo}Exemplo de Prototype.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.4_prototype/prototype_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Prototype Orientado a Objetos},label=ooprototype]
+\begin{lstlisting}[caption={Prototype Orientado a Objetos.},label=ooprototype]
 
 trait Graphic {
   def Draw(position : Position)
@@ -111,7 +111,7 @@ funcional, valores definidos podem
 ser reutilizados sem que haja preocupação 
 quanto a alterações de seu estado.
 
-O código \ref{fpprototype} demonstra como o 
+O Código \ref{fpprototype} demonstra como o 
 exemplo orientado a objetos anterior poderia 
 ser implementado. A função DrawPrototype, 
 definida na linha 2, recebe como parâmetro um 
@@ -126,7 +126,7 @@ que desenha um elemento gráfico, que pode ser
 alterada dinamicamente de acordo com o elemento 
 gráfico desejado.
 
-\begin{lstlisting}[caption={Prototype Funcional},label=fpprototype]
+\begin{lstlisting}[caption={Prototype Funcional.},label=fpprototype]
     
 def DrawPrototype(graphic: Graphic) : Position => Unit =
   (newPosition : Position) => {

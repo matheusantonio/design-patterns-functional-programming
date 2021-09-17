@@ -6,7 +6,7 @@ com o objeto Proxy seja controlada antes de ser
 repassada para o objeto real. Existe mais 
 de uma motivação para seu uso, apesar 
 da estrutura do padrão, 
-apresentada na figura \ref{proxy_struct},  
+apresentada na Figura \ref{proxy_struct},  
 permanecer a mesma. Essas motivações 
 podem ser divididas em três grupos de 
 proxy: remoto, virtual e de proteção. \cite{gamma:1995}
@@ -25,7 +25,7 @@ precise cumprir algum requisito antes de
 acessar o objeto real. \cite{gamma:1995}
 
 \begin{figure}[htb]
-	\caption{\label{proxy_struct}Estrutura do Proxy}
+	\caption{\label{proxy_struct}Estrutura do Proxy.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.7_proxy/proxy_estrutura.png}
 	\end{center}
@@ -46,17 +46,17 @@ documento. Quando o documento termina de
 ser aberto, as imagens são carregadas de 
 fato através de seus proxys. Esse é um 
 exemplo de proxy virtual, seu diagrama de 
-classes pode ser visto na imagem \ref{proxy_exemplo} 
-e a implementação no código \ref{ooproxy}.
+classes pode ser visto na Figura \ref{proxy_exemplo} 
+e a implementação no Código \ref{ooproxy}.
 
 \begin{figure}[htb]
-	\caption{\label{proxy_exemplo}Exemplo de Proxy}
+	\caption{\label{proxy_exemplo}Exemplo de Proxy.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.7_proxy/proxy_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Proxy Orientado a Objetos},label=ooproxy]
+\begin{lstlisting}[caption={Proxy Orientado a Objetos.},label=ooproxy]
 
 trait Graphic {
   def Draw(point : Point)
@@ -129,7 +129,7 @@ orientado a objetos, executará a função
 real, de acordo com o tipo de proxy que 
 deve ser implementado. 
 
-No código \ref{fpproxy}, a função intermediária 
+No Código \ref{fpproxy}, a função intermediária 
 DrawImageProxy, definida na linha 6, chama a 
 função real DrawImage, definida na linha 2. 
 A função EditorFunction, definida na linha 11, 
@@ -151,7 +151,7 @@ Isso faz com que o cliente precise gerenciar
 a mudança do Proxy, violando 
 um dos propósitos do padrão. 
 
-\begin{lstlisting}[caption={Proxy Funcional},label=fpproxy]
+\begin{lstlisting}[caption={Proxy Funcional.},label=fpproxy]
     
 def DrawImage(point : Point, image : Image) : Image = {
   // Desenha a imagem

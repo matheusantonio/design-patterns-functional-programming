@@ -19,20 +19,21 @@ bloco de código envolvido pelas chaves na definição da
 classe, o que inclui também a declaração dos métodos 
 e dos atributos\cite{wampler2021}. O exemplo mais 
 simples de um construtor 
-está no código \ref{scalaconstructor1}, onde a classe 
-Person define os atributos firstName e lastName, que 
+está no Código \ref{scalaconstructor1}, no qual a classe 
+\texttt{Person} define os atributos \texttt{firstName} e 
+\texttt{lastName}, que 
 devem ser passados durante a instanciação da classe. 
-Apenas essa linha é equivalente ao código \ref{javaconstructor1}, 
+Apenas essa linha é equivalente ao Código \ref{javaconstructor1}, 
 implementado em Java.
 
-\begin{lstlisting}[caption={Construtor Simples em Scala},label=scalaconstructor1]
+\begin{lstlisting}[caption={Construtor Simples em Scala.},label=scalaconstructor1]
 
     class Person(var firstName : String, var lastName : String)
 
 \end{lstlisting}
 
 
-\begin{lstlisting}[caption={Construtor Simples em Java},label=javaconstructor1]
+\begin{lstlisting}[caption={Construtor Simples em Java.},label=javaconstructor1]
 
     public class Person {
         
@@ -64,12 +65,12 @@ implementado em Java.
 \end{lstlisting}
 
 Scala também faz uso de construtores auxiliares, definidos 
-através de métodos com o nome this\cite{wampler2021}. 
+através de métodos com o nome \texttt{this}\cite{wampler2021}. 
 Dessa forma, é possível 
 definir instâncias mais flexíveis para uma classe. Esse 
-recurso pode ser visto no código \ref{scalaconstructor2}.
+recurso pode ser visto no Código \ref{scalaconstructor2}.
 
-\begin{lstlisting}[caption={Construtor Auxiliar em Scala},label=scalaconstructor2]
+\begin{lstlisting}[caption={Construtor Auxiliar em Scala.},label=scalaconstructor2]
 
     class Person(var firstName : String, var lastName : String) {
        
@@ -94,26 +95,26 @@ recurso pode ser visto no código \ref{scalaconstructor2}.
 \section{Var e Val}
 
 A linguagem também permite definir, através das 
-palavras chave var e val, valores 
+palavras chave \texttt{var} e \texttt{val}, valores 
 mutáveis ou imutáveis. Ao declarar um atributo com 
-a palavra chave val, o atributo torna-se imutável, 
+a palavra chave \texttt{val}, o atributo torna-se imutável, 
 sendo impossível alterar seu valor.\cite{wampler2021, ordesky2008} 
 Definir um atributo 
-como val é semelhante a definir uma classe sem um 
+como \texttt{val} é semelhante a definir uma classe sem um 
 método \textit{setter} para aquele atributo. Caso 
-o código \ref{scalaconstructor1} seja refatorado 
-para tornar o atributo lastName imutável, como no código 
+o Código \ref{scalaconstructor1} seja refatorado 
+para tornar o atributo \texttt{lastName} imutável, como no Código 
 \ref{immutableattr}, a implementação em Java vista no 
-código \ref{javaconstructor1} tornaria-se semelhante à do código 
+Código \ref{javaconstructor1} tornaria-se semelhante à do Código 
 \ref{javaimmutableattr}.
 
-\begin{lstlisting}[caption={Exemplo de Atributo Imutável},label=immutableattr]
+\begin{lstlisting}[caption={Exemplo de Atributo Imutável.},label=immutableattr]
 
-    class Person(var firstName : String, var lastName : String)
+    class Person(var firstName : String, val lastName : String)
 
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Construtor Simples em Java},label=javaimmutableattr]
+\begin{lstlisting}[caption={Construtor Simples em Java.},label=javaimmutableattr]
 
     public class Person {
         
@@ -143,18 +144,18 @@ código \ref{javaconstructor1} tornaria-se semelhante à do código
 
 \section{Trait}
 
-Uma trait é semelhante a uma interface em qualquer 
+Uma \textit{trait} é semelhante a uma interface em qualquer 
 linguagem orientada a objetos. Ela define uma abstração 
 de um comportamento e pode ser implementada por uma 
 classe para indicar que ela implementa esse comportamento.\cite{ordesky2008} 
-O código \ref{traitexample} define uma trait IButton com 
-o método Click. Qualquer classe que implemente essa trait 
-precisará definir uma implementação para o método Click. 
-Já o código \ref{traitclassexample} mostra a classe 
-Button, que implementa a trait IButton, e define a 
-implementação de Click.
+O Código \ref{traitexample} define uma \textit{trait} \texttt{IButton} com 
+o método \texttt{Click}. Qualquer classe que implemente essa \textit{trait} 
+precisará definir uma implementação para o método \texttt{Click}. 
+Já o Código \ref{traitclassexample} mostra a classe 
+\texttt{Button}, que implementa a \textit{trait} \texttt{IButton}, 
+e define a implementação de \texttt{Click}.
 
-\begin{lstlisting}[caption={Exemplo de Trait},label=traitexample]
+\begin{lstlisting}[caption={Exemplo de \textit{trait}.},label=traitexample]
 
     trait IButton {
       def Click();
@@ -162,7 +163,7 @@ implementação de Click.
 
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Exemplo de classe que implementa uma trait},label=traitclassexample]
+\begin{lstlisting}[caption={Exemplo de classe que implementa uma \textit{trait}.},label=traitclassexample]
 
     class Button extends IButton {
       def Click(): Unit = println("Clicked")
@@ -171,14 +172,14 @@ implementação de Click.
 \end{lstlisting}
 
 Apesar das semelhanças, diferente das interfaces em 
-linguagens como Java, as traits podem definir métodos 
+linguagens como Java, as \textit{traits} podem definir métodos 
 com implementações e até atributos, podendo servir 
 como \textit{mixins}\cite{wampler2021}. Isso permite que 
-as traits também possam ser usadas como alternativa 
+as \textit{traits} também possam ser usadas como alternativa 
 às classes abstratas em casos específicos. Porém, para 
 simplificar o entendimento dos exemplos deste 
 trabalho por parte de leitores não familiarizados 
-com a linguagem Scala, as traits serão utilizadas 
+com a linguagem Scala, as \textit{traits} serão utilizadas 
 apenas como alternativa às interfaces.
 
 
@@ -190,20 +191,20 @@ ou seja, atributos e métodos que existem independentes
 da instância de uma classe. 
 
 Isso pode ser contornado através de \textit{companion objects}. 
-Um exemplo pode ser visto no código \ref{coexample}, onde 
-existe a classe Companion e seu \textit{companion object}, que 
+Um exemplo pode ser visto no Código \ref{coexample}, onde 
+existe a classe \texttt{Companion} e seu \textit{companion object}, que 
 deve possuir o mesmo nome e ser definido no mesmo arquivo 
-que a classe. A operação StaticOperation é executada 
+que a classe. A operação \texttt{StaticOperation} é executada 
 independente de existir uma instância da classe, acessada 
-apenas através do nome Companion.
+apenas através do nome \texttt{Companion}.
 
 Externamente, os \textit{companion objects} são acessados 
 de forma semelhante aos membros estáticos de uma classe 
-em Java, por exemplo. Isso pode ser visto no código 
-\ref{coexample2}, onde o método StaticOperation é acessado 
+em Java, por exemplo. Isso pode ser visto no Código 
+\ref{coexample2}, onde o método \texttt{StaticOperation} é acessado 
 na função principal de um programa.
 
-\begin{lstlisting}[caption={Exemplo de companion object},label=coexample]
+\begin{lstlisting}[caption={Exemplo de \textit{companion object}.},label=coexample]
 
 class Companion(private var name : String) {
   def ClassOperation(): Unit = {
@@ -219,7 +220,7 @@ object Companion {
 
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Chamada de operações de um companion object},label=coexample2]
+\begin{lstlisting}[caption={Chamada de operações de um \textit{companion object}.},label=coexample2]
 
 object Main {
   def main(args : Array[String]) : Unit = {
@@ -244,7 +245,7 @@ Os códigos \ref{listadd} e \ref{listconcat} demonstram
 as operações de adição e concatenação em uma lista, 
 respectivamente. É importante ressaltar que, mesmo 
 as listas sendo imutáveis, o fato do 
-atributo numbers ter sido declarado como var 
+atributo \texttt{numbers} ter sido declarado como \textit{var} 
 faz com que ele possa ser reatribuído com a nova lista 
 resultante da operação.
 
@@ -271,10 +272,10 @@ resultante da operação.
 \section{Unit}
 
 Em diversos exemplos em código desse capítulo 
-(linha 12 em \ref{scalaconstructor2}, linha 3 em 
-\ref{traitclassexample}, linha 4 em 
-\ref{listadd} e linha 4 em \ref{listconcat}) 
-foi possível ver a palavra chave Unit. Ela é semelhante ao 
-valor void utilizado em linguagens de programação como C e 
+(linha 12 no Código \ref{scalaconstructor2}, linha 3 no Código 
+\ref{traitclassexample}, linha 4 no Código 
+\ref{listadd} e linha 4 no Código \ref{listconcat}) 
+foi possível ver a palavra chave \textit{Unit}. Ela é semelhante ao 
+valor \textit{void} utilizado em linguagens de programação como C e 
 Java para indicar que uma função ou método não retorna 
 nenhum valor\cite{wampler2021}.

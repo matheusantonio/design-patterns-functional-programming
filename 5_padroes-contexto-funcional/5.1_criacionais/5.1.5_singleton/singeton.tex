@@ -7,7 +7,7 @@ para implementar classes que fornecem serviços sem que seja
 necessário instanciar vários objetos idênticos em 
 locais diferentes do código.\cite{gamma:1995}
 
-A figura \ref{singleton_struct} demonstra a implementação 
+A Figura \ref{singleton_struct} demonstra a implementação 
 do padrão. A classe Singleton possui um método construtor 
 privado e armazena no atributo estático uniqueInstance uma 
 instância de Singleton. Através do método de classe 
@@ -17,7 +17,7 @@ ela é retornada. Caso não, a instância única é criada
 para ser retornada nas chamadas posteriores de Instance.
 
 \begin{figure}[htb]
-	\caption{\label{singleton_struct}Estrutura do Singleton}
+	\caption{\label{singleton_struct}Estrutura do Singleton.}
 	\begin{center}
 	    \includegraphics[scale=0.6]{5_padroes-contexto-funcional/5.1_criacionais/5.1.5_singleton/singleton_estrutura.png}
 	\end{center}
@@ -32,17 +32,17 @@ essas instâncias pelo código. Ela pode ser transformada em
 um Singleton, o que faz com que toda classe que deseja fazer 
 uma transação na base de dados apenas solicite uma instância 
 e realize as operações. A definição da classe do exemplo 
-pode ser vista na figura \ref{singleton_exemplo} e no 
-código \ref{oosingleton}.
+pode ser vista na Figura \ref{singleton_exemplo} e no 
+Código \ref{oosingleton}.
 
 \begin{figure}[htb]
-	\caption{\label{singleton_exemplo}Exemplo de Singleton}
+	\caption{\label{singleton_exemplo}Exemplo de Singleton.}
 	\begin{center}
 	    \includegraphics[scale=0.6]{5_padroes-contexto-funcional/5.1_criacionais/5.1.5_singleton/singleton_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Singleton Orientação a Objetos},label=oosingleton]
+\begin{lstlisting}[caption={Singleton Orientação a Objetos.},label=oosingleton]
 
 class Database private(){
   def Query(sql : String) : Object = {

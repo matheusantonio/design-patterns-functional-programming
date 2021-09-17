@@ -12,7 +12,7 @@ são acessados através de uma interface. Também, para
 que não seja do cliente a responsabilidade de saber 
 qual iterador instanciar, os objetos agregados devem 
 definir uma operação que retorna o iterador adequado. 
-Essa abordagem pode ser vista na figura \ref{iterator_struct}, 
+Essa abordagem pode ser vista na Figura \ref{iterator_struct}, 
 onde o cliente conhece apenas as interfaces 
 Aggregate e Iterator.
 
@@ -34,9 +34,9 @@ tanto as listas como as \textit{skiplists} implementem
 uma interface abstrata de lista, conhecida pela 
 classe cliente. Da mesma forma, um iterador diferente 
 é definido para cada um dos tipos, também de forma 
-abstrata para o cliente. A imagem \ref{iterator_exemplo} 
+abstrata para o cliente. A Figura \ref{iterator_exemplo} 
 demonstra o diagrama de classes para o exemplo, com a 
-implementação no código \ref{ooiterator}.
+implementação no Código \ref{ooiterator}.
 
 \begin{figure}[htb]
 	\caption{\label{iterator_exemplo}Exemplo de Iterator}
@@ -152,7 +152,7 @@ chamada de \textit{fold}}, que percorrem coleções
 de elementos enquanto executam uma função 
 passada por parâmetro.\cite{iteratoressence}
 
-O código \ref{fpiterator} demonstra a definição 
+O Código \ref{fpiterator} demonstra a definição 
 das funções Map e Reduce. Na função Map, definida 
 na linha 2, são recebidos como parâmetro uma 
 função e uma lista de elementos de um tipo 

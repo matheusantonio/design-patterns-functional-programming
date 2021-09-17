@@ -17,10 +17,10 @@ difícil de controlar. Em contrapartida, é
 fácil modificar ou estender a gramática, já 
 que cada regra está encapsulada em uma classe 
 diferente. A estrutura do padrão pode ser vista 
-no diagrama da imagem \ref{interpreter_struct}.
+no diagrama da Figura \ref{interpreter_struct}.
 
 \begin{figure}[htb]
-	\caption{\label{interpreter_struct}Estrutura do Interpreter}
+	\caption{\label{interpreter_struct}Estrutura do Interpreter.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.03_interpreter/Interpreter_struct.png}
 	\end{center}
@@ -32,21 +32,21 @@ Como exemplo, o Interpreter pode ser utilizado para
 interpretar expressões booleanas. Cada classe definida 
 representa uma expressão, que aceita constantes  
 booleanas e operadores \textit{and}, \textit{or} e 
-\textit{not}. No diagrama da figura \ref{interpreter_exemplo}, 
+\textit{not}. No diagrama da Figura \ref{interpreter_exemplo}, 
 as classes AndExpression, OrExpression e 
 NotExpression representam operadores com subexpressões, 
 enquanto a classe Constant representa um elemento 
 terminal da expressão. A implementação do exemplo 
-pode ser vista no código \ref{oointerpreter}.
+pode ser vista no Código \ref{oointerpreter}.
 
 \begin{figure}[htb]
-	\caption{\label{interpreter_exemplo}Exemplo de Interpreter}
+	\caption{\label{interpreter_exemplo}Exemplo de Interpreter.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.03_interpreter/Interpreter_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Interpreter Orientação a Objetos},label=oointerpreter]
+\begin{lstlisting}[caption={Interpreter Orientação a Objetos.},label=oointerpreter]
 
 abstract class BooleanExpression {
   def Evaluate() : Boolean
@@ -84,7 +84,7 @@ class Constant(value : Boolean)
 O padrão Interpreter pode ser refeito substituindo 
 cada classe que representa uma regra da gramática 
 por uma função de alta ordem. Essa função retorna a 
-operação que realiza a interpretação. No código 
+operação que realiza a interpretação. No Código 
 \ref{fpinterpreter}, a operação de interpretação 
 é definida pelo tipo Expression, na linha 2, como 
 uma função que não recebe parâmetros e retorna um 
@@ -101,7 +101,7 @@ NotExpression, uma expressão unária que recebe
 apenas uma outra expressão como parâmetro e 
 aplica uma função \textit{not} à mesma.
 
-\begin{lstlisting}[caption={Interpreter Funcional},label=fpinterpreter]
+\begin{lstlisting}[caption={Interpreter Funcional.},label=fpinterpreter]
     
 type Expression = () => Boolean
 
@@ -121,7 +121,7 @@ def NotExpression(expression: Expression) : Expression =
 \end{lstlisting}
 
 A vantagem da implementação funcional desse 
-padrão é demonstrada no código \ref{fpinterpreter2}, 
+padrão é demonstrada no Código \ref{fpinterpreter2}, 
 onde é possível aproveitar as funções de alta 
 ordem para definir operadores binários e unários 
 genéricos. Eles são definidos na linha 2 pela função 
@@ -129,9 +129,9 @@ BinaryExpression e na linha 8 pela função
 UnaryExpression. Nas linhas 13, 18 e 23, são 
 definidas funções equivalentes às funçãos 
 AndExpression, OrExpression e NotExpression do 
-código \ref{fpinterpreter}.
+Código \ref{fpinterpreter}.
 
-\begin{lstlisting}[caption={Interpreter com regras genéricas},label=fpinterpreter2]
+\begin{lstlisting}[caption={Interpreter com regras genéricas.},label=fpinterpreter2]
     
 def BinaryExpression(expression1 : Expression,
   expression2 : Expression,

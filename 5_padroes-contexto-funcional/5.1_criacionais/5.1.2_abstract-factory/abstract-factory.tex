@@ -1,6 +1,6 @@
 \section{Abstract Factory}
 
-O padrão Abstract Factory define uma família 
+O padrão \textit{Abstract Factory} define uma família 
 de objetos relacionados e uma interface para 
 criá-los, sem definir sua implementação. Dessa 
 forma, diferentes implementações desse 
@@ -8,16 +8,16 @@ conjunto de objetos podem ser utilizadas
 sem que as classes cliente que os utilizam 
 precisem conhecê-las.\cite{gamma:1995}
 
-O diagrama apresentado na figura \ref{abfactory_struct} 
+O diagrama apresentado na Figura \ref{abfactory_struct} 
 demonstra a estrutura desse padrão, onde a 
-interface AbstractFactory suporta as famílias 
-ConcreteFactory1 e ConcreteFactory2, com cada uma 
+interface \texttt{AbstractFactory} suporta as famílias 
+\texttt{ConcreteFactory1} e \texttt{ConcreteFactory2}, com cada uma 
 delas definindo qual implementação das interfaces 
-AbstractProductA e AbstractProductB serão 
+\texttt{AbstractProductA} e \texttt{AbstractProductB} serão 
 utilizadas.
 
 \begin{figure}[htb]
-	\caption{\label{abfactory_struct}Estrutura do Abstract Factory}
+	\caption{\label{abfactory_struct}Estrutura do \textit{Abstract Factory}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.2_abstract-factory/abstractfactory_estrutura.png}
 	\end{center}
@@ -27,31 +27,31 @@ utilizadas.
 
 Como exemplo, é apresentado um \textit{toolkit} 
 que suporta tipos diferentes de interação para 
-seus \textit{widgets}, como Motif ou Presentation 
-Manager (PM). Dessa forma, para que o \textit{toolkit} 
+seus \textit{widgets}, como \textit{Motif} ou \textit{Presentation 
+Manager} (PM). Dessa forma, para que o \textit{toolkit} 
 não precise ser implementado tendo conhecimento 
 de cada tipo diferente de \textit{widget}, é 
-utilizado o padrão Abstract Factory para 
-definir uma família de objetos de Widget 
+utilizado o padrão \textit{Abstract Factory} para 
+definir uma família de objetos de \textit{widget} 
 diferente para cada tipo de interação. 
 
 A implementação do padrão é demonstrada no 
-diagrama de classes da figura \ref{abfactory_exemplo} 
-e no código \ref{ooabfactory}. Uma interface 
-WidgetFactory define as operações de criação 
+diagrama de classes da Figura \ref{abfactory_exemplo} 
+e no Código \ref{ooabfactory}. Uma interface 
+\texttt{WidgetFactory} define as operações de criação 
 de todos os \textit{widgets} possíveis, enquanto 
-as classes MotifWidgetFactory e PMWidgetFactory 
+as classes \texttt{MotifWidgetFactory} e \texttt{PMWidgetFactory} 
 implementam sua criação para os tipos de 
 interação suportados.
 
 \begin{figure}[htb]
-	\caption{\label{abfactory_exemplo}Exemplo de Abstract Factory}
+	\caption{\label{abfactory_exemplo}Exemplo de \textit{Abstract Factory}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.2_abstract-factory/abstractfactory_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Abstract Factory Orientado a Objetos},label=ooabfactory]
+\begin{lstlisting}[caption={Abstract Factory Orientado a Objetos.},label=ooabfactory]
 	
 trait WidgetFactory {
   def CreateScrollBar() : ScrollBar
@@ -96,28 +96,28 @@ class MotifScrollBar extends ScrollBar {
 As classes e interfaces \textit{factory} podem 
 ser substituídas por funções de alta ordem 
 recebidas pela função cliente. 
-No código \ref{fpabfactory} são definidos, 
+No Código \ref{fpabfactory} são definidos, 
 nas linhas 2 e 3,  
-os tipos ScrollBar e Window referentes aos 
+os tipos \texttt{ScrollBar} e \texttt{Window} referentes aos 
 \textit{widgets} suportados pela ferramenta. 
 Da mesma forma, são definidas as operações de 
 criação desses \textit{widgets} para os tipos 
-PM e Motif. Nas linhas 5 e 8 são definidas as 
-operações para o tipo PM, enquanto nas linhas 
-12 e 15 são definidas as para o tipo Motif. 
+\texttt{PM} e \texttt{Motif}. Nas linhas 5 e 8 são definidas as 
+operações para o tipo \texttt{PM}, enquanto nas linhas 
+12 e 15 são definidas as para o tipo \texttt{Motif}. 
 
 Na linha 19 é definida uma função cliente, 
 que seria equivalente a uma operação da classe 
-Client apresentada no diagrama da figura 
+\texttt{Client} apresentada no diagrama da Figura 
 \ref{abfactory_exemplo}. Ela 
 recebe como parâmetro as funções para criação de 
 cada \textit{widget}. Por fim, na linha 28 é 
 demonstrada a chamada dessa função recebendo 
 como parâmetro as funções para criar um 
 \textit{scrollbar} e uma janela para o tipo 
-PM.
+\texttt{PM}.
 
-\begin{lstlisting}[caption={Abstract Factory Funcional},label=fpabfactory]
+\begin{lstlisting}[caption={Abstract Factory Funcional.},label=fpabfactory]
     
 type Scrollbar
 type Window
@@ -149,14 +149,14 @@ ClientFunction(CreatePMScrollBar, CreatePMWindow)
 
 \end{lstlisting}
 
-No código \ref{fpabfactory}, seria possivel passar 
+No Código \ref{fpabfactory}, seria possível passar 
 para a classe cliente \textit{widgets} de tipos 
 misturados, já que são definidos parâmetros 
 diferentes para cada função de criação. Caso 
 seja desejado um exemplo mais próximo do demonstrado 
-no diagrama da figura \ref{abfactory_exemplo}, 
+no diagrama da Figura \ref{abfactory_exemplo}, 
 pode-se encapsular as funções de criação 
-em uma tupla. Isso pode ser visto no código 
+em uma tupla. Isso pode ser visto no Código 
 \ref{fpabfactory2}, onde o tipo WidgetFactory 
 definido na linha 2 armazena tanto uma função 
 para a criação de um \textit{scrollbar} quanto a função 
@@ -165,7 +165,7 @@ cliente, redefinida na linha 10, agora
 recebe como parâmetro um valor do tipo 
 WidgetFactory.
 
-\begin{lstlisting}[caption={Abstract Factory Funcional usando tuplas},label=fpabfactory2]
+\begin{lstlisting}[caption={Abstract Factory Funcional usando tuplas.},label=fpabfactory2]
     
 type WidgetFactory = (
   () => ScrollBar, 

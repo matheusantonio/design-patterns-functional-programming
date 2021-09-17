@@ -9,7 +9,7 @@ uniforme, sem que seja necessário conhecer
 os elementos pertencentes a um conjunto para 
 tratá-lo.\cite{gamma:1995}
 
-A figura \ref{composite_struct} demonstra a 
+A Figura \ref{composite_struct} demonstra a 
 estrutura do padrão, onde uma interface Component 
 define tanto um objeto nó, representado pela 
 classe Composite, quanto um objeto folha, 
@@ -20,7 +20,7 @@ saiba se seus filhos são outros objetos compostos
 ou se são objetos folha.
 
 \begin{figure}[htb]
-	\caption{\label{composite_struct}Estrutura do Composite}
+	\caption{\label{composite_struct}Estrutura do Composite.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.3_composite/composite_estrutura.png}
 	\end{center}
@@ -38,19 +38,19 @@ em consideração todos os elementos dos quais eles
 são compostos. O padrão Composite permite 
 abstrair os elementos menores, tratando o elemento 
 composto como algo único, da mesma forma que 
-são tratados os elementos não compostos. A figura 
+são tratados os elementos não compostos. A Figura 
 \ref{composite_exemplo} demonstra o diagrama de 
-classes para esse exemplo, enquanto o código 
+classes para esse exemplo, enquanto o Código 
 \ref{oocomposite} traz um exemplo de implementação.
 
 \begin{figure}[htb]
-	\caption{\label{composite_exemplo}Exemplo de Composite}
+	\caption{\label{composite_exemplo}Exemplo de Composite.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.3_composite/composite_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Composite Orientado a Objetos},label=oocomposite]
+\begin{lstlisting}[caption={Composite Orientado a Objetos.},label=oocomposite]
 
 trait Graphic {
   def Draw();
@@ -96,7 +96,7 @@ class Line extends Graphic {
 
 \subsection*{Contexto Funcional}
 
-O código \ref{fpcomposite} demonstra como é 
+O Código \ref{fpcomposite} demonstra como é 
 possível declarar a estrutura do padrão Composite 
 utilizando funções de alta ordem. A função 
 Draw, definida na linha 2, é equivalente à função 
@@ -125,7 +125,7 @@ de forma indefinida, sem que a função
 cliente precise saber se está tratando de um 
 grupo de elementos ou de um elemento apenas. 
 
-\begin{lstlisting}[caption={Composite Funcional},label=fpcomposite]
+\begin{lstlisting}[caption={Composite Funcional.},label=fpcomposite]
     
 def Draw(functions : List[() => Unit]) : () => Unit =
   () => functions.foreach((function) => function())
@@ -147,7 +147,7 @@ def DrawText(text : String) : () => Unit =
     
 \end{lstlisting}
 
-O código \ref{fpcompositeapp} demonstra a 
+O Código \ref{fpcompositeapp} demonstra a 
 aplicação do padrão. O valor DrawGraphics, 
 definido na linha 2, é o resultado da aplicação 
 de Draw para uma lista contendo uma função que 
@@ -162,7 +162,7 @@ também todas as funções definidas anteriormente
 tratando todo o conjunto como um único elemento, 
 da forma como o padrão Composite propõe.
 
-\begin{lstlisting}[caption={Aplicação do Composite Funcional},label=fpcompositeapp]
+\begin{lstlisting}[caption={Aplicação do Composite Funcional.},label=fpcompositeapp]
     
 val DrawGraphics : () => Unit = Draw(
   List(

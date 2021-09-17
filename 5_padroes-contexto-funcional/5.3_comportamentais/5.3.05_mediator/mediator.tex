@@ -10,7 +10,7 @@ mais independentes, simplificando sua reutilização
  e concentrando as dependências entre eles 
 em um só lugar. \cite{gamma:1995}
 
-A estrutura do padrão é apresentada na figura \ref{mediator_struct}. 
+A estrutura do padrão é apresentada na Figura \ref{mediator_struct}. 
 Uma interface Mediator define as operações que um tipo de 
 objeto Mediator deve possuir. ConcreteMediator representa 
 uma classe que implementa essas operações. Um Colleague 
@@ -36,8 +36,8 @@ na caixa de entrada de texto. O Mediator é responsável
 por alterar a caixa de entrada de texto quando um item 
 é selecionado na lista, enquanto a lista é responsável 
 por informar ao Mediator quando um item for selecionado. 
-A figura \ref{mediator_exemplo} apresenta o diagrama 
-de classes para esse exemplo. O código \ref{oomediator} 
+A Figura \ref{mediator_exemplo} apresenta o diagrama 
+de classes para esse exemplo. O Código \ref{oomediator} 
 apresenta a implementação do padrão para esse exemplo.
 
 \begin{figure}[htb]
@@ -96,7 +96,7 @@ class ListBox(director : DialogDirector) extends Widget(director){
 
 \subsection*{Contexto Funcional}
 
-O código \ref{fpmediator} demonstra a implementação 
+O Código \ref{fpmediator} demonstra a implementação 
 funcional do Mediator. Uma função é responsável por 
 gerenciar as interdependências entre os valores 
 dos tipos EntryField, definido na linha 2, e ListBox, 
@@ -111,7 +111,7 @@ a função cliente que chama essa operação atualizada
 quanto ao estado de ambos os valores. 
 
 A vantagem dessa abordagem é que ela torna possível 
-que as funções dos \textit{colleagues} (no código 
+que as funções dos \textit{colleagues} (no Código 
 \ref{fpmediator}, ChangeEntryFieldText e 
 ChangeListBoxSelection) sejam idependentes dos 
 mediadodores, favorecendo seu reuso. A desvantagem 

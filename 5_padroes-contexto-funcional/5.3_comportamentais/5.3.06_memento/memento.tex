@@ -11,10 +11,10 @@ Isso é alcançado através de uma classe Memento que armazena os
 atributos de um objeto que precisa ser salvo. A responsabilidade 
 de criar a cópia, assim como a de recuperar os atributos copiados, 
 é do próprio objeto. A estrutura do padrão pode ser vista 
-na figura \ref{memento_struct}.
+na Figura \ref{memento_struct}.
 
 \begin{figure}[htb]
-	\caption{\label{memento_struct}Estrutura do Memento}
+	\caption{\label{memento_struct}Estrutura do Memento.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.06_memento/memento_estrutura.png}
 	\end{center}
@@ -28,18 +28,18 @@ suporta operações de desfazer. O editor pode armazenar um
 armazena o histórico de alterações. Dessa forma, quando a 
 operação de desfazer for executada, basta que o 
 \textit{snapshot} mais recente seja recuperado pelo histórico 
-e restaurado no editor. A figura \ref{memento_exemplo} demonstra 
-esse exemplo, enquanto o código \ref{oomemento} demonstra a 
+e restaurado no editor. A Figura \ref{memento_exemplo} demonstra 
+esse exemplo, enquanto o Código \ref{oomemento} demonstra a 
 implementação.
 
 \begin{figure}[htb]
-	\caption{\label{memento_exemplo}Exemplo de Memento}
+	\caption{\label{memento_exemplo}Exemplo de Memento.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.06_memento/memento_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Memento Orientação a Objetos},label=oomemento]
+\begin{lstlisting}[caption={Memento Orientação a Objetos.},label=oomemento]
 
 class Editor(private var text:String,
              private var cursorPosition : Position,
@@ -88,7 +88,7 @@ armazenar os valores que desejam ser salvos em
 uma coleção, como uma lista, é suficiente para 
 resolver o problema proposto pelo padrão.
 
-O código \ref{fpmemento} apresenta duas funções, 
+O Código \ref{fpmemento} apresenta duas funções, 
 CreateSnapshot na linha 2 e RestoreSnapshot na linha 
 5. A primeira recebe como parâmetro o valor que 
 deve ser salvo e a lista de valores já salvos. 
@@ -100,7 +100,7 @@ a partir da lista, e o segundo valor é a
 lista atualizada com o valor recuperado 
 removido.
 
-\begin{lstlisting}[caption={Memento Funcional},label=fpmemento]
+\begin{lstlisting}[caption={Memento Funcional.},label=fpmemento]
 
 def CreateSnapshot(editor : Editor, snapshots : List[Editor]) : List[Editor] =
   editor :: snapshots

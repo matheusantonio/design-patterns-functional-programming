@@ -21,7 +21,7 @@ classe em questão.
 Esse padrão permite estender objetos para novas operações 
 sem comprometer sua implementação ou poluir as classes com 
 diversas operações que não são de sua responsabilidade. 
-Sua estrutura pode ser vista na imagem \ref{visitor_struct}.
+Sua estrutura pode ser vista na Figura \ref{visitor_struct}.
 
 \begin{figure}[htb]
 	\caption{\label{visitor_struct}Estrutura do Visitor}
@@ -39,8 +39,8 @@ não precisem implementar essas operações, elas implementam uma operação
 genérica que recebe como parâmetro qualquer Visitor. Dessa forma, para 
 cada operação desejada, basta implementar uma nova classe Visitor 
 que percorrerá os elementos da árvore abstrata sintática. O diagrama 
-de classes para o exemplo pode ser visto na imagem \ref{visitor_exemplo1}, 
-enquanto a implementação pode ser vista no código \ref{oovisitor}.
+de classes para o exemplo pode ser visto na Figura \ref{visitor_exemplo1}, 
+enquanto a implementação pode ser vista no Código \ref{oovisitor}.
 
 \begin{figure}[htb]
 	\caption{\label{visitor_exemplo1}Exemplo de Visitor}
@@ -121,7 +121,7 @@ pode ser necessário incluir nos valores da
 estrutura um valor enumerável que identifica o 
 tipo do elemento. 
 
-O código \ref{fpvisitor} demonstra como o 
+O Código \ref{fpvisitor} demonstra como o 
 exemplo orientado a objetos pode ser implementado. 
 O tipo Node, definido na linha 2, armazena um valor 
 enumerável com os tipos de nó suportados 

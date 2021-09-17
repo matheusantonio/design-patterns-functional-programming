@@ -7,10 +7,10 @@ As operações da implementação são delegadas para essa
 nova interface, permitindo que as abstrações sejam 
 implementadas sem precisar conhecer o tipo de 
 implementação que está sendo utilizado. A estrutura do 
-padrão pode ser vista na figura \ref{bridge_struct}.\cite{gamma:1995}
+padrão pode ser vista na Figura \ref{bridge_struct}.\cite{gamma:1995}
 
 \begin{figure}[htb]
-	\caption{\label{bridge_struct}Estrutura do Bridge}
+	\caption{\label{bridge_struct}Estrutura do Bridge.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.2_bridge/bridge_estrutura.png}
 	\end{center}
@@ -28,18 +28,18 @@ uma versão diferente de janela de ícone e transitória
 para cada implementação diferente de janela, o padrão 
 Bridge pode ser usado para separar a implementação 
 da abstração em duas hierarquias diferentes. O diagrama 
-de classes da figura \ref{bridge_exemplo} e o código 
+de classes da Figura \ref{bridge_exemplo} e o Código 
 \ref{oobridge} demonstram o uso do padrão para esse 
 exemplo.
 
 \begin{figure}[htb]
-	\caption{\label{bridge_exemplo}Exemplo de Bridge}
+	\caption{\label{bridge_exemplo}Exemplo de Bridge.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.2_bridge/bridge_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Bridge Orientado a Objetos},label=oobridge]
+\begin{lstlisting}[caption={Bridge Orientado a Objetos.},label=oobridge]
 
 abstract class Window(imp : WindowImp) {
   def DrawText() : Unit = {
@@ -97,7 +97,7 @@ class PMWindowImp extends WindowImp {
 
 Funções de alta ordem também podem ser utilizadas 
 para separar as abstrações das implementações. 
-No código \ref{fpbridgeabs}, são definidas nas 
+No Código \ref{fpbridgeabs}, são definidas nas 
 linhas 2 e 10, respectivamente, as 
 duas funções equivalentes aos métodos das 
 classes IconWindow e TransientWindow do exemplo 
@@ -105,7 +105,7 @@ orientado a objetos. Ao invés de reutilizar
 funções de uma superclasse, as funções 
 DrawText e DrawRect são recebidas por parâmetro.
 
-\begin{lstlisting}[caption={Abstrações no Bridge Funcional},label=fpbridgeabs]
+\begin{lstlisting}[caption={Abstrações no Bridge Funcional.},label=fpbridgeabs]
     
 def DrawIconBorder(text : String,
                    height : Int, width : Int,
@@ -122,16 +122,16 @@ def DrawTransientCloseBox(height : Int, width : Int,
     
 \end{lstlisting}
 
-No código \ref{fpbridgeimp}, são definidas as 
+No Código \ref{fpbridgeimp}, são definidas as 
 funções referentes às implementações diferentes 
 de Window. Essas são as funções que podem ser 
 passadas como parâmetro para as funções vistas 
-no código \ref{fpbridgeabs}. Dessa forma, as 
+no Código \ref{fpbridgeabs}. Dessa forma, as 
 abstrações de Window tornam-se independentes 
 da forma como ela é implementada, resolvendo 
 o problema encontrado pelo padrão.
 
-\begin{lstlisting}[caption={Implementações no Bridge Funcional},label=fpbridgeimp]
+\begin{lstlisting}[caption={Implementações no Bridge Funcional.},label=fpbridgeimp]
     
 def XDrawLine(size : Int) : Unit = {
   // Desenha linha

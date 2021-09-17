@@ -19,7 +19,18 @@ Funções puras operam apenas nos parâmetros fornecidos.
 Elas não leem ou escrevem em qualquer valor que esteja 
 fora do corpo da função\cite{purefunctionscala, functionalscala}.
 
-\begin{lstlisting}[caption={Exemplo de Função Pura},label=purefunction]
+A função apresentada no Código \ref{purefunction} 
+opera apenas nos valores \textit{x} e \textit{y} que 
+são passados como parâmetros da função. A partir 
+dessa restrição, algumas conclusões relevantes podem 
+ser tiradas. Por exemplo, uma função pura sempre 
+retornará o mesmo valor para os mesmos parâmetros: 
+caso a função \texttt{add} vista receba os parâmetros 1 para 
+\textit{x} e 2 para \textit{y}, não importa quantas vezes 
+ela seja chamada, 
+o resultado da operação sempre será 3\cite{functionalscala}.
+
+\begin{lstlisting}[caption={Exemplo de Função Pura. Fonte: O Autor (2021)},label=purefunction]
 
     def add(x, y){
         return x + y;
@@ -27,17 +38,14 @@ fora do corpo da função\cite{purefunctionscala, functionalscala}.
 
 \end{lstlisting}
 
-A função apresentada no código \ref{purefunction} 
-opera apenas nos valores x e y que 
-são passados como parâmetro da função. A partir 
-dessa restrição, algumas conclusões relevantes podem 
-ser tiradas. Por exemplo, uma função pura sempre 
-retornará o mesmo valor para os mesmos parâmetros: 
-caso a função add vista receba os parâmetros 1 para x 
-e 2 para y, não importa quantas vezes ela seja chamada, 
-o resultado da operação sempre será 3\cite{functionalscala}.
+O Código \ref{impurefunction} apresenta uma função 
+não pura, \texttt{modify}. Essa função não é pura pois 
+depende de um valor externo - a variável \textit{z} - para 
+realizar uma operação. Existe ainda um outro problema 
+com esse tipo de função: sua execução implica em 
+um efeito colateral.
 
-\begin{lstlisting}[caption={Exemplo de Função Pura},label=impurefunction]
+\begin{lstlisting}[caption={Exemplo de Função Impura. Fonte: O Autor (2021)},label=impurefunction]
 
     var z = 10;
 
@@ -46,13 +54,6 @@ o resultado da operação sempre será 3\cite{functionalscala}.
     }
 
 \end{lstlisting}
-
-O código \ref{impurefunction} apresenta uma função 
-não pura, modify. Essa função não é pura pois 
-depende de um valor externo - a variável z - para 
-realizar uma operação. Existe ainda um outro problema 
-com esse tipo de função: sua execução implica em 
-um efeito colateral.
 
 Efeitos colaterais ocorrem em consultas ou 
 alterações a bases de dados, modificação de 
@@ -66,7 +67,7 @@ orientados a objetos, porém
 podem causar dificuldades no processo de 
 \textit{debug} de um código, afinal, 
 quanto maior for a quantidade de locais onde 
-uma variávei pode ser modificada, maior 
+uma variável pode ser modificada, maior 
 será o esforço para encontrar a origem de 
 um problema relacionado ao valor que essa 
 variável pode assumir.
@@ -90,9 +91,9 @@ processo de \textit{debugging}\cite{purefunctionscala}.
 Em programação funcional, a ideia de variáveis não 
 existe, ou ao menos possui uma definição diferente\cite{braveclojure}.
 Em paradigmas procedurais é comum encontar trechos 
-de código parecidos com o apresentado no código \ref{mutablevar}.
+de código parecidos com o apresentado no Código \ref{mutablevar}.
 
-\begin{lstlisting}[caption={Exemplo de Código Mutável},label=mutablevar]
+\begin{lstlisting}[caption={Exemplo de Código Mutável. Fonte: O Autor (2021)},label=mutablevar]
 
     var x = 1;
     x = x + 1;
@@ -102,20 +103,21 @@ de código parecidos com o apresentado no código \ref{mutablevar}.
 
 Porém, esse tipo de operação não é permitida no 
 paradigma funcional, já que ele segue o princípio 
-da imutabilidade, onde uma variável \footnote{Aqui, 
+da imutabilidade, onde uma variável \footnote{
+Em um contexto onde se utiliza imutabilidade, uma 
 variável é entendida como um valor armazenado 
 e não um valor variável.} que armazena um valor 
 não pode ter esse valor alterado até o fim da 
 execução do programa. Esse princípio é violado  
-pelo código \ref{mutablevar}.
+pelo Código \ref{mutablevar}.
 
 Em um programa funcional, a modificação do valor 
 de uma variável é feita copiando o valor para uma 
 nova variável que passará a representar esse valor\cite{functionalscala}.
-Por exemplo, o código \textit{mutablevar} poderia ser 
-escrito como no código \ref{imutablevar}.
+Por exemplo, o Código \ref{mutablevar} poderia ser 
+escrito como no Código \ref{imutablevar}.
 
-\begin{lstlisting}[caption={Exemplo de Código Imutável},label=imutablevar]
+\begin{lstlisting}[caption={Exemplo de Código Imutável. Fonte: O Autor (2021)},label=imutablevar]
 
     var x = 1;
     var z = x + 1;
@@ -149,14 +151,14 @@ são alguns exemplos de linguagens que possuem suporte
 para funções de alta ordem.
 
 Um bom exemplo de simplicidade do uso de 
-funções de alta ordem é a função map\cite{hofscala}. Seu objetivo 
+funções de alta ordem é a função \texttt{map}\cite{hofscala}. Seu objetivo 
 é aplicar uma função a todos os elementos de uma 
 coleção e retornar a nova coleção resultante. 
-Para que isso seja possível, a função map precisa 
+Para que isso seja possível, a função \texttt{map} precisa 
 receber como parâmetro a função que será aplicada. 
-O código \ref{hof} demonstra o uso dessa função.
+O Código \ref{hof} demonstra o uso dessa função.
 
-\begin{lstlisting}[caption={Exemplo de Função de Alta Ordem},label=hof]
+\begin{lstlisting}[caption={Exemplo de Função de Alta Ordem. Fonte: O Autor (2021)},label=hof]
 
     def add1(x){
         return x + 1;
@@ -171,9 +173,9 @@ O código \ref{hof} demonstra o uso dessa função.
 Em uma linguagem que não aceita funções sendo 
 passadas por parâmetro, uma operação simples como 
 essa poderia se tornar mais verbosa e menos legível, 
-como no código \ref{nohof}.
+como no Código \ref{nohof}.
 
-\begin{lstlisting}[caption={Exemplo sem Funções de Alta Ordem},label=nohof]
+\begin{lstlisting}[caption={Exemplo sem Funções de Alta Ordem. Fonte: O Autor (2021)},label=nohof]
 
     def add1(x){
         return x + 1;
@@ -203,14 +205,14 @@ implementação teria que ser repetida.
 % Currying
 \section{Currying}
 
-Currying é uma técnica de programação funcional que 
+\textit{Currying} é uma técnica de programação funcional que 
 permite que uma função com mais de um parâmetro seja 
 chamada como se possuísse apenas um\cite{realworldhaskell, functionalscala}. 
-Por exemplo, a função add apresentada no código 
-\ref{nocurrex} poderia ser escrita como no código 
+Por exemplo, a função \texttt{add} apresentada no Código 
+\ref{nocurrex} poderia ser escrita como no Código 
 \ref{currex}.
 
-\begin{lstlisting}[caption={Exemplo sem Currying},label=nocurrex]
+\begin{lstlisting}[caption={Exemplo sem \textit{Currying}. Fonte: O Autor (2021)},label=nocurrex]
 
     def add(x, y){
         return x + y;
@@ -218,7 +220,7 @@ Por exemplo, a função add apresentada no código
 
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Exemplo de Currying},label=currex]
+\begin{lstlisting}[caption={Exemplo de \textit{Currying}. Fonte: O Autor (2021)},label=currex]
 
     def add(x){
         return y => x + y;
@@ -238,17 +240,17 @@ nativamente\cite{realworldhaskell}.
 % Closures
 \section{Closures}
 
-No código \ref{closureex} é definida a função adder que 
-recebe como parâmetro um valor x e retorna uma função 
-que recebe como parâmetro outro valor y, retornando a 
-soma dos dois valores. A variável add10 receberá 
-o retorno da chamada da função adder para o valor 10. 
-Com isso, add10 será uma função que receberá como 
+No Código \ref{closureex} é definida a função \texttt{adder} que 
+recebe como parâmetro um valor \textit{x} e retorna uma função 
+que recebe como parâmetro outro valor \textit{y}, retornando a 
+soma dos dois valores. A variável \texttt{add10} receberá 
+o retorno da chamada da função \texttt{adder} para o valor 10. 
+Com isso, \texttt{add10} será uma função que receberá como 
 parâmetro um número e adicionará 10 a ele. Quando 
-add10 é chamada com o valor 5 sendo passado como 
+\texttt{add10} é chamada com o valor 5 sendo passado como 
 parâmetro, o retorno da função é 15.
 
-\begin{lstlisting}[caption={Exemplo de Closure},label=closureex]
+\begin{lstlisting}[caption={Exemplo de \textit{Closure}. Fonte: O Autor (2021)},label=closureex]
 
     def adder(x){
         return y => x + y;
@@ -263,12 +265,13 @@ parâmetro, o retorno da função é 15.
 \end{lstlisting}
 
 Para que isso seja possível, a função retornada por 
-adder precisou ter acesso ao valor da variável x mesmo 
-após o fim da execução de adder. Isso foi possível 
-por a variável x estar dentro do escopo da função 
+\texttt{adder} precisou ter acesso ao valor da variável 
+\textit{x} mesmo 
+após o fim da execução de \texttt{adder}. Isso foi possível 
+por a variável \textit{x} estar dentro do escopo da função 
 quando ela foi criada. Esse comportamento, 
 possível através do retorno de funções, 
-é chamado de closure\cite{mflambdas}.
+é chamado de \textit{closure}\cite{mflambdas}.
 
 
 % Composição de funções
@@ -278,9 +281,9 @@ Reuso de código é um objetivo desejável para qualquer
 paradigma de programação, e o paradigma funcional 
 aproveita a composição de funções para seguir esse 
 princípio\cite{realworldhaskell}.
-O código \ref{fogex} exemplifica esse recurso.
+O Código \ref{fogex} exemplifica esse recurso.
 
-\begin{lstlisting}[caption={Exemplo de Composição de Funções},label=fogex]
+\begin{lstlisting}[caption={Exemplo de Composição de Funções. Fonte: O Autor (2021)},label=fogex]
 
     def add1(x){
         return x + 1
@@ -310,16 +313,27 @@ funções maiores e mais complicadas é uma forma de
 \textit{design} comum em linguagens funcionais. Uma vantagem é 
 que em linguagens funcionais as composições podem 
 tornar-se mais legíveis utilizando funções 
-de alta ordem, como pode ser visto no código 
-\ref{hofogex} \footnote{Aqui, a função compose 
-recebe as funções add1 e mul2 e retorna a 
+de alta ordem, como pode ser visto no Código 
+\ref{hofogex} \footnote{Aqui, a função \texttt{compose} 
+recebe as funções \texttt{add1} e \texttt{mul2} e retorna a 
 composição delas. A função resultante 
-é recebida como parâmetro de compose novamente, 
-assim como a função sub4, resultando em uma função 
-equivalente a sub4(mul2(add1()))}.
+é recebida como parâmetro de \texttt{compose} novamente, 
+assim como a função \texttt{sub4}, resultando em uma função 
+equivalente a \texttt{sub4(mul2(add1()))}}.
 
-\begin{lstlisting}[caption={Exemplo de Composição de Funções},label=hofogex]
+\begin{lstlisting}[caption={Exemplo de Composição de Funções. Fonte: O Autor (2021)},label=hofogex]
 
+    def add1(x){
+        return x + 1
+    }
+
+    def mul2(x){
+        return x * 2
+    }
+
+    def sub4(x){
+        return x - 4
+    }
 
     let res = (sub4 compose mul2 compose add1)(1);
     // O resultado da função é 0

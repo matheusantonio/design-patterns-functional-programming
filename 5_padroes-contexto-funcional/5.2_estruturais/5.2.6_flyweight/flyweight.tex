@@ -3,7 +3,7 @@
 O padrão Flyweight permite economizar o espaço em memória 
 da aplicação ao fornecer uma instância compartilhada de 
 uma classe para que ela não precise ser instanciada 
-mais de uma vez. A figura \ref{flyweight_struct} mostra 
+mais de uma vez. A Figura \ref{flyweight_struct} mostra 
 a estrutura do padrão. Nela, uma interface Flyweight 
 define um elemento reutilizável, sendo implementada 
 pelas classes ConcreteFlyweight e UnsharedConcreteFlyweight. 
@@ -27,7 +27,7 @@ Esses elementos não podem ser criados através da
 FlyweightFactory.
 
 \begin{figure}[htb]
-	\caption{\label{flyweight_struct}Estrutura do Flyweight}
+	\caption{\label{flyweight_struct}Estrutura do Flyweight.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight_estrutura.png}
 	\end{center}
@@ -46,7 +46,7 @@ elementos que não podem ser compartilhados com as
 letras - a linha e a coluna onde cada letra está 
 localizada. 
 
-A figura \ref{flyweight_exemplo} apresenta o diagrama 
+A Figura \ref{flyweight_exemplo} apresenta o diagrama 
 de classes para esse exemplo. A interface Glyph 
 representa um elemento textual. As classes Row e 
 Column armazenam em seus atributos um conjunto de objetos 
@@ -54,17 +54,17 @@ do tipo Glyph.
 Por fim, a classe Character armazena em seus atributos 
 o caracter que deve ser compartilhado. Apenas uma 
 instância é criada para cada caracter. O 
-código \ref{ooflyweight} demonstra a implementação 
+Código \ref{ooflyweight} demonstra a implementação 
 desse exemplo.
 
 \begin{figure}[htb]
-	\caption{\label{flyweight_exemplo}Exemplo de Flyweight}
+	\caption{\label{flyweight_exemplo}Exemplo de Flyweight.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Flyweight Orientado a Objetos},label=ooflyweight]
+\begin{lstlisting}[caption={Flyweight Orientado a Objetos.},label=ooflyweight]
 
 trait Glyph {
   def Draw(context : Context)
@@ -108,7 +108,7 @@ class Column(var children : List[Glyph]) extends Glyph {
 Esse padrão utiliza uma técnica também conhecida 
 como memoização, que salva computações já realizadas 
 para serem reutilizadas e economizar espaço em 
-memória\cite{scalafunctpatterns}. O código \ref{fpflyweight} 
+memória\cite{scalafunctpatterns}. O Código \ref{fpflyweight} 
 demonstra como o exemplo anterior poderia ser 
 implementado. O tipo GlyphFactory, definido na 
 linha 3, é um dicionário cuja chave é do tipo 
@@ -122,7 +122,7 @@ por a função GetGlyph ser pura, é necessário
 sempre receber e retornar o \textit{factory} 
 atualizado.
 
-\begin{lstlisting}[caption={Flyweight Funcional},label=fpflyweight]
+\begin{lstlisting}[caption={Flyweight Funcional.},label=fpflyweight]
     
 type Glyph
 type GlyphFactory = Map[String, Glyph]

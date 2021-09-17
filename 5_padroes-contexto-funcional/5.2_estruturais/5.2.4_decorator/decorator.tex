@@ -16,7 +16,7 @@ formando uma estrutura de pilha onde o elemento ao
 fundo é o objeto decorado. Ele será o 
 alvo das operações acumuladas de todos os extensores 
 presentes na estrutura. O diagrama de classes que 
-demonstra essa estrutura pode ser visto na figura 
+demonstra essa estrutura pode ser visto na Figura 
 \ref{decorator_struct}.
 
 O maior problema resolvido pelo Decorator é a grande 
@@ -27,7 +27,7 @@ dinamicamente, gerando diversas combinações de grupos de
 funcionalidades possíveis.
 
 \begin{figure}[htb]
-	\caption{\label{decorator_struct}Estrutura do Decorator}
+	\caption{\label{decorator_struct}Estrutura do Decorator.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.4_decorator/decorator_estrutura.png}
 	\end{center}
@@ -43,7 +43,7 @@ o que exigiria que houvesse uma subclasse para cada
 combinação de funcionalidades e elementos gráficos, 
 o padrão Decorator é utilizado. Por exemplo, um 
 elemento de texto pode ser decorado com uma barra 
-de rolagem ou com uma borda. A figura \ref{decorator_exemplo} 
+de rolagem ou com uma borda. A Figura \ref{decorator_exemplo} 
 demonstra o diagrama de classes para esse caso, 
 onde uma classe TextView implementa uma interface 
 VisualComponent, assim como a classe abstrata Decorator, 
@@ -56,18 +56,18 @@ ScrollDecorator armazene um BorderDecorator, que
 por sua vez armazenará um TextView. A operação 
 Draw será chamada, em sequência, para cada 
 elemento da pilha, resultando no TextView 
-com as funcionalidades desejadas. O código 
+com as funcionalidades desejadas. O Código 
 \ref{oodecorator} traz a implementação dessa 
 abordagem.
 
 \begin{figure}[htb]
-	\caption{\label{decorator_exemplo}Exemplo de Decorator}
+	\caption{\label{decorator_exemplo}Exemplo de Decorator.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.4_decorator/decorator_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Decorator Orientado a Objetos},label=oodecorator]
+\begin{lstlisting}[caption={Decorator Orientado a Objetos.},label=oodecorator]
 
 trait VisualComponent {
   def Draw()
@@ -128,7 +128,7 @@ os parâmetros ao utilizá-la. Isso também permite
 encadear as funções decoradoras, trazendo uma estrutura de 
 pilha, semelhante à implementação orientada a objetos.
 
-O código \ref{fpdecorator} demonstra o exemplo anterior, onde 
+O Código \ref{fpdecorator} demonstra o exemplo anterior, onde 
 a função DrawTextView, na linha 2, recebe como parâmetro uma 
 String e cria um \textit{text view} que a exibe. As funções 
 DrawTextScroll, na linha 4, e DrawBorder, na linha 11, decoram 
@@ -138,7 +138,7 @@ linha 18, encadeia as três funções, criando uma nova função
 com a mesma assinatura de DrawTextView com as funcionalidades 
 adicionais.
 
-\begin{lstlisting}[caption={Decorator Funcional},label=fpdecorator]
+\begin{lstlisting}[caption={Decorator Funcional.},label=fpdecorator]
     
 def DrawTextView(text : String) : Unit = println(text)
 

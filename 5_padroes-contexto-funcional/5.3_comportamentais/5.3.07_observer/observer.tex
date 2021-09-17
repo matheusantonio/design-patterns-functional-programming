@@ -7,10 +7,10 @@ pré-configurados é notificado. Esse comportamento é
 semelhante a um \textit{publish and subscribe}, onde 
 um objeto é um \textit{publisher} que envia notificações 
 para os objetos inscritos. A estrutura do padrão pode ser 
-vista no diagrama da figura \ref{observer_struct}.\cite{gamma:1995}
+vista no diagrama da Figura \ref{observer_struct}.\cite{gamma:1995}
 
 \begin{figure}[htb]
-	\caption{\label{observer_struct}Estrutura do Observer}
+	\caption{\label{observer_struct}Estrutura do Observer.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.07_observer/observer_estrutura.png}
 	\end{center}
@@ -29,18 +29,18 @@ eles são armazenados pela classe que armazena
 os dados exibidos, possibilitando que 
 notificações sejam enviadas 
 caso os dados sejam atualizados. O diagrama 
-de classes para o exemplo pode ser visto na figura 
+de classes para o exemplo pode ser visto na Figura 
 \ref{observer_exemplo}, enquanto a implementação 
-pode ser vista no código \ref{ooobserver}.
+pode ser vista no Código \ref{ooobserver}.
 
 \begin{figure}[htb]
-	\caption{\label{observer_exemplo}Exemplo de Observer}
+	\caption{\label{observer_exemplo}Exemplo de Observer.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.07_observer/observer_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Observer Orientação a Objetos},label=ooobserver]
+\begin{lstlisting}[caption={Observer Orientação a Objetos.},label=ooobserver]
 
 abstract class Publisher {
   private var subscribers : List[DataSubscriber] = List.empty

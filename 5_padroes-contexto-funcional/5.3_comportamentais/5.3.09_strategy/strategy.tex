@@ -16,7 +16,7 @@ muitas operações condicionais. Ao invés de verificar qual
 deve ser o comportamento toda vez que ele precisar ser 
 executado, o comportamento é pré-definido pelo contexto. 
 
-A estrutura do padrão pode ser vista na figura \ref{strategy_struct}, 
+A estrutura do padrão pode ser vista na Figura \ref{strategy_struct}, 
 onde uma interface é responsável por definir que operações 
 uma estratégia deve possuir, enquanto diversas classes 
 concretas implementam essas operações definindo suas 
@@ -25,7 +25,7 @@ uma referência para a estratégia e chamar as
 operações desejadas.
 
 \begin{figure}[htb]
-	\caption{\label{strategy_struct}Estrutura do Strategy}
+	\caption{\label{strategy_struct}Estrutura do Strategy.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/strategy_estrutura.png}
 	\end{center}
@@ -41,18 +41,18 @@ um editor, enquanto a interface Compositor define
 uma estratégia de quebra de linha. As estratégias 
 apresentadas são representadas pelas classes 
 SimpleCompositor, TeXCompositor e ArrayCompositor. 
-A implementação desse exemplo pode ser vista no código 
+A implementação desse exemplo pode ser vista no Código 
 \ref{oostrategy}, enquanto o diagrama de classes pode 
-ser visto na figura \ref{strategy_exemplo}.
+ser visto na Figura \ref{strategy_exemplo}.
 
 \begin{figure}[htb]
-	\caption{\label{strategy_exemplo}Exemplo de Strategy}
+	\caption{\label{strategy_exemplo}Exemplo de Strategy.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/strategy_exemplo.png}
 	\end{center}
 \end{figure}
 
-\begin{lstlisting}[caption={Strategy Orientação a Objetos},label=oostrategy]
+\begin{lstlisting}[caption={Strategy Orientação a Objetos.},label=oostrategy]
     
 trait Compositor {
   def Compose(
@@ -135,9 +135,9 @@ um inteiro. Dessa forma, basta definir as
 funções ComposeSimple, ComposeTeX e ComposeArray 
 que podem ser passadas por parâmetro quando a 
 função Repair for chamada. A implementação pode 
-ser vista no código \ref{fpstrategy}.
+ser vista no Código \ref{fpstrategy}.
 
-\begin{lstlisting}[caption={Strategy Funcional},label=fpstrategy]
+\begin{lstlisting}[caption={Strategy Funcional.},label=fpstrategy]
     
 type Composition = (Int, List[Coord], Int)
 

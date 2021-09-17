@@ -17,7 +17,7 @@ histórico ou sequência de operações.
 Esse padrão funciona como uma solução para definir 
 \textit{callbacks}, ou seja, operações que podem ser 
 predefinidas e executadas futuramente no código. Sua 
-estrutura pode ser vista na imagem \ref{command_struct}.
+estrutura pode ser vista na Figura \ref{command_struct}.
 
 \begin{figure}[htb]
 	\caption{\label{command_struct}Estrutura do Command}
@@ -41,7 +41,7 @@ documento da aplicação, e OpenCommand, que tem como
 alvo o objeto da aplicação. Além disso, há um 
 MacroCommand que permite executar uma sequência 
 de comandos. O exemplo é apresentado no diagrama da 
-imagem \ref{command_exemplo} e no código \ref{oocommand}.
+Figura \ref{command_exemplo} e no Código \ref{oocommand}.
 
 \begin{figure}[htb]
 	\caption{\label{command_exemplo}Exemplo de Command}
@@ -114,7 +114,7 @@ são encapsuladas em um mesmo objeto, é necessário
 definir um valor, como uma tupla, que armazene ambas 
 as operações.
 
-O código \ref{fpcommand} demonstra uma implementação 
+O Código \ref{fpcommand} demonstra uma implementação 
 genérica do padrão no contexto funcional. Na linha 2 
 é definido um tipo Command que é uma tupla que 
 armazena duas funções: fazer e desfazer. A função 
@@ -170,7 +170,7 @@ def CommandMany[A](target : A, commands : List[Command[A]], operation : (A, Comm
     
 \end{lstlisting}
 
-O código \ref{fpcommandexample} demonstra como o exemplo 
+O Código \ref{fpcommandexample} demonstra como o exemplo 
 orientado a objetos poderia ser implementado a partir das 
 funções auxiliares vistas. O valor ExecuteOpen, visto 
 na linha 2, implementa a abertura de um documento em uma 

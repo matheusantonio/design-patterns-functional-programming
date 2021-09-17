@@ -9,7 +9,7 @@ solução que evita a refatoração e a dependência da
 interface do cliente com a interface desejada.\cite{gamma:1995}
 
 Existem duas formas de realizar essa adaptação. Um Adapter 
-de classe, apresentado na figura \ref{adapter_struct},  
+de classe, apresentado na Figura \ref{adapter_struct},  
 só é possível para linguagens que implementam herança 
 múltipla.
 Ele define uma classe que herda tanto da classe que 
@@ -19,13 +19,13 @@ reescrever a operação Request, ele adapta sua entrada
 para a de SpecificRequest, repassando a solicitação.\cite{gamma:1995}
 
 \begin{figure}[htb]
-	\caption{\label{adapter_struct}Estrutura do Adapter de Classe}
+	\caption{\label{adapter_struct}Estrutura do Adapter de Classe.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter_classe_estrutura.png}
 	\end{center}
 \end{figure}
 
-Já o Adapter de Objeto, apresentado na figura \ref{adapter_alt_struct}, 
+Já o Adapter de Objeto, apresentado na Figura \ref{adapter_alt_struct}, 
 herda apenas da classe que apresenta a interface 
 da aplicação, também reimplementando a operação Request. 
 A diferença é que ela repassa a solicitação para a 
@@ -33,7 +33,7 @@ classe que apresenta a interface que deseja ser
 utilizada através de uma delegação.\cite{gamma:1995}
 
 \begin{figure}[htb]
-	\caption{\label{adapter_alt_struct}Estrutura do Adapter de Objeto}
+	\caption{\label{adapter_alt_struct}Estrutura do Adapter de Objeto.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter_objeto_estrutura.png}
 	\end{center}
@@ -56,20 +56,20 @@ utilizá-la. Para esse exemplo, é utilizada a
 abordagem de Adapter de objeto, onde um objeto 
 do tipo da ferramenta textual é armazenado. O 
 diagrama de classes do exemplo pode ser visto na 
-figura \ref{adapter_exemplo}, enquanto a 
-implementação em código pode ser vista no código 
+Figura \ref{adapter_exemplo}, enquanto a 
+implementação em código pode ser vista no Código 
 \ref{ooadapter}.
 
 
 \begin{figure}[htb]
-	\caption{\label{adapter_exemplo}Exemplo de Adapter}
+	\caption{\label{adapter_exemplo}Exemplo de Adapter.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter_exemplo.png}
 	\end{center}
 \end{figure}
 
 
-\begin{lstlisting}[caption={Adapter Orientado a Objetos},label=ooadapter]
+\begin{lstlisting}[caption={Adapter Orientado a Objetos.},label=ooadapter]
 
 class DrawingEditor(shape : Shape) {
 
@@ -108,7 +108,7 @@ class TextView(var x : Point, var y : Point, var width : Int, var height : Int) 
 
 \subsection*{Contexto Funcional}
 
-No código \ref{fpadapter}, a função DrawingEditorFunction 
+No Código \ref{fpadapter}, a função DrawingEditorFunction 
 declarada na linha 2 recebe como parâmetro uma operação de um 
 objeto gráfico. Porém, é desejado utilizar a operação 
 GetExtent, declarada na linha 7, de um \textit{text view} 
@@ -122,7 +122,7 @@ DrawingEditorFunction. Com o uso das funções de alta
 ordem, foi necessário apenas uma nova função intermediária 
 para realizar a adaptação. 
 
-\begin{lstlisting}[caption={Adapter Funcional},label=fpadapter]
+\begin{lstlisting}[caption={Adapter Funcional.},label=fpadapter]
     
 def DrawingEditorFunction(CalculateBounding : () => Int) : Int = {
   // ...

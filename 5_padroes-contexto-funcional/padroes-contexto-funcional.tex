@@ -36,12 +36,13 @@ que define quais características e comportamentos um objeto
 deve possuir\cite{umlsystems}. Essas características 
 e comportamentos são representados em orientação a 
 objetos como atributos e métodos, respectivamente. 
-O código \ref{ooclass} demonstra uma classe que 
-possui os atributos nome e idade, além dos métodos 
-getNome, setNome, getIdade e setIdade, que realizam 
+O Código \ref{ooclass} demonstra uma classe que 
+possui os atributos \texttt{nome} e \texttt{idade}, além dos métodos 
+\texttt{getNome}, \texttt{setNome}, \texttt{getIdade} 
+e \texttt{setIdade}, que realizam 
 operações com esses atributos.
 
-\begin{lstlisting}[caption={Classe comum em Orientação a Objetos},label=ooclass]
+\begin{lstlisting}[caption={Exemplo de classe em Orientação a Objetos.},label=ooclass]
     
     class Pessoa(var nome : String, var idade : Int){
 
@@ -78,10 +79,31 @@ métodos é definir funções que recebam
 como parâmetro um valor do tipo definido em nossa 
 estrutura de dados imutável. Seguindo esses dois 
 princípios, uma versão funcional da classe apresentada 
-no código \ref{ooclass} pode ser vista no código \ref{fpclass}.
+no Código \ref{ooclass} pode ser vista no Código \ref{fpclass}
+\footnote{ 
+Este exemplo possui as notações \textit{\textunderscore1} e 
+\textit{\textunderscore2}, 
+que são a forma que a 
+linguagem Scala utiliza para acessar a primeira e 
+a segunda posição de uma tupla, respectivamente.
+}.
 
 
-\begin{lstlisting}[caption={Representação de uma classe no contexto funcional},label=fpclass]
+
+\begin{comment}
+    \footnote{
+    O Código \ref{fpclass} possui as notações 
+    pessoa._1 e pessoa._2, que são a forma que a 
+    linguagem Scala utiliza para acessar a primeira e 
+    a segunda posição de uma tupla, respectivamente.
+}
+    possui as notações 
+\textit{._1} e \textit{._2}, que são a forma que a 
+linguagem Scala utiliza para acessar a primeira e 
+a segunda posição de uma tupla, respectivamente
+\end{comment}
+
+\begin{lstlisting}[caption={Representação de uma classe no contexto funcional.},label=fpclass]
     
     type Pessoa = (String, Int)
 
@@ -111,7 +133,7 @@ entre duas classes, basta que pelo menos
 uma delas tenha em seus atributos uma 
 referência à outra.
 
-\begin{lstlisting}[caption={Exemplo de associação entre classes},label=ooassociation]
+\begin{lstlisting}[caption={Exemplo de associação entre classes.},label=ooassociation]
     
     class Cidade(var nome : String){
 
@@ -141,11 +163,11 @@ dentro de uma tupla associada a um tipo.
 Portanto, uma associação dentro do contexto 
 funcional pode ser implementada armazenando 
 um valor de um tipo A entre os valores da tupla 
-de um tipo B. O código \ref{fpassociation} 
+de um tipo B. O Código \ref{fpassociation} 
 demonstra o exemplo anterior implementado 
 de forma funcional.
 
-\begin{lstlisting}[caption={Exemplo de associação no contexto funcional},label=fpassociation]
+\begin{lstlisting}[caption={Exemplo de associação no contexto funcional.},label=fpassociation]
     
     type Cidade = (String)
     
@@ -199,13 +221,13 @@ Existe mais de uma abordagem que torna
 possível implementar o encapsulamento em 
 linguagens funcionais, o uso de GADTs - 
 \textit{Generalized Algebraic 
-Data Types}\cite{existentialhaskell} é uma 
-delas. Closures também podem 
+Data Types}\cite{existentialhaskell} - é uma 
+delas. \textit{Closures} também podem 
 ser utilizadas ao armazenar valores de 
 atributos enquanto retorna as funções 
 necessárias para acessá-los ou modificá-los. 
-Um exemplo equivalente ao do código \ref{fpclass} 
-pode ser visto no código \ref{fpclosure}, 
+Um exemplo equivalente ao do Código \ref{fpclass} 
+pode ser visto no Código \ref{fpclosure}, 
 implementado utilizando a linguagem funcional Clojure. 
 \cite{classlessjs} Nele, a função pessoa 
 funciona como um construtor que recebe como 
@@ -215,7 +237,7 @@ recuperar ou modificar o estado de uma pessoa.
 As funções de modificação retornam uma nova versão 
 da pessoa com o estado alterado.
 
-\begin{lstlisting}[caption={Representação de uma classe com closures},label=fpclosure]
+\begin{lstlisting}[caption={Representação de uma classe com \textit{closures}.},label=fpclosure]
     
     (defn pessoa [nome idade]
         {:getNome nome
@@ -229,20 +251,28 @@ Apesar de não ser um conceito de programação
 funcional, também é possível aproveitar a ideia 
 de modularização para esconder detalhes de 
 implementação \cite{mlmodules}. Por exemplo, o 
-código \ref{modulesencap}, implementado em 
-Haskell, mostra o tipo Pessoa com um construtor 
-P. Apesar do tipo Pessoa ser exportado para fora do 
-módulo, P não é, tornando impossível para qualquer 
+Código \ref{modulesencap}, implementado em 
+Haskell
+\footnote{
+    Como a linguagem Scala utiliza palavras-chave 
+    como \textit{object} e \textit{private} para 
+    implementar módulos, o exemplo foi feito em 
+    Haskell para que não fosse associável à 
+    orientação a objetos.
+}
+, mostra o tipo \texttt{Pessoa} com um construtor 
+\texttt{P}. Apesar do tipo \texttt{Pessoa} ser exportado para fora do 
+módulo, \texttt{P} não é, tornando impossível para qualquer 
 função que acesse esse módulo criar algo do tipo 
-Pessoa. Dessa forma, apenas a função newPessoa, 
+\texttt{Pessoa}. Dessa forma, apenas a função \texttt{newPessoa}, 
 também exportada pelo módulo, 
 pode criar novos valores do tipo 
-Pessoa. Funções implementadas dentro do módulo 
+\texttt{Pessoa}. Funções implementadas dentro do módulo 
 também podem deixar de ser exportadas, o que 
 as tornaria semelhantes a métodos privados 
 de uma classe.
 
-\begin{lstlisting}[caption={Módulos como forma de encapsulamento},label=modulesencap]
+\begin{lstlisting}[caption={Módulos como forma de encapsulamento.},label=modulesencap]
     
     module Pessoa (Pessoa, newPessoa, getNome, setNome, getIdade, setIdade) where
 
@@ -269,7 +299,7 @@ Todas essas abordagens são válidas para a
 implementação do encapsulamento, sendo a 
 linguagem utilizada um fator mais decisivo 
 do que a abordagem em si. Por exemplo, é 
-mais simples implementar a abordagem de closures 
+mais simples implementar a abordagem de \textit{closures} 
 em Clojure por ela ser dinamicamente tipada, 
 permitindo que um dicionário sem estrutura 
 predefinida seja retornado. Linguagens que exigem 
@@ -298,17 +328,18 @@ uma classe que implementa uma interface também
 implementará as operações definidas 
 pela mesma\cite{oracleooconcepts}. 
 
-Um exemplo do uso de interfaces é demonstrado no código 
+Um exemplo do uso de interfaces é demonstrado no Código 
 \ref{oopinterface1}, 
 onde a interface é necessária para garantir que as 
-classes SomadorMaisUm e MultiplicadorPorDois implementem 
-a operação calcular, que recebe como parâmetro 
+classes \texttt{SomadorMaisUm} e \texttt{MultiplicadorPorDois} 
+implementem 
+a operação \texttt{calcular}, que recebe como parâmetro 
 um valor do tipo inteiro e retorna outro valor 
 inteiro.
 
 % Exemplo 1 de Interfaces
 
-\begin{lstlisting}[caption={Interfaces em Orientação a Objetos},label=oopinterface1]
+\begin{lstlisting}[caption={Interfaces em Orientação a Objetos.},label=oopinterface1]
     
     trait ICalculaInteiro {
         def calcular(x : Int) : Int
@@ -333,12 +364,12 @@ consideração que as funções que representam nossos
 métodos não estão encapsulados em classes e 
 não dependem de atributos, é possível substituir o 
 objeto sendo passado por parâmetro na função 
-calcularInteiro por uma função qualquer que recebe 
+\texttt{calcularInteiro} por uma função qualquer que recebe 
 como parâmetro um valor inteiro e retorna outro 
 valor inteiro. Essa alternativa pode ser vista 
-no código \ref{fpinterface1}.
+no Código \ref{fpinterface1}.
 
-\begin{lstlisting}[caption={Interfaces em Programação Funcional},label=fpinterface1]
+\begin{lstlisting}[caption={Interfaces em Programação Funcional.},label=fpinterface1]
     
     def somaUm(x : Int) : Int = x + 1
 
@@ -359,12 +390,14 @@ utilizada como base para a criação de outra classe,
 usa-se a herança\cite{quarkoo}. Dessa forma, é 
 possível criar implementações mais específicas 
 de classes já existentes e reaproveitar o código. 
-O exemplo \ref{ooinheritance} demonstra 
-o uso da herança entre as classes Animal e Dog. 
+O Código \ref{ooinheritance} demonstra 
+o uso da herança entre as classes \texttt{Animal} 
+e \texttt{Cachorro}. 
 Ao invés de reimplementar os métodos da classe 
-Animal, a classe Cachorro usa herança para reaproveitá-los. 
+\texttt{Animal}, a classe \texttt{Cachorro} usa herança 
+para reaproveitá-los. 
 
-\begin{lstlisting}[caption={Herança em Orientação a Objetos},label=ooinheritance]
+\begin{lstlisting}[caption={Herança em Orientação a Objetos.},label=ooinheritance]
     
     class Animal(var nome : String) {
         def getNome() : String = nome
@@ -397,31 +430,31 @@ que deseja herdar as funcionalidades de um tipo B
 deve possuir uma instância desse mesmo tipo em seus 
 atributos. Para os métodos do tipo A, basta que as 
 funções do tipo B sejam compostas das funções 
-necessárias do tipo A. O código \ref{fpinheritance} 
-demonstra o exemplo anterior, onde um tipo Animal 
-armazena um valor String que representa o nome 
-enquanto o tipo Cachorro armazena um valor Animal. 
-As funções latir e comer que recebem como parâmetro 
-um valor do tipo Cachorro reutilizam as funções getNome 
-e comer que recebem como parâmetro um valor do tipo 
-Animal. Nesse exemplo, o tipo Animal representa 
-uma classe pai e o tipo Cachorro uma class filha.
+necessárias do tipo A. O Código \ref{fpinheritance} 
+demonstra o exemplo anterior, onde um tipo \texttt{Animal} 
+armazena um valor \textit{string} que representa o nome 
+enquanto o tipo \texttt{Cachorro} armazena um valor \texttt{Animal}. 
+As funções \texttt{latir} e \texttt{comer} que recebem como parâmetro 
+um valor do tipo \texttt{Cachorro} reutilizam as funções \texttt{getNome} 
+e \texttt{comer} que recebem como parâmetro um valor do tipo 
+\texttt{Animal}. Nesse exemplo, o tipo \texttt{Animal} representa 
+uma classe pai e o tipo \texttt{Cachorro} uma classe filha.
 
 \begin{lstlisting}[caption={Herança em Programação Funcional},label=fpinheritance]
     
     type Animal = (String)
 
-    def getName(animal : Animal) : String = animal._1;
-    def eat(animal : Animal) : String = 
+    def getNome(animal : Animal) : String = animal._1;
+    def comer(animal : Animal) : String = 
         "Meu nome é " + getNome(animal) + " e eu posso comer"
 
     type Cachorro = (Animal)
 
     def getAnimal(cachorro : Cachorro) : Animal = cachorro._1;
-    def bark(cachorro : Cachorro) : String = 
-        "Au! Meu nome é " + getName(getAnimal(cachorro))
-    def eat(cachorro : Cachorro) : String = 
-        eat(getAnimal(Cachorro)) + "\nEu como comida de cachorro";
+    def latir(cachorro : Cachorro) : String = 
+        "Au! Meu nome é " + getNome(getAnimal(cachorro))
+    def comer(cachorro : Cachorro) : String = 
+        comer(getAnimal(Cachorro)) + "\nEu como comida de cachorro";
 
 \end{lstlisting}
 
