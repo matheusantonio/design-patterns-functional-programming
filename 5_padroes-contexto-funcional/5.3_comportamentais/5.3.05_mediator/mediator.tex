@@ -1,29 +1,30 @@
 \section{Mediator}
 
 
-Nesse padrão, um objeto chamado de Mediator age como intermediário 
+Nesse padrão, um objeto chamado de \textit{Mediator} age como intermediário 
 entre um grupo de objetos, ficando responsável por qualquer 
-interação entre eles. O Mediator conhece todos 
+interação entre eles. O \textit{Mediator} conhece todos 
 esses objetos enquanto cada objeto conhece apenas o 
-Mediator, o que os torna 
+\textit{Mediator}, o que os torna 
 mais independentes, simplificando sua reutilização
  e concentrando as dependências entre eles 
 em um só lugar. \cite{gamma:1995}
 
 A estrutura do padrão é apresentada na Figura \ref{mediator_struct}. 
-Uma interface Mediator define as operações que um tipo de 
-objeto Mediator deve possuir. ConcreteMediator representa 
-uma classe que implementa essas operações. Um Colleague 
-é um objeto conhecido pelo Mediator e cada ConcreteColleague 
+Uma interface \texttt{Mediator} define as operações que um tipo de 
+objeto \textit{Mediator} deve possuir. \texttt{ConcreteMediator} representa 
+uma classe que implementa essas operações. Um \texttt{Colleague} 
+é um objeto conhecido pelo \texttt{Mediator} e cada \texttt{ConcreteColleague} 
 pode ser tanto um objeto que possui operações refletidas 
 em outros objetos quanto ser um dos objetos afetados 
-indiretamente por outro Colleague.
+indiretamente por outro \texttt{Colleague}.
 
 \begin{figure}[htb]
-	\caption{\label{mediator_struct}Estrutura do Mediator}
+	\caption{\label{mediator_struct}Estrutura do \textit{Mediator}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/mediator_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
@@ -32,22 +33,23 @@ Como exemplo, é considerada uma janela de uma aplicação
 que apresenta diversos \textit{widgets}, entre eles uma caixa 
 de entrada de texto e uma lista de seleção. Quando um item é 
 selecionado na lista, o texto contido nele deve aparecer 
-na caixa de entrada de texto. O Mediator é responsável 
+na caixa de entrada de texto. O \textit{Mediator} é responsável 
 por alterar a caixa de entrada de texto quando um item 
 é selecionado na lista, enquanto a lista é responsável 
-por informar ao Mediator quando um item for selecionado. 
+por informar ao \textit{Mediator} quando um item for selecionado. 
 A Figura \ref{mediator_exemplo} apresenta o diagrama 
 de classes para esse exemplo. O Código \ref{oomediator} 
 apresenta a implementação do padrão para esse exemplo.
 
 \begin{figure}[htb]
-	\caption{\label{mediator_exemplo}Exemplo de Mediator}
+	\caption{\label{mediator_exemplo}Exemplo de \textit{Mediator}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/mediator_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Mediator Orientado a Objetos},label=oomediator]
+\begin{lstlisting}[caption={\textit{Mediator} Orientado a Objetos.},label=oomediator]
 
 abstract class DialogDirector {
 
@@ -93,18 +95,19 @@ class ListBox(director : DialogDirector) extends Widget(director){
 }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
 O Código \ref{fpmediator} demonstra a implementação 
-funcional do Mediator. Uma função é responsável por 
+funcional do \textit{Mediator}. Uma função é responsável por 
 gerenciar as interdependências entre os valores 
-dos tipos EntryField, definido na linha 2, e ListBox, 
-definido na linha 12. Quando a função mediadora ChangeSelection, 
+dos tipos \texttt{EntryField}, definido na linha 2, e \texttt{ListBox}, 
+definido na linha 12. Quando a função mediadora \texttt{ChangeSelection}, 
 definida na linha 22, é chamada, ela precisa receber 
 como parâmetro o elemento alvo e o elemento dependente, 
 além das informações necessárias para executar a 
-operação ChangeListBoxSelection. A função retorna 
+operação \texttt{ChangeListBoxSelection}. A função retorna 
 tanto o \textit{colleague} alvo da operação 
 quanto os \textit{colleagues} afetados, mantendo 
 a função cliente que chama essa operação atualizada 
@@ -112,15 +115,15 @@ quanto ao estado de ambos os valores.
 
 A vantagem dessa abordagem é que ela torna possível 
 que as funções dos \textit{colleagues} (no Código 
-\ref{fpmediator}, ChangeEntryFieldText e 
-ChangeListBoxSelection) sejam idependentes dos 
+\ref{fpmediator}, \texttt{ChangeEntryFieldText} e 
+\texttt{ChangeListBoxSelection}) sejam idependentes dos 
 mediadodores, favorecendo seu reuso. A desvantagem 
 é que é necessário realizar, na função cliente, 
 um gerenciamento quanto ao estado de todos os 
 \textit{colleagues}, já que a função mediadora 
 deve ser pura e não realiza efeitos colaterais.
 
-\begin{lstlisting}[caption={Mediator Funcional},label=fpmediator]
+\begin{lstlisting}[caption={\textit{Mediator} Funcional.},label=fpmediator]
     
 type EntryField = String
 
@@ -149,3 +152,4 @@ def ChangeSelection(selection : String,
 }
 	    
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

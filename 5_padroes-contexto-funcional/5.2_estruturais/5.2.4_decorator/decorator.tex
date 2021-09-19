@@ -1,6 +1,6 @@
 \section{Decorator}
 
-O padrão Decorator permite adicionar responsabilidades a um 
+O padrão \textit{Decorator} permite adicionar responsabilidades a um 
 objeto de forma dinâmica. Essa dinamicidade é alcançada 
 substituindo a herança por uma delegação, fazendo com 
 que a classe decorada delegue à classe que a estende 
@@ -19,7 +19,7 @@ presentes na estrutura. O diagrama de classes que
 demonstra essa estrutura pode ser visto na Figura 
 \ref{decorator_struct}.
 
-O maior problema resolvido pelo Decorator é a grande 
+O maior problema resolvido pelo \textit{Decorator} é a grande 
 quantidade de subclasses que deveriam existir caso houvessem 
 muitas extensões para uma classe. O problema cresce ainda 
 mais quando é necessário que essas funcionalidades mudem 
@@ -27,10 +27,11 @@ dinamicamente, gerando diversas combinações de grupos de
 funcionalidades possíveis.
 
 \begin{figure}[htb]
-	\caption{\label{decorator_struct}Estrutura do Decorator.}
+	\caption{\label{decorator_struct}Estrutura do \textit{Decorator}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.4_decorator/decorator_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
@@ -41,33 +42,34 @@ como bordas ou barras de rolagem, possam ser adicionadas
 a qualquer componente. Ao invés de usar herança, 
 o que exigiria que houvesse uma subclasse para cada 
 combinação de funcionalidades e elementos gráficos, 
-o padrão Decorator é utilizado. Por exemplo, um 
+o padrão \textit{Decorator} é utilizado. Por exemplo, um 
 elemento de texto pode ser decorado com uma barra 
 de rolagem ou com uma borda. A Figura \ref{decorator_exemplo} 
 demonstra o diagrama de classes para esse caso, 
-onde uma classe TextView implementa uma interface 
-VisualComponent, assim como a classe abstrata Decorator, 
+onde uma classe \texttt{TextView} implementa uma interface 
+\texttt{VisualComponent}, assim como a classe abstrata \texttt{Decorator}, 
 que armazena em seus atributos um objeto do tipo 
-VisualComponent. As classes ScrollDecorator e 
-BorderDecorator herdam de Decorator, o que faz com que 
-elas implementem VisualComponent. Uma das 
+\texttt{VisualComponent}. As classes \texttt{ScrollDecorator} e 
+\texttt{BorderDecorator} herdam de \texttt{Decorator}, o que faz com que 
+elas implementem \texttt{VisualComponent}. Uma das 
 possibilidades desse cenário é que um objeto do tipo 
-ScrollDecorator armazene um BorderDecorator, que 
-por sua vez armazenará um TextView. A operação 
-Draw será chamada, em sequência, para cada 
-elemento da pilha, resultando no TextView 
+\texttt{ScrollDecorator} armazene um \texttt{BorderDecorator}, que 
+por sua vez armazenará um \texttt{TextView}. A operação 
+\texttt{Draw} será chamada, em sequência, para cada 
+elemento da pilha, resultando no \texttt{TextView} 
 com as funcionalidades desejadas. O Código 
 \ref{oodecorator} traz a implementação dessa 
 abordagem.
 
 \begin{figure}[htb]
-	\caption{\label{decorator_exemplo}Exemplo de Decorator.}
+	\caption{\label{decorator_exemplo}Exemplo de \textit{Decorator}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.4_decorator/decorator_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Decorator Orientado a Objetos.},label=oodecorator]
+\begin{lstlisting}[caption={\textit{Decorator} Orientado a Objetos.},label=oodecorator]
 
 trait VisualComponent {
   def Draw()
@@ -108,10 +110,11 @@ class BorderDecorator(visualComponent: VisualComponent)
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
-Para que o Decorator possa ser usado no contexto 
+Para que o \textit{Decorator} possa ser usado no contexto 
 funcional para estender operações, as funções 
 decoradoras devem receber como parâmetro uma função 
 que possua a mesma assinatura da função decorada. 
@@ -129,16 +132,16 @@ encadear as funções decoradoras, trazendo uma estrutura de
 pilha, semelhante à implementação orientada a objetos.
 
 O Código \ref{fpdecorator} demonstra o exemplo anterior, onde 
-a função DrawTextView, na linha 2, recebe como parâmetro uma 
-String e cria um \textit{text view} que a exibe. As funções 
-DrawTextScroll, na linha 4, e DrawBorder, na linha 11, decoram 
-a função DrawTextView, exibindo também uma barra de \textit{scroll} 
-e bordas para o componente. Por fim, o valor DecoratedDraw, na 
+a função \texttt{DrawTextView}, na linha 2, recebe como parâmetro uma 
+\textit{string} e cria um \textit{text view} que a exibe. As funções 
+\texttt{DrawTextScroll}, na linha 4, e \texttt{DrawBorder}, na linha 11, decoram 
+a função \texttt{DrawTextView}, exibindo também uma barra de \textit{scroll} 
+e bordas para o componente. Por fim, o valor \texttt{DecoratedDraw}, na 
 linha 18, encadeia as três funções, criando uma nova função 
-com a mesma assinatura de DrawTextView com as funcionalidades 
+com a mesma assinatura de \texttt{DrawTextView} com as funcionalidades 
 adicionais.
 
-\begin{lstlisting}[caption={Decorator Funcional.},label=fpdecorator]
+\begin{lstlisting}[caption={\textit{Decorator} Funcional.},label=fpdecorator]
     
 def DrawTextView(text : String) : Unit = println(text)
 
@@ -162,3 +165,4 @@ val DecoratedDraw : (String) => Unit =
       Draw))
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

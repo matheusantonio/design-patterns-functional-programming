@@ -2,7 +2,7 @@
 
 \section{Chain of Responsibility}
 
-Chain of Responsability propõe criar uma estrutura para 
+\textit{Chain of Responsability} propõe criar uma estrutura para 
 tratar solicitações feitas por um objeto cliente. As classes 
 que tratam as solicitações são chamadas de \textit{handlers}. 
 Uma solicitação é passada adiante por uma cadeia de 
@@ -18,15 +18,16 @@ caso um \textit{handler} adequado não esteja na cadeia. A
 estrutura do padrão pode ser vista na Figura \ref{chain_struct}.
 
 \begin{figure}[htb]
-	\caption{\label{chain_struct}Estrutura do Chain of Responsibility.}
+	\caption{\label{chain_struct}Estrutura do \textit{Chain of Responsibility}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.01_chain-of-responsibility/chainofresponsibility_struct.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
 
-O exemplo do Chain of Responsibility traz um recurso 
+O exemplo do \textit{Chain of Responsibility} traz um recurso 
 de ajuda utilizado nos componentes de uma 
 interface gráfica. O recurso é sensível ao contexto, 
 bastando que o usuário solicite a ajuda no local 
@@ -38,13 +39,14 @@ a ajuda. A Figura \ref{chain_exemplo} e o Código
 \ref{oochresponsibility} demonstram esse exemplo.
 
 \begin{figure}[htb]
-	\caption{\label{chain_exemplo}Exemplo de Chain of Responsibility.}
+	\caption{\label{chain_exemplo}Exemplo de \textit{Chain of Responsibility}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.01_chain-of-responsibility/chainofresponsibility_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Chain of Responsibility Orientação a Objetos.},label=oochresponsibility]
+\begin{lstlisting}[caption={\textit{Chain of Responsibility} Orientação a Objetos.},label=oochresponsibility]
 
 class HelpHandler(handler: HelpHandler = null, topic : Topic.Value = Topic.NO_HELP_TOPIC) {
 
@@ -105,10 +107,11 @@ class Application(topic: Topic.Value)
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
-O Chain of Responsability encadeia funções que 
+O \textit{Chain of Responsability} encadeia funções que 
 tratam solicitações, de forma que uma próxima 
 função seja chamada quando a solicitação não 
 pode ser tratada. É possível implementá-lo 
@@ -119,20 +122,20 @@ a função do próximo elemento da cadeia.
 
 O Código \ref{fpchresponsibility} demonstra a 
 criação dos \textit{handlers}. Na linha 2, a 
-função HandleButton recebe como parâmetro um 
+função \texttt{HandleButton} recebe como parâmetro um 
 tópico e o próximo \textit{handler} da cadeia, 
-assim como a classe Button do exemplo orientado 
+assim como a classe \texttt{Button} do exemplo orientado 
 a objetos. Ela retorna uma função que verifica 
 se a solicitação pode ser tratada e, caso 
 não seja, chama o \textit{handler} armazenado. 
-A função HandleDialog, na linha 12, é 
+A função \texttt{HandleDialog}, na linha 12, é 
 implementada de forma análoga. Já a função 
-HandleHelp, na linha 22, não recebe novos 
+\texttt{HandleHelp}, na linha 22, não recebe novos 
 \textit{handlers}, oferecendo ajuda de forma 
 genérica, da mesma forma que a classe 
-Application do exemplo orientado a objetos.
+\texttt{Application} do exemplo orientado a objetos.
 
-\begin{lstlisting}[caption={Chain of Responsibility Funcional.},label=fpchresponsibility]
+\begin{lstlisting}[caption={\textit{Chain of Responsibility} Funcional.},label=fpchresponsibility]
     
 def HandleButton(topic : Topic.Value, handler : () => Unit) : () => Unit = {
   () => {
@@ -159,17 +162,19 @@ def HandleHelp() : Unit = {
 }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 O Código \ref{fpchainfunction} demonstra a criação 
 da cadeia, onde as funções apresentadas anteriormente 
 são executadas e encadeadas, criando a função 
-ChainofResponsibility que será utilizada para 
+\texttt{ChainofResponsibility} que será utilizada para 
 tratar todas as solicitações.
 
-\begin{lstlisting}[caption={Função Chain of Responsability.},label=fpchainfunction]
+\begin{lstlisting}[caption={Função \textit{Chain of Responsability}.},label=fpchainfunction]
     
 val ChainofResponsibility: () => Unit = HandleButton(Topic.BUTTON,
   HandleDialog(Topic.DIALOG,
     HandleHelp))
       
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

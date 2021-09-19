@@ -57,6 +57,7 @@
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{microtype} 			% para melhorias de justificação
 \usepackage{multirow}
+\usepackage{caption}
 % ---
 		
 % ---
@@ -111,7 +112,7 @@
   %backgroundcolor=\color{theshade},
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
   breaklines=true,                 % sets automatic line breaking
-  captionpos=b,                    % sets the caption-position to bottom
+  captionpos=t,                    % sets the caption-position to bottom
   commentstyle=\color{Green},      % comment style
   deletekeywords={...},            % if you want to delete keywords from the given language
   escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
@@ -138,7 +139,8 @@
   tabsize=2,                       % sets default tabsize to 2 spaces
   title=\lstname,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
   framexleftmargin=10pt,
-  framexleftmargin=15pt
+  framexleftmargin=15pt,
+  float
 }
 \lstset{escapechar=@,style=prologCustom}
 % ---
@@ -259,6 +261,7 @@ Federal Fluminense.}
 \makeindex
 % ---
 
+
 % ----
 % Início do documento
 % ----
@@ -271,15 +274,15 @@ Federal Fluminense.}
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing 
 
-\include{1_capa/capa}
+\input{1_capa/capa}
 
 
 \part{Introdução}
 
-\include{2_introducao/introducao}
+\input{2_introducao/introducao}
 
 
-\include{3_trabalhos_relacionados/trabalhos-relacionados}
+\input{3_trabalhos_relacionados/trabalhos-relacionados}
 
 % ----------------------------------------------------------
 % PARTE
@@ -288,11 +291,11 @@ Federal Fluminense.}
 % ----------------------------------------------------------
 
 
-\include{4_referencial_teorico/1_paradigma-funcional/paradigma-funcional}
+\input{4_referencial_teorico/1_paradigma-funcional/paradigma-funcional}
 
-\include{4_referencial_teorico/2_padroes-projeto/padroes-projeto}
+\input{4_referencial_teorico/2_padroes-projeto/padroes-projeto}
 
-\include{4_referencial_teorico/3_scala/scala}
+\input{4_referencial_teorico/3_scala/scala}
 
 
 
@@ -303,7 +306,7 @@ Federal Fluminense.}
 \part{Desenvolvimento}
 % ----------------------------------------------------------
 
-\include{5_padroes-contexto-funcional/padroes-contexto-funcional}
+\input{5_padroes-contexto-funcional/padroes-contexto-funcional}
 
 
 % ----------------------------------------------------------
@@ -311,41 +314,41 @@ Federal Fluminense.}
 % ----------------------------------------------------------
 %\chapter{Padrões Criacionais}
 
-\include{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/factory-method}
-\include{5_padroes-contexto-funcional/5.1_criacionais/5.1.2_abstract-factory/abstract-factory}
-\include{5_padroes-contexto-funcional/5.1_criacionais/5.1.3_builder/builder}
-\include{5_padroes-contexto-funcional/5.1_criacionais/5.1.4_prototype/prototype}
-\include{5_padroes-contexto-funcional/5.1_criacionais/5.1.5_singleton/singeton}
+\input{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/factory-method}
+\input{5_padroes-contexto-funcional/5.1_criacionais/5.1.2_abstract-factory/abstract-factory}
+\input{5_padroes-contexto-funcional/5.1_criacionais/5.1.3_builder/builder}
+\input{5_padroes-contexto-funcional/5.1_criacionais/5.1.4_prototype/prototype}
+\input{5_padroes-contexto-funcional/5.1_criacionais/5.1.5_singleton/singeton}
 
 % ----------------------------------------------------------
 % ESTRUTURAIS
 % ----------------------------------------------------------
 %\chapter{Padrões Estruturais}
 
-\include{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter}
-\include{5_padroes-contexto-funcional/5.2_estruturais/5.2.2_bridge/bridge}
-\include{5_padroes-contexto-funcional/5.2_estruturais/5.2.3_composite/composite}
-\include{5_padroes-contexto-funcional/5.2_estruturais/5.2.4_decorator/decorator}
-\include{5_padroes-contexto-funcional/5.2_estruturais/5.2.5_facade/facade}
-\include{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight}
-\include{5_padroes-contexto-funcional/5.2_estruturais/5.2.7_proxy/proxy}
+\input{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter}
+\input{5_padroes-contexto-funcional/5.2_estruturais/5.2.2_bridge/bridge}
+\input{5_padroes-contexto-funcional/5.2_estruturais/5.2.3_composite/composite}
+\input{5_padroes-contexto-funcional/5.2_estruturais/5.2.4_decorator/decorator}
+\input{5_padroes-contexto-funcional/5.2_estruturais/5.2.5_facade/facade}
+\input{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight}
+\input{5_padroes-contexto-funcional/5.2_estruturais/5.2.7_proxy/proxy}
 
 % ----------------------------------------------------------
 % COMPORTAMENTAIS
 % ----------------------------------------------------------
 %\chapter{Padrões Comportamentais}
 
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.01_chain-of-responsibility/chain-of-responsibility}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.02_command/command}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.03_interpreter/interpreter}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.04_iterator/iterator}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/mediator}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.06_memento/memento}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.07_observer/observer}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.08_state/state}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/strategy}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.10_template-method/template-method}
-\include{5_padroes-contexto-funcional/5.3_comportamentais/5.3.11_visitor/visitor}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.01_chain-of-responsibility/chain-of-responsibility}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.02_command/command}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.03_interpreter/interpreter}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.04_iterator/iterator}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/mediator}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.06_memento/memento}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.07_observer/observer}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.08_state/state}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/strategy}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.10_template-method/template-method}
+\input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.11_visitor/visitor}
 
 % ----------------------------------------------------------
 % PARTE
@@ -354,10 +357,10 @@ Federal Fluminense.}
 % ----------------------------------------------------------
 \part{Resultados}
 
-\include{6_resultados/resultados}
+\input{6_resultados/resultados}
 %\include{6_resultados/avaliacao}
 
-\include{7_conclusao/conclusao}
+\input{7_conclusao/conclusao}
 
 % ----------------------------------------------------------
 % Finaliza a parte no bookmark do PDF

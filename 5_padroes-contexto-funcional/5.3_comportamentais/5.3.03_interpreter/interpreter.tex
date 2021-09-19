@@ -1,6 +1,6 @@
 \section{Interpreter}
 
-O padrão Interpreter define uma representação para 
+O padrão \textit{Interpreter} define uma representação para 
 a gramática de uma linguagem e um interpretador para 
 interpretar sentenças dessa linguagem. Apesar da 
 descrição generalista, o padrão 
@@ -20,33 +20,35 @@ diferente. A estrutura do padrão pode ser vista
 no diagrama da Figura \ref{interpreter_struct}.
 
 \begin{figure}[htb]
-	\caption{\label{interpreter_struct}Estrutura do Interpreter.}
+	\caption{\label{interpreter_struct}Estrutura do \textit{Interpreter}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.03_interpreter/Interpreter_struct.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
 
-Como exemplo, o Interpreter pode ser utilizado para 
+Como exemplo, o \textit{Interpreter} pode ser utilizado para 
 interpretar expressões booleanas. Cada classe definida 
 representa uma expressão, que aceita constantes  
 booleanas e operadores \textit{and}, \textit{or} e 
 \textit{not}. No diagrama da Figura \ref{interpreter_exemplo}, 
-as classes AndExpression, OrExpression e 
-NotExpression representam operadores com subexpressões, 
-enquanto a classe Constant representa um elemento 
+as classes \texttt{AndExpression}, \texttt{OrExpression} e 
+\texttt{NotExpression} representam operadores com subexpressões, 
+enquanto a classe \texttt{Constant} representa um elemento 
 terminal da expressão. A implementação do exemplo 
 pode ser vista no Código \ref{oointerpreter}.
 
 \begin{figure}[htb]
-	\caption{\label{interpreter_exemplo}Exemplo de Interpreter.}
+	\caption{\label{interpreter_exemplo}Exemplo de \textit{Interpreter}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.03_interpreter/Interpreter_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Interpreter Orientação a Objetos.},label=oointerpreter]
+\begin{lstlisting}[caption={\textit{Interpreter} Orientação a Objetos.},label=oointerpreter]
 
 abstract class BooleanExpression {
   def Evaluate() : Boolean
@@ -78,15 +80,16 @@ class Constant(value : Boolean)
 }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
-O padrão Interpreter pode ser refeito substituindo 
+O padrão \textit{Interpreter} pode ser refeito substituindo 
 cada classe que representa uma regra da gramática 
 por uma função de alta ordem. Essa função retorna a 
 operação que realiza a interpretação. No Código 
 \ref{fpinterpreter}, a operação de interpretação 
-é definida pelo tipo Expression, na linha 2, como 
+é definida pelo tipo \texttt{Expression}, na linha 2, como 
 uma função que não recebe parâmetros e retorna um 
 valor booleano. Na linha 4 é definida a regra para 
 constantes, representada por uma função que recebe 
@@ -94,14 +97,14 @@ um valor booleano e retorna uma função que retorna
 esse mesmo valor.
 
 Nas linhas 6 e 10 são definidas as funções 
-AndExpression e OrExpression, ambas expressões 
+\texttt{AndExpression} e \texttt{OrExpression}, ambas expressões 
 binárias que recebem duas expressões e realizam 
 uma operação. Por fim, a linha 14 define a função 
-NotExpression, uma expressão unária que recebe 
+\texttt{NotExpression}, uma expressão unária que recebe 
 apenas uma outra expressão como parâmetro e 
 aplica uma função \textit{not} à mesma.
 
-\begin{lstlisting}[caption={Interpreter Funcional.},label=fpinterpreter]
+\begin{lstlisting}[caption={\textit{Interpreter} Funcional.},label=fpinterpreter]
     
 type Expression = () => Boolean
 
@@ -119,19 +122,20 @@ def NotExpression(expression: Expression) : Expression =
   () => !expression()
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 A vantagem da implementação funcional desse 
 padrão é demonstrada no Código \ref{fpinterpreter2}, 
 onde é possível aproveitar as funções de alta 
 ordem para definir operadores binários e unários 
 genéricos. Eles são definidos na linha 2 pela função 
-BinaryExpression e na linha 8 pela função 
-UnaryExpression. Nas linhas 13, 18 e 23, são 
+\texttt{BinaryExpression} e na linha 8 pela função 
+\texttt{UnaryExpression}. Nas linhas 13, 18 e 23, são 
 definidas funções equivalentes às funçãos 
-AndExpression, OrExpression e NotExpression do 
+\texttt{AndExpression}, \texttt{OrExpression} e \texttt{NotExpression} do 
 Código \ref{fpinterpreter}.
 
-\begin{lstlisting}[caption={Interpreter com regras genéricas.},label=fpinterpreter2]
+\begin{lstlisting}[caption={\textit{Interpreter} com regras genéricas.},label=fpinterpreter2]
     
 def BinaryExpression(expression1 : Expression,
   expression2 : Expression,
@@ -158,3 +162,4 @@ val notExpression = (expression : Expression) =>
   UnaryExpression(expression, (e : Boolean) => !e)
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

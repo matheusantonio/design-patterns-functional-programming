@@ -1,6 +1,6 @@
 \section{Observer}
 
-O padrão Observer permite criar uma dependência de muitos 
+O padrão \textit{Observer} permite criar uma dependência de muitos 
 para um entre objetos. Dessa forma, quando um 
 objeto em específico é alterado, um grupo de objetos 
 pré-configurados é notificado. Esse comportamento é 
@@ -10,10 +10,11 @@ para os objetos inscritos. A estrutura do padrão pode ser
 vista no diagrama da Figura \ref{observer_struct}.\cite{gamma:1995}
 
 \begin{figure}[htb]
-	\caption{\label{observer_struct}Estrutura do Observer.}
+	\caption{\label{observer_struct}Estrutura do \textit{Observer}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.07_observer/observer_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
@@ -34,13 +35,14 @@ de classes para o exemplo pode ser visto na Figura
 pode ser vista no Código \ref{ooobserver}.
 
 \begin{figure}[htb]
-	\caption{\label{observer_exemplo}Exemplo de Observer.}
+	\caption{\label{observer_exemplo}Exemplo de \textit{Observer}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.07_observer/observer_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Observer Orientação a Objetos.},label=ooobserver]
+\begin{lstlisting}[caption={\textit{Observer} Orientação a Objetos.},label=ooobserver]
 
 abstract class Publisher {
   private var subscribers : List[DataSubscriber] = List.empty
@@ -102,21 +104,22 @@ class BarGraphic(data: ApplicationData) extends DataSubscriber {
 }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
-O padrão Observer depende de 
+O padrão \textit{Observer} depende de 
 efeitos colaterais em sua implementação, 
 já que precisa que outros objetos sejam avisados 
 quando o estado do objeto observado for 
 atualizado. Uma abordagem semelhante à vista 
-no padrão Mediator, onde as funções clientes 
+no padrão \textit{Mediator}, onde as funções clientes 
 gerenciam os observáveis e os subordinados, 
 poderia ser utilizada para trazer um resultado 
 semelhante. Porém, existe uma abordagem - a 
 programação reativa funcional - que se encaixa 
 no contexto funcional e serve como alternativa 
-para o padrão Observer\cite{reactiveprog}.
+para o padrão \textit{Observer}\cite{reactiveprog}.
 
 Programação reativa funcional pode ser entendida 
 como a interseção entre programação reativa e 
@@ -129,4 +132,4 @@ conceitos de composicionalidade e funções puras
 da programação funcional.\cite{reactiveprog}
 \footnote{A linguagem Scala suporta programação 
 reativa funcional através do \textit{framework} 
-Akka, disponível em \url{https://akka.io/}.}
+\textit{Akka}, disponível em \url{https://akka.io/}.}

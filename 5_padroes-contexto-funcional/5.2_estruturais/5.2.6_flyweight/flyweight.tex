@@ -1,36 +1,37 @@
 \section{Flyweight}
 
-O padrão Flyweight permite economizar o espaço em memória 
+O padrão \textit{Flyweight} permite economizar o espaço em memória 
 da aplicação ao fornecer uma instância compartilhada de 
 uma classe para que ela não precise ser instanciada 
 mais de uma vez. A Figura \ref{flyweight_struct} mostra 
-a estrutura do padrão. Nela, uma interface Flyweight 
+a estrutura do padrão. Nela, uma interface \texttt{Flyweight} 
 define um elemento reutilizável, sendo implementada 
-pelas classes ConcreteFlyweight e UnsharedConcreteFlyweight. 
-A classe ConcreteFlyweight armazena um estado intrínseco 
+pelas classes \texttt{ConcreteFlyweight} e \texttt{UnsharedConcreteFlyweight}. 
+A classe \texttt{ConcreteFlyweight} armazena um estado intrínseco 
 e define uma operação que depende de um estado extrínseco 
 para ser executada. \cite{gamma:1995}
 
 Duas classes merecem atenção nesse diagrama. A primeira 
-é a FlyweightFactory. Essa classe é adicionada para 
-gerenciar a criação dos Flyweights e garantir que as 
+é a \texttt{FlyweightFactory}. Essa classe é adicionada para 
+gerenciar a criação dos \textit{Flyweights} e garantir que as 
 instâncias da classe serão reutilizadas. Ela armazena, em 
-seus atributos, uma lista de objetos Flyweight para que,  
+seus atributos, uma lista de objetos \texttt{Flyweight} para que,  
 quando solicitada pelo cliente, seja verificado se a instância 
 desejada já existe. Caso não exista, ela é criada e 
 adicionada à lista. 
 
-A segunda classe que merece atenção é a UnsharedConcreteFlyweight, 
+A segunda classe que merece atenção é a \texttt{UnsharedConcreteFlyweight}, 
 que é necessária caso existam elementos específicos 
-do tipo Flyweight que não possam ser compartilhados. 
+do tipo \texttt{Flyweight} que não possam ser compartilhados. 
 Esses elementos não podem ser criados através da 
-FlyweightFactory.
+\texttt{FlyweightFactory}.
 
 \begin{figure}[htb]
-	\caption{\label{flyweight_struct}Estrutura do Flyweight.}
+	\caption{\label{flyweight_struct}Estrutura do \textit{Flyweight}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
@@ -47,24 +48,25 @@ letras - a linha e a coluna onde cada letra está
 localizada. 
 
 A Figura \ref{flyweight_exemplo} apresenta o diagrama 
-de classes para esse exemplo. A interface Glyph 
-representa um elemento textual. As classes Row e 
-Column armazenam em seus atributos um conjunto de objetos 
-do tipo Glyph. 
-Por fim, a classe Character armazena em seus atributos 
+de classes para esse exemplo. A interface \texttt{Glyph} 
+representa um elemento textual. As classes \texttt{Row} e 
+\texttt{Column} armazenam em seus atributos um conjunto de objetos 
+do tipo \texttt{Glyph}. 
+Por fim, a classe \texttt{Character} armazena em seus atributos 
 o caracter que deve ser compartilhado. Apenas uma 
 instância é criada para cada caracter. O 
 Código \ref{ooflyweight} demonstra a implementação 
 desse exemplo.
 
 \begin{figure}[htb]
-	\caption{\label{flyweight_exemplo}Exemplo de Flyweight.}
+	\caption{\label{flyweight_exemplo}Exemplo de \textit{Flyweight}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Flyweight Orientado a Objetos.},label=ooflyweight]
+\begin{lstlisting}[caption={\textit{Flyweight} Orientado a Objetos.},label=ooflyweight]
 
 trait Glyph {
   def Draw(context : Context)
@@ -102,6 +104,7 @@ class Column(var children : List[Glyph]) extends Glyph {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
@@ -110,19 +113,19 @@ como memoização, que salva computações já realizadas
 para serem reutilizadas e economizar espaço em 
 memória\cite{scalafunctpatterns}. O Código \ref{fpflyweight} 
 demonstra como o exemplo anterior poderia ser 
-implementado. O tipo GlyphFactory, definido na 
+implementado. O tipo \texttt{GlyphFactory}, definido na 
 linha 3, é um dicionário cuja chave é do tipo 
-String e o valor é do tipo Glyph. A função 
-GetGlyph recebe como parâmetro um valor de um 
-Glyph e uma fábrica de Glyphs. A função verifica 
-se o valor já está contido nos Glyphs criados, 
+\texttt{String} e o valor é do tipo \texttt{Glyph}. A função 
+\texttt{GetGlyph} recebe como parâmetro um valor de um 
+\texttt{Glyph} e uma fábrica de \texttt{Glyphs}. A função verifica 
+se o valor já está contido nos \texttt{Glyphs} criados, 
 retornando-o caso exista e criando um novo 
 caso não. A desvantagem dessa abordagem é que 
-por a função GetGlyph ser pura, é necessário 
+por a função \texttt{GetGlyph} ser pura, é necessário 
 sempre receber e retornar o \textit{factory} 
 atualizado.
 
-\begin{lstlisting}[caption={Flyweight Funcional.},label=fpflyweight]
+\begin{lstlisting}[caption={\textit{Flyweight} Funcional.},label=fpflyweight]
     
 type Glyph
 type GlyphFactory = Map[String, Glyph]
@@ -139,3 +142,4 @@ def GetGlyph(value : String, factory : GlyphFactory)
 }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

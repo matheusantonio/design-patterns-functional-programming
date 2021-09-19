@@ -10,20 +10,21 @@ os elementos pertencentes a um conjunto para
 tratá-lo.\cite{gamma:1995}
 
 A Figura \ref{composite_struct} demonstra a 
-estrutura do padrão, onde uma interface Component 
+estrutura do padrão, onde uma interface \texttt{Component} 
 define tanto um objeto nó, representado pela 
-classe Composite, quanto um objeto folha, 
-representado pela classe Leaf. Os elementos 
-filhos da classe Composite são todos instâncias 
-de Component, o que faz com que a classe não 
+classe \texttt{Composite}, quanto um objeto folha, 
+representado pela classe \texttt{Leaf}. Os elementos 
+filhos da classe \texttt{Composite} são todos instâncias 
+de \texttt{Component}, o que faz com que a classe não 
 saiba se seus filhos são outros objetos compostos 
 ou se são objetos folha.
 
 \begin{figure}[htb]
-	\caption{\label{composite_struct}Estrutura do Composite.}
+	\caption{\label{composite_struct}Estrutura do \textit{Composite}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.3_composite/composite_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
@@ -35,7 +36,7 @@ para formar diagramas maiores e mais complexos.
 Apesar do usuário tratar esses diagramas como um 
 único elemento gráfico, a aplicação precisa levar 
 em consideração todos os elementos dos quais eles 
-são compostos. O padrão Composite permite 
+são compostos. O padrão \textit{Composite} permite 
 abstrair os elementos menores, tratando o elemento 
 composto como algo único, da mesma forma que 
 são tratados os elementos não compostos. A Figura 
@@ -44,13 +45,14 @@ classes para esse exemplo, enquanto o Código
 \ref{oocomposite} traz um exemplo de implementação.
 
 \begin{figure}[htb]
-	\caption{\label{composite_exemplo}Exemplo de Composite.}
+	\caption{\label{composite_exemplo}Exemplo de \textit{Composite}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.3_composite/composite_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Composite Orientado a Objetos.},label=oocomposite]
+\begin{lstlisting}[caption={\textit{Composite} Orientado a Objetos.},label=oocomposite]
 
 trait Graphic {
   def Draw();
@@ -93,39 +95,40 @@ class Line extends Graphic {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
 O Código \ref{fpcomposite} demonstra como é 
-possível declarar a estrutura do padrão Composite 
+possível declarar a estrutura do padrão \textit{Composite} 
 utilizando funções de alta ordem. A função 
-Draw, definida na linha 2, é equivalente à função 
-Draw da classe Picture do exemplo orientado a 
+\texttt{Draw}, definida na linha 2, é equivalente à função 
+\texttt{Draw} da classe \texttt{Picture} do exemplo orientado a 
 objetos. A diferença é que ela recebe como parâmetro 
 uma lista de funções e retorna uma nova função, 
 com a mesma assinatura, que executa todas as 
-funções da lista. As funções DrawLine, DrawRectangle 
-e DrawText, definidas nas linhas 5, 10 e 15, 
+funções da lista. As funções \texttt{DrawLine}, \texttt{DrawRectangle} 
+e \texttt{DrawText}, definidas nas linhas 5, 10 e 15, 
 respectivamente, são equivalentes aos elementos 
 folha da estrutura de árvore proposta pelo 
-Composite. Elas recebem como parâmetro todos 
+\textit{Composite}. Elas recebem como parâmetro todos 
 os valores necessários para desenhar os elementos 
 gráficos e retornam uma função para 
 desenhá-los.
 
 As funções retornadas são adicionadas a uma 
-lista que deve ser passada para a função Draw. 
-Como a assinatura de Draw é igual à das funções 
-que ela recebe, uma nova chamada de Draw pode 
+lista que deve ser passada para a função \texttt{Draw}. 
+Como a assinatura de \texttt{Draw} é igual à das funções 
+que ela recebe, uma nova chamada de \texttt{Draw} pode 
 conter tanto "funções folha" quanto funções 
-que são resultado da chamada de Draw. Isso 
-favorece a vantagem do padrão Composite de 
+que são resultado da chamada de \texttt{Draw}. Isso 
+favorece a vantagem do padrão \textit{Composite} de 
 permitir que toda a estrutura seja tratada 
 de forma indefinida, sem que a função 
 cliente precise saber se está tratando de um 
 grupo de elementos ou de um elemento apenas. 
 
-\begin{lstlisting}[caption={Composite Funcional.},label=fpcomposite]
+\begin{lstlisting}[caption={\textit{Composite} Funcional.},label=fpcomposite]
     
 def Draw(functions : List[() => Unit]) : () => Unit =
   () => functions.foreach((function) => function())
@@ -146,23 +149,24 @@ def DrawText(text : String) : () => Unit =
   }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 O Código \ref{fpcompositeapp} demonstra a 
-aplicação do padrão. O valor DrawGraphics, 
+aplicação do padrão. O valor \textit{DrawGraphics}, 
 definido na linha 2, é o resultado da aplicação 
-de Draw para uma lista contendo uma função que 
+de \texttt{Draw} para uma lista contendo uma função que 
 desenha uma linha e uma função que desenha 
-um retângulo. Já o valor DrawAllText, definido 
+um retângulo. Já o valor \textit{DrawAllText}, definido 
 na linha 7, é definida através de duas funções 
 que desenham texto. Na linha 12, o valor 
-DrawEverything é definido a partir das funções 
-armazenadas nos valores DrawGraphics e 
-DrawAllText. Ao ser executado, ele executará 
+\textit{DrawEverything} é definido a partir das funções 
+armazenadas nos valores \textit{DrawGraphics} e 
+\textit{DrawAllText}. Ao ser executado, ele executará 
 também todas as funções definidas anteriormente 
 tratando todo o conjunto como um único elemento, 
-da forma como o padrão Composite propõe.
+da forma como o padrão \textit{Composite} propõe.
 
-\begin{lstlisting}[caption={Aplicação do Composite Funcional.},label=fpcompositeapp]
+\begin{lstlisting}[caption={Aplicação do \textit{Composite} Funcional.},label=fpcompositeapp]
     
 val DrawGraphics : () => Unit = Draw(
   List(
@@ -180,3 +184,4 @@ val DrawEverything : () => Unit = Draw(
     DrawAllText))
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

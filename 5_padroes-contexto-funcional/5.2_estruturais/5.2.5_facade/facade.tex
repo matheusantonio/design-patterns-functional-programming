@@ -5,48 +5,50 @@ de acesso às suas funcionalidades, o acesso de
 classes clientes de outros subsistemas a ele 
 torna-se descentralizado, aumentando a dependência 
 entre os dois sistemas. Para minimizar esse problema, 
-o padrão Façade fornece uma interface generalizada 
+o padrão \textit{Façade} fornece uma interface generalizada 
 para todo o subsistema, de forma que as classes 
 clientes possam comunicar-se apenas com um ponto 
 de entrada. A Figura \ref{facade_struct} demonstra 
-o padrão, na qual uma classe Façade, que é o ponto de 
+o padrão, na qual uma classe \texttt{Façade}, que é o ponto de 
 acesso ao subsistema, possui uma referência para 
 os componentes que antes eram diretamente acessíveis.\cite{gamma:1995}
 
 \begin{figure}[htb]
-	\caption{\label{facade_struct}Estrutura do Façade.}
+	\caption{\label{facade_struct}Estrutura do \textit{Façade}.}
 	\begin{center}
 	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.2_estruturais/5.2.5_facade/facade_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
 
-Como exemplo de uso do Façade, pode-se considerar 
+Como exemplo de uso do \textit{Façade}, pode-se considerar 
 um compilador que oferece diversas funcionalidades. 
 Essas funcionalidades são apresentadas no diagrama 
 de classes da Figura \ref{facade_exemplo}, representadas 
-pelas classes Scanner, Parser, ProgramNodeBuilder e 
-CodeGenerator. Por mais que alguns clientes desejem 
+pelas classes \texttt{Scanner}, \texttt{Parser}, \texttt{ProgramNodeBuilder} e 
+\texttt{CodeGenerator}. Por mais que alguns clientes desejem 
 acessar essas funcionalidades diretamente, a maioria 
 deseja apenas compilar seu programa, sem importar-se 
 com as etapas necessárias para isso. Assim, ao invés de 
 criar uma dependência entre o cliente e as 
-funcionalidades, a classe Compiler fornece um ponto 
+funcionalidades, a classe \texttt{Compiler} fornece um ponto 
 de acesso a todas elas, permitindo que um cliente 
 que deseja apenas compilar seu código possa fazer 
 isso diretamente. O Código \ref{oofacade} demonstra 
 a implementação desse exemplo.
 
 \begin{figure}[htb]
-	\caption{\label{facade_exemplo}Exemplo de Façade.}
+	\caption{\label{facade_exemplo}Exemplo de \textit{Façade}.}
 	\begin{center}
 	    \includegraphics[scale=0.4]{5_padroes-contexto-funcional/5.2_estruturais/5.2.5_facade/facade_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 
-\begin{lstlisting}[caption={Façade Orientado a Objetos.},label=oofacade]
+\begin{lstlisting}[caption={\textit{Façade} Orientado a Objetos.},label=oofacade]
 
 class Scanner(val input : Stream[String]) {
   def Scan() : Token = {
@@ -87,6 +89,7 @@ class Compiler {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
@@ -96,19 +99,19 @@ acesso para outros módulos ou definindo uma
 função dentro de um módulo que é um ponto de 
 acesso para outras funções não exportadas do 
 mesmo módulo. Independente da forma utilizada, 
-a função Compile, que é o ponto de acesso, permanece 
+a função \texttt{Compile}, que é o ponto de acesso, permanece 
 a mesma. Ela pode ser vista no Código \ref{facadecompile}. 
 
 Para que essa função seja implementada de forma 
 funcional, a implementação vista no Código \ref{oofacade} 
 foi alterada para que seja utilizada uma composição 
-de funções. Na linha 5, a função Scan é chamada, 
-seu resultado é passado para a função Parse, cujo 
-resultado é passado para a função Traverse. Essa sim, 
+de funções. Na linha 5, a função \texttt{Scan} é chamada, 
+seu resultado é passado para a função \texttt{Parse}, cujo 
+resultado é passado para a função \texttt{Traverse}. Essa sim, 
 retorna a \textit{stream} de \textit{bytes} com o 
 código compilado do programa.
 
-\begin{lstlisting}[caption={Função de acesso Compile.},label=facadecompile]
+\begin{lstlisting}[caption={Função de acesso \texttt{Compile}.},label=facadecompile]
     
 object Compiler {
 
@@ -119,13 +122,14 @@ object Compiler {
 }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 O Código \ref{facademodules} demonstra o primeiro caso, 
-no qual as operações utilizadas pela função Compile são 
+no qual as operações utilizadas pela função \texttt{Compile} são 
 definidas em módulos separados. Apenas o módulo 
-Compiler precisa conhecer e importar essas funções.
+\texttt{Compiler} precisa conhecer e importar essas funções.
 
-\begin{lstlisting}[caption={Função de acesso Compile.},label=facademodules]
+\begin{lstlisting}[caption={Função de acesso \texttt{Compile}.},label=facademodules]
     
 object Scanner{
   private def Scan(input : Stream[String]) : Scanner = 
@@ -144,14 +148,15 @@ object CodeGenerator{
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Para o segundo exemplo, o Código \ref{facadepvtfunc} define 
-as funções como membros não exportados do módulo Compiler. 
+as funções como membros não exportados do módulo \texttt{Compiler}. 
 Dessa forma, o módulo cliente não conseguirá acessá-los, 
 precisando acessar suas funcionalidades apenas através da 
-função Compile.
+função \texttt{Compile}.
 
-\begin{lstlisting}[caption={Função de acesso Compile.},label=facadepvtfunc]
+\begin{lstlisting}[caption={Função de acesso \texttt{Compile}.},label=facadepvtfunc]
     
   // módulo Compiler    
 
@@ -166,6 +171,7 @@ função Compile.
     // Percorre a árvore para gerar o código de máquina
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \begin{comment}
 \subsection*{Vantagens e Desvantanges}

@@ -1,6 +1,6 @@
 \section{Prototype}
 
-O padrão Prototype permite reduzir a quantidade 
+O padrão \textit{Prototype} permite reduzir a quantidade 
 de subclasses definidas em uma aplicação 
 substituindo-as por instâncias predefinidas 
 que podem ser reutilizadas em tempo de 
@@ -11,27 +11,28 @@ alternativa à herança. \cite{gamma:1995}
 
 A estrutura do padrão, apresentada na Figura 
 \ref{prototype_struct}, mostra uma interface 
-Prototype que define a operação Clone, responsável 
+\texttt{Prototype} que define a operação \texttt{Clone}, responsável 
 por copiar o protótipo reutilizável de um objeto. 
-As classes ConcretePrototype implementam essa 
+As classes \texttt{ConcretePrototype} implementam essa 
 interface e a operação que retorna a cópia. 
-A classe Client acessa o protótipo através da operação 
-Clone. Essa dinâmica permite que a classe cliente 
+A classe \texttt{Client} acessa o protótipo através da operação 
+\texttt{Clone}. Essa dinâmica permite que a classe cliente 
 não precise conhecer o objeto clonado nem sua 
 implementação, o que as torna independentes e 
 diminui o acoplamento.
 
 \begin{figure}[htb]
-	\caption{\label{prototype_struct}Estrutura do Prototype.}
+	\caption{\label{prototype_struct}Estrutura do \textit{Prototype}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.4_prototype/prototype_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 
 \subsection*{Exemplo Orientado a Objetos}
 
-Como exemplo de uso do Prototype, um 
+Como exemplo de uso do \textit{Prototype}, um 
 \textit{framework} de editores gráficos deseja 
 ser utilizado para construir um editor de 
 partituras musicais. A classe responsável pelo 
@@ -48,13 +49,14 @@ clonado. A Figura \ref{prototype_exemplo} e
 o Código \ref{ooprototype} ilustram esse cenário.
 
 \begin{figure}[htb]
-	\caption{\label{prototype_exemplo}Exemplo de Prototype.}
+	\caption{\label{prototype_exemplo}Exemplo de \textit{Prototype}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.4_prototype/prototype_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Prototype Orientado a Objetos.},label=ooprototype]
+\begin{lstlisting}[caption={\textit{Prototype} Orientado a Objetos.},label=ooprototype]
 
 trait Graphic {
   def Draw(position : Position)
@@ -99,10 +101,11 @@ class GraphicTool(var prototype : Graphic) {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
-O padrão Prototype fornece uma operação de 
+O padrão \textit{Prototype} fornece uma operação de 
 clonagem para que o estado de um objeto seja 
 copiado sem ser compartilhado entre todos 
 os objetos que o utilizam. Graças ao conceito 
@@ -113,20 +116,20 @@ quanto a alterações de seu estado.
 
 O Código \ref{fpprototype} demonstra como o 
 exemplo orientado a objetos anterior poderia 
-ser implementado. A função DrawPrototype, 
+ser implementado. A função \texttt{DrawPrototype}, 
 definida na linha 2, recebe como parâmetro um 
-valor do tipo Graphic - sem preocupar-se se 
+valor do tipo \texttt{Graphic} - sem preocupar-se se 
 esse valor está sendo clonado, reutilizado ou 
 se existem mais referências para ele em outras 
 funções da aplicação. Ela retorna uma função 
 responsável por desenhar esse elemento. Dessa 
-forma, a função ManipulateGraphic, na linha 
+forma, a função \texttt{ManipulateGraphic}, na linha 
 7, pode apenas receber como parâmetro uma função 
 que desenha um elemento gráfico, que pode ser 
 alterada dinamicamente de acordo com o elemento 
 gráfico desejado.
 
-\begin{lstlisting}[caption={Prototype Funcional.},label=fpprototype]
+\begin{lstlisting}[caption={\textit{Prototype} Funcional.},label=fpprototype]
     
 def DrawPrototype(graphic: Graphic) : Position => Unit =
   (newPosition : Position) => {
@@ -140,3 +143,4 @@ def ManipulateGraphic(Draw : Position => Graphic) : Unit = {
 }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

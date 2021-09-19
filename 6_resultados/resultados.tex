@@ -19,7 +19,7 @@ dividido em três subgrupos:
     \begin{alineas}
         \item Funções de alta ordem como alternativa a classes abstratas ou interfaces
         \item Valores que armazenam funções
-        \item Funções que armazenam valores em closures
+        \item Funções que armazenam valores em \textit{closures}
     \end{alineas}
     \item Padrões com soluções alternativas
     \item Padrões sem diferenças relevantes
@@ -34,7 +34,7 @@ Cada grupo será explicado com mais detalhes
 no decorrer do capítulo.
 
 \begin{quadro}[htb]
-    \caption{\label{resultados}Agrupamento de análises dos padrões}
+    \caption{\label{resultados}Agrupamento de análises dos padrões.}
     \begin{tabular}{@{}llll@{}}
         \toprule
                                   &                            & Padrões                 & Quantidade         \\ \midrule
@@ -93,12 +93,14 @@ de funções que a classe cliente deve receber. De forma
 equivalente, é possível que uma função cliente receba, 
 por parâmetro, uma função com a assinatura equivalente 
 à da interface. Essa é a abordagem utilizada com os 
-padrões Builder, Adapter, Bridge, Proxy e Strategy. 
+padrões \textit{Builder}, \textit{Adapter}, \textit{Bridge}, 
+\textit{Proxy} e \textit{Strategy}. 
 
 De forma semelhante, as funções de alta ordem são 
 alternativas ao uso de 
-classes abstratas, como é o caso dos padrõess 
-Factory Method e Template Method. Ambos baseiam-se 
+classes abstratas, como é o caso dos padrões 
+\textit{Factory Method} e \textit{Template Method}. 
+Ambos baseiam-se 
 em definir uma operação abstrata que deve ser 
 implementada por uma subclasse. Uma alternativa 
 a essa implementação é fazer com que as funções 
@@ -108,15 +110,15 @@ por parâmetro.
 % Abstract Factory, Command, State
 \subsection{Valores que armazenam funções}
 
-Os padrões Abstract Factory, Command e 
-State também baseiam-se em passar funções de 
+Os padrões \textit{Abstract Factory}, \textit{Command} e 
+\textit{State} também baseiam-se em passar funções de 
 alta ordem como parâmetro para funções clientes. 
 Porém, para esses três padrões, as funções 
 passadas são relacionadas, ou seja, 
-todas as funções de um Strategy pertencem a uma mesma 
-estratégia, todas as funções do Abstract Factory criam 
+todas as funções de um \textit{Strategy} pertencem a uma mesma 
+estratégia, todas as funções do \textit{Abstract Factory} criam 
 o mesmo tipo de valor e a função de desfazer do 
-Command está relacionada à função principal executada. 
+\textit{Command} está relacionada à função principal executada. 
 Agrupar essas funções em um mesmo valor pode 
 contribuir para retirar das funções clientes a 
 responsabilidade de garantir que elas possuam 
@@ -130,28 +132,28 @@ que retornam novas funções. Isso é necessário para
 que seja possível configurar as funções retornadas 
 com valores recebidos por parâmetro pelas funções 
 que as criam. Esse é o comportamento definido pelas 
-closures, onde uma determinada função armazena 
+\textit{closures}, onde uma determinada função armazena 
 um valor do escopo da função que a retornou. 
 
-O padrão Composite define funções para gerar os 
+O padrão \textit{Composite} define funções para gerar os 
 elementos nós e os elementos folha. Dessa forma, 
 a partir de uma única função, vários elementos 
 folha e nó configurados com valores diferentes 
 podem ser gerados.
 
-De forma semelhante, o padrão Decorator define 
+De forma semelhante, o padrão \textit{Decorator} define 
 funções que podem receber como parâmetro valores 
 variados enquanto retorna uma nova função com 
 a mesma assinatura da função decorada. 
 
-O padrão Chain of Responsibility aproveita a mesma 
+O padrão \textit{Chain of Responsibility} aproveita a mesma 
 ideia para gerar as funções da cadeia. O tópico e 
 a próxima função da cadeia são passadas por parâmetro 
-previamente, armazenadas na closure e reaproveitadas 
+previamente, armazenadas na \textit{closure} e reaproveitadas 
 na função retornada. 
 
-Por fim, o padrão Interpreter apresenta um comportamento 
-semelhante ao Composite, definindo funções que retornam 
+Por fim, o padrão \textit{Interpreter} apresenta um comportamento 
+semelhante ao \textit{Composite}, definindo funções que retornam 
 os elementos terminais e não terminais, permitindo 
 inclusive definir funções mais genéricas que recebem 
 a função que aplica a regra da gramática por parâmetro.
@@ -159,17 +161,18 @@ a função que aplica a regra da gramática por parâmetro.
 % Iterator, Observer, Visitor
 \section{Padrões com soluções alternativas}
 
-Os padrões Iterator, Observer e Visitor possuem 
+Os padrões \textit{Iterator}, \textit{Observer} e 
+\textit{Visitor} possuem 
 implementações alternativas existentes que não 
 necessariamente 
-seguem à risca a ideia do padrão. No caso do Iterator, 
+seguem à risca a ideia do padrão. No caso do \textit{Iterator}, 
 existe a diferença entre o gerenciamento por parte 
 do cliente e por parte da coleção entre as 
 alternativas orientada a objetos e funcional. No 
-caso do Observer, o conceito no qual ele se 
+caso do \textit{Observer}, o conceito no qual ele se 
 baseia - programação reativa - é levado em 
 consideração ao substituí-lo pela programação 
-reativa funcional. Já o Visitor, apesar de também 
+reativa funcional. Já o \textit{Visitor}, apesar de também 
 aproveitar-se de funções de alta ordem, na verdade 
 é resolvido pelo recurso \textit{pattern matching}, 
 que não é um conceito exclusivamente funcional, 
@@ -191,24 +194,24 @@ recursos adicionais oriundos da programação
 funcional que contribuem para a 
 resolução do problema. 
 
-Da mesma forma que o padrão Façade orientado 
+Da mesma forma que o padrão \textit{Façade} orientado 
 a objetos baseia-se no acesso entre as classes, 
 a implementação funcional baseia-se no acesso 
 entre módulos. Como ambas as ideias são 
 análogas, a implementação do padrão na verdade 
 não possui mudanças significativas. 
-O padrão Flyweight, tanto no 
+O padrão \textit{Flyweight}, tanto no 
 contexto orientado a objetos quanto no funcional, 
-é implementado através de memoização. Já o Mediator 
+é implementado através de memoização. Já o \textit{Mediator} 
 baseia-se em possuir uma função (ou classe) que 
 gerencia as dependências entre valores (ou objetos). 
 No caso desses dois padrões, ambos possuem 
 pequenas diferenças como consequência de suas 
 implementações - por exemplo, não existem os dois 
-tipos de Flyweight intrínseco ou extrínseco 
+tipos de \textit{Flyweight} intrínseco ou extrínseco 
 graças à imutabilidade e há a necessidade do 
 cliente gerenciar a mudança de estado dos 
-\textit{colleagues} no Mediator -, mas a ideia 
+\textit{colleagues} no \textit{Mediator} -, mas a ideia 
 por trás da implementação de ambos é análoga 
 à versão orientada a objetos.
 
@@ -220,17 +223,18 @@ Para alguns padrões, o problema proposto deixa
 de existir graças aos conceitos já implementados 
 em linguagens funcionais. No caso dos padrões 
 analisados neste trabalho, encaixam-se nessa 
-categoria o Singleton, o Prototype e o Memento. 
+categoria o \textit{Singleton}, o \textit{Prototype} 
+e o \textit{Memento}. 
 
-Como a intenção do padrão Singleton pode 
+Como a intenção do padrão \textit{Singleton} pode 
 ser entendida como a definição de uma variável 
 global, sua implementação no contexto funcional 
 viola o conceito de funções puras e imutabilidade - 
-para o caso em que o Singleton armazena algum 
+para o caso em que o \textit{Singleton} armazena algum 
 estado compartilhado. Portanto, tentar 
 implementá-lo não faz sentido. 
 
-Para o caso do Prototype, como visto anteriormente, 
+Para o caso do \textit{Prototype}, como visto anteriormente, 
 o uso de estruturas de dados imutáveis trazem um 
 gerenciamento mais simples de memória. Não existe 
 preocupação quanto a uma referência compartilhada 
@@ -238,7 +242,7 @@ para um mesmo valor, já que seu estado não pode ser
 modificado. Dessa forma, não há a necessidade de 
 definir uma implementação que compartilhe dados.
 
-Por fim, o padrão Memento, também graças à 
+Por fim, o padrão \textit{Memento}, também graças à 
 imutabilidade, não precisaria se preocupar quanto 
 a expor o estado interno de um valor. Assim, é 
 possível gerar \textit{snapshots} apenas copiando 
@@ -255,14 +259,14 @@ conceitos de programação funcional pode
 contribuir para a solução de alguns dos padrões. 
 Com o uso de funções de alta ordem, padrões 
 que apresentam interfaces com poucas funções, como o 
-Template Method, ou muitas funções 
+\textit{Template Method}, ou muitas funções 
 não necessariamente relacionadas, como 
-o Builder, poderiam aproveitar-se do 
+o \textit{Builder}, poderiam aproveitar-se do 
 uso de funções de alta ordem para diminuir a 
 quantidade de classes definidas pela 
 aplicação. Para os casos em que as funções 
 são relacionadas e agrupadas em 
-novos valores como no padrão State, 
+novos valores como no padrão \textit{State}, 
 o comportamento final torna-se semelhante 
 ao de uma interface, onde são declarados 
 tipos que armazenam funções e criados 
@@ -276,9 +280,9 @@ necessário definir classes abstratas
 para definir um comportamento compartilhado 
 por várias classes que implementem uma 
 mesma interface.
-A última abordagem, usando closures, também 
+A última abordagem, usando \textit{closures}, também 
 demonstrou flexibilidade e possibilidade 
-de reuso, como visto no padrão Interpreter. 
+de reuso, como visto no padrão \textit{Interpreter}. 
 Além de permitir a criação de novas funções, 
 é possível parametrizá-las através de 
 outras funções.
@@ -288,15 +292,15 @@ para resolver alguns dos problemas propostos
 pelos padrões não é algo novo, como foi visto 
 pelos padrões que já possuíam soluções alternativas 
 conhecidas. As funções \textit{map} e \textit{reduce} 
-usadas como alternativa para o Iterator já 
+usadas como alternativa para o \textit{Iterator} já 
 são implementadas em diversas linguagens funcionais
 \cite{realworldhaskell,wampler2021,braveclojure}, 
 enquanto o conceito de programação reativa, 
-um tipo de Observer, já é 
+um tipo de \textit{Observer}, já é 
 utilizado em \textit{frameworks} de  
 \textit{single page application}\cite{rxjs}. 
 O recurso de \textit{pattern matching} 
-utilizado na análise do Visitor também já 
+utilizado na análise do \textit{Visitor} também já 
 é um conceito conhecido como alternativa 
 aos multimétodos\cite{patternmatchingvisitor}.
 
@@ -309,25 +313,25 @@ permite que a mesma solução seja reaproveitada.
 Apesar de terem sido apresentadas algumas 
 ressalvas, elas não estão diretamente ligadas 
 à solução proposta, mas às consequências de 
-se utilizá-la, como é o caso do Mediator 
+se utilizá-la, como é o caso do \textit{Mediator} 
 precisar que a função cliente gerencie o 
 estado dos \textit{colleagues}. 
 
 Por fim, foi visto o grupo dos padrões 
 que não fazem sentido no contexto funcional, 
 já que os problemas propostos não existem. 
-Esse foi o caso dos padrões Prototype e Memento.
+Esse foi o caso dos padrões \textit{Prototype} e \textit{Memento}.
 Outro caso desse grupo foi a existência de 
 um padrão cuja intenção viola algum conceito da 
-programação funcional, o Singleton. 
-É relevante informar que o padrão Singleton 
+programação funcional, o \textit{Singleton}. 
+É relevante informar que o padrão \textit{Singleton} 
 pode ser considerado um antipadrão que poderia 
 ser substituído pela injeção de dependência.
 \cite{singletonantipattern}. Isso poderia 
 ser um indício de que a aplicação de 
 conceitos funcionais contribui para 
 identificar problemas de \textit{design} de 
-\textit{software}, mas como o Singleton 
+\textit{software}, mas como o \textit{Singleton} 
 foi o único dos vinte e três padrões que 
 apresentou esse comportamento, faltam 
 evidências para considerar essa 

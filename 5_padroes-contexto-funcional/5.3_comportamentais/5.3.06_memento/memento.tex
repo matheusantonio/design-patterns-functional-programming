@@ -1,23 +1,24 @@
 \section{Memento}
 
-O padrão Memento é útil para implementar funcionalidades 
+O padrão \textit{Memento} é útil para implementar funcionalidades 
 de \textit{checkpoint} ou de "desfazer", já que permite 
 armazenar e restaurar o estado interno de um objeto 
 sem que ele seja exposto. Dessa forma, o encapsulamento 
 não é violado, mesmo que o estado seja armazenado externamente.
 \cite{gamma:1995}
 
-Isso é alcançado através de uma classe Memento que armazena os 
+Isso é alcançado através de uma classe \textit{Memento} que armazena os 
 atributos de um objeto que precisa ser salvo. A responsabilidade 
 de criar a cópia, assim como a de recuperar os atributos copiados, 
 é do próprio objeto. A estrutura do padrão pode ser vista 
 na Figura \ref{memento_struct}.
 
 \begin{figure}[htb]
-	\caption{\label{memento_struct}Estrutura do Memento.}
+	\caption{\label{memento_struct}Estrutura do \textit{Memento}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.06_memento/memento_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
@@ -33,13 +34,14 @@ esse exemplo, enquanto o Código \ref{oomemento} demonstra a
 implementação.
 
 \begin{figure}[htb]
-	\caption{\label{memento_exemplo}Exemplo de Memento.}
+	\caption{\label{memento_exemplo}Exemplo de \textit{Memento}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.06_memento/memento_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Memento Orientação a Objetos.},label=oomemento]
+\begin{lstlisting}[caption={\textit{Memento} Orientação a Objetos.},label=oomemento]
 
 class Editor(private var text:String,
              private var cursorPosition : Position,
@@ -78,6 +80,7 @@ class History {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
@@ -89,7 +92,7 @@ uma coleção, como uma lista, é suficiente para
 resolver o problema proposto pelo padrão.
 
 O Código \ref{fpmemento} apresenta duas funções, 
-CreateSnapshot na linha 2 e RestoreSnapshot na linha 
+\texttt{CreateSnapshot} na linha 2 e \texttt{RestoreSnapshot} na linha 
 5. A primeira recebe como parâmetro o valor que 
 deve ser salvo e a lista de valores já salvos. 
 O retorno é apenas a lista de valores atualizada. 
@@ -100,7 +103,7 @@ a partir da lista, e o segundo valor é a
 lista atualizada com o valor recuperado 
 removido.
 
-\begin{lstlisting}[caption={Memento Funcional.},label=fpmemento]
+\begin{lstlisting}[caption={\textit{Memento} Funcional.},label=fpmemento]
 
 def CreateSnapshot(editor : Editor, snapshots : List[Editor]) : List[Editor] =
   editor :: snapshots
@@ -109,3 +112,4 @@ def RestoreSnapshot(snapshots : List[Editor]) : (Editor, List[Editor]) =
   (snapshots.head, snapshots.tail)
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

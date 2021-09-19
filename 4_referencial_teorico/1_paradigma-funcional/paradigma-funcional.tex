@@ -30,13 +30,14 @@ caso a função \texttt{add} vista receba os parâmetros 1 para
 ela seja chamada, 
 o resultado da operação sempre será 3\cite{functionalscala}.
 
-\begin{lstlisting}[caption={Exemplo de Função Pura. Fonte: O Autor (2021)},label=purefunction]
+\begin{lstlisting}[caption={Exemplo de Função Pura.},label=purefunction]
 
     def add(x, y){
         return x + y;
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 O Código \ref{impurefunction} apresenta uma função 
 não pura, \texttt{modify}. Essa função não é pura pois 
@@ -45,7 +46,7 @@ realizar uma operação. Existe ainda um outro problema
 com esse tipo de função: sua execução implica em 
 um efeito colateral.
 
-\begin{lstlisting}[caption={Exemplo de Função Impura. Fonte: O Autor (2021)},label=impurefunction]
+\begin{lstlisting}[caption={Exemplo de Função Impura.},label=impurefunction]
 
     var z = 10;
 
@@ -54,6 +55,7 @@ um efeito colateral.
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Efeitos colaterais ocorrem em consultas ou 
 alterações a bases de dados, modificação de 
@@ -93,13 +95,14 @@ existe, ou ao menos possui uma definição diferente\cite{braveclojure}.
 Em paradigmas procedurais é comum encontar trechos 
 de código parecidos com o apresentado no Código \ref{mutablevar}.
 
-\begin{lstlisting}[caption={Exemplo de Código Mutável. Fonte: O Autor (2021)},label=mutablevar]
+\begin{lstlisting}[caption={Exemplo de Código Mutável.},label=mutablevar]
 
     var x = 1;
     x = x + 1;
 
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Porém, esse tipo de operação não é permitida no 
 paradigma funcional, já que ele segue o princípio 
@@ -117,13 +120,14 @@ nova variável que passará a representar esse valor\cite{functionalscala}.
 Por exemplo, o Código \ref{mutablevar} poderia ser 
 escrito como no Código \ref{imutablevar}.
 
-\begin{lstlisting}[caption={Exemplo de Código Imutável. Fonte: O Autor (2021)},label=imutablevar]
+\begin{lstlisting}[caption={Exemplo de Código Imutável.},label=imutablevar]
 
     var x = 1;
     var z = x + 1;
 
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Apesar de parecer problemático quando é necessário 
 modificar um único valor em uma lista ou uma estrutura 
@@ -158,7 +162,7 @@ Para que isso seja possível, a função \texttt{map} precisa
 receber como parâmetro a função que será aplicada. 
 O Código \ref{hof} demonstra o uso dessa função.
 
-\begin{lstlisting}[caption={Exemplo de Função de Alta Ordem. Fonte: O Autor (2021)},label=hof]
+\begin{lstlisting}[caption={Exemplo de Função de Alta Ordem.},label=hof]
 
     def add1(x){
         return x + 1;
@@ -169,13 +173,14 @@ O Código \ref{hof} demonstra o uso dessa função.
         
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Em uma linguagem que não aceita funções sendo 
 passadas por parâmetro, uma operação simples como 
 essa poderia se tornar mais verbosa e menos legível, 
 como no Código \ref{nohof}.
 
-\begin{lstlisting}[caption={Exemplo sem Funções de Alta Ordem. Fonte: O Autor (2021)},label=nohof]
+\begin{lstlisting}[caption={Exemplo sem Funções de Alta Ordem.},label=nohof]
 
     def add1(x){
         return x + 1;
@@ -189,6 +194,7 @@ como no Código \ref{nohof}.
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \begin{comment}
 Talvez a implementação da função map seja parecida 
@@ -212,22 +218,26 @@ Por exemplo, a função \texttt{add} apresentada no Código
 \ref{nocurrex} poderia ser escrita como no Código 
 \ref{currex}.
 
-\begin{lstlisting}[caption={Exemplo sem \textit{Currying}. Fonte: O Autor (2021)},label=nocurrex]
+\begin{lstlisting}[caption={Exemplo sem \textit{Currying}.},label=nocurrex]
 
     def add(x, y){
         return x + y;
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
-\begin{lstlisting}[caption={Exemplo de \textit{Currying}. Fonte: O Autor (2021)},label=currex]
+\begin{lstlisting}[caption={Exemplo de \textit{Currying}.},label=currex]
 
     def add(x){
         return y => x + y;
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
+Dessa forma, o \textit{currying} faz com que qualquer 
+função possa ser tratada como uma função unária. 
 Essa técnica simplifica a composição de funções 
 que possuem quantidades diferentes de parâmetros. 
 Em algumas linguagens funcionais não é 
@@ -236,21 +246,31 @@ acima, já que as funções implementam essa técnica
 nativamente\cite{realworldhaskell}.
 
 
-
 % Closures
 \section{Closures}
 
-No Código \ref{closureex} é definida a função \texttt{adder} que 
+Uma \textit{closure} é um comportamento que pode 
+ocorrer em funções que retornam outras funções. Ela 
+consiste no uso, por uma função retornada, de um valor 
+que está no escopo da função que a retorna.\cite{mflambdas}.
+O Código \ref{closureex} 
+demonstra uma closure. Nele é definida a função \texttt{adder} que 
 recebe como parâmetro um valor \textit{x} e retorna uma função 
 que recebe como parâmetro outro valor \textit{y}, retornando a 
-soma dos dois valores. A variável \texttt{add10} receberá 
+soma dos dois valores. A variável \textit{add10} receberá 
 o retorno da chamada da função \texttt{adder} para o valor 10. 
 Com isso, \texttt{add10} será uma função que receberá como 
 parâmetro um número e adicionará 10 a ele. Quando 
 \texttt{add10} é chamada com o valor 5 sendo passado como 
 parâmetro, o retorno da função é 15.
+Para que isso seja possível, a função retornada por 
+\texttt{adder} precisou ter acesso ao valor da variável 
+\textit{x} mesmo 
+após o fim da execução de \texttt{adder}. Isso foi possível 
+por a variável \textit{x} estar dentro do escopo da função 
+quando ela foi criada.
 
-\begin{lstlisting}[caption={Exemplo de \textit{Closure}. Fonte: O Autor (2021)},label=closureex]
+\begin{lstlisting}[caption={Exemplo de \textit{Closure}.},label=closureex]
 
     def adder(x){
         return y => x + y;
@@ -263,15 +283,7 @@ parâmetro, o retorno da função é 15.
 
 
 \end{lstlisting}
-
-Para que isso seja possível, a função retornada por 
-\texttt{adder} precisou ter acesso ao valor da variável 
-\textit{x} mesmo 
-após o fim da execução de \texttt{adder}. Isso foi possível 
-por a variável \textit{x} estar dentro do escopo da função 
-quando ela foi criada. Esse comportamento, 
-possível através do retorno de funções, 
-é chamado de \textit{closure}\cite{mflambdas}.
+\legend{Fonte: O Autor (2021)}
 
 
 % Composição de funções
@@ -283,7 +295,7 @@ aproveita a composição de funções para seguir esse
 princípio\cite{realworldhaskell}.
 O Código \ref{fogex} exemplifica esse recurso.
 
-\begin{lstlisting}[caption={Exemplo de Composição de Funções. Fonte: O Autor (2021)},label=fogex]
+\begin{lstlisting}[caption={Exemplo de Composição de Funções.},label=fogex]
 
     def add1(x){
         return x + 1
@@ -305,6 +317,7 @@ O Código \ref{fogex} exemplifica esse recurso.
     // O resultado da função é 0
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 É comum qualquer linguagem permitir esse tipo 
 de comportamento. Entretanto, 
@@ -321,7 +334,7 @@ composição delas. A função resultante
 assim como a função \texttt{sub4}, resultando em uma função 
 equivalente a \texttt{sub4(mul2(add1()))}}.
 
-\begin{lstlisting}[caption={Exemplo de Composição de Funções. Fonte: O Autor (2021)},label=hofogex]
+\begin{lstlisting}[caption={Exemplo de Composição de Funções.},label=hofogex]
 
     def add1(x){
         return x + 1
@@ -339,3 +352,4 @@ equivalente a \texttt{sub4(mul2(add1()))}}.
     // O resultado da função é 0
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

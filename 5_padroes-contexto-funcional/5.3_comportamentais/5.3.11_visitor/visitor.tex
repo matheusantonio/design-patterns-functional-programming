@@ -1,19 +1,19 @@
 \section{Visitor}
 
-O padrão Visitor permite realizar 
+O padrão \textit{Visitor} permite realizar 
 operações em uma estrutura de objetos sem precisar alterá-los 
 e sem precisar que os objetos conheçam as 
 operações que estão sendo realizadas. \cite{gamma:1995}
 
-Uma estrutura alvo de um Visitor pode possuir objetos de 
+Uma estrutura alvo de um \textit{Visitor} pode possuir objetos de 
 classes diferentes. Por isso, o padrão deve implementar 
-uma operação Visit para cada uma dessas classes, 
+uma operação \texttt{Visit} para cada uma dessas classes, 
 através de uma sobrecarga de métodos. Para que essa 
 abordagem funcione, as classes da estrutura devem implementar 
-uma operação Accept que recebe como parâmetro um 
-Visitor genérico e chama sua operação Visit, 
+uma operação \texttt{Accept} que recebe como parâmetro um 
+\texttt{Visitor} genérico e chama sua operação \texttt{Visit}, 
 passando uma referência para a instância atual 
-(através da palavra chave this) 
+(através da palavra chave \texttt{this}) 
 como parâmetro. Dessa forma, a função chamada é a 
 que recebe como parâmetro uma instância da 
 classe em questão.
@@ -24,10 +24,11 @@ diversas operações que não são de sua responsabilidade.
 Sua estrutura pode ser vista na Figura \ref{visitor_struct}.
 
 \begin{figure}[htb]
-	\caption{\label{visitor_struct}Estrutura do Visitor}
+	\caption{\label{visitor_struct}Estrutura do \textit{Visitor}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.11_visitor/visitor_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
@@ -36,20 +37,23 @@ Um compilador precisa fazer a análise de árvore abstrata sintática de
 um programa. Essa análise inclui diversas operações diferentes, como 
 checagem de tipos e geração de código. Para que os nós da árvore 
 não precisem implementar essas operações, elas implementam uma operação 
-genérica que recebe como parâmetro qualquer Visitor. Dessa forma, para 
-cada operação desejada, basta implementar uma nova classe Visitor 
+genérica que recebe como parâmetro qualquer \textit{Visitor}. Dessa 
+forma, para 
+cada operação desejada, basta implementar uma nova classe 
+\texttt{Visitor} 
 que percorrerá os elementos da árvore abstrata sintática. O diagrama 
 de classes para o exemplo pode ser visto na Figura \ref{visitor_exemplo1}, 
 enquanto a implementação pode ser vista no Código \ref{oovisitor}.
 
 \begin{figure}[htb]
-	\caption{\label{visitor_exemplo1}Exemplo de Visitor}
+	\caption{\label{visitor_exemplo1}Exemplo de \textit{Visitor}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.11_visitor/visitor_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Visitor Orientação a Objetos},label=oovisitor]
+\begin{lstlisting}[caption={\textit{Visitor} Orientação a Objetos.},label=oovisitor]
 
 trait NodeVisitor {
   def VisitAssignment(node : AssignmentNode)
@@ -91,10 +95,11 @@ class CodeGeneratingVisitor extends NodeVisitor {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
-Uma das maiores vantagens do padrão Visitor 
+Uma das maiores vantagens do padrão \textit{Visitor} 
 é o uso de multimétodos, onde um método é 
 executado de forma dinâmica, baseado no tipo 
 de um objeto em tempo de execução. Essa 
@@ -109,7 +114,7 @@ Ela consiste em avaliar um valor a partir de
 um padrão predefinido, ou seja, a operação 
 que será realizada dependerá do valor avaliado
 \cite{functionalscala}. 
-No caso do padrão Visitor, todos os métodos 
+No caso do padrão \textit{Visitor}, todos os métodos 
 sobrecarregados que executam a operação 
 em cada tipo de elemento da coleção são 
 substituídos por um único método que 
@@ -123,27 +128,27 @@ tipo do elemento.
 
 O Código \ref{fpvisitor} demonstra como o 
 exemplo orientado a objetos pode ser implementado. 
-O tipo Node, definido na linha 2, armazena um valor 
+O tipo \texttt{Node}, definido na linha 2, armazena um valor 
 enumerável com os tipos de nó suportados 
 pela aplicação, além dos outros valores 
 armazenados por um nó - representados pelo tipo 
-NodeValue. A função DefineNodeVisitor, definida 
+\texttt{NodeValue}. A função \texttt{DefineNodeVisitor}, definida 
 na linha 4, aproveita o uso de funções de alta ordem 
-para gerar tipos diferentes de Visitor. Ela 
+para gerar tipos diferentes de \textit{Visitor}. Ela 
 recebe como parâmetro duas funções, uma que 
-realiza uma operação para o tipo de nó Assignment e 
+realiza uma operação para o tipo de nó \texttt{Assignment} e 
 outra que realiza uma operação para o tipo de 
-nó VariableRef. Ela retorna uma nova função - o 
-Visitor - que recebe como parâmetro uma coleção 
+nó \texttt{VariableRef}. Ela retorna uma nova função - o 
+\textit{Visitor} - que recebe como parâmetro uma coleção 
 de nós e retorna a mesma coleção após aplicadas 
 todas as operações. Nas linhas 9 e 11 é onde 
 ocorre o \textit{pattern matching}. Uma operação 
 de desconstrução é aplicada na tupla que representa 
-um nó. Caso o nó seja do tipo Assignment, o 
+um nó. Caso o nó seja do tipo \texttt{Assignment}, o 
 primeiro caso é executado. Caso seja do tipo 
-VariableRef, o segundo caso é executado.
+\texttt{VariableRef}, o segundo caso é executado.
 
-\begin{lstlisting}[caption={Visitor Funcional},label=fpvisitor]
+\begin{lstlisting}[caption={\textit{Visitor} Funcional.},label=fpvisitor]
     
 type Node = (NodeType.Value, NodeValue)
 
@@ -161,3 +166,4 @@ List[Node] => List[Node] = {
 }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

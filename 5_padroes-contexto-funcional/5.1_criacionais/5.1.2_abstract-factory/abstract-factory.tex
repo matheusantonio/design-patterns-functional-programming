@@ -21,6 +21,7 @@ utilizadas.
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.2_abstract-factory/abstractfactory_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
@@ -49,9 +50,10 @@ interação suportados.
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.2_abstract-factory/abstractfactory_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Abstract Factory Orientado a Objetos.},label=ooabfactory]
+\begin{lstlisting}[caption={\textit{Abstract Factory} Orientado a Objetos.},label=ooabfactory]
 	
 trait WidgetFactory {
   def CreateScrollBar() : ScrollBar
@@ -88,7 +90,7 @@ class MotifScrollBar extends ScrollBar {
 }
 
 \end{lstlisting}
-
+\legend{Fonte: O Autor (2021)}
 
 
 \subsection*{Contexto Funcional}
@@ -117,7 +119,7 @@ como parâmetro as funções para criar um
 \textit{scrollbar} e uma janela para o tipo 
 \texttt{PM}.
 
-\begin{lstlisting}[caption={Abstract Factory Funcional.},label=fpabfactory]
+\begin{lstlisting}[caption={\textit{Abstract Factory} Funcional.},label=fpabfactory]
     
 type Scrollbar
 type Window
@@ -148,6 +150,7 @@ def ClientFunction(
 ClientFunction(CreatePMScrollBar, CreatePMWindow)
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 No Código \ref{fpabfactory}, seria possível passar 
 para a classe cliente \textit{widgets} de tipos 
@@ -157,15 +160,15 @@ seja desejado um exemplo mais próximo do demonstrado
 no diagrama da Figura \ref{abfactory_exemplo}, 
 pode-se encapsular as funções de criação 
 em uma tupla. Isso pode ser visto no Código 
-\ref{fpabfactory2}, onde o tipo WidgetFactory 
+\ref{fpabfactory2}, onde o tipo \texttt{WidgetFactory} 
 definido na linha 2 armazena tanto uma função 
 para a criação de um \textit{scrollbar} quanto a função 
 para a criação de uma janela. A função 
 cliente, redefinida na linha 10, agora 
 recebe como parâmetro um valor do tipo 
-WidgetFactory.
+\texttt{WidgetFactory}.
 
-\begin{lstlisting}[caption={Abstract Factory Funcional usando tuplas.},label=fpabfactory2]
+\begin{lstlisting}[caption={\textit{Abstract Factory} Funcional usando tuplas.},label=fpabfactory2]
     
 type WidgetFactory = (
   () => ScrollBar, 
@@ -180,3 +183,4 @@ def ClientFunction(factory : WidgetFactory) : Unit = // ...
 ClientFunction(PMWidgetFactory)
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

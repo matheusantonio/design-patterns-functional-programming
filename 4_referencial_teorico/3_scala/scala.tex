@@ -31,7 +31,7 @@ implementado em Java.
     class Person(var firstName : String, var lastName : String)
 
 \end{lstlisting}
-
+\legend{Fonte: O Autor (2021)}
 
 \begin{lstlisting}[caption={Construtor Simples em Java.},label=javaconstructor1]
 
@@ -63,6 +63,7 @@ implementado em Java.
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Scala também faz uso de construtores auxiliares, definidos 
 através de métodos com o nome \texttt{this}\cite{wampler2021}. 
@@ -89,7 +90,7 @@ recurso pode ser visto no Código \ref{scalaconstructor2}.
     }
   
 \end{lstlisting}
-
+\legend{Fonte: O Autor (2021)}
 
 
 \section{Var e Val}
@@ -113,6 +114,7 @@ Código \ref{javaconstructor1} tornaria-se semelhante à do Código
     class Person(var firstName : String, val lastName : String)
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \begin{lstlisting}[caption={Construtor Simples em Java.},label=javaimmutableattr]
 
@@ -140,6 +142,7 @@ Código \ref{javaconstructor1} tornaria-se semelhante à do Código
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 
 \section{Trait}
@@ -162,6 +165,7 @@ e define a implementação de \texttt{Click}.
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \begin{lstlisting}[caption={Exemplo de classe que implementa uma \textit{trait}.},label=traitclassexample]
 
@@ -170,11 +174,16 @@ e define a implementação de \texttt{Click}.
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Apesar das semelhanças, diferente das interfaces em 
 linguagens como Java, as \textit{traits} podem definir métodos 
 com implementações e até atributos, podendo servir 
-como \textit{mixins}\cite{wampler2021}. Isso permite que 
+como \textit{mixins}\footnote{
+  Uma classe que armazena um conjunto de atributos e 
+  métodos reutilizáveis por outras classes, porém sem 
+  que haja uma relação de herança.
+}\cite{wampler2021}. Isso permite que 
 as \textit{traits} também possam ser usadas como alternativa 
 às classes abstratas em casos específicos. Porém, para 
 simplificar o entendimento dos exemplos deste 
@@ -219,6 +228,7 @@ object Companion {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \begin{lstlisting}[caption={Chamada de operações de um \textit{companion object}.},label=coexample2]
 
@@ -231,6 +241,7 @@ object Main {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \section{Listas imutáveis}
 
@@ -245,11 +256,11 @@ Os códigos \ref{listadd} e \ref{listconcat} demonstram
 as operações de adição e concatenação em uma lista, 
 respectivamente. É importante ressaltar que, mesmo 
 as listas sendo imutáveis, o fato do 
-atributo \texttt{numbers} ter sido declarado como \textit{var} 
+atributo \textit{numbers} ter sido declarado como \textit{var} 
 faz com que ele possa ser reatribuído com a nova lista 
 resultante da operação.
 
-\begin{lstlisting}[caption={Exemplo de adição em uma lista imutável},label=listadd]
+\begin{lstlisting}[caption={Exemplo de adição em uma lista imutável.},label=listadd]
 
   var numbers : List[Int] = List()
   
@@ -258,8 +269,9 @@ resultante da operação.
   }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
-\begin{lstlisting}[caption={Exemplo de concatenação em uma lista imutável},label=listconcat]
+\begin{lstlisting}[caption={Exemplo de concatenação em uma lista imutável.},label=listconcat]
 
   var numbers : List[Int] = List()
   
@@ -268,6 +280,7 @@ resultante da operação.
   }    
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \section{Unit}
 

@@ -25,6 +25,7 @@ de \texttt{Product} será criada.
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/factorymethod_struct.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 
@@ -52,9 +53,10 @@ Código \ref{oofactory}.
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/factorymethod_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Factory Method Orientado a Objetos},label=oofactory]
+\begin{lstlisting}[caption={\textit{Factory Method} Orientado a Objetos.},label=oofactory]
     
 abstract class Document {
   def Open()
@@ -102,6 +104,7 @@ class MyDocument extends Document {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
@@ -127,7 +130,7 @@ fim, na linha 14 pode ser vista a chamada
 da função \texttt{ApplicationFunction} recebendo a 
 função de criação \texttt{CreateMyDocument}.
 
-\begin{lstlisting}[caption={Factory Method Funcional},label=fpfactory]
+\begin{lstlisting}[caption={\textit{Factory Method} Funcional.},label=fpfactory]
     
 type Document
 
@@ -144,4 +147,5 @@ def ApplicationFunction(createDocument : () => Document): Unit = {
 ApplicationFunction(CreateMyDocument)
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 

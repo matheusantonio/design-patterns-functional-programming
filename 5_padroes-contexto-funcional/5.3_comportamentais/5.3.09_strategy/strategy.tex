@@ -1,14 +1,14 @@
 \section{Strategy}
 
 
-O padrão Strategy define grupos de algoritmos encapsulados e
+O padrão \textit{Strategy} define grupos de algoritmos encapsulados e
 intercambiáveis para um determinado contexto. Esses 
 algoritmos podem ser definidos ou trocados em tempo de 
 execução, permitindo que os clientes que os utilizem possam
 alternar entre as implementações definidas livremente.
 \cite{gamma:1995}
 
-O Strategy soluciona o problema de classes relacionadas 
+O \textit{Strategy} soluciona o problema de classes relacionadas 
 diferirem apenas em algum comportamento, permitindo que 
 esse comportamento possa ser isolado e o resto da implementação 
 das classes reaproveitado. Ele também evita a utilização de 
@@ -25,34 +25,36 @@ uma referência para a estratégia e chamar as
 operações desejadas.
 
 \begin{figure}[htb]
-	\caption{\label{strategy_struct}Estrutura do Strategy.}
+	\caption{\label{strategy_struct}Estrutura do \textit{Strategy}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/strategy_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
 
-O exemplo do Strategy apresenta uma \textit{stream} 
+O exemplo do \textit{Strategy} apresenta uma \textit{stream} 
 de texto que pode ser quebrada em linhas utilizando 
-estratégias diferentes. A classe Composition 
+estratégias diferentes. A classe \texttt{Composition} 
 gerencia as quebras de linha do texto exibidas em 
-um editor, enquanto a interface Compositor define 
+um editor, enquanto a interface \texttt{Compositor} define 
 uma estratégia de quebra de linha. As estratégias 
 apresentadas são representadas pelas classes 
-SimpleCompositor, TeXCompositor e ArrayCompositor. 
+\texttt{SimpleCompositor}, \texttt{TeXCompositor} e \texttt{ArrayCompositor}. 
 A implementação desse exemplo pode ser vista no Código 
 \ref{oostrategy}, enquanto o diagrama de classes pode 
 ser visto na Figura \ref{strategy_exemplo}.
 
 \begin{figure}[htb]
-	\caption{\label{strategy_exemplo}Exemplo de Strategy.}
+	\caption{\label{strategy_exemplo}Exemplo de \textit{Strategy}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.09_strategy/strategy_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Strategy Orientação a Objetos.},label=oostrategy]
+\begin{lstlisting}[caption={\textit{Strategy} Orientação a Objetos.},label=oostrategy]
     
 trait Compositor {
   def Compose(
@@ -121,6 +123,7 @@ class Composition(var compositor: Compositor) {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
@@ -128,16 +131,16 @@ Como a intenção do padrão é permitir a criação de
 grupos de algoritmos, ele é um candidato para o uso 
 de funções de alta ordem. Ao invés de definir 
 uma classe nova para cada implementação, a 
-função Repair pode receber como parâmetro uma 
+função \texttt{Repair} pode receber como parâmetro uma 
 função compose que recebe como parâmetro um valor 
-do tipo Compositor e retorna 
+do tipo \texttt{Compositor} e retorna 
 um inteiro. Dessa forma, basta definir as 
-funções ComposeSimple, ComposeTeX e ComposeArray 
+funções \texttt{ComposeSimple}, \texttt{ComposeTeX} e \texttt{ComposeArray} 
 que podem ser passadas por parâmetro quando a 
-função Repair for chamada. A implementação pode 
+função \texttt{Repair} for chamada. A implementação pode 
 ser vista no Código \ref{fpstrategy}.
 
-\begin{lstlisting}[caption={Strategy Funcional.},label=fpstrategy]
+\begin{lstlisting}[caption={\textit{Strategy} Funcional.},label=fpstrategy]
     
 type Composition = (Int, List[Coord], Int)
 
@@ -173,6 +176,7 @@ def ComposeArray(compositor : Compositor) : Int = {
 }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \begin{comment}
 \subsection*{Vantagens e Desvantagens}

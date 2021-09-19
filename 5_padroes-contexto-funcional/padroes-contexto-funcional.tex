@@ -57,6 +57,7 @@ operações com esses atributos.
     }   
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Dessa forma, é necessário definir uma estrutura em 
 programação funcional que possua características e 
@@ -118,6 +119,7 @@ a segunda posição de uma tupla, respectivamente
         (pessoa._1, age)
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 %associação
 \section{Associação, Agregação e Composição}
@@ -156,6 +158,7 @@ referência à outra.
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Como foi visto anteriormente, os atributos 
 podem ser representados por valores salvos 
@@ -184,6 +187,7 @@ de forma funcional.
         (estado._1, estado._2 :+ cidade)
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 % encapsulamento
 \section{Encapsulamento}
@@ -246,6 +250,7 @@ da pessoa com o estado alterado.
          :setIdade (fn [_idade] (pessoa nome _idade))})
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Apesar de não ser um conceito de programação 
 funcional, também é possível aproveitar a ideia 
@@ -294,6 +299,7 @@ de uma classe.
     setIdade (P (nome, _)) idade = P (nome, idade)
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Todas essas abordagens são válidas para a 
 implementação do encapsulamento, sendo a 
@@ -358,6 +364,7 @@ inteiro.
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Utilizando funções de alta ordem e levando em 
 consideração que as funções que representam nossos 
@@ -379,6 +386,7 @@ no Código \ref{fpinterface1}.
         calcular(x)
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 
 
@@ -423,6 +431,7 @@ para reaproveitá-los.
     }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 No contexto funcional, um comportamento semelhante 
 pode ser alcançado através da composição. Um tipo A 
@@ -440,7 +449,7 @@ e \texttt{comer} que recebem como parâmetro um valor do tipo
 \texttt{Animal}. Nesse exemplo, o tipo \texttt{Animal} representa 
 uma classe pai e o tipo \texttt{Cachorro} uma classe filha.
 
-\begin{lstlisting}[caption={Herança em Programação Funcional},label=fpinheritance]
+\begin{lstlisting}[caption={Herança em Programação Funcional.},label=fpinheritance]
     
     type Animal = (String)
 
@@ -457,6 +466,7 @@ uma classe pai e o tipo \texttt{Cachorro} uma classe filha.
         comer(getAnimal(Cachorro)) + "\nEu como comida de cachorro";
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 É possível perceber que a implementação da herança 
 assemelha-se à implementação de uma associação, 

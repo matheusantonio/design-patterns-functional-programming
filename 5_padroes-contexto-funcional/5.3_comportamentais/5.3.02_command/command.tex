@@ -1,13 +1,13 @@
 \section{Command}
 
-O padrão Command permite encapsular operações 
+O padrão \textit{Command} permite encapsular operações 
 em objetos. Isso permite que seja mantido um 
 histórico das operações realizadas, que seja 
 criada uma sequência de operações a serem 
 executadas e até mesmo que operações realizadas 
 possam ser desfeitas.\cite{gamma:1995}
 
-Para alcançar isso, uma classe Command armazena o 
+Para alcançar isso, uma classe \texttt{Command} armazena o 
 objeto alvo da operação e define uma operação 
 de execução e uma de reversão, quando necessário. 
 Uma outra classe pode ser responsável por armazenar 
@@ -20,37 +20,39 @@ predefinidas e executadas futuramente no código. Sua
 estrutura pode ser vista na Figura \ref{command_struct}.
 
 \begin{figure}[htb]
-	\caption{\label{command_struct}Estrutura do Command}
+	\caption{\label{command_struct}Estrutura do \textit{Command}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.02_command/command_struct.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
 
-O exemplo do Command traz um \textit{toolkit} para 
+O exemplo do \textit{Command} traz um \textit{toolkit} para 
 construção de interfaces de usuário, onde ao clicar 
 ou realizar uma ação sobre botões e menus, uma 
 operação deve ser executada. Porém, os botões e 
 menus não devem conhecer essas operações, elas são 
-definidas pelo desenvolvedor que utiliza os toolkits. 
-Dessa forma, o padrão Command permite isolar as 
+definidas pelo desenvolvedor que utiliza os \textit{toolkits}. 
+Dessa forma, o padrão \textit{Command} permite isolar as 
 operações dos \textit{widgets}. O exemplo traz as 
-operações PasteCommand, que tem como alvo um 
-documento da aplicação, e OpenCommand, que tem como 
+operações \texttt{PasteCommand}, que tem como alvo um 
+documento da aplicação, e \texttt{OpenCommand}, que tem como 
 alvo o objeto da aplicação. Além disso, há um 
-MacroCommand que permite executar uma sequência 
+\texttt{MacroCommand} que permite executar uma sequência 
 de comandos. O exemplo é apresentado no diagrama da 
 Figura \ref{command_exemplo} e no Código \ref{oocommand}.
 
 \begin{figure}[htb]
-	\caption{\label{command_exemplo}Exemplo de Command}
+	\caption{\label{command_exemplo}Exemplo de \textit{Command}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.02_command/command_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Command Orientação a Objetos},label=oocommand]
+\begin{lstlisting}[caption={\textit{Command} Orientação a Objetos.},label=oocommand]
 
 abstract class Command {
   def Execute()
@@ -89,14 +91,15 @@ class MacroCommand extends Command {
 }
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
-A a intenção do Command é encapsular operações 
+A a intenção do \textit{Command} é encapsular operações 
 em objetos. Isso já é possível no contexto 
 funcional graças às funções de alta ordem. 
 Entretanto, existem duas particularidades 
-do padrão Command que devem ser consideradas. 
+do padrão \textit{Command} que devem ser consideradas. 
 
 O padrão encapsula, junto da operação, uma 
 referência para o objeto alvo. Dessa forma, 
@@ -116,19 +119,19 @@ as operações.
 
 O Código \ref{fpcommand} demonstra uma implementação 
 genérica do padrão no contexto funcional. Na linha 2 
-é definido um tipo Command que é uma tupla que 
+é definido um tipo \texttt{Command} que é uma tupla que 
 armazena duas funções: fazer e desfazer. A função 
-CreateCommand, na linha 4, é uma função auxiliar para 
-a criação de um command. Caso não seja fornecida 
+\texttt{CreateCommand}, na linha 4, é uma função auxiliar para 
+a criação de um \textit{command}. Caso não seja fornecida 
 uma função de desfazer, a função é substituída por 
 uma função identidade que recebe um valor como 
 parâmetro e retorna esse mesmo valor.
 
-As funções auxiliares Execute, na linha 12, e 
-Unexecute, na linha 14, recebem como parâmetro o valor 
+As funções auxiliares \texttt{Execute}, na linha 12, e 
+\texttt{Unexecute}, na linha 14, recebem como parâmetro o valor 
 alvo e um comando. Elas executam a primeira e a 
-segunda função armazenadas na tupla Command, 
-respectivamente. A função CommandMany, da linha 16, 
+segunda função armazenadas na tupla \texttt{Command}, 
+respectivamente. A função \texttt{CommandMany}, da linha 16, 
 é uma função auxiliar 
 para executar uma lista de \textit{commands}. Ela recebe 
 como parâmetro um alvo, uma lista de \textit{commands} e 
@@ -136,13 +139,13 @@ uma operação que recebe um alvo e um comando. Essa
 operação genérica é utilizada para que essa função 
 possa ser reaproveitada tanto para executar uma 
 sequência de \textit{commands} quando desfazê-los. 
-As funções ExecuteMany, na linha 20, e UnexecuteMany, 
-na linha 23, chamam a função CommandMany passando 
-como operação as função Execute e Unexecute, 
+As funções \texttt{ExecuteMany}, na linha 20, e \texttt{UnexecuteMany}, 
+na linha 23, chamam a função \texttt{CommandMany} passando 
+como operação as função \texttt{Execute} e \texttt{Unexecute}, 
 respectivamente.
 
 
-\begin{lstlisting}[caption={Command Funcional},label=fpcommand]
+\begin{lstlisting}[caption={\textit{Command} Funcional.},label=fpcommand]
     
 type Command[A] = (A => A, A => A)
 
@@ -169,19 +172,20 @@ def CommandMany[A](target : A, commands : List[Command[A]], operation : (A, Comm
     CommandMany(target, commands, Unexecute)
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 O Código \ref{fpcommandexample} demonstra como o exemplo 
 orientado a objetos poderia ser implementado a partir das 
-funções auxiliares vistas. O valor ExecuteOpen, visto 
+funções auxiliares vistas. O valor \textit{ExecuteOpen}, visto 
 na linha 2, implementa a abertura de um documento em uma 
 aplicação e retorna o estado atualizado dessa aplicação 
-com o documento aberto. Já a função ExecutePaste, na 
+com o documento aberto. Já a função \texttt{ExecutePaste}, na 
 linha 8, realiza a operação de colar um documento. 
-O valor resultingApplication na linha 14 é o estado 
+O valor \textit{resultingApplication} na linha 14 é o estado 
 resultante da aplicação após a execução de ambos os 
-comandos através da função auxiliar ExecuteMany.
+comandos através da função auxiliar \texttt{ExecuteMany}.
 
-\begin{lstlisting}[caption={Exemplo funcional de Command},label=fpcommandexample]
+\begin{lstlisting}[caption={Exemplo funcional de \textit{Command}.},label=fpcommandexample]
     
 val ExecuteOpen = CreateCommand[Application](
   (target : Application) => {
@@ -198,6 +202,7 @@ val ExecutePaste = CreateCommand[Application](
 val resultingApplication = ExecuteMany(application, List(ExecuteOpen, ExecutePaste))
     
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \begin{comment}
 \subsection*{Vantagens e Desvantagens}

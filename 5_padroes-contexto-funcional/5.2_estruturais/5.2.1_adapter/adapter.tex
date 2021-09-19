@@ -4,39 +4,41 @@
 
 Quando a interface de uma classe não 
 é compatível com a interface do cliente que deseja 
-utilizá-la, o padrão Adapter fornece uma 
+utilizá-la, o padrão \textit{Adapter} fornece uma 
 solução que evita a refatoração e a dependência da 
 interface do cliente com a interface desejada.\cite{gamma:1995}
 
-Existem duas formas de realizar essa adaptação. Um Adapter 
+Existem duas formas de realizar essa adaptação. Um \textit{Adapter} 
 de classe, apresentado na Figura \ref{adapter_struct},  
 só é possível para linguagens que implementam herança 
 múltipla.
 Ele define uma classe que herda tanto da classe que 
 apresenta a interface do cliente quanto da classe que 
 apresenta a interface que deseja ser utilizada. Ao 
-reescrever a operação Request, ele adapta sua entrada 
-para a de SpecificRequest, repassando a solicitação.\cite{gamma:1995}
+reescrever a operação \texttt{Request}, ele adapta sua entrada 
+para a de \texttt{SpecificRequest}, repassando a solicitação.\cite{gamma:1995}
 
 \begin{figure}[htb]
-	\caption{\label{adapter_struct}Estrutura do Adapter de Classe.}
+	\caption{\label{adapter_struct}Estrutura do \textit{Adapter} de Classe.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter_classe_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-Já o Adapter de Objeto, apresentado na Figura \ref{adapter_alt_struct}, 
+Já o \textit{Adapter} de Objeto, apresentado na Figura \ref{adapter_alt_struct}, 
 herda apenas da classe que apresenta a interface 
-da aplicação, também reimplementando a operação Request. 
+da aplicação, também reimplementando a operação \texttt{Request}. 
 A diferença é que ela repassa a solicitação para a 
 classe que apresenta a interface que deseja ser 
 utilizada através de uma delegação.\cite{gamma:1995}
 
 \begin{figure}[htb]
-	\caption{\label{adapter_alt_struct}Estrutura do Adapter de Objeto.}
+	\caption{\label{adapter_alt_struct}Estrutura do \textit{Adapter} de Objeto.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter_objeto_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
@@ -50,10 +52,10 @@ ferramentas prontas para gerenciar esse tipo de
 elemento, é desejado reutilizá-las. Como essas 
 ferramentas não foram feitas pensando na 
 aplicação de ferramenta gráfica do exemplo, uma 
-classe Adapter é implementada para adaptar a 
+classe \texttt{Adapter} é implementada para adaptar a 
 ferramenta textual para a aplicação que deseja 
 utilizá-la. Para esse exemplo, é utilizada a 
-abordagem de Adapter de objeto, onde um objeto 
+abordagem de \textit{Adapter} de objeto, onde um objeto 
 do tipo da ferramenta textual é armazenado. O 
 diagrama de classes do exemplo pode ser visto na 
 Figura \ref{adapter_exemplo}, enquanto a 
@@ -62,14 +64,15 @@ implementação em código pode ser vista no Código
 
 
 \begin{figure}[htb]
-	\caption{\label{adapter_exemplo}Exemplo de Adapter.}
+	\caption{\label{adapter_exemplo}Exemplo de \textit{Adapter}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 
-\begin{lstlisting}[caption={Adapter Orientado a Objetos.},label=ooadapter]
+\begin{lstlisting}[caption={\textit{Adapter} Orientado a Objetos.},label=ooadapter]
 
 class DrawingEditor(shape : Shape) {
 
@@ -105,24 +108,25 @@ class TextView(var x : Point, var y : Point, var width : Int, var height : Int) 
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
-No Código \ref{fpadapter}, a função DrawingEditorFunction 
+No Código \ref{fpadapter}, a função \texttt{DrawingEditorFunction} 
 declarada na linha 2 recebe como parâmetro uma operação de um 
 objeto gráfico. Porém, é desejado utilizar a operação 
-GetExtent, declarada na linha 7, de um \textit{text view} 
+\texttt{GetExtent}, declarada na linha 7, de um \textit{text view} 
 que não é comportado pela ferramenta. Para que essa 
 operação possa ser reutilizada, a função 
-AdaptTextShapeBoundingBox declarada na linha 11 
+\texttt{AdaptTextShapeBoundingBox} declarada na linha 11 
 recebe como parâmetro o \textit{text view} e retorna 
-uma função que executa GetExtent, com a assinatura 
+uma função que executa \texttt{GetExtent}, com a assinatura 
 necessária para ser recebida pela função 
-DrawingEditorFunction. Com o uso das funções de alta 
+\texttt{DrawingEditorFunction}. Com o uso das funções de alta 
 ordem, foi necessário apenas uma nova função intermediária 
 para realizar a adaptação. 
 
-\begin{lstlisting}[caption={Adapter Funcional.},label=fpadapter]
+\begin{lstlisting}[caption={\textit{Adapter} Funcional.},label=fpadapter]
     
 def DrawingEditorFunction(CalculateBounding : () => Int) : Int = {
   // ...
@@ -140,3 +144,4 @@ def AdaptTextShapeBoundingBox(view : TextView): () => Int =
   }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}

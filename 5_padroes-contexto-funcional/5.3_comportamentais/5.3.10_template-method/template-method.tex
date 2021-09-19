@@ -1,9 +1,10 @@
 \section{Template Method}
 
-A ideia do Template Method é fornecer um esqueleto para um algoritmo 
+A ideia do \textit{Template Method} é fornecer um esqueleto para um algoritmo 
 e deixar para outras classes a tarefa de implementar as funções que 
-compõem esse algoritmo. Uma classe abstrata define a operação Template 
-Method, onde são executas as etapas do algoritmo, definidas em função 
+compõem esse algoritmo. Uma classe abstrata define a operação 
+\textit{Template Method}, onde são executas as etapas do 
+algoritmo, definidas em função 
 das operações abstratas ainda não implementadas.\cite{gamma:1995}
 
 Esse padrão ajuda a evitar repetição de código, concentrando 
@@ -14,26 +15,36 @@ evitando mais ainda a repetição do código. A estrutura do padrão
 pode ser vista na Figura \ref{tpmethod_struct}.
 
 \begin{figure}[htb]
-	\caption{\label{tpmethod_struct}Estrutura do Template Method.}
+	\caption{\label{tpmethod_struct}Estrutura do \textit{Template Method}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.10_template-method/templatemethod_estrutura.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
 \subsection*{Exemplo Orientado a Objetos}
 
-Como exemplo pode ser consideraro um \textit{framework} que fornece uma classe para abrir documentos. Essa classe possui operações abstratas para cada etapada da abertura de um documento, de forma que as subclasses que a estendem podem definir formas diferentes de abrir documentos de tipos diferentes. A operação AddDocument é o template method, responsável por chamar as demais operações implementadas pelas subclasses. 
-O diagrama de classes do exemplo pode ser visto na Figura \ref{tpmethod_exemplo}, 
+Como exemplo pode ser consideraro um \textit{framework} que 
+fornece uma classe para abrir documentos. Essa classe 
+possui operações abstratas para cada etapada da abertura 
+de um documento, de forma que as subclasses que a estendem 
+podem definir formas diferentes de abrir documentos de tipos 
+diferentes. A operação \texttt{AddDocument} é o \textit{template method}, 
+responsável por chamar as demais operações implementadas 
+pelas subclasses. 
+O diagrama de classes do exemplo pode ser visto na 
+Figura \ref{tpmethod_exemplo}, 
 enquanto a implementação pode ser vista no Código \ref{ootpmethod}.
 
 \begin{figure}[htb]
-	\caption{\label{tpmethod_exemplo}Exemplo de Template Method.}
+	\caption{\label{tpmethod_exemplo}Exemplo de \textit{Template Method}.}
 	\begin{center}
 	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.10_template-method/templatemethod_exemplo.png}
 	\end{center}
+  \caption*{Fonte: O Autor (2021)}
 \end{figure}
 
-\begin{lstlisting}[caption={Template Method Orientação a Objetos.},label=ootpmethod]
+\begin{lstlisting}[caption={\textit{Template Method} Orientado a Objetos.},label=ootpmethod]
 
 abstract class Document {
   def Save() : Unit = {
@@ -91,17 +102,18 @@ class MyApplication extends Application {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \subsection*{Contexto Funcional}
 
 No contexto funcional, a mesma ideia pode ser alcançada 
 através de funções de alta ordem e composição de funções. 
-O método OpenDocument (o \textit{template method}) é 
+O método \texttt{OpenDocument} (o \textit{template method}) é 
 uma função de alta ordem que recebe como parâmetro todas 
 as funções necessárias para executar o algoritmo. 
 O exemplo pode ser visto no Código \ref{fptpmethod}.
 
-\begin{lstlisting}[caption={Template Method Funcional.},label=fptpmethod]
+\begin{lstlisting}[caption={\textit{Template Method} Funcional.},label=fptpmethod]
     
 object Application {
 
@@ -130,19 +142,20 @@ object Application {
 }
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 Para definir uma implementação do algoritmo, basta 
 definir uma nova função que é a combinação do método 
 template com as funções que representam as etapas do 
 algoritmo. O Código \ref{algotpmethod} define uma 
-nova função, MyApplicationOpenDocument, que recebe 
+nova função, \texttt{MyApplicationOpenDocument}, que recebe 
 como parâmetro o nome do arquivo e uma lista de 
-documentos. Ela retorna a função OpenDocument com as 
+documentos. Ela retorna a função \texttt{OpenDocument} com as 
 funções específicas para o tipo de documento 
 desejado sendo passadas como parâmetro, nas linhas 
-6, 7 e 8. Dessa forma, a função MyApplicationOpenDocument 
+6, 7 e 8. Dessa forma, a função \texttt{MyApplicationOpenDocument} 
 pode ser reutilizada da mesma forma que a classe 
-MyApplication seria reutilizada no exemplo orientado 
+\texttt{MyApplication} seria reutilizada no exemplo orientado 
 a objetos.
 
 \begin{lstlisting}[caption={Definição do algoritmo.},label=algotpmethod]
@@ -155,6 +168,7 @@ val MyApplicationOpenDocument =
         MyAboutToOpenDocument)
 
 \end{lstlisting}
+\legend{Fonte: O Autor (2021)}
 
 \begin{comment}
 \subsection*{Vantagens e Desvantagens}
