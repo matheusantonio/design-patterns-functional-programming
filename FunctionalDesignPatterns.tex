@@ -31,7 +31,7 @@
 \documentclass[
 	% -- opções da classe memoir --
 	12pt,				% tamanho da fonte
-	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	openany,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
 	twoside,			% para impressão em recto e verso. Oposto a oneside
 	a4paper,			% tamanho do papel. 
 	% -- opções da classe abntex2 --
@@ -70,6 +70,7 @@
 % Pacotes de citações
 % ---
 \usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage{hyperref}
 \usepackage[num]{abntex2cite}	% Citações padrão ABNT
 \citebrackets[]
 
@@ -77,6 +78,7 @@
 % Formatação de código-fonte
 % ---
 \usepackage{listings}
+
 
 % Altera o nome padrão do rótulo usado no comando \autoref{}
 \renewcommand{\lstlistingname}{Código}
@@ -261,7 +263,6 @@ Federal Fluminense.}
 \makeindex
 % ---
 
-
 % ----
 % Início do documento
 % ----
@@ -273,9 +274,16 @@ Federal Fluminense.}
 
 % Retira espaço extra obsoleto entre as frases.
 \frenchspacing 
+\pretextual
 
 \input{1_capa/capa}
 
+\makeevenhead{abntheadings}{\ABNTEXfontereduzida\thepage}{}{}
+\makeoddhead{abntheadings}{}{}{\ABNTEXfontereduzida\thepage}
+\makeheadrule{abntheadings}{\textwidth}{0pt}
+\makeevenhead{abntchapfirst}{\ABNTEXfontereduzida\thepage}{}{}
+\makeoddhead{abntchapfirst}{}{}{\ABNTEXfontereduzida\thepage}
+\textual
 
 \part{Introdução}
 
@@ -289,7 +297,6 @@ Federal Fluminense.}
 % ----------------------------------------------------------
 \part{Conceitos Básicos}
 % ----------------------------------------------------------
-
 
 \input{4_referencial_teorico/1_paradigma-funcional/paradigma-funcional}
 
@@ -305,14 +312,13 @@ Federal Fluminense.}
 % ----------------------------------------------------------
 \part{Desenvolvimento}
 % ----------------------------------------------------------
-
 \input{5_padroes-contexto-funcional/padroes-contexto-funcional}
 
 
 % ----------------------------------------------------------
 % CRIACIONAIS
 % ----------------------------------------------------------
-%\chapter{Padrões Criacionais}
+\chapter{Padrões Criacionais}
 
 \input{5_padroes-contexto-funcional/5.1_criacionais/5.1.1_factory-method/factory-method}
 \input{5_padroes-contexto-funcional/5.1_criacionais/5.1.2_abstract-factory/abstract-factory}
@@ -323,7 +329,7 @@ Federal Fluminense.}
 % ----------------------------------------------------------
 % ESTRUTURAIS
 % ----------------------------------------------------------
-%\chapter{Padrões Estruturais}
+\chapter{Padrões Estruturais}
 
 \input{5_padroes-contexto-funcional/5.2_estruturais/5.2.1_adapter/adapter}
 \input{5_padroes-contexto-funcional/5.2_estruturais/5.2.2_bridge/bridge}
@@ -336,7 +342,7 @@ Federal Fluminense.}
 % ----------------------------------------------------------
 % COMPORTAMENTAIS
 % ----------------------------------------------------------
-%\chapter{Padrões Comportamentais}
+\chapter{Padrões Comportamentais}
 
 \input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.01_chain-of-responsibility/chain-of-responsibility}
 \input{5_padroes-contexto-funcional/5.3_comportamentais/5.3.02_command/command}

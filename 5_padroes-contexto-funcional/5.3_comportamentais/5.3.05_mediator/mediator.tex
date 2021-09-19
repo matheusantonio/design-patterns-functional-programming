@@ -41,14 +41,6 @@ A Figura \ref{mediator_exemplo} apresenta o diagrama
 de classes para esse exemplo. O Código \ref{oomediator} 
 apresenta a implementação do padrão para esse exemplo.
 
-\begin{figure}[htb]
-	\caption{\label{mediator_exemplo}Exemplo de \textit{Mediator}.}
-	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/mediator_exemplo.png}
-	\end{center}
-  \caption*{Fonte: O Autor (2021)}
-\end{figure}
-
 \begin{lstlisting}[caption={\textit{Mediator} Orientado a Objetos.},label=oomediator]
 
 abstract class DialogDirector {
@@ -96,6 +88,14 @@ class ListBox(director : DialogDirector) extends Widget(director){
     
 \end{lstlisting}
 \legend{Fonte: O Autor (2021)}
+
+\begin{figure}[htb]
+	\caption{\label{mediator_exemplo}Exemplo de \textit{Mediator}.}
+	\begin{center}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.05_mediator/mediator_exemplo.png}
+	\end{center}
+  \caption*{Fonte: O Autor (2021)}
+\end{figure}
 
 \subsection*{Contexto Funcional}
 

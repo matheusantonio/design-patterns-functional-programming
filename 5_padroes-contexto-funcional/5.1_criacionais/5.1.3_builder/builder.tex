@@ -53,14 +53,6 @@ dos conversores desejados. O exemplo de
 implementação dessa abordagem é apresentado no 
 Código \ref{oobuilder}.
 
-\begin{figure}[htb]
-	\caption{\label{builder_exemplo}Exemplo de \textit{Builder}.}
-	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.3_builder/builder_exemplo.png}
-	\end{center}
-  \caption*{Fonte: O Autor (2021)}
-\end{figure}
-
 \begin{lstlisting}[caption={\textit{Builder} Orientado a Objetos.},label=oobuilder]
 
 trait TextConverter {
@@ -134,6 +126,14 @@ class RTFReader(var textConverter: TextConverter) {
 
 \end{lstlisting}
 \legend{Fonte: O Autor (2021)}
+
+\begin{figure}[htb]
+	\caption{\label{builder_exemplo}Exemplo de \textit{Builder}.}
+	\begin{center}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.1_criacionais/5.1.3_builder/builder_exemplo.png}
+	\end{center}
+  \caption*{Fonte: O Autor (2021)}
+\end{figure}
 
 \subsection*{Contexto Funcional}
 

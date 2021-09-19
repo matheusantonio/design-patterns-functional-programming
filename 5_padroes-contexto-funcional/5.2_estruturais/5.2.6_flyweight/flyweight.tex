@@ -58,14 +58,6 @@ instância é criada para cada caracter. O
 Código \ref{ooflyweight} demonstra a implementação 
 desse exemplo.
 
-\begin{figure}[htb]
-	\caption{\label{flyweight_exemplo}Exemplo de \textit{Flyweight}.}
-	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight_exemplo.png}
-	\end{center}
-  \caption*{Fonte: O Autor (2021)}
-\end{figure}
-
 \begin{lstlisting}[caption={\textit{Flyweight} Orientado a Objetos.},label=ooflyweight]
 
 trait Glyph {
@@ -105,6 +97,14 @@ class Column(var children : List[Glyph]) extends Glyph {
 
 \end{lstlisting}
 \legend{Fonte: O Autor (2021)}
+
+\begin{figure}[htb]
+	\caption{\label{flyweight_exemplo}Exemplo de \textit{Flyweight}.}
+	\begin{center}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.6_flyweight/flyweight_exemplo.png}
+	\end{center}
+  \caption*{Fonte: O Autor (2021)}
+\end{figure}
 
 \subsection*{Contexto Funcional}
 

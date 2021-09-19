@@ -1,4 +1,4 @@
-\chapter{Padrões Comportamentais}
+%\chapter{Padrões Comportamentais}
 
 \section{Chain of Responsibility}
 
@@ -37,14 +37,6 @@ interface, ele pertence a uma cadeia que é
 percorrida sempre que o usuário solicita 
 a ajuda. A Figura \ref{chain_exemplo} e o Código 
 \ref{oochresponsibility} demonstram esse exemplo.
-
-\begin{figure}[htb]
-	\caption{\label{chain_exemplo}Exemplo de \textit{Chain of Responsibility}.}
-	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.01_chain-of-responsibility/chainofresponsibility_exemplo.png}
-	\end{center}
-  \caption*{Fonte: O Autor (2021)}
-\end{figure}
 
 \begin{lstlisting}[caption={\textit{Chain of Responsibility} Orientação a Objetos.},label=oochresponsibility]
 
@@ -108,6 +100,14 @@ class Application(topic: Topic.Value)
 
 \end{lstlisting}
 \legend{Fonte: O Autor (2021)}
+
+\begin{figure}[htb]
+	\caption{\label{chain_exemplo}Exemplo de \textit{Chain of Responsibility}.}
+	\begin{center}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.3_comportamentais/5.3.01_chain-of-responsibility/chainofresponsibility_exemplo.png}
+	\end{center}
+  \caption*{Fonte: O Autor (2021)}
+\end{figure}
 
 \subsection*{Contexto Funcional}
 

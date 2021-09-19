@@ -50,14 +50,6 @@ exemplo de \textit{Proxy} virtual, seu diagrama de
 classes pode ser visto na Figura \ref{proxy_exemplo} 
 e a implementação no Código \ref{ooproxy}.
 
-\begin{figure}[htb]
-	\caption{\label{proxy_exemplo}Exemplo de \textit{Proxy}.}
-	\begin{center}
-	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.7_proxy/proxy_exemplo.png}
-	\end{center}
-  \caption*{Fonte: O Autor (2021)}
-\end{figure}
-
 \begin{lstlisting}[caption={\textit{Proxy} Orientado a Objetos.},label=ooproxy]
 
 trait Graphic {
@@ -115,6 +107,14 @@ class ImageProxy(var filename : String, var extent : Point) extends Graphic {
 
 \end{lstlisting}
 \legend{Fonte: O Autor (2021)}
+
+\begin{figure}[htb]
+	\caption{\label{proxy_exemplo}Exemplo de \textit{Proxy}.}
+	\begin{center}
+	    \includegraphics[scale=0.5]{5_padroes-contexto-funcional/5.2_estruturais/5.2.7_proxy/proxy_exemplo.png}
+	\end{center}
+  \caption*{Fonte: O Autor (2021)}
+\end{figure}
 
 \subsection*{Contexto Funcional}
 
