@@ -1,0 +1,415 @@
+\renewcommand{\imprimircapa}{%
+  \begin{capa}%
+    \center
+    \ABNTEXchapterfont\Large \imprimirinstituicao
+
+    \vspace*{1cm}
+
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+
+    \vfill
+
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo
+    \end{center}
+
+    \vfill
+
+
+    
+
+    \large\imprimirlocal
+
+    \large\imprimirdata
+
+    \vspace*{1cm}
+
+  \end{capa}
+}
+
+
+
+\makeatletter
+\renewcommand{\folhaderostocontent}{
+
+\begin{center}
+  \center
+    \ABNTEXchapterfont\Large \imprimirinstituicao
+
+    \vspace*{1cm}
+
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+
+  \vspace*{\fill}\vspace*{\fill}
+
+  \begin{center}
+    \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+  \end{center}
+
+  \vspace*{\fill}
+
+  \abntex@ifnotempty{\imprimirpreambulo}{%    
+ 
+    \hspace{.45\textwidth}
+
+    \begin{flushright}  
+      \begin{minipage}{.5\textwidth}
+        \SingleSpacing
+        \imprimirpreambulo
+      \end{minipage}%
+    \end{flushright}
+
+    \vspace*{\fill}
+  }%
+
+
+  
+
+  {\large\imprimirorientadorRotulo~\imprimirorientador\par}
+
+
+  \vspace*{\fill}
+
+  {\large\imprimirlocal}
+
+  \par
+
+  {\large\imprimirdata}
+
+  \vspace*{1cm}
+
+\end{center}
+}
+
+\makeatother
+
+
+
+
+
+
+
+
+% ---
+% Capa
+% ---
+\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+
+% ---
+% Inserir a ficha bibliografica
+% ---
+
+% Isto é um exemplo de Ficha Catalográfica, ou ``Dados internacionais de
+% catalogação-na-publicação''. Você pode utilizar este modelo como referência. 
+% Porém, provavelmente a biblioteca da sua universidade lhe fornecerá um PDF
+% com a ficha catalográfica definitiva após a defesa do trabalho. Quando estiver
+% com o documento, salve-o como PDF no diretório do seu projeto e substitua todo
+% o conteúdo de implementação deste arquivo pelo comando abaixo:
+%
+% \begin{fichacatalografica}
+%     \includepdf{fig_ficha_catalografica.pdf}
+% \end{fichacatalografica}
+
+%\begin{fichacatalografica}
+%	\sffamily
+%	\vspace*{\fill}					% Posição vertical
+%	\begin{center}					% Minipage Centralizado
+%	\fbox{\begin{minipage}[c][8cm]{13.5cm}		% Largura
+%	\small
+%	\imprimirautor
+%	%Sobrenome, Nome do autor
+%	
+%	\hspace{0.5cm} \imprimirtitulo  / \imprimirautor. --
+%	\imprimirlocal, \imprimirdata-
+%	
+%	\hspace{0.5cm} \thelastpage p. : il. (algumas color.) ; 30 cm.\\
+%	
+%	\hspace{0.5cm} \imprimirorientadorRotulo~\imprimirorientador\\
+%	
+%	\hspace{0.5cm}
+%	\parbox[t]{\textwidth}{\imprimirtipotrabalho~--~\imprimirinstituicao,
+%	\imprimirdata.}\\
+%	
+%	\hspace{0.5cm}
+%		1. Palavra-chave1.
+%		2. Palavra-chave2.
+%		2. Palavra-chave3.
+%		I. Orientador.
+%		II. Universidade xxx.
+%		III. Faculdade de xxx.
+%		IV. Título 			
+%	\end{minipage}}
+%	\end{center}
+%\end{fichacatalografica}
+% ---
+
+
+% ---
+% Inserir folha de aprovação
+% ---
+
+% Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
+% 14724/2011 (seção 4.2.1.3). Você pode utilizar este modelo até a aprovação
+% do trabalho. Após isso, substitua todo o conteúdo deste arquivo por uma
+% imagem da página assinada pela banca com o comando abaixo:
+%
+%\begin{folhadeaprovacao}
+%\includepdf{folhadeaprovacao_final.pdf}
+%\end{folhadeaprovacao}
+
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+    \end{center}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+        
+   Trabalho aprovado. \imprimirlocal, 15 de setembro de 2021:
+
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
+   %\assinatura{\textbf{Professor} \\ Convidado 1}
+   %\assinatura{\textbf{Professor} \\ Convidado 2}
+   %\assinatura{\textbf{Professor} \\ Convidado 3}
+   %\assinatura{\textbf{Professor} \\ Convidado 4}
+      
+   \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+  
+\end{folhadeaprovacao}
+% ---
+
+% ---
+% Dedicatória
+% ---
+%\begin{dedicatoria}
+%   \vspace*{\fill}
+%   \centering
+%   \noindent
+%   \textit{} \vspace*{\fill}
+%\end{dedicatoria}
+% ---
+
+% ---
+% Agradecimentos
+% ---
+%\begin{agradecimentos}
+%Os agradecimentos principais são direcionados à Gerald Weber, Miguel Frasson,
+%Leslie H. Watter, Bruno Parente Lima, Flávio de Vasconcellos Corrêa, Otavio Real
+%Salvador, Renato Machnievscz\footnote{Os nomes dos integrantes do primeiro
+%projeto abn\TeX\ foram extraídos de
+%\url{http://codigolivre.org.br/projects/abntex/}} e todos aqueles que
+%contribuíram para que a produção de trabalhos acadêmicos conforme
+%as normas ABNT com \LaTeX\ fosse possível.
+%
+%Agradecimentos especiais são direcionados ao Centro de Pesquisa em Arquitetura
+%da Informação\footnote{\url{http://www.cpai.unb.br/}} da Universidade de
+%Brasília (CPAI), ao grupo de usuários
+%\emph{latex-br}\footnote{\url{http://groups.google.com/group/latex-br}} e aos
+%novos voluntários do grupo
+%\emph{\abnTeX}\footnote{\url{http://groups.google.com/group/abntex2} e
+%\url{http://www.abntex.net.br/}}~que contribuíram e que ainda
+%contribuirão para a evolução do \abnTeX.
+%
+%\end{agradecimentos}
+% ---
+
+% ---
+% Epígrafe
+% ---
+%\begin{epigrafe}
+%    \vspace*{\fill}
+%	\begin{flushright}
+%		\textit{``Não vos amoldeis às estruturas deste mundo, \\
+%		mas transformai-vos pela renovação da mente, \\
+%		a fim de distinguir qual é a vontade de Deus: \\
+%		o que é bom, o que Lhe é agradável, o que é perfeito.\\
+%		(Bíblia Sagrada, Romanos 12, 2)}
+%	\end{flushright}
+%\end{epigrafe}
+% ---
+
+
+% ---
+% RESUMOS
+% ---
+
+% resumo em português
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
+  O presente trabalho tem como objetivo analisar 
+  um conjunto de padrões de projeto no contexto do 
+  paradigma de programação funcional. Os padrões 
+  de projeto apresentam soluções tradicionais para problemas 
+  comuns de \textit{design} de \textit{software}, 
+  destacando-se os vinte e três padrões 
+  \textit{Gang of Four}, que apresentam soluções 
+  voltadas para o desenvolvimento de \textit{software} 
+  orientado a objetos. Porém, como a forma 
+  de construir um \textit{software} difere muito 
+  do paradigma funcional para o orientado a 
+  objetos, existe a dúvida de como ou se os 
+  problemas apresentados pelos padrões podem ser 
+  solucionados com o uso de uma linguagem 
+  funcional. Dessa forma, o trabalho analisará, 
+  do ponto de vista funcional, cada um dos 
+  vinte e três padrões \textit{Gang of Four}, 
+  verificando se o problema de orientação a objetos 
+  proposto também existe no contexto funcional e 
+  como pode ser resolvido no mesmo. Ao 
+  fim, deseja-se concluir se o uso dos recursos de 
+  programação funcional pode contribuir para a 
+  solução de cada padrão e, caso a conclusão não 
+  seja a mesma para todos os padrões, 
+  identificar características que possibilitem 
+  agrupar as soluções encontradas.
+
+ \textbf{Palavras-chave}: padrões de projeto. programação funcional.
+\end{resumo}
+
+\begin{comment}
+  O presente trabalho tem como objetivo analisar 
+  o conceito de padrões de projeto no contexto do 
+  paradigma de programação funcional. Os padrões 
+  de projeto apresentam soluções comuns para problemas 
+  comuns de design de software, destacando-se os 
+  vinte e três padrões Gang of Four, que apresentam 
+  soluções comuns para problemas relacionados ao 
+  paradigma orientado a objetos. Porém, como a forma 
+  de construir um software difere muito do paradigma 
+  funcional para o orientado a 
+  objetos, existe a dúvida de como ou se esses padrões 
+  podem ser reaproveitados, além da possibilidade de o 
+  uso do paradigma funcional solucionar os problemas 
+  oriundos da orientação a objetos.
+  Dessa forma, o trabalho buscará analisar, 
+  do ponto de vista funcional, cada um dos 
+  23 padrões GoF, verificando se o problema de 
+  orientação a objetos proposto também existe 
+  no contexto funcional e se é resolvido pelo 
+  padrão em questão. Também serão analisados, se 
+  existirem, os casos em que o problema deixa de 
+  existir ou é solucionado de outra forma. Ao 
+  fim, deseja-se concluir se 
+  o uso dos recursos de programação funcional 
+  contribui para a solução de cada padrão GoF 
+  e, caso a conclusão não seja a mesma para 
+  todos os padrões, tentar identificar as 
+  características de cada grupo.
+
+
+ \textbf{Palavras-chave}: padrões de projeto. programação funcional.
+\end{comment}
+
+% resumo em inglês
+\begin{resumo}[Abstract]
+ \begin{otherlanguage*}{english}
+  The present work aims to analyze a set of 
+  design patterns in a functional programming 
+  paradigm context. The design patterns present 
+  traditional solutions for common software design 
+  problems, standing out the twenty three Gang 
+  of Four patterns, which present solutions 
+  aimed at the object oriented software 
+  development. However, since the way of building 
+  a software differs a lot between a functional 
+  paradigm and an object oriented paradigm, there is 
+  the question of how or whether the problems 
+  presented by the patterns can be solved with 
+  a functional language. In this way, the work will 
+  seek to analyze, from the functional point of view, 
+  the twenty three Gang of Four patterns, verifying if 
+  the proposed object orientation problem also 
+  exists in the functional context and how it could 
+  be solved by it. At the end, it is wished to 
+  conclude if the use of functional programming 
+  resources can add to the solution of each 
+  pattern and, if the conclusion isn't the same 
+  for all patterns, identify characteristics 
+  that enable a grouping of the found solutions.
+
+   \vspace{\onelineskip}
+ 
+   \noindent 
+   \textbf{Keywords}: design patterns. functional programming.
+ \end{otherlanguage*}
+\end{resumo}
+
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de quadros
+% ---
+\pdfbookmark[0]{\listofquadrosname}{loq}
+\listofquadros*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de listings
+% ---
+\pdfbookmark[0]{\lstlistlistingname}{lol}
+\begin{KeepFromToc}
+\lstlistoflistings
+\end{KeepFromToc}
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+%\begin{siglas}
+%	\item[GOF] Gang of Four
+%  \end{siglas}
+  % ---
+  
+  % ---
+  % inserir lista de símbolos
+  % ---
+  %\begin{simbolos}
+  %	\item[$ \Gamma $] Letra grega Gama
+  %	\item[$ \Lambda $] Lambda
+  %	\item[$ \zeta $] Letra grega minúscula zeta
+  %	\item[$ \in $] Pertence
+  %\end{simbolos}
+  % ---
+  
+  % ---
+  % inserir o sumario
+  % ---
+  \pdfbookmark[0]{\contentsname}{toc}
+  \tableofcontents*
+  \cleardoublepage
+  % ---
